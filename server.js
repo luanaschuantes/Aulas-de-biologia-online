@@ -170,5 +170,3 @@ app.listen(3000, () => {
     console.log('📂 Banco de Dados: siscristovao.db');
     console.log('====================================================');
 });
-server.js
-Exibindo server.js…
