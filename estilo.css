@@ -1,154 +1,147 @@
-/* ==========================================================================
-   PALETA DE CORES OFICIAL - COLÉGIO ESTADUAL SÃO CRISTÓVÃO
+/* ========================================================================== 
+   ESTILO GERAL - BIOMENTORIA (VERSÃO LIMPA)
    ========================================================================== */
+
 :root {
-    --primary-blue: #132960;
-    --accent-red: #D31C24;
-    --bg-white: #FFFFFF;
-    --bg-light: #F0F3F8;
-    --text-dark: #1C1C1C;
-    --text-muted: #555555;
+    --primary: #132960;
+    --accent: #D31C24;
+    --bg: #F0F3F8;
+    --white: #FFFFFF;
+    --text: #1C1C1C;
 }
 
-/* ==========================================================================
-   ESTRUTURA GERAL DA PÁGINA
-   ========================================================================== */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
+    background-color: var(--bg);
+    color: var(--text);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-.container {
-    padding: 2rem 1rem;
-    max-width: 900px;
-    margin: 0 auto;
-    flex: 1;
-}
-
-/* ==========================================================================
-   MENU DE NAVEGAÇÃO
+/* ========================================================================== 
+   NAVEGAÇÃO
    ========================================================================== */
+
 nav {
-    background-color: var(--primary-blue);
-    padding: 1.1rem;
+    background-color: var(--primary);
+    padding: 15px;
     display: flex;
     justify-content: space-around;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    border-bottom: 4px solid var(--accent-red);
 }
 
 nav a {
-    color: var(--bg-white);
+    color: white;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.05rem;
-    padding: 5px 12px;
-    border-radius: 4px;
 }
 
 nav a:hover {
-    background-color: var(--accent-red);
+    color: var(--accent);
 }
 
-/* ==========================================================================
-   HEADER / BANNER (SÓ AQUI FOI ALTERADO)
+/* ========================================================================== 
+   BANNER COM IMAGEM DE FUNDO
    ========================================================================== */
-.banner {
-    /* 🔥 SOMENTE AQUI FOI ALTERADO PARA COLOCAR A FOTO */
-    background: url('imagem2.jpg');
 
+.banner {
+    background-image: url('imagens/fundo.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    color: var(--primary-blue);
-    padding: 40px 20px;
+    padding: 120px 20px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    margin-bottom: 15px;
-    border-bottom: 1px solid #DDD;
-}
 
-.banner h1 {
-    margin: 0;
-    font-size: 2.8rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--primary-blue);
-}
-
-.banner p {
-    margin: 8px 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--accent-red);
-    text-transform: uppercase;
-}
-
-/* ==========================================================================
-   CARDS
-   ========================================================================== */
-.card {
-    background: var(--bg-white);
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border-left: 6px solid var(--primary-blue);
-    margin-bottom: 25px;
-}
-
-.card h1, .card h2, .card h3 {
-    color: var(--primary-blue);
-}
-
-/* ==========================================================================
-   FORMULÁRIOS
-   ========================================================================== */
-input, select, button {
-    width: 100%;
-    padding: 0.85rem;
-    margin: 0.6rem 0;
-    border: 2px solid #CBD5E1;
-    border-radius: 6px;
-}
-
-/* ==========================================================================
-   TABELAS
-   ========================================================================== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.2rem;
-}
-
-th, td {
-    padding: 12px 15px;
-}
-
-thead tr {
-    background-color: var(--primary-blue);
     color: white;
 }
 
-tbody tr:nth-of-type(even) {
-    background-color: #F8FAFC;
+.banner h1 {
+    font-size: 3rem;
+    margin: 0;
+
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
 }
 
-/* ==========================================================================
+.banner p {
+    font-size: 1.3rem;
+
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
+
+/* ========================================================================== 
+   CONTAINER
+   ========================================================================== */
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* ========================================================================== 
+   CARDS
+   ========================================================================== */
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* ========================================================================== 
+   TABELA
+   ========================================================================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    background: var(--primary);
+    color: white;
+}
+
+/* ========================================================================== 
+   FORMULÁRIOS
+   ========================================================================== */
+
+input, select, button {
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--accent);
+}
+
+/* ========================================================================== 
    RODAPÉ
    ========================================================================== */
+
 .rodape {
-    background-color: #1A1A1A;
-    color: #AEB0B5;
+    background: #111;
+    color: #ccc;
     text-align: center;
-    padding: 25px 0;
-    margin-top: 40px;
-    width: 100%;
-    border-top: 4px solid var(--primary-blue);
+    padding: 20px;
+    margin-top: auto;
 }
