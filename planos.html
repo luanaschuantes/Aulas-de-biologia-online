@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioMentoria | Mensalidades</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="clientes.html">Cadastro de Alunos</a>
+    <a href="servicos.html">Cursos e Aulas</a>
+    <a href="agendamentos.html">Mensalidades</a>
+    <a href="consulta_agendamentos.html">Contato</a>
+</nav>
+
+<header class="banner">
+    <h1>Planos Mensais BioMentoria</h1>
+    <p>Escolha o plano ideal para evoluir nos seus estudos de Biologia</p>
+</header>
+
+<main class="container">
+
+    <div class="card">
+        <h2>💰 Planos de Assinatura</h2>
+        <p>
+            Na BioMentoria você pode escolher o plano ideal para sua rotina de estudos.
+            Todos os planos dão acesso aos conteúdos de Biologia para ENEM, vestibulares e reforço escolar.
+        </p>
+
+        <p id="planoEscolhido"><strong>Nenhum plano selecionado ainda.</strong></p>
+    </div>
+
+    <div class="card">
+        <h3>🟢 Plano Básico - R$10</h3>
+        <p>Acesso a conteúdos introdutórios de Biologia e materiais de revisão.</p>
+        <button onclick="escolherPlano('Plano Básico - R$10')">Escolher R$10</button>
+    </div>
+
+    <div class="card">
+        <h3>🟡 Plano Intermediário - R$20</h3>
+        <p>Inclui aulas completas, exercícios e simulados para prática.</p>
+        <button onclick="escolherPlano('Plano Intermediário - R$20')">Escolher R$20</button>
+    </div>
+
+    <div class="card">
+        <h3>🔴 Plano Premium - R$30</h3>
+        <p>Acesso total à plataforma com conteúdos exclusivos e revisões completas.</p>
+        <button onclick="escolherPlano('Plano Premium - R$30')">Escolher R$30</button>
+    </div>
+
+</main>
+
+<footer class="rodape">
+    <div class="container-rodape">
+        <p>&copy; 2026 BioMentoria - Plataforma de Ensino de Biologia</p>
+        <p>Aprendendo Biologia com qualidade e simplicidade</p>
+    </div>
+</footer>
+
+<script>
+function escolherPlano(plano) {
+    localStorage.setItem("planoSelecionado", plano);
+
+    document.getElementById("planoEscolhido").innerHTML =
+        "✔ Você selecionou: <strong>" + plano + "</strong>";
+}
+
+window.onload = function () {
+    let plano = localStorage.getItem("planoSelecionado");
+
+    if (plano) {
+        document.getElementById("planoEscolhido").innerHTML =
+            "✔ Seu plano atual: <strong>" + plano + "</strong>";
+    }
+}
+</script>
+
+</body>
+</html>
