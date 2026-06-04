@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="estilo.css">
-    <title>BioMentoria - Conatato</title>
+    <title>BioMentoria - Contato</title>
 </head>
 <body>
+
     <nav>
         <a href="index.html">Home</a>
         <a href="clientes.html">Cadastro de Aluno</a>
@@ -15,16 +16,30 @@
     </nav>
 
     <header class="banner">
-        <h1>Histórico de Agendamentos</h1>
-        <p>Consulte as Ordens de Serviço abertas e alocações de equipes</p>
+        <h1>Fale Conosco</h1>
+        <p>Dúvidas, suporte e informações gerais</p>
     </header>
 
     <div class="container">
+
+        <!-- NOVO BLOCO DE CONTATO (sem interferir na lógica existente) -->
         <div class="card">
+            <h2>Informações de Contato</h2>
+            <p style="font-size: 1rem; margin-top: 10px;">
+                📞 Telefone / WhatsApp:
+            </p>
+            <p style="font-size: 1.4rem; font-weight: bold; color: var(--accent-red);">
+                (46) 99971-3828
+            </p>
+        </div>
+
+        <!-- TODO O RESTO MANTIDO (FUNCIONALIDADE ORIGINAL) -->
+        <div class="card" style="margin-top: 25px;">
             <h2>Agendamentos Registrados (Mestre)</h2>
             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
                 Clique em "Ver Detalhes" para examinar os serviços específicos alocados a cada horário.
             </p>
+
             <table>
                 <thead>
                     <tr>
@@ -37,15 +52,17 @@
                     </tr>
                 </thead>
                 <tbody id="lista-agendamentos-consulta">
-                    </tbody>
+                </tbody>
             </table>
         </div>
 
         <div id="card-detalhes" class="card" style="margin-top: 25px; display: none; border-left: 6px solid var(--accent-red);">
             <h2>Detalhes da Ordem de Serviço #<span id="num-agendamento"></span></h2>
+
             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
                 Serviços técnicos executados nesta reserva:
             </p>
+
             <table>
                 <thead>
                     <tr>
@@ -55,22 +72,21 @@
                     </tr>
                 </thead>
                 <tbody id="lista-servicos-detalhe">
-                    </tbody>
+                </tbody>
             </table>
         </div>
+
     </div>
 
-    <script {="" }="">
-        // Executa automaticamente ao carregar a página para preencher a tabela Mestre
+    <script>
         window.onload = function() {
             fetch('/listar-agendamentos')
                 .then(res => res.json())
                 .then(agendamentos => {
                     const corpoTabela = document.getElementById('lista-agendamentos-consulta');
                     corpoTabela.innerHTML = "";
-                    
+
                     agendamentos.forEach(a => {
-                        // Formatação amigável para a data vinda do datetime-local
                         const dataFormatada = new Date(a.data).toLocaleString('pt-BR', {
                             dateStyle: 'short',
                             timeStyle: 'short'
@@ -92,18 +108,17 @@
                 .catch(err => console.error("Erro ao listar agendamentos:", err));
         };
 
-        // Função para carregar e exibir os Detalhes do agendamento clicado
         function verDetalhes(idAgendamento) {
             fetch(`/detalhes-agendamento/${idAgendamento}`)
                 .then(res => res.json())
                 .then(servicos => {
-                    // Torna o card visível e atualiza o número da O.S.
+
                     document.getElementById('card-detalhes').style.display = 'block';
                     document.getElementById('num-agendamento').innerText = idAgendamento;
-                    
+
                     const corpoDetalhe = document.getElementById('lista-servicos-detalhe');
                     corpoDetalhe.innerHTML = "";
-                    
+
                     servicos.forEach(item => {
                         corpoDetalhe.innerHTML += `
                             <tr>
@@ -112,8 +127,7 @@
                                 <td>R$ ${item.preco_cobrado.toFixed(2)}</td>
                             </tr>`;
                     });
-                    
-                    // Rola a tela suavemente até o card de detalhes para melhorar a usabilidade
+
                     window.scrollTo({
                         top: document.getElementById('card-detalhes').offsetTop - 20,
                         behavior: 'smooth'
@@ -122,6 +136,7 @@
                 .catch(err => console.error("Erro ao carregar detalhes:", err));
         }
     </script>
+
 </body>
 
 <footer class="rodape">
@@ -130,4 +145,5 @@
         <p>Desenvolvido para fins didáticos - Alunos do São Cristóvão</p>
     </div>
 </footer>
+
 </html>
