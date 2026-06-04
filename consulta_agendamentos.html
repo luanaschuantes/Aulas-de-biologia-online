@@ -22,20 +22,38 @@
 
     <div class="container">
 
-        <!-- NOVO BLOCO DE CONTATO (sem interferir na lógica existente) -->
+        <!-- CONTATO COM WHATSAPP -->
         <div class="card">
             <h2>Informações de Contato</h2>
+
             <p style="font-size: 1rem; margin-top: 10px;">
-                📞 Telefone / WhatsApp:
+                📞 Atendimento via WhatsApp:
             </p>
-            <p style="font-size: 1.4rem; font-weight: bold; color: var(--accent-red);">
-                (46) 99971-3828
+
+            <a href="https://wa.me/5546999713828" target="_blank"
+               style="
+                    display: inline-block;
+                    margin-top: 10px;
+                    padding: 12px 18px;
+                    background-color: #25D366;
+                    color: white;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    border-radius: 8px;
+                    text-decoration: none;
+               ">
+                📲 (46) 99971-3828
+            </a>
+
+            <p style="margin-top: 15px; color: var(--text-muted);">
+                Clique no botão acima para falar diretamente conosco no WhatsApp.
             </p>
         </div>
 
-        <!-- TODO O RESTO MANTIDO (FUNCIONALIDADE ORIGINAL) -->
+        <!-- MANTIDO SEM ALTERAR FUNCIONALIDADE -->
         <div class="card" style="margin-top: 25px;">
             <h2>Agendamentos Registrados (Mestre)</h2>
+
             <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
                 Clique em "Ver Detalhes" para examinar os serviços específicos alocados a cada horário.
             </p>
@@ -51,6 +69,7 @@
                         <th>Ação</th>
                     </tr>
                 </thead>
+
                 <tbody id="lista-agendamentos-consulta">
                 </tbody>
             </table>
@@ -71,6 +90,7 @@
                         <th>Preço (R$)</th>
                     </tr>
                 </thead>
+
                 <tbody id="lista-servicos-detalhe">
                 </tbody>
             </table>
