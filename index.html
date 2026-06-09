@@ -6,105 +6,69 @@
     <title>BioMentoria | Plataforma de Aulas Online de Biologia</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
-
 <body>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="clientes.html">Cadastro de Alunos</a>
-    <a href="servicos.html">Aulas</a>
-    <a href="agendamentos.html">Mensalidade</a>
-    <a href="consulta_agendamentos.html">Contato</a>
-</nav>
+    <nav class="menu-navegacao">
+        <a href="index.html">Home</a>
+        <a href="clientes.html">Cadastro de Alunos</a>
+        <a href="servicos.html">Aulas</a>
+        <a href="agendamentos.html">Mensalidade</a>
+        <a href="consulta_agendamentos.html">Contato</a>
+    </nav>
 
-<header class="banner">
-    <h1>BioMentoria</h1>
-    <p>Aprenda Biologia de forma simples, prática e eficiente sem sair de casa.</p>
-</header>
+    <header class="banner-principal">
+        <h1>BioMentoria</h1>
+        <p>Aprenda Biologia de forma simples, prática e eficiente sem sair de casa.</p>
+    </header>
 
-<main class="container">
+    <main class="container">
 
-    <div class="card">
-        <h1>Seja Bem-vindo(a) à BioMentoria</h1>
+        <section class="card">
+            <h2>Seja Bem-vindo(a) à BioMentoria</h2>
+            <p>
+                A BioMentoria é uma plataforma educacional criada para auxiliar estudantes
+                no aprendizado da Biologia de maneira clara, dinâmica e acessível.
+            </p>
+            <p>
+                Nosso objetivo é oferecer suporte aos alunos por meio de aulas online,
+                materiais didáticos, exercícios e mentorias personalizadas para ENEM,
+                vestibulares, concursos e reforço escolar.
+            </p>
+            <p>
+                Aqui você encontra conteúdos organizados e atualizados que facilitam
+                a compreensão dos principais temas da Biologia, contribuindo para um
+                aprendizado mais eficiente e resultados cada vez melhores.
+            </p>
+        </section>
 
-        <p>
-            A BioMentoria é uma plataforma educacional criada para auxiliar estudantes
-            no aprendizado da Biologia de maneira clara, dinâmica e acessível.
-        </p>
+        <section class="card card-recursos">
+            <h3>🚀 Recursos da Plataforma</h3>
+            <table class="tabela-recursos">
+                <thead>
+                    <tr>
+                        <th>Módulo</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>👥 <strong>Alunos</strong></td>
+                        <td>Cadastro e gerenciamento de estudantes participantes da plataforma.</td>
+                    </tr>
+                    <tr>
+                        <td>📚 <strong>Cursos</strong></td>
+                        <td>Organização de aulas, conteúdos programáticos e materiais de apoio em Biologia.</td>
+                    </tr>
+                    <tr>
+                        <td>📅 <strong>Agendamentos</strong></td>
+                        <td>Agendamento de mentorias, aulas particulares e atendimentos pedagógicos.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-        <p>
-            Nosso objetivo é oferecer suporte aos alunos por meio de aulas online,
-            materiais didáticos, exercícios e mentorias personalizadas para ENEM,
-            vestibulares, concursos e reforço escolar.
-        </p>
-
-        <p>
-            Aqui você encontra conteúdos organizados e atualizados que facilitam
-            a compreensão dos principais temas da Biologia, contribuindo para um
-            aprendizado mais eficiente e resultados cada vez melhores.
-        </p>
-    </div>
-
-    <div class="card" style="margin-top: 20px;">
-        <h3>🚀 Recursos da Plataforma</h3>
-
-        <table border="1" style="width:100%; border-collapse: collapse; margin-top: 10px;">
-            <thead>
-                <tr style="background-color: #eeeeee;">
-                    <th>Módulo</th>
-                    <th>Descrição</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td>👥 <strong>Alunos</strong></td>
-                    <td>Cadastro e gerenciamento de estudantes participantes da plataforma.</td>
-                </tr>
-
-                <tr>
-                    <td>📚 <strong>Cursos</strong></td>
-                    <td>Organização de aulas, conteúdos programáticos e materiais de apoio em Biologia.</td>
-                </tr>
-
-                <tr>
-                    <td>📅 <strong>Agendamentos</strong></td>
-                    <td>Agendamento de mentorias, aulas particulares e atendimentos pedagógicos.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="card" style="margin-top: 20px;">
-        <h3>🎯 Nossa Missão</h3>
-
-        <p>
-            Promover uma aprendizagem significativa em Biologia por meio de métodos
-            didáticos modernos, incentivando o desenvolvimento acadêmico e a preparação
-            dos estudantes para seus desafios educacionais e profissionais.
-        </p>
-    </div>
-
-    <div class="card" style="margin-top: 20px;">
-        <h3>📊 Estrutura da Plataforma</h3>
-
-        <ul>
-            <li><strong>Ensino Online:</strong> Acesso remoto às aulas e conteúdos exclusivos.</li>
-            <li><strong>Mentorias Personalizadas:</strong> Acompanhamento individual conforme as necessidades do aluno.</li>
-            <li><strong>Backend:</strong> Node.js com Express e API REST.</li>
-            <li><strong>Banco de Dados:</strong> SQLite para armazenamento seguro das informações.</li>
-            <li><strong>Interface Web:</strong> Ambiente intuitivo e responsivo para facilitar a navegação.</li>
-        </ul>
-    </div>
-
-</main>
-
-<footer class="rodape">
-    <div class="container-rodape">
-        <p>&copy; 2026 BioMentoria - Plataforma de Ensino de Biologia</p>
-        <p>Aprendendo Biologia com qualidade, tecnologia e dedicação.</p>
-    </div>
-</footer>
-
-</body>
-</html>
+        <section class="card">
+            <h3>🎯 Nossa Missão</h3>
+            <p>
+                Promover uma aprendizagem significativa em Biologia por meio de métodos
+                didáticos modernos, incentivando
