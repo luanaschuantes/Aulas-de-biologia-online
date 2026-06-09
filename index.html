@@ -1,67 +1,132 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioMentoria | Plataforma de Aulas Online de Biologia</title>
     <link rel="stylesheet" href="estilo.css">
+    <title>BioMentoria - Home</title>
 </head>
 <body>
-    <nav class="menu-navegacao">
-        <a href="index.html">Home</a>
-        <a href="clientes.html">Cadastro de Alunos</a>
-        <a href="servicos.html">Aulas</a>
-        <a href="agendamentos.html">Mensalidade</a>
-        <a href="consulta_agendamentos.html">Contato</a>
-    </nav>
 
-    <header class="banner-principal">
-        <h1>BioMentoria</h1>
-        <p>Aprenda Biologia de forma simples, prática e eficiente sem sair de casa.</p>
-    </header>
+```
+<nav>
+    <a href="index.html">Home</a>
+    <a href="clientes.html">Alunos</a>
+    <a href="servicos.html">Cursos</a>
+    <a href="agendamentos.html">Mentorias</a>
+    <a href="consulta_agendamentos.html">Consultar Mentorias</a>
+</nav>
 
-    <main class="container">
-        <section class="card">
-            <h2>Seja Bem-vindo(a) à BioMentoria</h2>
-            <p>A BioMentoria é uma plataforma educacional criada para auxiliar estudantes no aprendizado da Biologia de maneira clara, dinâmica e acessível.</p>
-            <p>Nosso objetivo é oferecer suporte aos alunos por meio de aulas online, materiais didáticos, exercícios e mentorias personalizadas para ENEM, vestibulares, concursos e reforço escolar.</p>
-            <p>Aqui você encontra conteúdos organizados e atualizados que facilitam a compreensão dos principais temas da Biologia.</p>
-        </section>
+<header class="banner">
+    <h1>BioMentoria</h1>
+    <p>Plataforma de Aulas e Mentorias em Biologia</p>
 
-        <section class="card card-recursos">
-            <h3>🚀 Recursos da Plataforma</h3>
-            <table class="tabela-recursos">
-                <thead>
-                    <tr>
-                        <th>Módulo</th>
-                        <th>Descrição</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>👥 <strong>Alunos</strong></td>
-                        <td>Cadastro e gerenciamento de estudantes participantes da plataforma.</td>
-                    </tr>
-                    <tr>
-                        <td>📚 <strong>Cursos</strong></td>
-                        <td>Organização de aulas, conteúdos programáticos e materiais de apoio em Biologia.</td>
-                    </tr>
-                    <tr>
-                        <td>📅 <strong>Agendamentos</strong></td>
-                        <td>Agendamento de mentorias, aulas particulares e atendimentos pedagógicos.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+    <img src="imagens/banner-biologia.jpg"
+         alt="BioMentoria"
+         width="300">
+</header>
 
-        <section class="card">
-            <h3>🎯 Nossa Missão</h3>
-            <p>Promover uma aprendizagem significativa em Biologia por meio de métodos didáticos modernos, incentivando o pensamento crítico e o amor pela ciência.</p>
-        </section>
-    </main>
+<div class="container">
 
-    <footer>
-        <p>&copy; 2026 BioMentoria - Todos os direitos reservados</p>
-    </footer>
+    <div class="card">
+        <h1>Bem-vindo à BioMentoria</h1>
+
+        <p>
+            Uma plataforma educacional desenvolvida para auxiliar
+            estudantes no aprendizado da Biologia por meio de
+            cursos, mentorias e acompanhamento personalizado.
+        </p>
+
+        <p>
+            O sistema conecta a interface Web ao banco de dados
+            SQLite para simular um ambiente real de gestão de
+            alunos, cursos e agendamentos de mentorias.
+        </p>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+
+        <h3>🧬 Módulos da Plataforma</h3>
+
+        <table border="1"
+               style="width:100%; border-collapse: collapse; margin-top: 10px;">
+
+            <thead>
+                <tr style="background-color: #eee;">
+                    <th>Módulo</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>👨‍🎓 <strong>Alunos</strong></td>
+                    <td>
+                        Cadastro dos estudantes e gerenciamento
+                        de informações acadêmicas.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>📚 <strong>Cursos</strong></td>
+                    <td>
+                        Catálogo de cursos e conteúdos de Biologia,
+                        incluindo carga horária e valores.
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>📅 <strong>Mentorias</strong></td>
+                    <td>
+                        Agendamento de aulas particulares,
+                        revisões para ENEM e acompanhamento
+                        individual dos alunos.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+
+        <h3>🌱 Áreas de Estudo</h3>
+
+        <ul>
+            <li><strong>Biologia Celular:</strong> Estruturas e funções das células.</li>
+            <li><strong>Genética:</strong> DNA, RNA, hereditariedade e biotecnologia.</li>
+            <li><strong>Ecologia:</strong> Ecossistemas e sustentabilidade.</li>
+            <li><strong>Anatomia:</strong> Sistemas do corpo humano.</li>
+            <li><strong>Preparação para ENEM:</strong> Conteúdos focados em vestibulares.</li>
+        </ul>
+
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+
+        <h3>📊 Estrutura Tecnológica</h3>
+
+        <ul>
+            <li><strong>Frontend:</strong> HTML5, CSS3 e JavaScript.</li>
+            <li><strong>Backend:</strong> Node.js com Express.</li>
+            <li><strong>Banco de Dados:</strong> SQLite (biomentoria.db).</li>
+            <li><strong>API:</strong> RESTful para integração entre módulos.</li>
+        </ul>
+
+    </div>
+
+</div>
+
+<footer class="rodape">
+    <div class="container-rodape">
+        <p>&copy; 2026 BioMentoria - Plataforma de Ensino de Biologia</p>
+        <p>Desenvolvido para fins educacionais</p>
+    </div>
+</footer>
+```
+
 </body>
 </html>
