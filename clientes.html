@@ -5,79 +5,120 @@
     <link rel="stylesheet" href="estilo.css">
     <title>BioMentoria - Cadastro de Alunos</title>
 </head>
+
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="clientes.html">Cadastro de Alunos</a>
-        <a href="servicos.html">Aulas</a>
-        <a href="agendamentos.html">Mensalidade</a>
-        <a href="consulta_agendamentos.html">Contato</a>
-    </nav>
 
-    <header class="banner">
-        <h1>Gestão de Alunos</h1>
-        <p>Cadastre os estudantes que irão participar das aulas e atividades de Biologia</p>
-    </header>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="clientes.html">Alunos</a>
+    <a href="servicos.html">Cursos</a>
+    <a href="agendamentos.html">Mentorias</a>
+    <a href="consulta_agendamentos.html">Contato</a>
+</nav>
 
-    <div class="container">
-        <div class="card">
-            <h2>Novo Cadastro de Aluno</h2>
-            <form action="/salvar-cliente" method="POST">
-                <label for="nome">Nome do Aluno:</label>
-                <input type="text" id="nome" name="nome" placeholder="Ex: João da Silva" required>
-                
-                <label for="cpf">CPF / Registro Acadêmico:</label>
-                <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
-                
-                <label for="telefone">Telefone / WhatsApp:</label>
-                <input type="tel" id="telefone" name="telefone" placeholder="(00) 99999-9999" required>
-                
-                <button type="submit">Salvar Aluno</button>
-            </form>
-        </div>
+<header class="banner">
+    <h1>Cadastro de Alunos</h1>
+    <p>Gerencie os estudantes da BioMentoria</p>
+</header>
 
-        <div class="card" style="margin-top: 20px;">
-            <h2>Alunos Cadastrados</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
-                Lista de estudantes matriculados nas aulas e atividades de Biologia.
-            </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF / Registro</th>
-                        <th>Telefone</th>
-                    </tr>
-                </thead>
-                <tbody id="lista-clientes">
-                </tbody>
-            </table>
-        </div>
+<div class="container">
+
+    <!-- FORMULÁRIO -->
+    <div class="card">
+        <h2>➕ Novo Aluno</h2>
+
+        <form action="/salvar-cliente" method="POST">
+
+            <label>Nome</label>
+            <input type="text" name="nome" required>
+
+            <label>CPF</label>
+            <input type="text" name="cpf" required>
+
+            <label>Telefone</label>
+            <input type="tel" name="telefone" required>
+
+            <button type="submit">Salvar</button>
+        </form>
     </div>
 
-    <script>
-        fetch('/listar-clientes')
-            .then(res => res.json())
-            .then(clientes => {
-                const corpoTabela = document.getElementById('lista-clientes');
-                clientes.forEach(c => {
-                    corpoTabela.innerHTML += `
-                        <tr>
-                            <td><strong>${c.nome}</strong></td>
-                            <td>${c.cpf}</td>
-                            <td>${c.telefone}</td>
-                        </tr>`;
-                });
-            })
-            .catch(err => console.error("Erro ao listar clientes:", err));
-    </script>
+    <!-- LISTA -->
+    <div class="card">
+        <h2>👨‍🎓 Alunos Cadastrados</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody id="lista-clientes"></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+let alunos = [];
+
+fetch('/listar-clientes')
+    .then(res => res.json())
+    .then(data => {
+        alunos = data;
+        renderizar();
+    });
+
+function renderizar() {
+    const tabela = document.getElementById('lista-clientes');
+    tabela.innerHTML = "";
+
+    alunos.forEach((a, index) => {
+        tabela.innerHTML += `
+            <tr>
+                <td><strong>${a.nome}</strong></td>
+                <td>${a.cpf}</td>
+                <td>${a.telefone}</td>
+                <td>
+                    <button onclick="editar(${index})">✏ Editar</button>
+                    <button onclick="deletar(${index})">🗑 Excluir</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// EDITAR (front simples - depois liga no backend)
+function editar(i) {
+    const aluno = alunos[i];
+
+    const novoNome = prompt("Editar nome:", aluno.nome);
+    const novoCpf = prompt("Editar CPF:", aluno.cpf);
+    const novoTel = prompt("Editar telefone:", aluno.telefone);
+
+    if (novoNome) alunos[i].nome = novoNome;
+    if (novoCpf) alunos[i].cpf = novoCpf;
+    if (novoTel) alunos[i].telefone = novoTel;
+
+    renderizar();
+}
+
+// EXCLUIR (front simples - depois liga no backend)
+function deletar(i) {
+    if (confirm("Tem certeza que deseja excluir este aluno?")) {
+        alunos.splice(i, 1);
+        renderizar();
+    }
+}
+</script>
+
 </body>
 
 <footer class="rodape">
-    <div class="container-rodape">
-        <p>&copy; 2026 BioMentoria - Plataforma de Ensino de Biologia
-</p>
-        <p>Aprendendo Biologia com qualidade, tecnologia e dedicação.</p>
-    </div>
+    <p>&copy; 2026 BioMentoria - Sistema de Alunos</p>
 </footer>
+
 </html>
