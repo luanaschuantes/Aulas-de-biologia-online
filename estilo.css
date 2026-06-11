@@ -1,5 +1,5 @@
 /* =======================================================================
-   BIOMENTORIA - DESIGN PROFISSIONAL (MELHORADO)
+   BIOMENTORIA - SISTEMA SAAS PROFISSIONAL
    ======================================================================= */
 
 :root {
@@ -25,76 +25,62 @@ body {
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    line-height: 1.5;
 }
 
 /* =======================================================================
-   NAVBAR
+   LAYOUT SAAS (SIDEBAR + CONTEÚDO)
    ======================================================================= */
 
-nav {
-    background: var(--primary);
-    padding: 15px;
+.layout {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    min-height: 100vh;
 }
 
-nav a {
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    background: var(--primary);
+    color: white;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.15);
+}
+
+.sidebar h2 {
+    margin-bottom: 5px;
+}
+
+.sidebar p {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* LINKS SIDEBAR */
+.sidebar a {
+    display: block;
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.25s;
-    padding: 6px 10px;
-    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
-nav a:hover {
-    color: var(--accent);
-    background: rgba(255,255,255,0.08);
+.sidebar a:hover {
+    background: rgba(255,255,255,0.15);
 }
 
-/* =======================================================================
-   HERO / BANNER
-   ======================================================================= */
-
-.banner {
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-                url('imagem2.jpg');
-    background-size: cover;
-    background-position: center;
-    padding: 140px 20px;
-    text-align: center;
-    color: white;
-}
-
-.banner h1 {
-    font-size: 3rem;
-    margin: 0;
-    letter-spacing: 1px;
-}
-
-.banner p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-}
-
-/* =======================================================================
-   CONTAINER
-   ======================================================================= */
-
-.container {
-    max-width: 1000px;
-    margin: auto;
+/* CONTEÚDO */
+.content {
+    margin-left: 260px;
     padding: 25px;
+    width: 100%;
 }
 
 /* =======================================================================
-   CARDS
+   CARDS (DASHBOARD)
    ======================================================================= */
 
 .card {
@@ -111,8 +97,15 @@ nav a:hover {
     box-shadow: 0 12px 28px rgba(0,0,0,0.12);
 }
 
+/* GRID DASHBOARD */
+.grid-dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
 /* =======================================================================
-   BOTÕES
+   BOTÕES (SAAS STYLE)
    ======================================================================= */
 
 button, .btn {
@@ -139,11 +132,10 @@ button:hover, .btn:hover {
 .btn-small {
     width: auto;
     padding: 8px 14px;
-    font-size: 14px;
 }
 
 /* =======================================================================
-   TABELAS
+   TABELAS (PAINEL ADMIN)
    ======================================================================= */
 
 table {
@@ -191,7 +183,7 @@ input:focus, select:focus {
 }
 
 /* =======================================================================
-   LOGIN ADMIN BOX
+   LOGIN BOX
    ======================================================================= */
 
 .login-box {
@@ -205,39 +197,51 @@ input:focus, select:focus {
 }
 
 /* =======================================================================
-   PAINEL ADMIN
+   BANNER (CASO USE NA HOME)
    ======================================================================= */
 
-.painel {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 20px;
+.banner {
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+                url('imagem2.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 140px 20px;
+    text-align: center;
+    color: white;
 }
 
-/* =======================================================================
-   FOOTER
-   ======================================================================= */
+.banner h1 {
+    font-size: 3rem;
+    margin: 0;
+}
 
-footer, .rodape {
-    background: #111;
-    color: #aaa;
-    text-align: center;
-    padding: 25px;
-    margin-top: 50px;
+.banner p {
+    font-size: 1.2rem;
 }
 
 /* =======================================================================
    RESPONSIVO
    ======================================================================= */
 
+@media (max-width: 900px) {
+    .grid-dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+        margin-left: 0;
+    }
 
     .banner h1 {
         font-size: 2rem;
-    }
-
-    nav {
-        flex-direction: column;
-        gap: 10px;
     }
 }
