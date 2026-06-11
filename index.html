@@ -2,87 +2,85 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>BioMentoria | Dashboard</title>
+    <title>BioMentoria | Painel</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
-<div class="layout">
+<!-- MENU SUPERIOR -->
+<nav>
+    <a href="index.html">Início</a>
+    <a href="clientes.html">Alunos</a>
+    <a href="servicos.html">Cursos</a>
+    <a href="agendamentos.html">Mentorias</a>
+    <a href="consulta_agendamentos.html">Contato</a>
+    <a href="admin.html">Admin</a>
+</nav>
 
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
-    <div class="sidebar">
+<!-- BANNER -->
+<header class="banner">
+    <h1>BioMentoria</h1>
+    <p>Painel de gestão de aulas e alunos em Biologia</p>
+</header>
 
-        <h2>BioMentoria</h2>
-        <p style="font-size: 13px; opacity: 0.8;">
-            Sistema de Gestão
+<!-- CONTEÚDO -->
+<div class="container">
+
+    <!-- INTRO -->
+    <div class="card">
+        <h2>📊 Painel Principal</h2>
+        <p>
+            Bem-vinda, Luana Schuantes.  
+            Use o painel abaixo para gerenciar alunos, cursos e mentorias.
         </p>
+    </div>
 
-        <a href="index.html">📊 Dashboard</a>
-        <a href="clientes.html">👨‍🎓 Alunos</a>
-        <a href="servicos.html">📚 Cursos</a>
-        <a href="agendamentos.html">📅 Mentorias</a>
-        <a href="consulta_agendamentos.html">📞 Contato</a>
-        <a href="admin.html">🔐 Admin</a>
+    <!-- ACESSOS RÁPIDOS -->
+    <div class="grid-dashboard">
+
+        <div class="card">
+            <h3>👨‍🎓 Alunos</h3>
+            <p>Cadastro e lista de alunos matriculados.</p>
+            <a href="clientes.html" class="btn">Acessar</a>
+        </div>
+
+        <div class="card">
+            <h3>📚 Cursos</h3>
+            <p>Gerencie os cursos de Biologia disponíveis.</p>
+            <a href="servicos.html" class="btn">Acessar</a>
+        </div>
+
+        <div class="card">
+            <h3>📅 Mentorias</h3>
+            <p>Controle de agendamentos e aulas individuais.</p>
+            <a href="agendamentos.html" class="btn">Acessar</a>
+        </div>
+
+        <div class="card">
+            <h3>📞 Contato</h3>
+            <p>Mensagens e consultas dos alunos.</p>
+            <a href="consulta_agendamentos.html" class="btn">Acessar</a>
+        </div>
 
     </div>
 
-    <!-- =========================
-         CONTEÚDO PRINCIPAL
-    ========================== -->
-    <div class="content">
+    <!-- ADMIN -->
+    <div class="card" style="margin-top: 20px; border-left: 5px solid #D31C24;">
+        <h3>🔐 Painel Administrativo</h3>
+        <p>
+            Área restrita para gerenciamento completo do sistema.
+        </p>
 
-        <!-- TOPO -->
-        <div class="card">
-            <h1>Bem-vinda, Luana Schuantes 👩‍🏫</h1>
-            <p>
-                Este é o painel principal da BioMentoria.
-                Aqui você gerencia alunos, cursos e mentorias.
-            </p>
-        </div>
-
-        <!-- CARDS RESUMO -->
-        <div class="grid-dashboard">
-
-            <div class="card">
-                <h3>👨‍🎓 Alunos</h3>
-                <p>Gerencie os alunos cadastrados no sistema.</p>
-                <a href="clientes.html" class="btn">Abrir</a>
-            </div>
-
-            <div class="card">
-                <h3>📚 Cursos</h3>
-                <p>Controle os cursos disponíveis na plataforma.</p>
-                <a href="servicos.html" class="btn">Abrir</a>
-            </div>
-
-            <div class="card">
-                <h3>📅 Mentorias</h3>
-                <p>Visualize e organize os agendamentos.</p>
-                <a href="agendamentos.html" class="btn">Abrir</a>
-            </div>
-
-            <div class="card">
-                <h3>📞 Contato</h3>
-                <p>Mensagens e consultas de alunos.</p>
-                <a href="consulta_agendamentos.html" class="btn">Abrir</a>
-            </div>
-
-        </div>
-
-        <!-- INFO FINAL -->
-        <div class="card">
-            <h3>📌 Status do Sistema</h3>
-            <p>✔ Sistema online e funcionando</p>
-            <p>✔ Banco de dados conectado (SQLite)</p>
-            <p>✔ Área administrativa ativa</p>
-        </div>
-
+        <a href="admin.html" class="btn">Entrar no Admin</a>
     </div>
 
 </div>
+
+<!-- RODAPÉ -->
+<footer class="rodape">
+    <p>&copy; 2026 BioMentoria - Sistema Educacional</p>
+</footer>
 
 </body>
 </html>
