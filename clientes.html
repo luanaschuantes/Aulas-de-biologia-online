@@ -1,105 +1,87 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <title>BioMentoria - Matrícula</title>
     <link rel="stylesheet" href="estilo.css">
-    <title>BioMentoria - Cadastro de Alunos</title>
 </head>
 
 <body>
 
+<!-- MENU -->
 <nav>
     <a href="index.html">Início</a>
-    <a href="clientes.html">Cadastro de Alunos</a>
+    <a href="matricula.html">Matrícula</a>
     <a href="servicos.html">Planos</a>
     <a href="agendamentos.html">Mensalidades</a>
     <a href="consulta_agendamentos.html">Contato</a>
     <a href="admin.html">Admin</a>
 </nav>
 
+<!-- BANNER -->
 <header class="banner">
-    <h1>Cadastro de Alunos</h1>
-    <p>Gerencie os estudantes da BioMentoria</p>
+    <h1>Matrícula</h1>
+    <p>Cadastre-se e escolha seu plano de estudos</p>
 </header>
 
+<!-- CONTEÚDO -->
 <div class="container">
 
-    <!-- FORM -->
+    <!-- FORMULÁRIO -->
     <div class="card">
-        <h2>➕ Novo Aluno</h2>
+
+        <h2>🎓 Faça sua Matrícula</h2>
+
+        <p>
+            Seja bem-vindo à BioMentoria! Preencha seus dados para realizar sua matrícula.
+            Após o cadastro, você poderá escolher o plano desejado e acessar as aulas e mentorias disponíveis.
+        </p>
 
         <form action="/salvar-cliente" method="POST">
 
-            <label>Nome</label>
-            <input type="text" name="nome" required>
+            <label>Nome Completo</label>
+            <input type="text" name="nome" placeholder="Digite seu nome completo" required>
 
             <label>CPF</label>
-            <input type="text" name="cpf" required>
+            <input type="text" name="cpf" placeholder="000.000.000-00" required>
 
-            <label>Telefone</label>
-            <input type="tel" name="telefone" required>
+            <label>Telefone / WhatsApp</label>
+            <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
 
-            <button class="btn" type="submit">Salvar</button>
+            <label>E-mail</label>
+            <input type="email" name="email" placeholder="seuemail@email.com" required>
+
+            <button class="btn" type="submit">
+                Finalizar Matrícula
+            </button>
+
         </form>
+
     </div>
 
-    <!-- LISTA -->
+    <!-- INFORMAÇÕES -->
     <div class="card">
-        <h2>👨‍🎓 Alunos Cadastrados</h2>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
+        <h2>📚 Como funciona?</h2>
 
-            <tbody id="lista-clientes"></tbody>
-        </table>
+        <ul style="line-height: 2;">
+            <li>✔ Preencha seus dados e conclua sua matrícula.</li>
+            <li>✔ Escolha o plano de estudos ideal para você.</li>
+            <li>✔ Efetue o pagamento da mensalidade.</li>
+            <li>✔ Receba acesso às aulas incluídas no seu plano.</li>
+            <li>✔ Participe das mentorias e acompanhe seu desenvolvimento.</li>
+        </ul>
+
     </div>
 
 </div>
 
+<!-- RODAPÉ -->
 <footer class="rodape">
     <p>&copy; 2026 BioMentoria - Todos os Direitos Reservados</p>
 </footer>
 
-<script>
-let alunos = [];
-
-function carregar() {
-    fetch('/listar-clientes')
-    .then(res => res.json())
-    .then(data => {
-        alunos = data;
-        renderizar();
-    });
-}
-
-function renderizar() {
-    const tabela = document.getElementById('lista-clientes');
-    tabela.innerHTML = "";
-
-    alunos.forEach((a) => {
-        tabela.innerHTML += `
-            <tr>
-                <td><strong>${a.nome}</strong></td>
-                <td>${a.cpf}</td>
-                <td>${a.telefone}</td>
-                <td>
-                    <button class="btn" onclick="alert('Editar precisa backend')">✏ Editar</button>
-                    <button class="btn" onclick="alert('Excluir precisa backend')">🗑 Excluir</button>
-                </td>
-            </tr>
-        `;
-    });
-}
-
-window.onload = carregar;
-</script>
-
 </body>
 </html>
+```
