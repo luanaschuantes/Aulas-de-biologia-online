@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin - BioMentoria</title>
-    <link rel="stylesheet" href="estilo.css">
+<meta charset="UTF-8">
+<title>Admin - BioMentoria</title>
+<link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
@@ -14,73 +14,66 @@
     <a href="servicos.html">Planos</a>
     <a href="agendamentos.html">Mensalidades</a>
     <a href="consulta_agendamentos.html">Contato</a>
-    <a href="admin.html">Admin</a>
+    <a href="login.html">Sair</a>
 </nav>
 
 <header class="banner">
-    <h1>Painel Administrativo</h1>
-    <p>Lista de alunos cadastrados</p>
+    <h1>Painel da Luana Schuantes</h1>
+    <p>Alunos cadastrados no sistema</p>
 </header>
 
 <div class="container">
 
-    <div class="card">
+<div class="card">
+    <h2>👨‍🎓 Lista de Alunos</h2>
 
-        <h2>👨‍🎓 Alunos Cadastrados</h2>
+    <button class="btn" onclick="carregar()">Atualizar Lista</button>
 
-        <button class="btn" onclick="carregar()">
-            Atualizar Lista
-        </button>
+    <br><br>
 
-        <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                </tr>
-            </thead>
-
-            <tbody id="lista"></tbody>
-        </table>
-
-    </div>
-
+        <tbody id="lista"></tbody>
+    </table>
 </div>
 
-<footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Administração</p>
-</footer>
+</div>
 
 <script>
 
 function carregar() {
 
     fetch('/listar-clientes')
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) throw new Error("Sem acesso");
+        return res.json();
+    })
     .then(clientes => {
 
         const tabela = document.getElementById('lista');
         tabela.innerHTML = '';
 
-        clientes.forEach(cliente => {
-
+        clientes.forEach(c => {
             tabela.innerHTML += `
                 <tr>
-                    <td><strong>${cliente.nome}</strong></td>
-                    <td>${cliente.cpf}</td>
-                    <td>${cliente.telefone}</td>
+                    <td><strong>${c.nome}</strong></td>
+                    <td>${c.cpf}</td>
+                    <td>${c.telefone}</td>
                 </tr>
             `;
-
         });
 
     })
-    .catch(err => {
-        console.log(err);
-        alert("Erro ao carregar alunos.");
+    .catch(() => {
+        alert("Você não tem acesso. Faça login como admin.");
+        window.location.href = "/login.html";
     });
 
 }
