@@ -1,5 +1,5 @@
 /* =======================================================================
-   BIOMENTORIA - DESIGN PROFISSIONAL (SITE + ADMIN)
+   BIOMENTORIA - DESIGN PROFISSIONAL (MELHORADO)
    ======================================================================= */
 
 :root {
@@ -8,7 +8,7 @@
     --bg: #F5F7FB;
     --white: #FFFFFF;
     --text: #1C1C1C;
-    --shadow: 0 6px 18px rgba(0,0,0,0.08);
+    --shadow: 0 8px 22px rgba(0,0,0,0.10);
 }
 
 /* =======================================================================
@@ -25,6 +25,7 @@ body {
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+    line-height: 1.5;
 }
 
 /* =======================================================================
@@ -36,21 +37,25 @@ nav {
     padding: 15px;
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 30px;
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
+    transition: 0.25s;
+    padding: 6px 10px;
+    border-radius: 6px;
 }
 
 nav a:hover {
     color: var(--accent);
+    background: rgba(255,255,255,0.08);
 }
 
 /* =======================================================================
@@ -58,7 +63,7 @@ nav a:hover {
    ======================================================================= */
 
 .banner {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
                 url('imagem2.jpg');
     background-size: cover;
     background-position: center;
@@ -70,10 +75,12 @@ nav a:hover {
 .banner h1 {
     font-size: 3rem;
     margin: 0;
+    letter-spacing: 1px;
 }
 
 .banner p {
     font-size: 1.2rem;
+    opacity: 0.9;
 }
 
 /* =======================================================================
@@ -83,7 +90,7 @@ nav a:hover {
 .container {
     max-width: 1000px;
     margin: auto;
-    padding: 20px;
+    padding: 25px;
 }
 
 /* =======================================================================
@@ -94,13 +101,14 @@ nav a:hover {
     background: var(--white);
     padding: 25px;
     margin-bottom: 20px;
-    border-radius: 12px;
+    border-radius: 14px;
     box-shadow: var(--shadow);
-    transition: 0.3s;
+    transition: 0.25s ease;
 }
 
 .card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
 }
 
 /* =======================================================================
@@ -112,36 +120,37 @@ button, .btn {
     color: white;
     border: none;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
     width: 100%;
     display: inline-block;
     text-align: center;
     text-decoration: none;
-    transition: 0.3s;
+    transition: 0.25s;
 }
 
 button:hover, .btn:hover {
     background: var(--accent);
+    transform: scale(1.02);
 }
 
-/* botão menor (opcional) */
+/* botão pequeno */
 .btn-small {
     width: auto;
-    padding: 8px 15px;
+    padding: 8px 14px;
     font-size: 14px;
 }
 
 /* =======================================================================
-   TABELAS (ADMIN SYSTEM STYLE)
+   TABELAS
    ======================================================================= */
 
 table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
 }
@@ -171,12 +180,14 @@ input, select {
     padding: 12px;
     margin-top: 10px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
     outline: none;
+    transition: 0.2s;
 }
 
 input:focus, select:focus {
     border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(19,41,96,0.1);
 }
 
 /* =======================================================================
@@ -187,8 +198,8 @@ input:focus, select:focus {
     max-width: 450px;
     margin: 80px auto;
     background: white;
-    padding: 25px;
-    border-radius: 12px;
+    padding: 30px;
+    border-radius: 14px;
     box-shadow: var(--shadow);
     text-align: center;
 }
@@ -211,8 +222,8 @@ footer, .rodape {
     background: #111;
     color: #aaa;
     text-align: center;
-    padding: 20px;
-    margin-top: 40px;
+    padding: 25px;
+    margin-top: 50px;
 }
 
 /* =======================================================================
