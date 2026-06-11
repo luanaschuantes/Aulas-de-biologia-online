@@ -1,37 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - BioMentoria</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html">Início</a>
+    <a href="clientes.html">Cadastro de Alunos</a>
+    <a href="servicos.html">Planos</a>
+    <a href="agendamentos.html">Mensalidades</a>
+    <a href="consulta_agendamentos.html">Contato</a>
+    <a href="admin.html">Admin</a>
+</nav>
+
+<header class="banner">
+    <h1>Painel Administrativo</h1>
+    <p>Lista de alunos cadastrados</p>
+</header>
+
 <div class="container">
+
     <div class="card">
-        <h2>Admin - Alunos</h2>
-        <button onclick="carregar()">Carregar alunos</button>
+
+        <h2>👨‍🎓 Alunos Cadastrados</h2>
+
+        <button class="btn" onclick="carregar()">
+            Atualizar Lista
+        </button>
+
+        <br><br>
 
         <table>
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
                 </tr>
             </thead>
 
             <tbody id="lista"></tbody>
         </table>
+
     </div>
+
 </div>
 
-<script>
-function carregar() {
-    fetch('/admin/alunos')
-    .then(r => r.json())
-    .then(data => {
-        const t = document.getElementById('lista');
-        t.innerHTML = "";
+<footer class="rodape">
+    <p>&copy; 2026 BioMentoria - Administração</p>
+</footer>
 
-        data.forEach(u => {
-            t.innerHTML += `
+<script>
+
+function carregar() {
+
+    fetch('/listar-clientes')
+    .then(res => res.json())
+    .then(clientes => {
+
+        const tabela = document.getElementById('lista');
+        tabela.innerHTML = '';
+
+        clientes.forEach(cliente => {
+
+            tabela.innerHTML += `
                 <tr>
-                    <td>${u.nome}</td>
-                    <td>${u.email}</td>
+                    <td><strong>${cliente.nome}</strong></td>
+                    <td>${cliente.cpf}</td>
+                    <td>${cliente.telefone}</td>
                 </tr>
             `;
+
         });
+
+    })
+    .catch(err => {
+        console.log(err);
+        alert("Erro ao carregar alunos.");
     });
+
 }
+
+window.onload = carregar;
+
 </script>
+
+</body>
+</html>
