@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static('.'));
 
 /* =========================
-   SESSÃO (LOGIN ADMIN)
+   SESSÃO ADMIN
 ========================= */
 app.use(session({
     secret: 'biomentoria_secret',
@@ -35,19 +35,35 @@ db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS servicos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         descricao TEXT,
-        preco REAL
+        preco REAL,
+        tempo_estimado INTEGER
     )`);
 
-    db.run(`CREATE TABLE IF NOT EXISTS compras (
+    db.run(`CREATE TABLE IF NOT EXISTS clientes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        usuario_id INTEGER,
+        nome TEXT,
+        cpf TEXT,
+        telefone TEXT
+    )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS agendamentos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        cliente_id INTEGER,
+        data TEXT,
+        responsavel TEXT,
+        total REAL
+    )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS itens_agendamento (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        agendamento_id INTEGER,
         servico_id INTEGER,
-        data TEXT
+        preco_cobrado REAL
     )`);
 });
 
 /* =========================
-   ADMIN FIXO (VOCÊ)
+   ADMIN FIXO
 ========================= */
 const ADMIN = {
     nome: "Luana Schuantes",
@@ -69,15 +85,86 @@ app.post('/login-admin', (req, res) => {
 });
 
 /* =========================
-   PROTEÇÃO ADMIN
+   LOGOUT
+========================= */
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login.html');
+    });
+});
+
+/* =========================
+   MIDDLEWARE ADMIN
 ========================= */
 function auth(req, res, next) {
     if (req.session.admin) next();
-    else res.send("Acesso negado");
+    else res.status(403).send("Acesso negado");
 }
 
 /* =========================
-   LISTAR ALUNOS (ADMIN)
+   CLIENTES
+========================= */
+app.post('/salvar-cliente', (req, res) => {
+    const { nome, cpf, telefone } = req.body;
+
+    db.run(
+        `INSERT INTO clientes(nome,cpf,telefone) VALUES (?,?,?)`,
+        [nome, cpf, telefone],
+        () => res.redirect('/clientes.html')
+    );
+});
+
+app.get('/listar-clientes', (req, res) => {
+    db.all(`SELECT * FROM clientes`, [], (err, rows) => {
+        res.json(rows);
+    });
+});
+
+/* =========================
+   SERVIÇOS
+========================= */
+app.post('/salvar-servico', (req, res) => {
+    const { descricao, preco, tempo_estimado } = req.body;
+
+    db.run(
+        `INSERT INTO servicos(descricao,preco,tempo_estimado) VALUES (?,?,?)`,
+        [descricao, preco, tempo_estimado],
+        () => res.redirect('/servicos.html')
+    );
+});
+
+app.get('/listar-servicos', (req, res) => {
+    db.all(`SELECT * FROM servicos`, [], (err, rows) => {
+        res.json(rows);
+    });
+});
+
+/* =========================
+   AGENDAMENTOS
+========================= */
+app.get('/listar-agendamentos', (req, res) => {
+    db.all(`
+        SELECT a.*, c.nome as nome_cliente
+        FROM agendamentos a
+        JOIN clientes c ON c.id = a.cliente_id
+    `, [], (err, rows) => {
+        res.json(rows);
+    });
+});
+
+app.get('/detalhes-agendamento/:id', (req, res) => {
+    db.all(`
+        SELECT s.descricao, s.tempo_estimado, i.preco_cobrado
+        FROM itens_agendamento i
+        JOIN servicos s ON s.id = i.servico_id
+        WHERE i.agendamento_id = ?
+    `, [req.params.id], (err, rows) => {
+        res.json(rows);
+    });
+});
+
+/* =========================
+   ADMIN - LISTAR ALUNOS
 ========================= */
 app.get('/admin/alunos', auth, (req, res) => {
     db.all(`SELECT * FROM usuarios`, [], (err, rows) => {
@@ -86,30 +173,8 @@ app.get('/admin/alunos', auth, (req, res) => {
 });
 
 /* =========================
-   CRIAR USUÁRIO (ALUNO)
-========================= */
-app.post('/cadastro', (req, res) => {
-    const { nome, email, senha } = req.body;
-
-    db.run(
-        `INSERT INTO usuarios(nome,email,senha) VALUES (?,?,?)`,
-        [nome, email, senha],
-        () => res.redirect('/login.html')
-    );
-});
-
-/* =========================
-   CURSOS
-========================= */
-app.get('/cursos', (req, res) => {
-    db.all(`SELECT * FROM servicos`, [], (err, rows) => {
-        res.json(rows);
-    });
-});
-
-/* =========================
    START
 ========================= */
 app.listen(3000, () => {
-    console.log("🚀 Sistema profissional rodando em http://localhost:3000");
+    console.log("🚀 Sistema rodando em http://localhost:3000");
 });
