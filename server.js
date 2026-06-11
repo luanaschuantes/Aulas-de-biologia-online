@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static('.'));
 
 /* =========================
-   SESSION
+   SESSION (IMPORTANTE)
 ========================= */
 app.use(session({
     secret: 'biomentoria_secret_key',
@@ -19,19 +19,19 @@ app.use(session({
 }));
 
 /* =========================
-   DB
+   BANCO
 ========================= */
 const db = new sqlite3.Database('./siscristovao.db');
 
 /* =========================
-   CRIA TABELAS
+   TABELAS
 ========================= */
 db.serialize(() => {
 
     db.run(`CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT,
-        email TEXT UNIQUE,
+        email TEXT,
         senha TEXT
     )`);
 
@@ -74,33 +74,41 @@ const ADMIN = {
 };
 
 /* =========================
-   LOGIN ADMIN
+   LOGIN ADMIN (CORRIGIDO)
 ========================= */
 app.post('/login-admin', (req, res) => {
     const { nome, senha } = req.body;
 
     if (nome === ADMIN.nome && senha === ADMIN.senha) {
         req.session.admin = true;
-        return res.redirect('/index.html');
+        return res.redirect('/admin.html');
     }
 
-    res.status(401).send("Login inválido");
-});
-
-app.get('/logout', (req, res) => {
-    req.session.destroy(() => res.redirect('/index.html'));
+    return res.send("Login inválido");
 });
 
 /* =========================
-   MIDDLEWARE ADMIN
+   LOGOUT
+========================= */
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login.html');
+    });
+});
+
+/* =========================
+   MIDDLEWARE ADMIN (CORRIGIDO)
 ========================= */
 function auth(req, res, next) {
-    if (req.session.admin) next();
-    else res.status(403).send("Acesso negado");
+    if (req.session && req.session.admin) {
+        next();
+    } else {
+        res.redirect('/login.html');
+    }
 }
 
 /* =========================
-   CLIENTES (CRUD BÁSICO)
+   CLIENTES
 ========================= */
 app.post('/salvar-cliente', (req, res) => {
     const { nome, cpf, telefone } = req.body;
@@ -112,7 +120,7 @@ app.post('/salvar-cliente', (req, res) => {
     );
 });
 
-app.get('/listar-clientes', (req, res) => {
+app.get('/listar-clientes', auth, (req, res) => {
     db.all(`SELECT * FROM clientes`, [], (err, rows) => {
         res.json(rows);
     });
@@ -138,10 +146,9 @@ app.get('/listar-servicos', (req, res) => {
 });
 
 /* =========================
-   CRIAR AGENDAMENTO (IMPORTANTE - FALTAVA)
+   AGENDAMENTOS
 ========================= */
 app.post('/salvar-agendamento', (req, res) => {
-
     const { cliente_id, data, responsavel, total, itens } = req.body;
 
     db.run(
@@ -150,14 +157,14 @@ app.post('/salvar-agendamento', (req, res) => {
         [cliente_id, data, responsavel, total],
         function () {
 
-            const agendamentoId = this.lastID;
+            const id = this.lastID;
 
             if (Array.isArray(itens)) {
                 itens.forEach(i => {
                     db.run(
                         `INSERT INTO itens_agendamento(agendamento_id,servico_id,preco_cobrado)
                          VALUES (?,?,?)`,
-                        [agendamentoId, i.servico_id, i.preco]
+                        [id, i.servico_id, i.preco]
                     );
                 });
             }
@@ -167,9 +174,6 @@ app.post('/salvar-agendamento', (req, res) => {
     );
 });
 
-/* =========================
-   LISTAR AGENDAMENTOS
-========================= */
 app.get('/listar-agendamentos', (req, res) => {
     db.all(`
         SELECT a.*, c.nome as nome_cliente
@@ -178,9 +182,6 @@ app.get('/listar-agendamentos', (req, res) => {
     `, [], (err, rows) => res.json(rows));
 });
 
-/* =========================
-   DETALHES
-========================= */
 app.get('/detalhes-agendamento/:id', (req, res) => {
     db.all(`
         SELECT s.descricao, s.tempo_estimado, i.preco_cobrado
@@ -191,7 +192,7 @@ app.get('/detalhes-agendamento/:id', (req, res) => {
 });
 
 /* =========================
-   ADMIN ALUNOS
+   ADMIN ALUNOS (PROTEGIDO)
 ========================= */
 app.get('/admin/alunos', auth, (req, res) => {
     db.all(`SELECT * FROM usuarios`, [], (err, rows) => {
