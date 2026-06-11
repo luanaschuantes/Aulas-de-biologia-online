@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Login Admin - BioMentoria</title>
-<link rel="stylesheet" href="estilo.css">
+    <meta charset="UTF-8">
+    <title>Login Admin - BioMentoria</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
@@ -12,28 +12,38 @@
     <a href="index.html">Início</a>
 </nav>
 
+<header class="banner">
+    <h1>Login Administrativo</h1>
+    <p>Acesso restrito ao sistema</p>
+</header>
+
 <div class="container">
 
-<div class="card">
+    <div class="card">
 
-    <h2>🔐 Acesso Administrativo</h2>
-    <p>Somente para Luana Schuantes</p>
+        <h2>Entrar como Admin</h2>
 
-    <form action="/login-admin" method="POST">
+        <form action="/login-admin" method="POST">
 
-        <label>Usuário</label>
-        <input type="text" name="nome" placeholder="Nome admin" required>
+            <label>Nome</label>
+            <input type="text" name="nome" placeholder="Luana Schuantes" required>
 
-        <label>Senha</label>
-        <input type="password" name="senha" placeholder="Senha" required>
+            <label>Senha</label>
+            <input type="password" name="senha" placeholder="********" required>
 
-        <button class="btn" type="submit">Entrar</button>
+            <button class="btn" type="submit">
+                Entrar
+            </button>
 
-    </form>
+        </form>
+
+    </div>
 
 </div>
 
-</div>
+<footer class="rodape">
+    <p>&copy; 2026 BioMentoria</p>
+</footer>
 
 </body>
 </html>
