@@ -23,6 +23,9 @@ app.use(session({
 ========================= */
 const db = new sqlite3.Database('./siscristovao.db');
 
+/* =========================
+   CRIA TABELAS
+========================= */
 db.serialize(() => {
 
     db.run(`CREATE TABLE IF NOT EXISTS usuarios (
@@ -63,13 +66,16 @@ db.serialize(() => {
 });
 
 /* =========================
-   ADMIN
+   ADMIN FIXO
 ========================= */
 const ADMIN = {
     nome: "Luana Schuantes",
     senha: "luana2009"
 };
 
+/* =========================
+   LOGIN ADMIN
+========================= */
 app.post('/login-admin', (req, res) => {
     const { nome, senha } = req.body;
 
@@ -78,15 +84,15 @@ app.post('/login-admin', (req, res) => {
         return res.redirect('/index.html');
     }
 
-    res.send("Login inválido");
+    res.status(401).send("Login inválido");
 });
 
 app.get('/logout', (req, res) => {
-    req.session.destroy(() => res.redirect('/login.html'));
+    req.session.destroy(() => res.redirect('/index.html'));
 });
 
 /* =========================
-   PROTEÇÃO (USO FUTURO)
+   MIDDLEWARE ADMIN
 ========================= */
 function auth(req, res, next) {
     if (req.session.admin) next();
@@ -94,13 +100,13 @@ function auth(req, res, next) {
 }
 
 /* =========================
-   CLIENTES
+   CLIENTES (CRUD BÁSICO)
 ========================= */
 app.post('/salvar-cliente', (req, res) => {
     const { nome, cpf, telefone } = req.body;
 
     db.run(
-        `INSERT INTO clientes VALUES (NULL,?,?,?)`,
+        `INSERT INTO clientes(nome,cpf,telefone) VALUES (?,?,?)`,
         [nome, cpf, telefone],
         () => res.redirect('/clientes.html')
     );
@@ -119,7 +125,7 @@ app.post('/salvar-servico', (req, res) => {
     const { descricao, preco, tempo_estimado } = req.body;
 
     db.run(
-        `INSERT INTO servicos VALUES (NULL,?,?,?)`,
+        `INSERT INTO servicos(descricao,preco,tempo_estimado) VALUES (?,?,?)`,
         [descricao, preco, tempo_estimado],
         () => res.redirect('/servicos.html')
     );
@@ -132,7 +138,37 @@ app.get('/listar-servicos', (req, res) => {
 });
 
 /* =========================
-   AGENDAMENTOS
+   CRIAR AGENDAMENTO (IMPORTANTE - FALTAVA)
+========================= */
+app.post('/salvar-agendamento', (req, res) => {
+
+    const { cliente_id, data, responsavel, total, itens } = req.body;
+
+    db.run(
+        `INSERT INTO agendamentos(cliente_id,data,responsavel,total)
+         VALUES (?,?,?,?)`,
+        [cliente_id, data, responsavel, total],
+        function () {
+
+            const agendamentoId = this.lastID;
+
+            if (Array.isArray(itens)) {
+                itens.forEach(i => {
+                    db.run(
+                        `INSERT INTO itens_agendamento(agendamento_id,servico_id,preco_cobrado)
+                         VALUES (?,?,?)`,
+                        [agendamentoId, i.servico_id, i.preco]
+                    );
+                });
+            }
+
+            res.json({ ok: true });
+        }
+    );
+});
+
+/* =========================
+   LISTAR AGENDAMENTOS
 ========================= */
 app.get('/listar-agendamentos', (req, res) => {
     db.all(`
@@ -142,6 +178,9 @@ app.get('/listar-agendamentos', (req, res) => {
     `, [], (err, rows) => res.json(rows));
 });
 
+/* =========================
+   DETALHES
+========================= */
 app.get('/detalhes-agendamento/:id', (req, res) => {
     db.all(`
         SELECT s.descricao, s.tempo_estimado, i.preco_cobrado
@@ -152,7 +191,7 @@ app.get('/detalhes-agendamento/:id', (req, res) => {
 });
 
 /* =========================
-   ADMIN
+   ADMIN ALUNOS
 ========================= */
 app.get('/admin/alunos', auth, (req, res) => {
     db.all(`SELECT * FROM usuarios`, [], (err, rows) => {
