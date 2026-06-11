@@ -1,147 +1,67 @@
-/* ========================================================================== 
-   ESTILO GERAL - BIOMENTORIA (VERSÃO LIMPA)
-   ========================================================================== */
-
-:root {
-    --primary: #132960;
-    --accent: #D31C24;
-    --bg: #F0F3F8;
-    --white: #FFFFFF;
-    --text: #1C1C1C;
-}
-
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    background-color: var(--bg);
-    color: var(--text);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
 }
 
-/* ========================================================================== 
-   NAVEGAÇÃO
-   ========================================================================== */
-
-nav {
-    background-color: var(--primary);
-    padding: 15px;
-    display: flex;
-    justify-content: space-around;
+.hero {
+    background: linear-gradient(120deg, #1e3c72, #2a5298);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
 }
 
-nav a {
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #00c853;
     color: white;
     text-decoration: none;
+    border-radius: 6px;
     font-weight: bold;
 }
 
-nav a:hover {
-    color: var(--accent);
+.btn:hover {
+    background: #00a844;
 }
 
-/* ========================================================================== 
-   BANNER COM IMAGEM DE FUNDO
-   ========================================================================== */
-
-.banner {
-    background-image: url('imagem2.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    padding: 120px 20px;
+.beneficios {
+    padding: 50px 20px;
     text-align: center;
-
-    color: white;
 }
 
-.banner h1 {
-    font-size: 3rem;
-    margin: 0;
-
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+.grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
-
-.banner p {
-    font-size: 1.3rem;
-
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
-}
-
-/* ========================================================================== 
-   CONTAINER
-   ========================================================================== */
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-}
-
-/* ========================================================================== 
-   CARDS
-   ========================================================================== */
 
 .card {
     background: white;
     padding: 20px;
-    margin-bottom: 20px;
+    width: 280px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* ========================================================================== 
-   TABELA
-   ========================================================================== */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-th {
-    background: var(--primary);
+.cta {
+    background: #1e3c72;
     color: white;
+    text-align: center;
+    padding: 60px 20px;
 }
 
-/* ========================================================================== 
-   FORMULÁRIOS
-   ========================================================================== */
-
-input, select, button {
-    padding: 10px;
-    width: 100%;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    background: var(--primary);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background: var(--accent);
-}
-
-/* ========================================================================== 
-   RODAPÉ
-   ========================================================================== */
-
-.rodape {
-    background: #111;
-    color: #ccc;
+footer {
     text-align: center;
     padding: 20px;
-    margin-top: auto;
+    background: #111;
+    color: white;
 }
