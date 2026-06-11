@@ -9,11 +9,12 @@
 <body>
 
 <nav>
-    <a href="index.html">Home</a>
-    <a href="clientes.html">Alunos</a>
+    <a href="index.html">Início</a>
+    <a href="clientes.html">Cadastro de Alunos</a>
     <a href="servicos.html">Cursos</a>
-    <a href="agendamentos.html">Mentorias</a>
+    <a href="agendamentos.html">Mensalidades</a>
     <a href="consulta_agendamentos.html">Contato</a>
+    <a href="admin.html">Admin</a>
 </nav>
 
 <header class="banner">
@@ -23,7 +24,7 @@
 
 <div class="container">
 
-    <!-- FORMULÁRIO -->
+    <!-- FORM -->
     <div class="card">
         <h2>➕ Novo Aluno</h2>
 
@@ -38,7 +39,7 @@
             <label>Telefone</label>
             <input type="tel" name="telefone" required>
 
-            <button type="submit">Salvar</button>
+            <button class="btn" type="submit">Salvar</button>
         </form>
     </div>
 
@@ -62,63 +63,43 @@
 
 </div>
 
+<footer class="rodape">
+    <p>&copy; 2026 BioMentoria - Sistema de Alunos</p>
+</footer>
+
 <script>
 let alunos = [];
 
-fetch('/listar-clientes')
+function carregar() {
+    fetch('/listar-clientes')
     .then(res => res.json())
     .then(data => {
         alunos = data;
         renderizar();
     });
+}
 
 function renderizar() {
     const tabela = document.getElementById('lista-clientes');
     tabela.innerHTML = "";
 
-    alunos.forEach((a, index) => {
+    alunos.forEach((a) => {
         tabela.innerHTML += `
             <tr>
                 <td><strong>${a.nome}</strong></td>
                 <td>${a.cpf}</td>
                 <td>${a.telefone}</td>
                 <td>
-                    <button onclick="editar(${index})">✏ Editar</button>
-                    <button onclick="deletar(${index})">🗑 Excluir</button>
+                    <button class="btn" onclick="alert('Editar precisa backend')">✏ Editar</button>
+                    <button class="btn" onclick="alert('Excluir precisa backend')">🗑 Excluir</button>
                 </td>
             </tr>
         `;
     });
 }
 
-// EDITAR (front simples - depois liga no backend)
-function editar(i) {
-    const aluno = alunos[i];
-
-    const novoNome = prompt("Editar nome:", aluno.nome);
-    const novoCpf = prompt("Editar CPF:", aluno.cpf);
-    const novoTel = prompt("Editar telefone:", aluno.telefone);
-
-    if (novoNome) alunos[i].nome = novoNome;
-    if (novoCpf) alunos[i].cpf = novoCpf;
-    if (novoTel) alunos[i].telefone = novoTel;
-
-    renderizar();
-}
-
-// EXCLUIR (front simples - depois liga no backend)
-function deletar(i) {
-    if (confirm("Tem certeza que deseja excluir este aluno?")) {
-        alunos.splice(i, 1);
-        renderizar();
-    }
-}
+window.onload = carregar;
 </script>
 
 </body>
-
-<footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Sistema de Alunos</p>
-</footer>
-
 </html>
