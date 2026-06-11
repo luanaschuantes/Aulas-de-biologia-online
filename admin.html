@@ -1,85 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Admin - BioMentoria</title>
-<link rel="stylesheet" href="estilo.css">
+    <meta charset="UTF-8">
+    <title>Painel Admin - BioMentoria</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
 <nav>
     <a href="index.html">Início</a>
-    <a href="clientes.html">Cadastro de Alunos</a>
+    <a href="clientes.html">Alunos</a>
     <a href="servicos.html">Planos</a>
     <a href="agendamentos.html">Mensalidades</a>
     <a href="consulta_agendamentos.html">Contato</a>
-    <a href="login.html">Sair</a>
+    <a href="/logout">Sair</a>
 </nav>
 
 <header class="banner">
-    <h1>Painel da Luana Schuantes</h1>
-    <p>Alunos cadastrados no sistema</p>
+    <h1>Painel Administrativo</h1>
+    <p>Controle de alunos cadastrados</p>
 </header>
 
 <div class="container">
 
-<div class="card">
-    <h2>👨‍🎓 Lista de Alunos</h2>
+    <div class="card">
+        <h2>👨‍🎓 Lista de Alunos</h2>
 
-    <button class="btn" onclick="carregar()">Atualizar Lista</button>
+        <button class="btn" onclick="carregarAlunos()">
+            Atualizar lista
+        </button>
 
-    <br><br>
+        <br><br>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Telefone</th>
-            </tr>
-        </thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                </tr>
+            </thead>
 
-        <tbody id="lista"></tbody>
-    </table>
+            <tbody id="tabela-alunos"></tbody>
+        </table>
+    </div>
+
 </div>
 
-</div>
+<footer class="rodape">
+    <p>&copy; 2026 BioMentoria - Admin</p>
+</footer>
 
 <script>
+function carregarAlunos() {
 
-function carregar() {
-
-    fetch('/listar-clientes')
+    fetch('/admin/alunos')
     .then(res => {
-        if (!res.ok) throw new Error("Sem acesso");
+
+        if (!res.ok) {
+            window.location.href = "/login.html";
+        }
+
         return res.json();
     })
-    .then(clientes => {
+    .then(data => {
 
-        const tabela = document.getElementById('lista');
-        tabela.innerHTML = '';
+        const tabela = document.getElementById('tabela-alunos');
+        tabela.innerHTML = "";
 
-        clientes.forEach(c => {
+        data.forEach(aluno => {
             tabela.innerHTML += `
                 <tr>
-                    <td><strong>${c.nome}</strong></td>
-                    <td>${c.cpf}</td>
-                    <td>${c.telefone}</td>
+                    <td>${aluno.nome}</td>
+                    <td>${aluno.cpf}</td>
+                    <td>${aluno.telefone}</td>
                 </tr>
             `;
         });
 
     })
-    .catch(() => {
-        alert("Você não tem acesso. Faça login como admin.");
-        window.location.href = "/login.html";
+    .catch(err => {
+        console.log(err);
+        alert("Erro ao carregar alunos");
     });
-
 }
 
-window.onload = carregar;
-
+window.onload = carregarAlunos;
 </script>
 
 </body>
