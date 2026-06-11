@@ -2,55 +2,60 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>BioMentoria | Sistema</title>
+    <title>BioMentoria | Dashboard</title>
     <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
 <header class="banner">
-
     <h1>BioMentoria</h1>
-
-    <p>Sistema de aulas, alunos e mentorias em Biologia</p>
-
+    <p>Dashboard do sistema de aulas e gestão de alunos</p>
 </header>
 
 <div class="container">
 
+    <!-- INTRO -->
     <div class="card">
-        <h2>📌 Acesso Rápido</h2>
-        <p>Escolha uma opção abaixo para navegar no sistema:</p>
+        <h2>📊 Painel Principal</h2>
+        <p>
+            Acesse rapidamente todas as áreas do sistema de gestão da BioMentoria.
+        </p>
     </div>
 
-    <div class="card">
-        <h3>👨‍🎓 Alunos</h3>
-        <p>Cadastro e visualização de alunos.</p>
-        <a href="clientes.html" class="btn">Ir para Alunos</a>
-    </div>
+    <!-- GRID DE OPÇÕES -->
+    <div class="grid-dashboard">
 
-    <div class="card">
-        <h3>📚 Cursos</h3>
-        <p>Gerenciar planos e conteúdos de Biologia.</p>
-        <a href="servicos.html" class="btn">Ir para Cursos</a>
-    </div>
+        <div class="card">
+            <h3>👨‍🎓 Alunos</h3>
+            <p>Cadastro e visualização de estudantes.</p>
+            <a href="clientes.html" class="btn">Acessar</a>
+        </div>
 
-    <div class="card">
-        <h3>📅 Mentorias</h3>
-        <p>Agendamentos e acompanhamento dos alunos.</p>
-        <a href="agendamentos.html" class="btn">Ir para Mentorias</a>
-    </div>
+        <div class="card">
+            <h3>📚 Cursos</h3>
+            <p>Gerencie os planos de Biologia disponíveis.</p>
+            <a href="servicos.html" class="btn">Acessar</a>
+        </div>
 
-    <div class="card">
-        <h3>📞 Contato</h3>
-        <p>Consulta de agendamentos e suporte.</p>
-        <a href="consulta_agendamentos.html" class="btn">Ir para Contato</a>
-    </div>
+        <div class="card">
+            <h3>📅 Mentorias</h3>
+            <p>Agendamentos e acompanhamento individual.</p>
+            <a href="agendamentos.html" class="btn">Acessar</a>
+        </div>
 
-    <div class="card">
-        <h3>🔐 Administração</h3>
-        <p>Acesso restrito ao painel administrativo.</p>
-        <a href="admin.html" class="btn">Ir para Admin</a>
+        <div class="card">
+            <h3>📞 Contato</h3>
+            <p>Consulta de agendamentos e suporte.</p>
+            <a href="consulta_agendamentos.html" class="btn">Acessar</a>
+        </div>
+
+        <div class="card admin">
+            <h3>🔐 Administração</h3>
+            <p>Painel restrito para controle do sistema.</p>
+            <a href="admin.html" class="btn">Entrar</a>
+        </div>
+
     </div>
 
 </div>
