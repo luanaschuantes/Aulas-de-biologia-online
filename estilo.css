@@ -1,67 +1,232 @@
+/* =======================================================================
+   BIOMENTORIA - DESIGN PROFISSIONAL (SITE + ADMIN)
+   ======================================================================= */
+
+:root {
+    --primary: #132960;
+    --accent: #D31C24;
+    --bg: #F5F7FB;
+    --white: #FFFFFF;
+    --text: #1C1C1C;
+    --shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* =======================================================================
+   BASE
+   ======================================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    color: #222;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
 }
 
-.hero {
-    background: linear-gradient(120deg, #1e3c72, #2a5298);
-    color: white;
-    text-align: center;
-    padding: 80px 20px;
+/* =======================================================================
+   NAVBAR
+   ======================================================================= */
+
+nav {
+    background: var(--primary);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
-}
-
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: #00c853;
+nav a {
     color: white;
     text-decoration: none;
-    border-radius: 6px;
     font-weight: bold;
+    transition: 0.3s;
 }
 
-.btn:hover {
-    background: #00a844;
+nav a:hover {
+    color: var(--accent);
 }
 
-.beneficios {
-    padding: 50px 20px;
+/* =======================================================================
+   HERO / BANNER
+   ======================================================================= */
+
+.banner {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('imagem2.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 140px 20px;
     text-align: center;
+    color: white;
 }
 
-.grid {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+.banner h1 {
+    font-size: 3rem;
+    margin: 0;
 }
+
+.banner p {
+    font-size: 1.2rem;
+}
+
+/* =======================================================================
+   CONTAINER
+   ======================================================================= */
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* =======================================================================
+   CARDS
+   ======================================================================= */
 
 .card {
+    background: var(--white);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* =======================================================================
+   BOTÕES
+   ======================================================================= */
+
+button, .btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+button:hover, .btn:hover {
+    background: var(--accent);
+}
+
+/* botão menor (opcional) */
+.btn-small {
+    width: auto;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+/* =======================================================================
+   TABELAS (ADMIN SYSTEM STYLE)
+   ======================================================================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
     background: white;
-    padding: 20px;
-    width: 280px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    box-shadow: var(--shadow);
 }
 
-.cta {
-    background: #1e3c72;
+th {
+    background: var(--primary);
     color: white;
-    text-align: center;
-    padding: 60px 20px;
+    padding: 12px;
+    text-align: left;
 }
 
-footer {
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background: #f0f4ff;
+}
+
+/* =======================================================================
+   FORMULÁRIOS
+   ======================================================================= */
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary);
+}
+
+/* =======================================================================
+   LOGIN ADMIN BOX
+   ======================================================================= */
+
+.login-box {
+    max-width: 450px;
+    margin: 80px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+/* =======================================================================
+   PAINEL ADMIN
+   ======================================================================= */
+
+.painel {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* =======================================================================
+   FOOTER
+   ======================================================================= */
+
+footer, .rodape {
+    background: #111;
+    color: #aaa;
     text-align: center;
     padding: 20px;
-    background: #111;
-    color: white;
+    margin-top: 40px;
+}
+
+/* =======================================================================
+   RESPONSIVO
+   ======================================================================= */
+
+@media (max-width: 768px) {
+
+    .banner h1 {
+        font-size: 2rem;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
