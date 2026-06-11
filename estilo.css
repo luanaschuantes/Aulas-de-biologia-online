@@ -1,6 +1,6 @@
-/* =======================================================================
-   BIOMENTORIA - SISTEMA SAAS PROFISSIONAL
-   ======================================================================= */
+/* ============================
+   BIOMENTORIA - CSS FINAL LIMPO
+   ============================ */
 
 :root {
     --primary: #132960;
@@ -8,15 +8,19 @@
     --bg: #F5F7FB;
     --white: #FFFFFF;
     --text: #1C1C1C;
-    --shadow: 0 8px 22px rgba(0,0,0,0.10);
+    --shadow: 0 8px 20px rgba(0,0,0,0.10);
 }
 
-/* =======================================================================
+/* ============================
    BASE
-   ======================================================================= */
+   ============================ */
 
 * {
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
@@ -24,127 +28,114 @@ body {
     font-family: Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
-}
 
-/* =======================================================================
-   LAYOUT SAAS (SIDEBAR + CONTEÚDO)
-   ======================================================================= */
-
-.layout {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
-/* SIDEBAR */
-.sidebar {
-    width: 240px;
+/* ============================
+   MENU
+   ============================ */
+
+nav {
     background: var(--primary);
-    color: white;
-    padding: 20px;
-    position: fixed;
-    height: 100%;
-    box-shadow: 4px 0 12px rgba(0,0,0,0.15);
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 15px;
 }
 
-.sidebar h2 {
-    margin-bottom: 5px;
-}
-
-.sidebar p {
-    font-size: 13px;
-    opacity: 0.8;
-    margin-bottom: 20px;
-}
-
-/* LINKS SIDEBAR */
-.sidebar a {
-    display: block;
+nav a {
     color: white;
     text-decoration: none;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 8px;
+    font-weight: bold;
     transition: 0.3s;
 }
 
-.sidebar a:hover {
-    background: rgba(255,255,255,0.15);
+nav a:hover {
+    color: var(--accent);
 }
 
-/* CONTEÚDO */
-.content {
-    margin-left: 260px;
-    padding: 25px;
-    width: 100%;
+/* ============================
+   BANNER
+   ============================ */
+
+.banner {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('imagem2.jpg');
+    background-size: cover;
+    background-position: center;
+
+    padding: 120px 20px;
+    text-align: center;
+    color: white;
 }
 
-/* =======================================================================
-   CARDS (DASHBOARD)
-   ======================================================================= */
+.banner h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.banner p {
+    font-size: 1.2rem;
+}
+
+/* ============================
+   CONTAINER
+   ============================ */
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+
+    flex: 1; /* empurra footer para baixo */
+}
+
+/* ============================
+   CARD
+   ============================ */
 
 .card {
     background: var(--white);
     padding: 25px;
     margin-bottom: 20px;
-    border-radius: 14px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
-    transition: 0.25s ease;
 }
 
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-}
+/* ============================
+   BOTÃO
+   ============================ */
 
-/* GRID DASHBOARD */
-.grid-dashboard {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-/* =======================================================================
-   BOTÕES (SAAS STYLE)
-   ======================================================================= */
-
-button, .btn {
+.btn {
+    display: inline-block;
     background: var(--primary);
     color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    display: inline-block;
-    text-align: center;
+    padding: 12px 18px;
+    border-radius: 8px;
     text-decoration: none;
-    transition: 0.25s;
+    font-weight: bold;
+    text-align: center;
+    transition: 0.3s;
 }
 
-button:hover, .btn:hover {
+.btn:hover {
     background: var(--accent);
-    transform: scale(1.02);
 }
 
-/* botão pequeno */
-.btn-small {
-    width: auto;
-    padding: 8px 14px;
-}
-
-/* =======================================================================
-   TABELAS (PAINEL ADMIN)
-   ======================================================================= */
+/* ============================
+   TABELA
+   ============================ */
 
 table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    border-radius: 12px;
-    overflow: hidden;
     box-shadow: var(--shadow);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 th {
@@ -159,86 +150,40 @@ td {
     border-bottom: 1px solid #eee;
 }
 
-tr:hover {
-    background: #f0f4ff;
-}
-
-/* =======================================================================
-   FORMULÁRIOS
-   ======================================================================= */
+/* ============================
+   FORM
+   ============================ */
 
 input, select {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    outline: none;
-    transition: 0.2s;
+    border-radius: 8px;
 }
 
-input:focus, select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(19,41,96,0.1);
-}
+/* ============================
+   FOOTER (CORRIGIDO)
+   ============================ */
 
-/* =======================================================================
-   LOGIN BOX
-   ======================================================================= */
-
-.login-box {
-    max-width: 450px;
-    margin: 80px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 14px;
-    box-shadow: var(--shadow);
+.rodape {
+    background: #111;
+    color: #aaa;
     text-align: center;
+    padding: 20px;
+
+    margin-top: auto; /* ISSO RESOLVE O PROBLEMA */
 }
 
-/* =======================================================================
-   BANNER (CASO USE NA HOME)
-   ======================================================================= */
-
-.banner {
-    background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-                url('imagem2.jpg');
-    background-size: cover;
-    background-position: center;
-    padding: 140px 20px;
-    text-align: center;
-    color: white;
-}
-
-.banner h1 {
-    font-size: 3rem;
-    margin: 0;
-}
-
-.banner p {
-    font-size: 1.2rem;
-}
-
-/* =======================================================================
+/* ============================
    RESPONSIVO
-   ======================================================================= */
-
-@media (max-width: 900px) {
-    .grid-dashboard {
-        grid-template-columns: 1fr;
-    }
-}
+   ============================ */
 
 @media (max-width: 768px) {
 
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-    }
-
-    .content {
-        margin-left: 0;
+    nav {
+        flex-direction: column;
+        gap: 10px;
     }
 
     .banner h1 {
