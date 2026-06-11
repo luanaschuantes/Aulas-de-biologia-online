@@ -28,7 +28,7 @@
 <!-- CONTEÚDO -->
 <div class="container">
 
-    <!-- FORMULÁRIO -->
+    <!-- FORMULÁRIO DE MATRÍCULA -->
     <div class="card">
 
         <h2>🎓 Faça sua Matrícula</h2>
@@ -40,17 +40,41 @@
 
         <form action="/salvar-cliente" method="POST">
 
-            <label>Nome Completo</label>
-            <input type="text" name="nome" placeholder="Digite seu nome completo" required>
+            <label for="nome">Nome Completo</label>
+            <input
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Digite seu nome completo"
+                required
+            >
 
-            <label>CPF</label>
-            <input type="text" name="cpf" placeholder="000.000.000-00" required>
+            <label for="cpf">CPF</label>
+            <input
+                type="text"
+                id="cpf"
+                name="cpf"
+                placeholder="000.000.000-00"
+                required
+            >
 
-            <label>Telefone / WhatsApp</label>
-            <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                placeholder="(00) 00000-0000"
+                required
+            >
 
-            <label>E-mail</label>
-            <input type="email" name="email" placeholder="seuemail@email.com" required>
+            <label for="email">E-mail</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="seuemail@email.com"
+                required
+            >
 
             <button class="btn" type="submit">
                 Finalizar Matrícula
@@ -60,18 +84,41 @@
 
     </div>
 
-    <!-- INFORMAÇÕES -->
+    <!-- PLANOS DISPONÍVEIS -->
     <div class="card">
 
-        <h2>📚 Como funciona?</h2>
+        <h2>📖 Planos Disponíveis</h2>
 
-        <ul style="line-height: 2;">
-            <li>✔ Preencha seus dados e conclua sua matrícula.</li>
-            <li>✔ Escolha o plano de estudos ideal para você.</li>
-            <li>✔ Efetue o pagamento da mensalidade.</li>
-            <li>✔ Receba acesso às aulas incluídas no seu plano.</li>
-            <li>✔ Participe das mentorias e acompanhe seu desenvolvimento.</li>
-        </ul>
+        <p>
+            Após concluir sua matrícula, você poderá escolher o plano que melhor se adapta
+            aos seus objetivos de estudo e ter acesso aos conteúdos correspondentes.
+        </p>
+
+        <div style="margin-top: 20px;">
+
+            <h3>🟢 Plano Básico</h3>
+            <p>
+                Acesso às aulas gravadas e materiais de apoio para acompanhar os conteúdos
+                fundamentais de Biologia.
+            </p>
+
+            <hr>
+
+            <h3>🔵 Plano Intermediário</h3>
+            <p>
+                Inclui aulas gravadas, materiais complementares e encontros de mentoria
+                para esclarecimento de dúvidas.
+            </p>
+
+            <hr>
+
+            <h3>🟣 Plano Premium</h3>
+            <p>
+                Acesso completo a todas as aulas, mentorias exclusivas e acompanhamento
+                personalizado para potencializar seus resultados.
+            </p>
+
+        </div>
 
     </div>
 
