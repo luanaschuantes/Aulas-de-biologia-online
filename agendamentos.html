@@ -3,124 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="estilo.css">
-    <title>BioMentoria - Controle de Mensalidades</title>
+    <title>BioMentoria - Mensalidades</title>
 </head>
+
 <body>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="clientes.html">Cadastro de Alunos</a>
-        <a href="servicos.html">Aulas</a>
-        <a href="agendamentos.html">Mensalidade</a>
-        <a href="consulta_agendamentos.html">Contato</a>
-    </nav>
+<nav>
+    <a href="index.html">Início</a>
+    <a href="clientes.html">Cadastro de Alunos</a>
+    <a href="servicos.html">Cursos</a>
+    <a href="agendamentos.html">Mensalidades</a>
+    <a href="consulta_agendamentos.html">Contato</a>
+    <a href="admin.html">Admin</a>
+</nav>
 
-    <header class="banner">
-        <h1>Gestão de Mensalidades</h1>
-        <p>Organize e registre as mensalidades dos alunos nas aulas de Biologia</p>
-    </header>
+<header class="banner">
+    <h1>Gestão de Mensalidades</h1>
+    <p>Organize e registre os planos dos alunos</p>
+</header>
 
-    <div class="container">
+<div class="container">
 
-        <div style="margin-bottom: 20px;">
-            <button onclick="window.location.href='consulta_agendamentos.html'" style="background: #555; width: auto; padding: 10px 20px;">
-                🔍 Ver Histórico de Mensalidades
-            </button>
-        </div>
+    <div class="card">
 
-        <div class="card">
-            <h2>Nova Mensalidade</h2>
+        <h2>Nova Mensalidade</h2>
 
-            <label for="selCliente">Aluno / Responsável:</label>
-            <select id="selCliente">
-                <option value="">Selecione o Aluno...</option>
-            </select>
+        <label>Aluno / Responsável:</label>
+        <select id="selCliente">
+            <option value="">Selecione o aluno...</option>
+        </select>
 
-            <label for="data_agendamento">Data de Vencimento:</label>
-            <input type="datetime-local" id="data_agendamento" required>
+        <label>Data de vencimento:</label>
+        <input type="datetime-local" id="data_agendamento">
 
-            <label for="responsavel">Turma / Plano do Aluno:</label>
-            <input type="text" id="responsavel" placeholder="Ex: Turma A - Biologia Básica" required>
+        <label>Turma / Plano:</label>
+        <input type="text" id="responsavel">
 
-            <hr>
+        <hr>
 
-            <h3>📚 Seleção de Planos e Aulas da Mensalidade</h3>
+        <h3>Plano / Aula</h3>
 
-            <label for="selServico">Selecione a Mensalidade / Aula:</label>
-            <select id="selServico" onchange="atualizarDadosServico()">
-                <option value="">Selecione uma opção...</option>
-            </select>
+        <label>Selecione:</label>
+        <select id="selServico">
+            <option value="">Selecione...</option>
+        </select>
 
-            <div style="display: flex; gap: 15px; margin-top: 5px;">
-                <div style="flex: 1;">
-                    <label>Valor (R$):</label>
-                    <input type="number" id="txtPreco" readonly style="background: #eee;">
-                </div>
-                <div style="flex: 1;">
-                    <label>Carga Horária (Horas):</label>
-                    <input type="number" id="txtTempo" readonly style="background: #eee;">
-                </div>
-            </div>
+        <label>Valor</label>
+        <input type="number" id="txtPreco" readonly>
 
-            <button type="button" onclick="adicionarServicoNaLista()" style="background-color: var(--primary-blue); margin-top: 15px;">
-                ➕ Adicionar à Mensalidade
-            </button>
-        </div>
+        <label>Carga Horária</label>
+        <input type="number" id="txtTempo" readonly>
 
-        <div class="card" style="margin-top: 20px;">
-            <h2>Itens da Mensalidade</h2>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Plano / Aula</th>
-                        <th>Carga Horária</th>
-                        <th>Valor (R$)</th>
-                    </tr>
-                </thead>
-                <tbody id="lista-servicos-agendados">
-                </tbody>
-            </table>
-
-            <div style="text-align: right; margin-top: 15px;">
-                <h3 id="txtTotal">Total Geral: R$ 0.00</h3>
-                <h4 id="txtTempoTotal" style="color: var(--accent-red);">Carga Horária Total: 0h</h4>
-            </div>
-
-            <button type="button" onclick="finalizarAgendamento()" style="margin-top: 15px; background-color: var(--accent-red);">
-                💾 Confirmar Mensalidade
-            </button>
-        </div>
+        <button class="btn" type="button">
+            Adicionar à Mensalidade
+        </button>
 
     </div>
 
-    <!-- RODAPÉ ADICIONADO -->
-    <footer class="rodape">
-        <div class="container-rodape">
-            <p>&copy; 2026 BioMentoria - Plataforma de Ensino de Biologia
-</p>
-            
-          <p>Aprendendo Biologia com qualidade, tecnologia e dedicação</p>
+    <div class="card">
+
+        <h2>Itens da Mensalidade</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Plano / Aula</th>
+                    <th>Carga Horária</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+
+            <tbody id="lista-servicos-agendados"></tbody>
+        </table>
+
+        <div style="text-align:right; margin-top:15px;">
+            <h3>Total: R$ 0,00</h3>
+            <h4>Carga Horária: 0h</h4>
         </div>
-    </footer>
 
-    <script>
-        let listaServicosDb = [];
-        let carrinhoServicos = [];
-        let totalGeral = 0;
-        let tempoTotalGeral = 0;
+        <button class="btn">
+            Confirmar Mensalidade
+        </button>
 
-        window.onload = function() {
-            fetch('/listar-clientes')
-                .then(res => res.json())
-                .then(clientes => {
-                    const sel = document.getElementById('selCliente');
-                    clientes.forEach(c => {
-                        sel.innerHTML += `<option value="${c.id}">${c.nome} (${c.cpf})</option>`;
-                    });
-                });
-        }
-    </script>
+    </div>
+
+</div>
+
+<footer class="rodape">
+    <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
+</footer>
+
+<script>
+window.onload = function () {
+
+    fetch('/listar-clientes')
+    .then(r => r.json())
+    .then(data => {
+        let sel = document.getElementById('selCliente');
+        data.forEach(c => {
+            sel.innerHTML += `<option value="${c.id}">${c.nome}</option>`;
+        });
+    });
+
+    fetch('/listar-servicos')
+    .then(r => r.json())
+    .then(data => {
+        let sel = document.getElementById('selServico');
+        data.forEach(s => {
+            sel.innerHTML += `<option value="${s.id}">${s.descricao}</option>`;
+        });
+    });
+
+};
+</script>
 
 </body>
 </html>
