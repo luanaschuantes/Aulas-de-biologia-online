@@ -1,48 +1,27 @@
-/* ============================
-   BIOMENTORIA - CSS FINAL LIMPO
-   ============================ */
-
-:root {
-    --primary: #132960;
-    --accent: #D31C24;
-    --bg: #F5F7FB;
-    --white: #FFFFFF;
-    --text: #1C1C1C;
-    --shadow: 0 8px 20px rgba(0,0,0,0.10);
-}
-
-/* ============================
-   BASE
-   ============================ */
+/* =========================
+   BIOMENTORIA - BASE LIMPA
+   ========================= */
 
 * {
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-}
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background: #f5f7fb;
+    color: #1c1c1c;
 }
 
-/* ============================
-   MENU
-   ============================ */
+/* =========================
+   NAV (SEMPRE VISÍVEL)
+   ========================= */
 
 nav {
-    background: var(--primary);
+    background: #132960;
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 20px;
     padding: 15px;
 }
 
@@ -50,143 +29,126 @@ nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
 }
 
 nav a:hover {
-    color: var(--accent);
+    color: #d31c24;
 }
 
-/* ============================
+/* =========================
    BANNER
-   ============================ */
+   ========================= */
 
 .banner {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                url('imagem2.jpg');
-    background-size: cover;
-    background-position: center;
-
-    padding: 120px 20px;
-    text-align: center;
+    background: #132960;
     color: white;
+    text-align: center;
+    padding: 80px 20px;
 }
 
-.banner h1 {
-    font-size: 3rem;
-    margin: 0;
-}
-
-.banner p {
-    font-size: 1.2rem;
-}
-
-/* ============================
+/* =========================
    CONTAINER
-   ============================ */
+   ========================= */
 
 .container {
     max-width: 1000px;
     margin: auto;
     padding: 20px;
-
-    flex: 1; /* empurra footer para baixo */
 }
 
-/* ============================
+/* =========================
    CARD
-   ============================ */
+   ========================= */
 
 .card {
-    background: var(--white);
-    padding: 25px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: var(--shadow);
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* ============================
+/* =========================
    BOTÃO
-   ============================ */
+   ========================= */
 
 .btn {
     display: inline-block;
-    background: var(--primary);
+    background: #132960;
     color: white;
-    padding: 12px 18px;
+    padding: 12px 16px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    text-align: center;
-    transition: 0.3s;
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
-    background: var(--accent);
+    background: #d31c24;
 }
 
-/* ============================
+/* =========================
    TABELA
-   ============================ */
+   ========================= */
 
 table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    box-shadow: var(--shadow);
-    border-radius: 10px;
-    overflow: hidden;
 }
 
 th {
-    background: var(--primary);
+    background: #132960;
     color: white;
-    padding: 12px;
-    text-align: left;
+    padding: 10px;
 }
 
 td {
-    padding: 12px;
+    padding: 10px;
     border-bottom: 1px solid #eee;
 }
 
-/* ============================
+/* =========================
    FORM
-   ============================ */
+   ========================= */
 
 input, select {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-/* ============================
-   FOOTER (CORRIGIDO)
-   ============================ */
+/* =========================
+   FOOTER FIXO NO FINAL
+   ========================= */
 
-.rodape {
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+footer {
     background: #111;
     color: #aaa;
     text-align: center;
     padding: 20px;
-
-    margin-top: auto; /* ISSO RESOLVE O PROBLEMA */
+    margin-top: auto;
 }
 
-/* ============================
+/* =========================
    RESPONSIVO
-   ============================ */
+   ========================= */
 
 @media (max-width: 768px) {
-
     nav {
         flex-direction: column;
-        gap: 10px;
-    }
-
-    .banner h1 {
-        font-size: 2rem;
     }
 }
