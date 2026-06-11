@@ -5,165 +5,145 @@
     <link rel="stylesheet" href="estilo.css">
     <title>BioMentoria - Contato</title>
 </head>
+
 <body>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="clientes.html">Cadastro de Aluno</a>
-        <a href="servicos.html">Aulas</a>
-        <a href="agendamentos.html">Mensalidade</a>
-        <a href="consulta_agendamentos.html">Contato</a>
-    </nav>
+<nav>
+    <a href="index.html">Início</a>
+    <a href="clientes.html">Cadastro de Alunos</a>
+    <a href="servicos.html">Cursos</a>
+    <a href="agendamentos.html">Mensalidades</a>
+    <a href="consulta_agendamentos.html">Contato</a>
+    <a href="admin.html">Admin</a>
+</nav>
 
-    <header class="banner">
-        <h1>Fale Conosco</h1>
-        <p>Dúvidas, suporte e informações gerais</p>
-    </header>
+<header class="banner">
+    <h1>Fale Conosco</h1>
+    <p>Dúvidas e suporte</p>
+</header>
 
-    <div class="container">
+<div class="container">
 
-        <!-- CONTATO COM WHATSAPP -->
-        <div class="card">
-            <h2>Informações de Contato</h2>
+    <!-- CONTATO -->
+    <div class="card">
 
-            <p style="font-size: 1rem; margin-top: 10px;">
-                📞 Atendimento via WhatsApp:
-            </p>
+        <h2>WhatsApp</h2>
 
-            <a href="https://wa.me/5546999713828" target="_blank"
-               style="
-                    display: inline-block;
-                    margin-top: 10px;
-                    padding: 12px 18px;
-                    background-color: #25D366;
-                    color: white;
-                    font-size: 1.2rem;
-                    font-weight: bold;
-                    border-radius: 8px;
-                    text-decoration: none;
-               ">
-                📲 (46) 99971-3828
-            </a>
+        <p>Atendimento rápido:</p>
 
-            <p style="margin-top: 15px; color: var(--text-muted);">
-                Clique no botão acima para falar diretamente conosco no WhatsApp.
-            </p>
-        </div>
-
-        <!-- MANTIDO SEM ALTERAR FUNCIONALIDADE -->
-        <div class="card" style="margin-top: 25px;">
-            <h2>Agendamentos Registrados (Mestre)</h2>
-
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
-                Clique em "Ver Detalhes" para examinar os serviços específicos alocados a cada horário.
-            </p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Data / Hora</th>
-                        <th>Cliente</th>
-                        <th>Responsável</th>
-                        <th>Total</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-
-                <tbody id="lista-agendamentos-consulta">
-                </tbody>
-            </table>
-        </div>
-
-        <div id="card-detalhes" class="card" style="margin-top: 25px; display: none; border-left: 6px solid var(--accent-red);">
-            <h2>Detalhes da Ordem de Serviço #<span id="num-agendamento"></span></h2>
-
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
-                Serviços técnicos executados nesta reserva:
-            </p>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Serviço Técnico</th>
-                        <th>Tempo Estimado</th>
-                        <th>Preço (R$)</th>
-                    </tr>
-                </thead>
-
-                <tbody id="lista-servicos-detalhe">
-                </tbody>
-            </table>
-        </div>
+        <a class="btn" href="https://wa.me/5546999713828" target="_blank">
+            📲 Falar no WhatsApp
+        </a>
 
     </div>
 
-    <script>
-        window.onload = function() {
-            fetch('/listar-agendamentos')
-                .then(res => res.json())
-                .then(agendamentos => {
-                    const corpoTabela = document.getElementById('lista-agendamentos-consulta');
-                    corpoTabela.innerHTML = "";
+    <!-- LISTA -->
+    <div class="card">
 
-                    agendamentos.forEach(a => {
-                        const dataFormatada = new Date(a.data).toLocaleString('pt-BR', {
-                            dateStyle: 'short',
-                            timeStyle: 'short'
-                        });
+        <h2>Agendamentos</h2>
 
-                        corpoTabela.innerHTML += `
-                            <tr>
-                                <td>${a.id}</td>
-                                <td>${dataFormatada}</td>
-                                <td><strong>${a.nome_cliente}</strong></td>
-                                <td>${a.responsavel}</td>
-                                <td>R$ ${a.total.toFixed(2)}</td>
-                                <td>
-                                    <button onclick="verDetalhes(${a.id})">Ver Detalhes</button>
-                                </td>
-                            </tr>`;
-                    });
-                })
-                .catch(err => console.error("Erro ao listar agendamentos:", err));
-        };
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                    <th>Responsável</th>
+                    <th>Total</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
 
-        function verDetalhes(idAgendamento) {
-            fetch(`/detalhes-agendamento/${idAgendamento}`)
-                .then(res => res.json())
-                .then(servicos => {
+            <tbody id="lista-agendamentos-consulta"></tbody>
+        </table>
 
-                    document.getElementById('card-detalhes').style.display = 'block';
-                    document.getElementById('num-agendamento').innerText = idAgendamento;
+    </div>
 
-                    const corpoDetalhe = document.getElementById('lista-servicos-detalhe');
-                    corpoDetalhe.innerHTML = "";
+    <!-- DETALHES -->
+    <div id="card-detalhes" class="card" style="display:none;">
 
-                    servicos.forEach(item => {
-                        corpoDetalhe.innerHTML += `
-                            <tr>
-                                <td><strong>${item.descricao}</strong></td>
-                                <td>${item.tempo_estimado}h</td>
-                                <td>R$ ${item.preco_cobrado.toFixed(2)}</td>
-                            </tr>`;
-                    });
+        <h2>Detalhes #<span id="num-agendamento"></span></h2>
 
-                    window.scrollTo({
-                        top: document.getElementById('card-detalhes').offsetTop - 20,
-                        behavior: 'smooth'
-                    });
-                })
-                .catch(err => console.error("Erro ao carregar detalhes:", err));
-        }
-    </script>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serviço</th>
+                    <th>Horas</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
 
-</body>
+            <tbody id="lista-servicos-detalhe"></tbody>
+        </table>
+
+    </div>
+
+</div>
 
 <footer class="rodape">
-    <div class="container-rodape">
-        <p>&copy; 2026 BioMentoria - Plataforma de Ensino de Biologia</p>
-        <p>Aprendendo Biologia com qualidade, tecnologia e dedicação.</p>
-    </div>
+    <p>&copy; 2026 BioMentoria</p>
 </footer>
 
+<script>
+window.onload = function () {
+
+    fetch('/listar-agendamentos')
+    .then(r => r.json())
+    .then(data => {
+
+        const tabela = document.getElementById('lista-agendamentos-consulta');
+        tabela.innerHTML = "";
+
+        data.forEach(a => {
+
+            let total = a.total ? Number(a.total).toFixed(2) : "0.00";
+
+            let dataFormatada = new Date(a.data).toLocaleString('pt-BR');
+
+            tabela.innerHTML += `
+                <tr>
+                    <td>${a.id}</td>
+                    <td>${dataFormatada}</td>
+                    <td>${a.nome_cliente}</td>
+                    <td>${a.responsavel}</td>
+                    <td>R$ ${total}</td>
+                    <td>
+                        <button class="btn" onclick="verDetalhes(${a.id})">
+                            Ver
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    });
+};
+
+function verDetalhes(id) {
+
+    fetch(`/detalhes-agendamento/${id}`)
+    .then(r => r.json())
+    .then(data => {
+
+        document.getElementById('card-detalhes').style.display = 'block';
+        document.getElementById('num-agendamento').innerText = id;
+
+        const tabela = document.getElementById('lista-servicos-detalhe');
+        tabela.innerHTML = "";
+
+        data.forEach(s => {
+
+            tabela.innerHTML += `
+                <tr>
+                    <td>${s.descricao}</td>
+                    <td>${s.tempo_estimado}h</td>
+                    <td>R$ ${Number(s.preco_cobrado).toFixed(2)}</td>
+                </tr>
+            `;
+        });
+
+    });
+}
+</script>
+
+</body>
 </html>
