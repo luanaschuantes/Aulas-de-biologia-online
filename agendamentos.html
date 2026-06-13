@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="estilo.css">
-    <title>BioMentoria - Mensalidades</title>
+    <title>BioMentoria - Conteúdos</title>
 </head>
 
 <body>
@@ -12,78 +13,62 @@
     <a href="index.html">Início</a>
     <a href="clientes.html">Cadastro de Alunos</a>
     <a href="servicos.html">Planos</a>
-    <a href="agendamentos.html">Mensalidades</a>
+    <a href="agendamentos.html">Conteúdos</a>
     <a href="consulta_agendamentos.html">Contato</a>
     <a href="admin.html">Admin</a>
 </nav>
 
 <header class="banner">
-    <h1>Gestão de Mensalidades</h1>
-    <p>Organize e registre os planos dos alunos</p>
+    <h1>Conteúdos de Biologia</h1>
+    <p>Visualize as aulas disponíveis de acordo com seu plano</p>
 </header>
 
 <div class="container">
 
     <div class="card">
 
-        <h2>Nova Mensalidade</h2>
+        <h2>Informações do Aluno</h2>
 
-        <label>Aluno / Responsável:</label>
+        <label>Aluno:</label>
         <select id="selCliente">
             <option value="">Selecione o aluno...</option>
         </select>
 
-        <label>Data de vencimento:</label>
-        <input type="datetime-local" id="data_agendamento">
-
-        <label>Turma / Plano:</label>
-        <input type="text" id="responsavel">
-
-        <hr>
-
-        <h3>Plano / Aula</h3>
-
-        <label>Selecione:</label>
-        <select id="selServico">
+        <label>Plano Contratado:</label>
+        <select id="selPlano">
             <option value="">Selecione...</option>
+            <option value="basico">Básico - R$20 (3 meses)</option>
+            <option value="intermediario">Intermediário - R$40 (6 meses)</option>
+            <option value="premium">Premium - R$60 (12 meses)</option>
         </select>
 
-        <label>Valor</label>
-        <input type="number" id="txtPreco" readonly>
-
-        <label>Carga Horária</label>
-        <input type="number" id="txtTempo" readonly>
-
-        <button class="btn" type="button">
-            Adicionar à Mensalidade
+        <button class="btn" type="button" onclick="carregarConteudos()">
+            Ver Conteúdos
         </button>
 
     </div>
 
     <div class="card">
 
-        <h2>Itens da Mensalidade</h2>
+        <h2>Conteúdos Disponíveis</h2>
 
         <table>
             <thead>
                 <tr>
-                    <th>Plano / Aula</th>
-                    <th>Carga Horária</th>
-                    <th>Valor</th>
+                    <th>Aula</th>
+                    <th>Nível</th>
+                    <th>Acesso</th>
                 </tr>
             </thead>
 
-            <tbody id="lista-servicos-agendados"></tbody>
+            <tbody id="lista-servicos-agendados">
+            </tbody>
+
         </table>
 
         <div style="text-align:right; margin-top:15px;">
-            <h3>Total: R$ 0,00</h3>
-            <h4>Carga Horária: 0h</h4>
+            <h3 id="totalAulas">Total de Aulas: 0</h3>
         </div>
-
-        <button class="btn">
-            Confirmar Mensalidade
-        </button>
 
     </div>
 
@@ -94,28 +79,99 @@
 </footer>
 
 <script>
+
 window.onload = function () {
 
     fetch('/listar-clientes')
     .then(r => r.json())
     .then(data => {
+
         let sel = document.getElementById('selCliente');
+
         data.forEach(c => {
-            sel.innerHTML += `<option value="${c.id}">${c.nome}</option>`;
+            sel.innerHTML += `
+                <option value="${c.id}">
+                    ${c.nome}
+                </option>
+            `;
         });
+
     });
 
-    fetch('/listar-servicos')
-    .then(r => r.json())
-    .then(data => {
-        let sel = document.getElementById('selServico');
-        data.forEach(s => {
-            sel.innerHTML += `<option value="${s.id}">${s.descricao}</option>`;
-        });
+}
+
+function carregarConteudos(){
+
+    let plano = document.getElementById('selPlano').value;
+    let tabela = document.getElementById('lista-servicos-agendados');
+
+    tabela.innerHTML = '';
+
+    let aulas = [];
+
+    if(plano === 'basico'){
+
+        aulas = [
+            ['Introdução à Biologia', 'Básico'],
+            ['Citologia', 'Básico'],
+            ['Água e Sais Minerais', 'Básico'],
+            ['Organelas Celulares', 'Básico']
+        ];
+
+    }
+
+    else if(plano === 'intermediario'){
+
+        aulas = [
+            ['Introdução à Biologia', 'Básico'],
+            ['Citologia', 'Básico'],
+            ['Água e Sais Minerais', 'Básico'],
+            ['Organelas Celulares', 'Básico'],
+            ['Histologia', 'Intermediário'],
+            ['Genética', 'Intermediário'],
+            ['Ecologia', 'Intermediário']
+        ];
+
+    }
+
+    else if(plano === 'premium'){
+
+        aulas = [
+            ['Introdução à Biologia', 'Básico'],
+            ['Citologia', 'Básico'],
+            ['Água e Sais Minerais', 'Básico'],
+            ['Organelas Celulares', 'Básico'],
+            ['Histologia', 'Intermediário'],
+            ['Genética', 'Intermediário'],
+            ['Ecologia', 'Intermediário'],
+            ['Fisiologia Humana', 'Avançado'],
+            ['Biotecnologia', 'Avançado'],
+            ['Botânica Completa', 'Avançado'],
+            ['Zoologia Completa', 'Avançado'],
+            ['Preparação ENEM', 'Premium']
+        ];
+
+    }
+
+    aulas.forEach(aula => {
+
+        tabela.innerHTML += `
+            <tr>
+                <td>${aula[0]}</td>
+                <td>${aula[1]}</td>
+                <td>Liberado</td>
+            </tr>
+        `;
+
     });
 
-};
+    document.getElementById('totalAulas').innerHTML =
+        'Total de Aulas: ' + aulas.length;
+
+}
+
 </script>
 
 </body>
 </html>
+```
