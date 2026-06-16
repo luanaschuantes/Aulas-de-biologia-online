@@ -13,7 +13,7 @@
     --light: #f8f9fa;
 }
 
-/* Fundo geral da página - SEM imagem */
+/* Fundo geral da página */
 html, body {
     margin: 0;
     padding: 0;
@@ -22,7 +22,7 @@ html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: var(--light);           /* fundo claro limpo */
+    background: var(--light);
 }
 
 /* =========================
@@ -50,7 +50,7 @@ nav a:hover {
 }
 
 /* =========================
-   BANNER - Apenas aqui fica a imagem
+   BANNER (com imagem)
    ========================= */
 .banner {
     background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
@@ -100,8 +100,27 @@ nav a:hover {
    ========================= */
 h1, h2, h3 {
     margin-bottom: 12px;
-    color: var(--primary);
 }
+
+/* Títulos principais em BRANCO com fundo escuro */
+h2, h3 {
+    color: white;
+    background: #132960;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
+}
+
+/* Títulos do banner (hero) */
+.banner h1,
+.banner h2,
+.banner h3,
+.banner p {
+    color: white !important;
+}
+
 button,
 .btn {
     background: var(--primary);
