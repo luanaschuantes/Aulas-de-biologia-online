@@ -8,15 +8,13 @@
     padding: 0;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
-
-    /* FUNDO (CORRIGIDO E SEGURO) */
-    background-image: url("./fundo.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 
     color: #1c1c1c;
     min-height: 100vh;
@@ -51,11 +49,17 @@ nav a:hover {
 }
 
 /* =========================
-   BANNER
+   BANNER COM IMAGEM
    ========================= */
 
 .banner {
-    background: #132960;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url("./fundo.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     color: white;
     text-align: center;
     padding: 90px 20px;
