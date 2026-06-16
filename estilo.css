@@ -14,7 +14,7 @@ body {
     /* FUNDO COM IMAGEM + OVERLAY */
     background: 
         linear-gradient(rgba(245, 247, 251, 0.85), rgba(245, 247, 251, 0.85)),
-        url("imagens/fundo.jpg");
+        url("imagemdna.jpg");
 
     background-size: cover;
     background-position: center;
