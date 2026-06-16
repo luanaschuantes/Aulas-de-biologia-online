@@ -11,8 +11,8 @@
 body {
     font-family: Arial, sans-serif;
 
-    /* FUNDO (VERSÃO SEGURA) */
-    background-image: url("fundo.jpg");
+    /* FUNDO (CORRIGIDO E SEGURO) */
+    background-image: url("./fundo.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
