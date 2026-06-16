@@ -11,11 +11,8 @@
 body {
     font-family: Arial, sans-serif;
 
-    /* FUNDO COM IMAGEM + OVERLAY */
-    background: 
-        linear-gradient(rgba(245, 247, 251, 0.85), rgba(245, 247, 251, 0.85)),
-        url("imagemdna.jpg");
-
+    /* FUNDO (VERSÃO SEGURA) */
+    background-image: url("fundo.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -105,7 +102,7 @@ h1, h2, h3 {
 }
 
 /* =========================
-   BOTÕES PADRÃO
+   BOTÕES
    ========================= */
 
 button,
@@ -176,7 +173,7 @@ select:focus {
 }
 
 /* =========================
-   FOOTER CENTRALIZADO
+   FOOTER
    ========================= */
 
 footer {
