@@ -10,7 +10,17 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f5f7fb;
+
+    /* FUNDO COM IMAGEM + OVERLAY */
+    background: 
+        linear-gradient(rgba(245, 247, 251, 0.85), rgba(245, 247, 251, 0.85)),
+        url("imagens/fundo.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
     color: #1c1c1c;
     min-height: 100vh;
     display: flex;
