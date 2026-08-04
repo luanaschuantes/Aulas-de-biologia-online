@@ -1,5 +1,5 @@
 /* =====================================
-   BIOMENTORIA - NOVO VISUAL
+   BIOMENTORIA - VISUAL COMPLETO
 ===================================== */
 
 *{
@@ -89,8 +89,6 @@ nav a:hover{
 
 
 
-
-
 /* =====================================
    BANNER PRINCIPAL
 ===================================== */
@@ -144,6 +142,7 @@ nav a:hover{
 }
 
 
+
 .banner p{
 
     font-size:22px;
@@ -154,9 +153,8 @@ nav a:hover{
 
 
 
-
 /* =====================================
-   CONTAINER GERAL
+   CONTAINER
 ===================================== */
 
 
@@ -177,7 +175,7 @@ nav a:hover{
 
 
 /* =====================================
-   CARDS MODERNOS
+   CARDS
 ===================================== */
 
 
@@ -215,7 +213,7 @@ nav a:hover{
 
 
 /* =====================================
-   TITULOS
+   TEXTOS
 ===================================== */
 
 
@@ -347,13 +345,8 @@ tr:hover{
     background:#eef3ff;
 
 }
-
-
-
-
-
 /* =====================================
-   FORMULARIOS
+   FORMULÁRIOS
 ===================================== */
 
 
@@ -381,7 +374,8 @@ textarea{
 
 
 input:focus,
-select:focus{
+select:focus,
+textarea:focus{
 
     outline:none;
 
@@ -394,7 +388,7 @@ select:focus{
 
 
 /* =====================================
-   RODAPÉ SEMPRE EMBAIXO
+   RODAPÉ
 ===================================== */
 
 
@@ -425,8 +419,9 @@ footer,
 
 
 
+
 /* =====================================
-   PAGINAS INTERNAS
+   PÁGINAS INTERNAS
 ===================================== */
 
 
@@ -435,6 +430,7 @@ main{
     flex:1;
 
 }
+
 
 
 .banner + .container{
@@ -448,7 +444,295 @@ main{
 
 
 /* =====================================
-   CELULAR
+   NOVO VISUAL - SOMENTE PÁGINA INICIAL
+   USAR <body class="inicio">
+===================================== */
+
+
+.inicio {
+
+
+    background:#f6f9f8;
+
+
+}
+
+
+
+
+
+/* MENU DA HOME */
+
+
+.inicio nav {
+
+
+    background:#063b2b;
+
+
+    padding:22px 8%;
+
+
+}
+
+
+
+.inicio nav a {
+
+
+    font-size:17px;
+
+
+}
+
+
+
+.inicio nav a:hover {
+
+
+    color:#75f0c0;
+
+
+}
+
+
+
+
+
+/* BANNER DA HOME */
+
+
+.inicio .banner {
+
+
+    min-height:580px;
+
+
+    background:
+
+
+    linear-gradient(
+
+        rgba(6,59,43,.82),
+
+        rgba(6,59,43,.82)
+
+    ),
+
+
+    url("./fundo.jpg");
+
+
+
+    background-size:cover;
+
+
+    background-position:center;
+
+
+}
+
+
+
+.inicio .banner h1 {
+
+
+    font-size:clamp(45px,7vw,80px);
+
+
+    font-weight:900;
+
+
+    letter-spacing:3px;
+
+
+}
+
+
+
+.inicio .banner p {
+
+
+    font-size:26px;
+
+
+    max-width:850px;
+
+
+}
+
+
+
+
+
+/* CONTEÚDO DA HOME */
+
+
+.inicio .container {
+
+
+    max-width:1150px;
+
+
+}
+
+
+
+
+
+/* REMOVE CAIXAS E DEIXA MAIS LIMPO */
+
+
+.inicio .card {
+
+
+    background:transparent;
+
+
+    box-shadow:none;
+
+
+    border-radius:0;
+
+
+    padding:50px 10px;
+
+
+    margin:0;
+
+
+    border-bottom:1px solid #d9e3df;
+
+
+}
+
+
+
+.inicio .card:hover {
+
+
+    transform:none;
+
+
+}
+
+
+
+.inicio .card:last-child {
+
+
+    border-bottom:none;
+
+
+}
+
+
+
+
+
+/* TÍTULOS HOME */
+
+
+.inicio h2 {
+
+
+    color:#063b2b;
+
+
+    font-size:38px;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+
+/* TEXTOS HOME */
+
+
+.inicio p {
+
+
+    color:#334155;
+
+
+    font-size:19px;
+
+
+}
+
+
+
+.inicio li {
+
+
+    color:#334155;
+
+
+    font-size:18px;
+
+
+    margin:15px 0;
+
+
+}
+
+
+
+
+
+/* BOTÕES HOME */
+
+
+.inicio .btn {
+
+
+    background:#063b2b;
+
+
+    padding:16px 40px;
+
+
+    border-radius:50px;
+
+
+}
+
+
+
+.inicio .btn:hover {
+
+
+    background:#086b4d;
+
+
+}
+
+
+
+
+
+/* RODAPÉ HOME */
+
+
+.inicio footer {
+
+
+    background:#03251c;
+
+
+}
+
+
+
+
+
+/* =====================================
+   RESPONSIVO
 ===================================== */
 
 
@@ -489,9 +773,49 @@ nav{
 
 
 
+.banner p{
+
+    font-size:18px;
+
+}
+
+
+
 table{
 
     font-size:14px;
+
+}
+
+
+
+
+
+.inicio .banner h1{
+
+
+    font-size:40px;
+
+
+}
+
+
+
+.inicio .banner p{
+
+
+    font-size:18px;
+
+
+}
+
+
+
+.inicio h2{
+
+
+    font-size:30px;
+
 
 }
 
