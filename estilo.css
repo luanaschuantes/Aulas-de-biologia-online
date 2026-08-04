@@ -1,6 +1,7 @@
 /* =====================================
-   BIOMENTORIA - ESTILO GERAL
+   BIOMENTORIA - CSS COMPLETO
 ===================================== */
+
 
 *{
     margin:0;
@@ -8,55 +9,82 @@
     box-sizing:border-box;
 }
 
-html, body{
+
+html,body{
+
     min-height:100%;
+
 }
+
 
 body{
+
     font-family:'Segoe UI', Arial, sans-serif;
+
     background:#f4f7fb;
+
     color:#222;
+
     display:flex;
+
     flex-direction:column;
+
     min-height:100vh;
+
 }
 
 
 
-/* =====================================
+/* ===============================
    MENU
-===================================== */
+================================ */
 
 nav{
+
     width:100%;
+
     background:#132960;
-    padding:18px 5%;
+
+    padding:18px;
+
     display:flex;
+
     justify-content:center;
-    align-items:center;
+
     gap:35px;
+
     position:sticky;
+
     top:0;
-    z-index:999;
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+    z-index:10;
+
 }
+
 
 nav a{
+
     color:white;
+
     text-decoration:none;
+
     font-weight:600;
-    transition:.3s;
+
 }
+
 
 nav a:hover{
+
     color:#ff3b3b;
+
 }
 
 
 
-/* =====================================
+/* ===============================
    BANNER
-===================================== */
+================================ */
+
 
 .banner{
 
@@ -74,7 +102,9 @@ nav a:hover{
 
     text-align:center;
 
-    padding:80px 20px;
+    padding:70px 20px;
+
+    color:white;
 
 
     background:
@@ -91,45 +121,42 @@ nav a:hover{
 
     background-position:center;
 
-    color:white;
-
 }
+
 
 
 .banner h1{
 
-    font-size:clamp(35px,5vw,60px);
+    font-size:60px;
 
-    margin-bottom:20px;
+    margin-bottom:15px;
 
 }
+
 
 
 .banner p{
 
     font-size:22px;
 
-    max-width:700px;
-
 }
 
 
 
 
 
-/* =====================================
+/* ===============================
    CONTEÚDO
-===================================== */
+================================ */
+
 
 .container{
 
     width:90%;
 
-    max-width:1300px;
+    max-width:1200px;
 
     margin:auto;
-
-    flex:1;
 
 }
 
@@ -139,15 +166,13 @@ nav a:hover{
 
     background:white;
 
-    width:100%;
-
     margin:40px 0;
 
-    padding:45px;
+    padding:40px;
 
     border-radius:25px;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.08);
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 
 }
 
@@ -157,12 +182,11 @@ h2{
 
     color:#132960;
 
+    margin-bottom:20px;
+
     font-size:32px;
 
-    margin-bottom:25px;
-
 }
-
 
 
 p{
@@ -174,10 +198,9 @@ p{
 }
 
 
-
 li{
 
-    margin:12px 0;
+    margin:12px;
 
     font-size:17px;
 
@@ -187,9 +210,10 @@ li{
 
 
 
-/* =====================================
+/* ===============================
    BOTÕES
-===================================== */
+================================ */
+
 
 .btn,
 button{
@@ -198,21 +222,17 @@ button{
 
     color:white;
 
-    border:none;
-
-    padding:14px 30px;
+    padding:14px 35px;
 
     border-radius:30px;
 
-    cursor:pointer;
+    text-decoration:none;
+
+    border:none;
 
     font-weight:bold;
 
-    text-decoration:none;
-
     display:inline-block;
-
-    transition:.3s;
 
 }
 
@@ -228,9 +248,10 @@ button:hover{
 
 
 
-/* =====================================
+/* ===============================
    FORMULÁRIOS
-===================================== */
+================================ */
+
 
 input,
 select,
@@ -240,13 +261,9 @@ textarea{
 
     padding:15px;
 
-    margin:10px 0 20px;
-
-    border-radius:12px;
+    border-radius:10px;
 
     border:1px solid #ccc;
-
-    font-size:16px;
 
 }
 
@@ -254,17 +271,18 @@ textarea{
 
 
 
-/* =====================================
+/* ===============================
    TABELAS
-===================================== */
+================================ */
+
 
 table{
 
     width:100%;
 
-    border-collapse:collapse;
-
     background:white;
+
+    border-collapse:collapse;
 
 }
 
@@ -275,7 +293,7 @@ th{
 
     color:white;
 
-    padding:18px;
+    padding:15px;
 
 }
 
@@ -284,20 +302,18 @@ td{
 
     padding:15px;
 
-    border-bottom:1px solid #ddd;
-
 }
 
 
 
 
 
-/* =====================================
+/* ===============================
    RODAPÉ
-===================================== */
+================================ */
 
-footer,
-.rodape{
+
+footer{
 
     margin-top:auto;
 
@@ -305,11 +321,9 @@ footer,
 
     color:white;
 
-    text-align:center;
-
     padding:30px;
 
-    width:100%;
+    text-align:center;
 
 }
 
@@ -317,9 +331,9 @@ footer,
 
 
 
-/* =================================================
-   DESIGN NOVO - SOMENTE INDEX.HTML
-================================================= */
+/************************************************
+        NOVO VISUAL - SOMENTE INDEX
+************************************************/
 
 
 .inicio{
@@ -332,6 +346,7 @@ footer,
 
 /* MENU HOME */
 
+
 .inicio nav{
 
     background:#06402f;
@@ -339,19 +354,8 @@ footer,
 }
 
 
-.inicio nav a:hover{
 
-    color:#80ffd2;
-
-}
-
-
-
-
-
-/* =====================================
-   BANNER HOME AJUSTADO
-===================================== */
+/* BANNER HOME */
 
 
 .inicio .banner{
@@ -363,9 +367,9 @@ footer,
 
     linear-gradient(
 
-        rgba(6,64,47,.65),
+        rgba(6,64,47,.60),
 
-        rgba(6,64,47,.65)
+        rgba(6,64,47,.60)
 
     ),
 
@@ -374,20 +378,17 @@ footer,
 
     background-size:cover;
 
-
     background-position:center;
-
-
-    padding:80px 20px;
 
 }
 
 
 
 
+
 .inicio .banner h1{
 
-    font-size:clamp(45px,6vw,70px);
+    font-size:70px;
 
     font-weight:900;
 
@@ -400,17 +401,16 @@ footer,
 
 
 
+
 .inicio .banner p{
+
+    display:block;
 
     color:white;
 
-    font-size:24px;
+    font-size:26px;
 
-    max-width:800px;
-
-    line-height:1.5;
-
-    opacity:1;
+    max-width:850px;
 
 }
 
@@ -418,7 +418,7 @@ footer,
 
 
 
-/* REMOVE CAIXAS DA HOME */
+/* HOME SEM CAIXAS */
 
 
 .inicio .card{
@@ -431,7 +431,7 @@ footer,
 
     border-bottom:1px solid #d8e3de;
 
-    padding:50px 10px;
+    padding:45px 10px;
 
     margin:0;
 
@@ -447,17 +447,6 @@ footer,
 
 
 
-.inicio .card:last-child{
-
-    border-bottom:none;
-
-}
-
-
-
-
-
-/* TITULOS HOME */
 
 
 .inicio h2{
@@ -472,39 +461,19 @@ footer,
 
 
 
-/* TEXTOS HOME */
-
-
 .inicio p{
 
     color:#374151;
 
-    font-size:19px;
-
 }
 
 
 
-.inicio li{
-
-    color:#374151;
-
-    font-size:18px;
-
-}
-
-
-
-
-
-/* BOTÕES HOME */
 
 
 .inicio .btn{
 
     background:#06402f;
-
-    padding:16px 40px;
 
 }
 
@@ -520,9 +489,6 @@ footer,
 
 
 
-/* RODAPÉ HOME */
-
-
 .inicio footer{
 
     background:#03251c;
@@ -533,9 +499,9 @@ footer,
 
 
 
-/* =====================================
+/* ===============================
    CELULAR
-===================================== */
+================================ */
 
 
 @media(max-width:768px){
@@ -545,55 +511,35 @@ nav{
 
     flex-direction:column;
 
-    gap:15px;
+    align-items:center;
 
 }
-
-
-
-.card{
-
-    padding:25px;
-
-}
-
-
-
-.banner{
-
-    min-height:350px;
-
-}
-
 
 
 .banner h1{
-
-    font-size:35px;
-
-}
-
-
-
-.banner p{
-
-    font-size:18px;
-
-}
-
-
-
-.inicio .banner h1{
 
     font-size:40px;
 
 }
 
 
+.inicio .banner h1{
+
+    font-size:42px;
+
+}
+
 
 .inicio .banner p{
 
     font-size:18px;
+
+}
+
+
+.card{
+
+    padding:25px;
 
 }
 
