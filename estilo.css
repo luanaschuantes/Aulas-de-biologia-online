@@ -1,5 +1,5 @@
 /* =====================================
-   BIOMENTORIA - VISUAL COMPLETO
+   BIOMENTORIA - ESTILO GERAL
 ===================================== */
 
 *{
@@ -8,246 +8,129 @@
     box-sizing:border-box;
 }
 
-
-html,body{
-
+html, body{
     min-height:100%;
-
 }
-
 
 body{
-
     font-family:'Segoe UI', Arial, sans-serif;
-
     background:#f4f7fb;
-
     color:#222;
-
     display:flex;
-
     flex-direction:column;
-
     min-height:100vh;
-
 }
 
 
-
 /* =====================================
-   MENU
+   MENU (TODAS AS PÁGINAS)
 ===================================== */
-
 
 nav{
-
     width:100%;
-
     background:#132960;
-
     padding:18px 5%;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:35px;
-
     position:sticky;
-
     top:0;
-
     z-index:999;
-
     box-shadow:0 5px 20px rgba(0,0,0,.15);
-
 }
-
-
 
 nav a{
-
     color:white;
-
     text-decoration:none;
-
     font-weight:600;
-
     transition:.3s;
-
 }
 
-
-
 nav a:hover{
-
     color:#ff3b3b;
-
 }
 
 
 
 /* =====================================
-   BANNER PRINCIPAL
+   BANNER
 ===================================== */
 
-
 .banner{
-
     width:100%;
-
     min-height:450px;
-
     display:flex;
-
     flex-direction:column;
-
     justify-content:center;
-
     align-items:center;
-
     text-align:center;
-
     padding:80px 20px;
 
-
     background:
-
     linear-gradient(
-    rgba(19,41,96,.85),
-    rgba(19,41,96,.85)
+        rgba(19,41,96,.85),
+        rgba(19,41,96,.85)
     ),
-
     url("./fundo.jpg");
 
-
     background-size:cover;
-
     background-position:center;
 
     color:white;
-
 }
-
-
 
 .banner h1{
-
     font-size:clamp(35px,5vw,60px);
-
     margin-bottom:20px;
-
 }
-
-
 
 .banner p{
-
     font-size:22px;
-
     max-width:700px;
-
 }
 
 
 
 /* =====================================
-   CONTAINER
+   CONTEÚDO
 ===================================== */
-
 
 .container{
-
     width:90%;
-
     max-width:1300px;
-
     margin:auto;
-
     flex:1;
-
 }
-
-
-
-
-
-/* =====================================
-   CARDS
-===================================== */
 
 
 .card{
-
     background:white;
-
     width:100%;
-
     margin:40px 0;
-
     padding:45px;
-
     border-radius:25px;
-
-    box-shadow:
-
-    0 15px 40px rgba(0,0,0,.08);
-
-
-    transition:.3s;
-
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
 }
-
-
-
-.card:hover{
-
-    transform:translateY(-5px);
-
-}
-
-
-
-
-
-/* =====================================
-   TEXTOS
-===================================== */
 
 
 h2{
-
     color:#132960;
-
     font-size:32px;
-
     margin-bottom:25px;
-
 }
-
 
 
 p{
-
     font-size:18px;
-
     line-height:1.8;
-
 }
-
 
 
 li{
-
     margin:12px 0;
-
     font-size:17px;
-
 }
-
-
 
 
 
@@ -255,45 +138,42 @@ li{
    BOTÕES
 ===================================== */
 
-
 .btn,
 button{
-
-
     background:#d31c24;
-
     color:white;
-
     border:none;
-
     padding:14px 30px;
-
     border-radius:30px;
-
     cursor:pointer;
-
     font-weight:bold;
-
     text-decoration:none;
-
     display:inline-block;
-
     transition:.3s;
-
 }
-
 
 
 .btn:hover,
 button:hover{
-
     background:#ff4048;
-
-    transform:translateY(-3px);
-
 }
 
 
+
+/* =====================================
+   FORMULÁRIOS
+===================================== */
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:15px;
+    margin:10px 0 20px;
+    border-radius:12px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
 
 
 
@@ -301,89 +181,22 @@ button:hover{
    TABELAS
 ===================================== */
 
-
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
     background:white;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
 }
-
-
 
 th{
-
     background:#132960;
-
     color:white;
-
     padding:18px;
-
 }
-
-
 
 td{
-
     padding:15px;
-
     border-bottom:1px solid #ddd;
-
 }
-
-
-
-tr:hover{
-
-    background:#eef3ff;
-
-}
-/* =====================================
-   FORMULÁRIOS
-===================================== */
-
-
-input,
-select,
-textarea{
-
-
-    width:100%;
-
-    padding:15px;
-
-    margin:10px 0 20px;
-
-
-    border-radius:12px;
-
-    border:1px solid #ccc;
-
-    font-size:16px;
-
-
-}
-
-
-
-input:focus,
-select:focus,
-textarea:focus{
-
-    outline:none;
-
-    border-color:#132960;
-
-}
-
-
 
 
 
@@ -391,434 +204,192 @@ textarea:focus{
    RODAPÉ
 ===================================== */
 
-
 footer,
 .rodape{
-
-
     margin-top:auto;
-
-
     background:#111827;
-
-
     color:white;
-
-
     text-align:center;
-
-
     padding:30px;
-
-
     width:100%;
-
-
 }
 
 
 
+/* =================================================
+   DESIGN NOVO - SOMENTE INDEX.HTML
+================================================= */
+
+.inicio{
+    background:#f7faf9;
+}
 
 
-/* =====================================
-   PÁGINAS INTERNAS
-===================================== */
+/* MENU HOME */
+
+.inicio nav{
+    background:#06402f;
+}
 
 
-main{
-
-    flex:1;
-
+.inicio nav a:hover{
+    color:#80ffd2;
 }
 
 
 
-.banner + .container{
+/* BANNER HOME */
 
-    padding-top:30px;
+.inicio .banner{
 
-}
-
-
-
-
-
-/* =====================================
-   NOVO VISUAL - SOMENTE PÁGINA INICIAL
-   USAR <body class="inicio">
-===================================== */
-
-
-.inicio {
-
-
-    background:#f6f9f8;
-
-
-}
-
-
-
-
-
-/* MENU DA HOME */
-
-
-.inicio nav {
-
-
-    background:#063b2b;
-
-
-    padding:22px 8%;
-
-
-}
-
-
-
-.inicio nav a {
-
-
-    font-size:17px;
-
-
-}
-
-
-
-.inicio nav a:hover {
-
-
-    color:#75f0c0;
-
-
-}
-
-
-
-
-
-/* BANNER DA HOME */
-
-
-.inicio .banner {
-
-
-    min-height:580px;
-
+    min-height:600px;
 
     background:
-
-
     linear-gradient(
-
-        rgba(6,59,43,.82),
-
-        rgba(6,59,43,.82)
-
+        rgba(6,64,47,.82),
+        rgba(6,64,47,.82)
     ),
-
-
     url("./fundo.jpg");
 
-
-
     background-size:cover;
-
-
     background-position:center;
 
-
 }
 
 
+.inicio .banner h1{
 
-.inicio .banner h1 {
-
-
-    font-size:clamp(45px,7vw,80px);
-
-
+    font-size:clamp(50px,8vw,90px);
     font-weight:900;
-
-
     letter-spacing:3px;
 
-
 }
 
 
-
-.inicio .banner p {
-
+.inicio .banner p{
 
     font-size:26px;
 
-
-    max-width:850px;
-
-
 }
 
 
 
+/* REMOVE CAIXAS DA HOME */
 
-
-/* CONTEÚDO DA HOME */
-
-
-.inicio .container {
-
-
-    max-width:1150px;
-
-
-}
-
-
-
-
-
-/* REMOVE CAIXAS E DEIXA MAIS LIMPO */
-
-
-.inicio .card {
-
+.inicio .card{
 
     background:transparent;
-
-
     box-shadow:none;
-
-
     border-radius:0;
-
-
+    border-bottom:1px solid #d8e3de;
     padding:50px 10px;
-
-
     margin:0;
-
-
-    border-bottom:1px solid #d9e3df;
-
 
 }
 
 
-
-.inicio .card:hover {
-
+.inicio .card:hover{
 
     transform:none;
 
-
 }
 
 
-
-.inicio .card:last-child {
-
+.inicio .card:last-child{
 
     border-bottom:none;
 
-
 }
 
 
 
+/* TITULOS HOME */
 
+.inicio h2{
 
-/* TÍTULOS HOME */
-
-
-.inicio h2 {
-
-
-    color:#063b2b;
-
-
+    color:#06402f;
     font-size:38px;
 
-
-    margin-bottom:25px;
-
-
 }
-
-
 
 
 
 /* TEXTOS HOME */
 
+.inicio p{
 
-.inicio p {
-
-
-    color:#334155;
-
-
+    color:#374151;
     font-size:19px;
 
-
 }
 
 
+.inicio li{
 
-.inicio li {
-
-
-    color:#334155;
-
-
+    color:#374151;
     font-size:18px;
 
-
-    margin:15px 0;
-
-
 }
-
-
 
 
 
 /* BOTÕES HOME */
 
+.inicio .btn{
 
-.inicio .btn {
-
-
-    background:#063b2b;
-
-
+    background:#06402f;
     padding:16px 40px;
 
-
-    border-radius:50px;
-
-
 }
 
 
+.inicio .btn:hover{
 
-.inicio .btn:hover {
-
-
-    background:#086b4d;
-
+    background:#087052;
 
 }
-
-
 
 
 
 /* RODAPÉ HOME */
 
-
-.inicio footer {
-
+.inicio footer{
 
     background:#03251c;
 
-
 }
-
-
 
 
 
 /* =====================================
-   RESPONSIVO
+   CELULAR
 ===================================== */
-
 
 @media(max-width:768px){
 
-
 nav{
-
     flex-direction:column;
-
     gap:15px;
-
 }
-
 
 
 .card{
-
     padding:25px;
-
 }
-
 
 
 .banner{
-
     min-height:350px;
-
 }
-
-
-
-.banner h1{
-
-    font-size:35px;
-
-}
-
-
-
-.banner p{
-
-    font-size:18px;
-
-}
-
-
-
-table{
-
-    font-size:14px;
-
-}
-
-
-
 
 
 .inicio .banner h1{
-
-
     font-size:40px;
-
-
 }
-
 
 
 .inicio .banner p{
-
-
     font-size:18px;
-
-
 }
-
-
-
-.inicio h2{
-
-
-    font-size:30px;
-
-
-}
-
-
 
 }
