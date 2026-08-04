@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro</title>
+</head>
+<body>
+
+<h1>Cadastre-se para acessar o site</h1>
+
+<form id="cadastro">
+    <input type="text" id="nome" placeholder="Nome" required><br><br>
+
+    <input type="email" id="email" placeholder="E-mail" required><br><br>
+
+    <button type="submit">Entrar no site</button>
+</form>
+
+<script>
+document.getElementById("cadastro").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    localStorage.setItem("cadastrado", "sim");
+
+    window.location.href = "index.html";
+});
+</script>
+
+</body>
+</html>
