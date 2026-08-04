@@ -1,6 +1,6 @@
-/* =========================
-   RESET GERAL
-========================= */
+/* =====================================
+   BIOMENTORIA - NOVO VISUAL
+===================================== */
 
 *{
     margin:0;
@@ -9,8 +9,7 @@
 }
 
 
-html,
-body{
+html,body{
 
     min-height:100%;
 
@@ -19,11 +18,11 @@ body{
 
 body{
 
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:'Segoe UI', Arial, sans-serif;
 
     background:#f4f7fb;
 
-    color:#333;
+    color:#222;
 
     display:flex;
 
@@ -35,73 +34,46 @@ body{
 
 
 
-/* =========================
+/* =====================================
    MENU
-========================= */
+===================================== */
 
 
-header{
-
-    background:#132960;
+nav{
 
     width:100%;
 
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    background:#132960;
 
-}
-
-
-.navbar{
-
-    width:90%;
-
-    max-width:1200px;
-
-    margin:auto;
-
-    height:80px;
+    padding:18px 5%;
 
     display:flex;
+
+    justify-content:center;
 
     align-items:center;
 
-    justify-content:space-between;
+    gap:35px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
 
 }
 
 
 
-.logo{
-
-    color:white;
-
-    font-size:26px;
-
-    font-weight:bold;
-
-    text-decoration:none;
-
-}
-
-
-
-.menu{
-
-    display:flex;
-
-    gap:25px;
-
-}
-
-
-
-.menu a{
+nav a{
 
     color:white;
 
     text-decoration:none;
 
-    font-weight:bold;
+    font-weight:600;
 
     transition:.3s;
 
@@ -109,9 +81,9 @@ header{
 
 
 
-.menu a:hover{
+nav a:hover{
 
-    color:#ff4048;
+    color:#ff3b3b;
 
 }
 
@@ -119,12 +91,82 @@ header{
 
 
 
-/* =========================
-   CONTEÚDO PRINCIPAL
-========================= */
+/* =====================================
+   BANNER PRINCIPAL
+===================================== */
 
 
-main{
+.banner{
+
+    width:100%;
+
+    min-height:450px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:80px 20px;
+
+
+    background:
+
+    linear-gradient(
+    rgba(19,41,96,.85),
+    rgba(19,41,96,.85)
+    ),
+
+    url("./fundo.jpg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    color:white;
+
+}
+
+
+
+.banner h1{
+
+    font-size:clamp(35px,5vw,60px);
+
+    margin-bottom:20px;
+
+}
+
+
+.banner p{
+
+    font-size:22px;
+
+    max-width:700px;
+
+}
+
+
+
+
+/* =====================================
+   CONTAINER GERAL
+===================================== */
+
+
+.container{
+
+    width:90%;
+
+    max-width:1300px;
+
+    margin:auto;
 
     flex:1;
 
@@ -132,40 +174,31 @@ main{
 
 
 
-.pagina{
-
-    width:90%;
-
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:60px 0;
-
-}
 
 
-
-
-
-/* =========================
-   CARDS
-========================= */
+/* =====================================
+   CARDS MODERNOS
+===================================== */
 
 
 .card{
 
     background:white;
 
-    padding:35px;
+    width:100%;
 
-    margin-bottom:30px;
+    margin:40px 0;
 
-    border-radius:20px;
+    padding:45px;
+
+    border-radius:25px;
 
     box-shadow:
 
-    0 10px 25px rgba(0,0,0,.08);
+    0 15px 40px rgba(0,0,0,.08);
+
+
+    transition:.3s;
 
 }
 
@@ -173,9 +206,7 @@ main{
 
 .card:hover{
 
-    transform:translateY(-3px);
-
-    transition:.3s;
+    transform:translateY(-5px);
 
 }
 
@@ -183,30 +214,18 @@ main{
 
 
 
-/* =========================
-   TEXTOS
-========================= */
-
-
-h1{
-
-    color:#132960;
-
-    font-size:42px;
-
-    margin-bottom:20px;
-
-}
-
+/* =====================================
+   TITULOS
+===================================== */
 
 
 h2{
 
     color:#132960;
 
-    font-size:30px;
+    font-size:32px;
 
-    margin-bottom:20px;
+    margin-bottom:25px;
 
 }
 
@@ -214,51 +233,52 @@ h2{
 
 p{
 
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+
+
+li{
+
+    margin:12px 0;
+
     font-size:17px;
 
-    line-height:1.7;
-
-}
-
-
-
-ul,
-ol{
-
-    margin-left:25px;
-
-    line-height:2;
-
 }
 
 
 
 
 
-/* =========================
+/* =====================================
    BOTÕES
-========================= */
+===================================== */
 
 
-.btn{
+.btn,
+button{
 
-    display:inline-block;
 
     background:#d31c24;
 
     color:white;
 
+    border:none;
+
     padding:14px 30px;
 
     border-radius:30px;
 
-    text-decoration:none;
+    cursor:pointer;
 
     font-weight:bold;
 
-    border:none;
+    text-decoration:none;
 
-    cursor:pointer;
+    display:inline-block;
 
     transition:.3s;
 
@@ -266,9 +286,10 @@ ol{
 
 
 
-.btn:hover{
+.btn:hover,
+button:hover{
 
-    background:#ff4148;
+    background:#ff4048;
 
     transform:translateY(-3px);
 
@@ -278,76 +299,9 @@ ol{
 
 
 
-/* =========================
-   FORMULÁRIOS
-========================= */
-
-
-form{
-
-    background:white;
-
-    padding:35px;
-
-    border-radius:20px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-
-
-label{
-
-    display:block;
-
-    margin-top:15px;
-
-    color:#132960;
-
-    font-weight:bold;
-
-}
-
-
-
-input,
-select,
-textarea{
-
-    width:100%;
-
-    padding:14px;
-
-    margin-top:8px;
-
-    border-radius:10px;
-
-    border:1px solid #ddd;
-
-    font-size:16px;
-
-}
-
-
-
-
-
-/* =========================
+/* =====================================
    TABELAS
-========================= */
-
-
-.tabela-container{
-
-    overflow-x:auto;
-
-    background:white;
-
-    border-radius:15px;
-
-}
-
+===================================== */
 
 
 table{
@@ -355,6 +309,12 @@ table{
     width:100%;
 
     border-collapse:collapse;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
 
 }
 
@@ -366,9 +326,7 @@ th{
 
     color:white;
 
-    padding:15px;
-
-    text-align:left;
+    padding:18px;
 
 }
 
@@ -386,7 +344,7 @@ td{
 
 tr:hover{
 
-    background:#f1f5ff;
+    background:#eef3ff;
 
 }
 
@@ -394,75 +352,40 @@ tr:hover{
 
 
 
-/* =========================
-   PLANOS / GRID
-========================= */
+/* =====================================
+   FORMULARIOS
+===================================== */
 
 
-.grid{
+input,
+select,
+textarea{
 
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:30px;
-
-}
-
-
-
-.plano{
-
-    background:white;
-
-    padding:35px;
-
-    border-radius:20px;
-
-    text-align:center;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-
-
-.destaque{
-
-    border:3px solid #d31c24;
-
-}
-
-
-
-
-
-/* =========================
-   RODAPÉ FIXO NO FINAL
-========================= */
-
-
-footer{
-
-    margin-top:auto;
-
-    background:#111827;
-
-    color:white;
-
-    text-align:center;
-
-    padding:25px;
 
     width:100%;
 
+    padding:15px;
+
+    margin:10px 0 20px;
+
+
+    border-radius:12px;
+
+    border:1px solid #ccc;
+
+    font-size:16px;
+
+
 }
 
 
 
-footer p{
+input:focus,
+select:focus{
 
-    font-size:15px;
+    outline:none;
+
+    border-color:#132960;
 
 }
 
@@ -470,71 +393,76 @@ footer p{
 
 
 
-/* =========================
-   RESPONSIVIDADE
-========================= */
+/* =====================================
+   RODAPÉ SEMPRE EMBAIXO
+===================================== */
 
 
-@media(max-width:900px){
+footer,
+.rodape{
 
 
-.navbar{
+    margin-top:auto;
 
-    height:auto;
 
-    padding:20px;
+    background:#111827;
+
+
+    color:white;
+
+
+    text-align:center;
+
+
+    padding:30px;
+
+
+    width:100%;
+
+
+}
+
+
+
+
+/* =====================================
+   PAGINAS INTERNAS
+===================================== */
+
+
+main{
+
+    flex:1;
+
+}
+
+
+.banner + .container{
+
+    padding-top:30px;
+
+}
+
+
+
+
+
+/* =====================================
+   CELULAR
+===================================== */
+
+
+@media(max-width:768px){
+
+
+nav{
 
     flex-direction:column;
 
-    gap:20px;
+    gap:15px;
 
 }
 
-
-.menu{
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-}
-
-
-.pagina{
-
-    width:92%;
-
-}
-
-
-h1{
-
-    font-size:32px;
-
-}
-
-
-.grid{
-
-    grid-template-columns:1fr;
-
-}
-
-
-}
-
-
-
-@media(max-width:500px){
-
-
-.menu{
-
-    flex-direction:column;
-
-    align-items:center;
-
-}
 
 
 .card{
@@ -544,11 +472,29 @@ h1{
 }
 
 
-h1{
 
-    font-size:28px;
+.banner{
+
+    min-height:350px;
 
 }
+
+
+
+.banner h1{
+
+    font-size:35px;
+
+}
+
+
+
+table{
+
+    font-size:14px;
+
+}
+
 
 
 }
