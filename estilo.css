@@ -11,9 +11,7 @@
 
 
 html,body{
-
     min-height:100%;
-
 }
 
 
@@ -38,6 +36,7 @@ body{
 /* ===============================
    MENU
 ================================ */
+
 
 nav{
 
@@ -78,6 +77,8 @@ nav a:hover{
     color:#ff3b3b;
 
 }
+
+
 
 
 
@@ -132,7 +133,6 @@ nav a:hover{
     margin-bottom:15px;
 
 }
-
 
 
 .banner p{
@@ -235,6 +235,7 @@ button{
     display:inline-block;
 
 }
+
 
 
 .btn:hover,
@@ -354,8 +355,19 @@ footer{
 }
 
 
+.inicio nav a:hover{
 
-/* BANNER HOME */
+    color:#80ffd2;
+
+}
+
+
+
+
+
+/* BANNER HOME
+   FOTO MANTIDA IGUAL
+================================ */
 
 
 .inicio .banner{
@@ -412,13 +424,17 @@ footer{
 
     max-width:850px;
 
+    line-height:1.5;
+
+    text-shadow:0 3px 8px rgba(0,0,0,.5);
+
 }
 
 
 
 
 
-/* HOME SEM CAIXAS */
+/* HOME SEM REPARTIÇÕES */
 
 
 .inicio .card{
@@ -427,9 +443,9 @@ footer{
 
     box-shadow:none;
 
-    border-radius:0;
+    border:none;
 
-    border-bottom:1px solid #d8e3de;
+    border-radius:0;
 
     padding:45px 10px;
 
