@@ -22,8 +22,9 @@ body{
 }
 
 
+
 /* =====================================
-   MENU (TODAS AS PÁGINAS)
+   MENU
 ===================================== */
 
 nav{
@@ -58,37 +59,61 @@ nav a:hover{
 ===================================== */
 
 .banner{
+
     width:100%;
+
     min-height:450px;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
+
     padding:80px 20px;
 
+
     background:
+
     linear-gradient(
         rgba(19,41,96,.85),
         rgba(19,41,96,.85)
     ),
+
     url("./fundo.jpg");
 
+
     background-size:cover;
+
     background-position:center;
 
     color:white;
+
 }
+
 
 .banner h1{
+
     font-size:clamp(35px,5vw,60px);
+
     margin-bottom:20px;
+
 }
 
+
 .banner p{
+
     font-size:22px;
+
     max-width:700px;
+
 }
+
+
 
 
 
@@ -97,40 +122,68 @@ nav a:hover{
 ===================================== */
 
 .container{
+
     width:90%;
+
     max-width:1300px;
+
     margin:auto;
+
     flex:1;
+
 }
+
 
 
 .card{
+
     background:white;
+
     width:100%;
+
     margin:40px 0;
+
     padding:45px;
+
     border-radius:25px;
+
     box-shadow:0 15px 40px rgba(0,0,0,.08);
+
 }
+
 
 
 h2{
+
     color:#132960;
+
     font-size:32px;
+
     margin-bottom:25px;
+
 }
+
 
 
 p{
+
     font-size:18px;
+
     line-height:1.8;
+
 }
+
 
 
 li{
+
     margin:12px 0;
+
     font-size:17px;
+
 }
+
+
 
 
 
@@ -140,23 +193,38 @@ li{
 
 .btn,
 button{
+
     background:#d31c24;
+
     color:white;
+
     border:none;
+
     padding:14px 30px;
+
     border-radius:30px;
+
     cursor:pointer;
+
     font-weight:bold;
+
     text-decoration:none;
+
     display:inline-block;
+
     transition:.3s;
+
 }
 
 
 .btn:hover,
 button:hover{
+
     background:#ff4048;
+
 }
+
+
 
 
 
@@ -167,13 +235,22 @@ button:hover{
 input,
 select,
 textarea{
+
     width:100%;
+
     padding:15px;
+
     margin:10px 0 20px;
+
     border-radius:12px;
+
     border:1px solid #ccc;
+
     font-size:16px;
+
 }
+
+
 
 
 
@@ -182,21 +259,36 @@ textarea{
 ===================================== */
 
 table{
+
     width:100%;
+
     border-collapse:collapse;
+
     background:white;
+
 }
+
 
 th{
+
     background:#132960;
+
     color:white;
+
     padding:18px;
+
 }
 
+
 td{
+
     padding:15px;
+
     border-bottom:1px solid #ddd;
+
 }
+
+
 
 
 
@@ -206,13 +298,22 @@ td{
 
 footer,
 .rodape{
+
     margin-top:auto;
+
     background:#111827;
+
     color:white;
+
     text-align:center;
+
     padding:30px;
+
     width:100%;
+
 }
+
+
 
 
 
@@ -220,72 +321,122 @@ footer,
    DESIGN NOVO - SOMENTE INDEX.HTML
 ================================================= */
 
+
 .inicio{
+
     background:#f7faf9;
+
 }
+
 
 
 /* MENU HOME */
 
 .inicio nav{
+
     background:#06402f;
+
 }
 
 
 .inicio nav a:hover{
+
     color:#80ffd2;
+
 }
 
 
 
-/* BANNER HOME */
+
+
+/* =====================================
+   BANNER HOME AJUSTADO
+===================================== */
+
 
 .inicio .banner{
 
-    min-height:600px;
+    min-height:450px;
+
 
     background:
+
     linear-gradient(
-        rgba(6,64,47,.82),
-        rgba(6,64,47,.82)
+
+        rgba(6,64,47,.65),
+
+        rgba(6,64,47,.65)
+
     ),
+
     url("./fundo.jpg");
 
+
     background-size:cover;
+
+
     background-position:center;
 
+
+    padding:80px 20px;
+
 }
+
+
 
 
 .inicio .banner h1{
 
-    font-size:clamp(50px,8vw,90px);
+    font-size:clamp(45px,6vw,70px);
+
     font-weight:900;
-    letter-spacing:3px;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
 
 }
+
+
 
 
 .inicio .banner p{
 
-    font-size:26px;
+    color:white;
+
+    font-size:24px;
+
+    max-width:800px;
+
+    line-height:1.5;
+
+    opacity:1;
 
 }
+
+
 
 
 
 /* REMOVE CAIXAS DA HOME */
 
+
 .inicio .card{
 
     background:transparent;
+
     box-shadow:none;
+
     border-radius:0;
+
     border-bottom:1px solid #d8e3de;
+
     padding:50px 10px;
+
     margin:0;
 
 }
+
 
 
 .inicio .card:hover{
@@ -293,6 +444,7 @@ footer,
     transform:none;
 
 }
+
 
 
 .inicio .card:last-child{
@@ -303,44 +455,59 @@ footer,
 
 
 
+
+
 /* TITULOS HOME */
+
 
 .inicio h2{
 
     color:#06402f;
+
     font-size:38px;
 
 }
 
 
 
+
+
 /* TEXTOS HOME */
+
 
 .inicio p{
 
     color:#374151;
+
     font-size:19px;
 
 }
 
 
+
 .inicio li{
 
     color:#374151;
+
     font-size:18px;
 
 }
 
 
 
+
+
 /* BOTÕES HOME */
+
 
 .inicio .btn{
 
     background:#06402f;
+
     padding:16px 40px;
 
 }
+
 
 
 .inicio .btn:hover{
@@ -351,7 +518,10 @@ footer,
 
 
 
+
+
 /* RODAPÉ HOME */
+
 
 .inicio footer{
 
@@ -361,35 +531,71 @@ footer,
 
 
 
+
+
 /* =====================================
    CELULAR
 ===================================== */
 
+
 @media(max-width:768px){
 
+
 nav{
+
     flex-direction:column;
+
     gap:15px;
+
 }
+
 
 
 .card{
+
     padding:25px;
+
 }
+
 
 
 .banner{
+
     min-height:350px;
+
 }
+
+
+
+.banner h1{
+
+    font-size:35px;
+
+}
+
+
+
+.banner p{
+
+    font-size:18px;
+
+}
+
 
 
 .inicio .banner h1{
+
     font-size:40px;
+
 }
+
 
 
 .inicio .banner p{
+
     font-size:18px;
+
 }
+
 
 }
