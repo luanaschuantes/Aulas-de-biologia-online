@@ -200,33 +200,29 @@ nav a:hover{
 
 
 
-
 /* =====================================
-   CARDS
+   CARDS (SEM CAIXAS BRANCAS)
 ===================================== */
-
 
 .card{
 
-    background:white;
+    background:transparent;
 
     margin:40px 0;
 
-    padding:45px;
+    padding:20px 0;
 
-    border-radius:25px;
+    border:none;
 
-    box-shadow:
+    border-radius:0;
 
-    0 15px 35px rgba(0,0,0,.08);
+    box-shadow:none;
 
 }
 
-
-
 .card:hover{
 
-    transform:translateY(-3px);
+    transform:none;
 
 }
 
