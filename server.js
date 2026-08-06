@@ -71,12 +71,49 @@ app.post('/salvar-cliente', (req, res) => {
 });
 
 // Listar todos os clientes (API JSON)
-app.get('/listar-clientes', (req, res) => {
-    const sql = `SELECT * FROM clientes ORDER BY nome ASC`;
-    db.all(sql, [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
-    });
+app.post('/salvar-cliente', (req, res) => {
+
+    const { 
+        nome, 
+        cpf, 
+        telefone, 
+        email, 
+        senha, 
+        plano 
+    } = req.body;
+
+
+    const sql = `
+    INSERT INTO clientes 
+    (nome, cpf, telefone, email, senha, plano)
+    VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+
+    db.run(
+        sql,
+        [
+            nome,
+            cpf,
+            telefone,
+            email,
+            senha,
+            plano
+        ],
+
+        (err) => {
+
+            if (err) {
+                return res.status(500)
+                .send("Erro ao salvar aluno: " + err.message);
+            }
+
+
+            res.redirect('/matricula.html');
+
+        }
+    );
+
 });
 
 /* ==========================================================================
