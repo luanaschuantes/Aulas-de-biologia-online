@@ -14,12 +14,15 @@ const db = new sqlite3.Database('./siscristovao.db');
 // Inicialização das Tabelas (Cria a estrutura caso não exista)
 db.serialize(() => {
     // 1. Tabela de Clientes (Solicitantes dos Serviços)
-    db.run(`CREATE TABLE IF NOT EXISTS clientes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        nome TEXT NOT NULL, 
-        cpf TEXT NOT NULL, 
-        telefone TEXT NOT NULL
-    )`);
+   db.run(`CREATE TABLE IF NOT EXISTS clientes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    cpf TEXT,
+    telefone TEXT,
+    email TEXT,
+    senha TEXT,
+    plano TEXT
+)`);
 
     // 2. Tabela de Serviços (Catálogo de Assistência do Laboratório)
     db.run(`CREATE TABLE IF NOT EXISTS servicos (
