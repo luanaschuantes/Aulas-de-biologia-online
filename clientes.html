@@ -21,6 +21,9 @@
 
 <body>
 
+
+<!-- MENU -->
+
 <nav>
 
     <a href="index.html">Início</a>
@@ -36,16 +39,21 @@
 </nav>
 
 
+<!-- CABEÇALHO -->
+
 <header class="banner">
 
     <h1>Matrícula de Alunos</h1>
 
     <p>
-        Cadastre-se para ter acesso aos conteúdos de Biologia
+        Cadastre seus dados para começar
+        sua jornada na BioMentoria.
     </p>
 
 </header>
 
+
+<!-- CONTEÚDO -->
 
 <div class="container">
 
@@ -54,16 +62,21 @@
         <h2>Cadastro do Aluno</h2>
 
         <p>
-            Preencha seus dados abaixo para realizar sua
-            matrícula na BioMentoria.
+            Preencha seus dados abaixo.
+            Depois do cadastro, você poderá
+            escolher o plano ideal para seus estudos.
         </p>
 
+
+        <!-- FORMULÁRIO -->
 
         <form
             action="/salvar-cliente"
             method="POST"
         >
 
+
+            <!-- NOME -->
 
             <label for="nome">
                 Nome completo:
@@ -78,6 +91,8 @@
             >
 
 
+            <!-- CPF -->
+
             <label for="cpf">
                 CPF:
             </label>
@@ -90,6 +105,8 @@
             >
 
 
+            <!-- TELEFONE -->
+
             <label for="telefone">
                 Telefone:
             </label>
@@ -101,6 +118,8 @@
                 placeholder="Digite seu telefone"
             >
 
+
+            <!-- E-MAIL -->
 
             <label for="email">
                 E-mail:
@@ -119,11 +138,15 @@
             <br>
 
 
+            <!-- BOTÃO -->
+
             <button
                 class="btn"
                 type="submit"
             >
+
                 Continuar para os Planos
+
             </button>
 
 
@@ -134,10 +157,13 @@
 </div>
 
 
+<!-- RODAPÉ -->
+
 <footer class="rodape">
 
     <p>
-        &copy; 2026 BioMentoria - Plataforma de Biologia
+        &copy; 2026 BioMentoria -
+        Plataforma de Biologia
     </p>
 
 </footer>
