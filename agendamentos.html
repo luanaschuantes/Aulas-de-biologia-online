@@ -11,9 +11,100 @@
 
     <title>BioMentoria - Conteúdos</title>
 
+    <style>
+
+        .conteudo-aula {
+            margin-top: 20px;
+        }
+
+        .quiz-pergunta {
+            background: #f5f5f5;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .quiz-pergunta h3 {
+            margin-bottom: 15px;
+        }
+
+        .opcao {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin: 8px 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .opcao:hover {
+            background: #eeeeee;
+        }
+
+        .opcao.correta {
+            background: #c8f7c5;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .opcao.errada {
+            background: #f8caca;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+
+        .resultado {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .texto-aula {
+            line-height: 1.7;
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .exercicio {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .resposta {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-left: 4px solid #28a745;
+            display: none;
+        }
+
+        .btn-resposta {
+            margin-top: 10px;
+        }
+
+        .mensagem {
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 8px;
+            color: #856404;
+        }
+
+    </style>
+
 </head>
 
+
 <body>
+
+
+<!-- MENU -->
 
 <nav>
 
@@ -30,16 +121,20 @@
 </nav>
 
 
+<!-- CABEÇALHO -->
+
 <header class="banner">
 
     <h1>Conteúdos de Biologia</h1>
 
     <p>
-        Visualize as aulas disponíveis de acordo com seu plano
+        Estude de acordo com o plano escolhido
     </p>
 
 </header>
 
+
+<!-- CONTEÚDO -->
 
 <div class="container">
 
@@ -50,58 +145,41 @@
 
         <h2>Informações do Aluno</h2>
 
-        <label>Aluno:</label>
+        <p>
 
-        <p id="nomeAluno">
-            Carregando...
+            <strong>Aluno:</strong>
+
+            <span id="nomeAluno">
+                Carregando...
+            </span>
+
         </p>
 
 
-        <label>Plano Contratado:</label>
+        <p>
 
-        <p id="planoAluno">
-            Carregando...
+            <strong>Plano:</strong>
+
+            <span id="planoAluno">
+                Carregando...
+            </span>
+
         </p>
 
     </div>
 
 
-
-    <!-- CONTEÚDOS -->
+    <!-- ÁREA DOS CONTEÚDOS -->
 
     <div class="card">
 
         <h2>Conteúdos Disponíveis</h2>
 
-        <table>
+        <div id="conteudos">
 
-            <thead>
-
-                <tr>
-
-                    <th>Aula</th>
-
-                    <th>Nível</th>
-
-                    <th>Acesso</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody id="lista-servicos-agendados">
-
-            </tbody>
-
-        </table>
-
-
-        <div style="text-align:right; margin-top:15px;">
-
-            <h3 id="totalAulas">
-                Total de Aulas: 0
-            </h3>
+            <p>
+                Carregando conteúdos...
+            </p>
 
         </div>
 
@@ -110,6 +188,8 @@
 
 </div>
 
+
+<!-- RODAPÉ -->
 
 <footer class="rodape">
 
@@ -120,10 +200,13 @@
 </footer>
 
 
+
 <script>
 
 
-// Pega o ID do aluno enviado pelo servidor
+// ============================================================
+// PEGAR ID DO ALUNO
+// ============================================================
 
 const parametros =
     new URLSearchParams(window.location.search);
@@ -132,8 +215,9 @@ const alunoId =
     parametros.get('aluno_id');
 
 
+
 // ============================================================
-// CARREGAR ALUNO
+// BUSCAR ALUNO NO BANCO
 // ============================================================
 
 function carregarAluno() {
@@ -145,6 +229,20 @@ function carregarAluno() {
 
         document.getElementById('planoAluno').textContent =
             '-';
+
+        document.getElementById('conteudos').innerHTML = `
+
+            <div class="mensagem">
+
+                Não foi possível identificar o aluno.
+
+                <br><br>
+
+                Faça a matrícula novamente.
+
+            </div>
+
+        `;
 
         return;
 
@@ -172,8 +270,10 @@ function carregarAluno() {
             document.getElementById('nomeAluno').textContent =
                 aluno.nome;
 
+
             document.getElementById('planoAluno').textContent =
                 formatarPlano(aluno.plano);
+
 
             carregarConteudos(aluno.plano);
 
@@ -183,15 +283,30 @@ function carregarAluno() {
 
             console.error(error);
 
+
             document.getElementById('nomeAluno').textContent =
                 'Aluno não encontrado';
+
 
             document.getElementById('planoAluno').textContent =
                 '-';
 
+
+            document.getElementById('conteudos').innerHTML = `
+
+                <div class="mensagem">
+
+                    Não foi possível carregar os dados
+                    do aluno.
+
+                </div>
+
+            `;
+
         });
 
 }
+
 
 
 // ============================================================
@@ -201,22 +316,42 @@ function carregarAluno() {
 function formatarPlano(plano) {
 
     if (!plano) {
+
         return 'Não informado';
+
     }
 
 
-    if (plano.toLowerCase() === 'basico') {
-        return 'Básico - R$20 (3 meses)';
+    plano = plano.toLowerCase();
+
+
+    if (plano === 'simples') {
+
+        return 'Plano Simples - R$ 15,00 por mês';
+
     }
 
 
-    if (plano.toLowerCase() === 'intermediario') {
-        return 'Intermediário - R$40 (6 meses)';
+    if (plano === 'completo') {
+
+        return 'Plano Completo - R$ 30,00 por mês';
+
     }
 
 
-    if (plano.toLowerCase() === 'premium') {
-        return 'Premium - R$60 (12 meses)';
+    // Compatibilidade com cadastros antigos
+
+    if (plano === 'basico') {
+
+        return 'Plano Simples - R$ 15,00 por mês';
+
+    }
+
+
+    if (plano === 'premium') {
+
+        return 'Plano Completo - R$ 30,00 por mês';
+
     }
 
 
@@ -225,138 +360,830 @@ function formatarPlano(plano) {
 }
 
 
+
 // ============================================================
 // CARREGAR CONTEÚDOS
 // ============================================================
 
 function carregarConteudos(plano) {
 
-    const tabela =
-        document.getElementById(
-            'lista-servicos-agendados'
-        );
+    const area =
+        document.getElementById('conteudos');
 
 
-    tabela.innerHTML = '';
+    area.innerHTML = '';
 
 
-    let aulas = [];
+    plano = plano.toLowerCase();
 
 
-    // PLANO BÁSICO
+    // ========================================================
+    // PLANO SIMPLES
+    // ========================================================
 
-    if (plano === 'basico') {
+    if (
+        plano === 'simples' ||
+        plano === 'basico'
+    ) {
 
-        aulas = [
+        carregarQuiz();
 
-            ['Introdução à Biologia', 'Básico'],
-
-            ['Citologia', 'Básico'],
-
-            ['Água e Sais Minerais', 'Básico'],
-
-            ['Organelas Celulares', 'Básico']
-
-        ];
+        return;
 
     }
 
 
-    // PLANO INTERMEDIÁRIO
+    // ========================================================
+    // PLANO COMPLETO
+    // ========================================================
 
-    else if (plano === 'intermediario') {
+    if (
+        plano === 'completo' ||
+        plano === 'premium'
+    ) {
 
-        aulas = [
+        carregarConteudoCompleto();
 
-            ['Introdução à Biologia', 'Básico'],
-
-            ['Citologia', 'Básico'],
-
-            ['Água e Sais Minerais', 'Básico'],
-
-            ['Organelas Celulares', 'Básico'],
-
-            ['Histologia', 'Intermediário'],
-
-            ['Genética', 'Intermediário'],
-
-            ['Ecologia', 'Intermediário']
-
-        ];
+        return;
 
     }
 
 
-    // PLANO PREMIUM
+    area.innerHTML = `
 
-    else if (plano === 'premium') {
+        <div class="mensagem">
 
-        aulas = [
+            Plano não identificado.
 
-            ['Introdução à Biologia', 'Básico'],
+            Entre em contato com a BioMentoria.
 
-            ['Citologia', 'Básico'],
+        </div>
 
-            ['Água e Sais Minerais', 'Básico'],
-
-            ['Organelas Celulares', 'Básico'],
-
-            ['Histologia', 'Intermediário'],
-
-            ['Genética', 'Intermediário'],
-
-            ['Ecologia', 'Intermediário'],
-
-            ['Fisiologia Humana', 'Avançado'],
-
-            ['Biotecnologia', 'Avançado'],
-
-            ['Botânica Completa', 'Avançado'],
-
-            ['Zoologia Completa', 'Avançado'],
-
-            ['Preparação ENEM', 'Premium']
-
-        ];
-
-    }
-
-
-    // MOSTRAR AULAS
-
-    aulas.forEach(aula => {
-
-        tabela.innerHTML += `
-
-            <tr>
-
-                <td>
-                    ${aula[0]}
-                </td>
-
-                <td>
-                    ${aula[1]}
-                </td>
-
-                <td>
-                    Liberado
-                </td>
-
-            </tr>
-
-        `;
-
-    });
-
-
-    document.getElementById('totalAulas').textContent =
-        'Total de Aulas: ' + aulas.length;
+    `;
 
 }
 
 
+
 // ============================================================
-// INICIAR
+// QUIZ DO PLANO SIMPLES
+// ============================================================
+
+function carregarQuiz() {
+
+    const area =
+        document.getElementById('conteudos');
+
+
+    area.innerHTML = `
+
+        <h2>🧠 Quiz de Biologia</h2>
+
+        <p>
+            Responda às perguntas abaixo.
+            Ao escolher uma alternativa, você saberá
+            imediatamente se acertou ou errou.
+        </p>
+
+
+        <div id="quiz"></div>
+
+
+        <h3 id="pontuacao">
+            Pontuação: 0
+        </h3>
+
+    `;
+
+
+    const perguntas = [
+
+        {
+            pergunta:
+                'Qual é a unidade básica dos seres vivos?',
+
+            opcoes: [
+                'Órgão',
+                'Célula',
+                'Tecido',
+                'Molécula'
+            ],
+
+            correta: 1
+        },
+
+
+        {
+            pergunta:
+                'Qual organela é responsável pela produção de energia na célula?',
+
+            opcoes: [
+                'Ribossomo',
+                'Núcleo',
+                'Mitocôndria',
+                'Lisossomo'
+            ],
+
+            correta: 2
+        },
+
+
+        {
+            pergunta:
+                'Qual molécula contém as informações genéticas dos seres vivos?',
+
+            opcoes: [
+                'DNA',
+                'Água',
+                'Glicose',
+                'Proteína'
+            ],
+
+            correta: 0
+        },
+
+
+        {
+            pergunta:
+                'Qual processo as plantas utilizam para produzir seu próprio alimento?',
+
+            opcoes: [
+                'Respiração',
+                'Digestão',
+                'Fotossíntese',
+                'Fermentação'
+            ],
+
+            correta: 2
+        },
+
+
+        {
+            pergunta:
+                'Qual sistema é responsável pelo transporte do sangue pelo corpo humano?',
+
+            opcoes: [
+                'Sistema digestório',
+                'Sistema circulatório',
+                'Sistema respiratório',
+                'Sistema nervoso'
+            ],
+
+            correta: 1
+        }
+
+    ];
+
+
+    let pontos = 0;
+
+    const quiz =
+        document.getElementById('quiz');
+
+
+    perguntas.forEach((pergunta, indice) => {
+
+        const bloco =
+            document.createElement('div');
+
+        bloco.className =
+            'quiz-pergunta';
+
+
+        const titulo =
+            document.createElement('h3');
+
+
+        titulo.textContent =
+            (indice + 1) +
+            '. ' +
+            pergunta.pergunta;
+
+
+        bloco.appendChild(titulo);
+
+
+        const resultado =
+            document.createElement('div');
+
+
+        resultado.className =
+            'resultado';
+
+
+        pergunta.opcoes.forEach((opcao, indiceOpcao) => {
+
+            const botao =
+                document.createElement('button');
+
+
+            botao.className =
+                'opcao';
+
+
+            botao.type =
+                'button';
+
+
+            botao.textContent =
+                opcao;
+
+
+            botao.onclick = function () {
+
+                // Impede responder novamente
+
+                if (bloco.dataset.respondida === 'true') {
+
+                    return;
+
+                }
+
+
+                bloco.dataset.respondida =
+                    'true';
+
+
+                if (indiceOpcao === pergunta.correta) {
+
+                    botao.classList.add('correta');
+
+
+                    resultado.textContent =
+                        '✓ Correto! Muito bem!';
+
+
+                    resultado.style.color =
+                        '#28a745';
+
+
+                    pontos++;
+
+
+                    document.getElementById(
+                        'pontuacao'
+                    ).textContent =
+                        'Pontuação: ' +
+                        pontos +
+                        '/' +
+                        perguntas.length;
+
+                }
+
+                else {
+
+                    botao.classList.add('errada');
+
+
+                    resultado.textContent =
+                        '✗ Resposta incorreta.';
+
+
+                    resultado.style.color =
+                        '#dc3545';
+
+
+                    // Mostra a resposta certa
+
+                    const botoes =
+                        bloco.querySelectorAll('.opcao');
+
+
+                    botoes[
+                        pergunta.correta
+                    ].classList.add('correta');
+
+                }
+
+            };
+
+
+            bloco.appendChild(botao);
+
+        });
+
+
+        bloco.appendChild(resultado);
+
+
+        quiz.appendChild(bloco);
+
+    });
+
+}
+
+
+
+// ============================================================
+// PLANO COMPLETO
+// ============================================================
+
+function carregarConteudoCompleto() {
+
+    const area =
+        document.getElementById('conteudos');
+
+
+    area.innerHTML = `
+
+
+        <h2>📚 Aulas de Biologia</h2>
+
+
+        <!-- AULA 1 -->
+
+        <div class="conteudo-aula">
+
+            <h2>1. Introdução à Biologia</h2>
+
+
+            <div class="texto-aula">
+
+                <p>
+
+                    A Biologia é a ciência que estuda a vida
+                    e os seres vivos. Ela procura compreender
+                    como os organismos funcionam, como se
+                    reproduzem, como interagem com o ambiente
+                    e como evoluem ao longo do tempo.
+
+                </p>
+
+
+                <p>
+
+                    Os seres vivos possuem características
+                    como organização celular, metabolismo,
+                    capacidade de reprodução e resposta
+                    aos estímulos do ambiente.
+
+                </p>
+
+
+                <p>
+
+                    A célula é considerada a unidade básica
+                    da vida. Existem organismos formados por
+                    uma única célula, chamados unicelulares,
+                    e organismos formados por muitas células,
+                    chamados multicelulares.
+
+                </p>
+
+            </div>
+
+
+            <h3>Exercícios</h3>
+
+
+            <div class="exercicio">
+
+                <p>
+
+                    <strong>
+                        1. O que a Biologia estuda?
+                    </strong>
+
+                </p>
+
+
+                <button
+                    class="btn btn-resposta"
+                    onclick="mostrarResposta('r1')"
+                >
+
+                    Mostrar resposta
+
+                </button>
+
+
+                <div
+                    id="r1"
+                    class="resposta"
+                >
+
+                    A Biologia estuda a vida e os seres vivos,
+                    incluindo seu funcionamento, reprodução,
+                    evolução e relação com o ambiente.
+
+                </div>
+
+            </div>
+
+
+            <div class="exercicio">
+
+                <p>
+
+                    <strong>
+                        2. O que é uma célula?
+                    </strong>
+
+                </p>
+
+
+                <button
+                    class="btn btn-resposta"
+                    onclick="mostrarResposta('r2')"
+                >
+
+                    Mostrar resposta
+
+                </button>
+
+
+                <div
+                    id="r2"
+                    class="resposta"
+                >
+
+                    A célula é a unidade básica estrutural
+                    e funcional dos seres vivos.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- AULA 2 -->
+
+        <div class="conteudo-aula">
+
+            <h2>2. Citologia</h2>
+
+
+            <div class="texto-aula">
+
+                <p>
+
+                    A Citologia é a área da Biologia responsável
+                    pelo estudo das células.
+
+                </p>
+
+
+                <p>
+
+                    As células possuem diferentes estruturas
+                    que desempenham funções específicas.
+
+                    O núcleo, por exemplo, contém grande parte
+                    do material genético das células eucarióticas.
+
+                </p>
+
+
+                <p>
+
+                    As mitocôndrias estão relacionadas à produção
+                    de energia para as atividades celulares.
+
+                </p>
+
+
+                <p>
+
+                    Os ribossomos participam da produção de
+                    proteínas.
+
+                </p>
+
+            </div>
+
+
+            <h3>Exercícios</h3>
+
+
+            <div class="exercicio">
+
+                <p>
+
+                    <strong>
+                        1. O que a Citologia estuda?
+                    </strong>
+
+                </p>
+
+
+                <button
+                    class="btn"
+                    onclick="mostrarResposta('r3')"
+                >
+
+                    Mostrar resposta
+
+                </button>
+
+
+                <div
+                    id="r3"
+                    class="resposta"
+                >
+
+                    A Citologia estuda as células,
+                    suas estruturas e suas funções.
+
+                </div>
+
+            </div>
+
+
+            <div class="exercicio">
+
+                <p>
+
+                    <strong>
+                        2. Qual é a função das mitocôndrias?
+                    </strong>
+
+                </p>
+
+
+                <button
+                    class="btn"
+                    onclick="mostrarResposta('r4')"
+                >
+
+                    Mostrar resposta
+
+                </button>
+
+
+                <div
+                    id="r4"
+                    class="resposta"
+                >
+
+                    As mitocôndrias participam da produção
+                    de energia utilizada pela célula.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- AULA 3 -->
+
+        <div class="conteudo-aula">
+
+            <h2>3. Genética</h2>
+
+
+            <div class="texto-aula">
+
+                <p>
+
+                    A Genética é a área da Biologia que estuda
+                    a hereditariedade e a transmissão das
+                    características dos organismos.
+
+                </p>
+
+
+                <p>
+
+                    O DNA é uma molécula que armazena informações
+                    genéticas. Essas informações estão relacionadas
+                    às características e ao funcionamento dos seres vivos.
+
+                </p>
+
+
+                <p>
+
+                    Os genes são segmentos do DNA que possuem
+                    informações relacionadas a determinadas
+                    características.
+
+                </p>
+
+            </div>
+
+
+            <h3>Exercícios</h3>
+
+
+            <div class="exercicio">
+
+                <p>
+
+                    <strong>
+                        1. O que a Genética estuda?
+                    </strong>
+
+                </p>
+
+
+                <button
+                    class="btn"
+                    onclick="mostrarResposta('r5')"
+                >
+
+                    Mostrar resposta
+
+                </button>
+
+
+                <div
+                    id="r5"
+                    class="resposta"
+                >
+
+                    A Genética estuda a hereditariedade
+                    e a transmissão das características
+                    dos seres vivos.
+
+                </div>
+
+            </div>
+
+
+            <div class="exercicio">
+
+                <p>
+
+                    <strong>
+                        2. Qual molécula armazena as informações genéticas?
+                    </strong>
+
+                </p>
+
+
+                <button
+                    class="btn"
+                    onclick="mostrarResposta('r6')"
+                >
+
+                    Mostrar resposta
+
+                </button>
+
+
+                <div
+                    id="r6"
+                    class="resposta"
+                >
+
+                    O DNA armazena as informações genéticas.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AULA 4 -->
+
+        <div class="conteudo-aula">
+
+            <h2>4. Ecologia</h2>
+
+
+            <div class="texto-aula">
+
+                <p>
+
+                    A Ecologia estuda as relações dos seres vivos
+                    entre si e com o ambiente em que vivem.
+
+                </p>
+
+
+                <p>
+
+                    Um ecossistema é formado pelos seres vivos
+                    e pelos fatores não vivos presentes em
+                    determinado ambiente.
+
+                </p>
+
+
+                <p>
+
+                    As cadeias alimentares representam a
+                    transferência de matéria e energia entre
+                    os organismos.
+
+                </p>
+
+            </div>
+
+
+            <h3>Exercícios</h3>
+
+
+            <div class="exercicio">
+
+                <p>
+
+                    <strong>
+                        1. O que a Ecologia estuda?
+                    </strong>
+
+                </p>
+
+
+                <button
+                    class="btn"
+                    onclick="mostrarResposta('r7')"
+                >
+
+                    Mostrar resposta
+
+                </button>
+
+
+                <div
+                    id="r7"
+                    class="resposta"
+                >
+
+                    A Ecologia estuda as relações entre os
+                    seres vivos e o ambiente.
+
+                </div>
+
+            </div>
+
+
+            <div class="exercicio">
+
+                <p>
+
+                    <strong>
+                        2. O que é uma cadeia alimentar?
+                    </strong>
+
+                </p>
+
+
+                <button
+                    class="btn"
+                    onclick="mostrarResposta('r8')"
+                >
+
+                    Mostrar resposta
+
+                </button>
+
+
+                <div
+                    id="r8"
+                    class="resposta"
+                >
+
+                    É uma representação da transferência de
+                    matéria e energia entre organismos.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+
+// ============================================================
+// MOSTRAR RESPOSTA DO EXERCÍCIO
+// ============================================================
+
+function mostrarResposta(id) {
+
+    const resposta =
+        document.getElementById(id);
+
+
+    if (resposta.style.display === 'block') {
+
+        resposta.style.display =
+            'none';
+
+    }
+
+    else {
+
+        resposta.style.display =
+            'block';
+
+    }
+
+}
+
+
+
+// ============================================================
+// INICIAR PÁGINA
 // ============================================================
 
 window.onload = function () {
