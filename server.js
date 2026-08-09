@@ -14,15 +14,12 @@ const db = new sqlite3.Database('./siscristovao.db');
 // Inicialização das Tabelas (Cria a estrutura caso não exista)
 db.serialize(() => {
     // 1. Tabela de Clientes (Solicitantes dos Serviços)
-   db.run(`CREATE TABLE IF NOT EXISTS clientes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
-    cpf TEXT,
-    telefone TEXT,
-    email TEXT,
-    senha TEXT,
-    plano TEXT
-)`);
+    db.run(`CREATE TABLE IF NOT EXISTS clientes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        nome TEXT NOT NULL, 
+        cpf TEXT NOT NULL, 
+        telefone TEXT NOT NULL
+    )`);
 
     // 2. Tabela de Serviços (Catálogo de Assistência do Laboratório)
     db.run(`CREATE TABLE IF NOT EXISTS servicos (
@@ -71,49 +68,12 @@ app.post('/salvar-cliente', (req, res) => {
 });
 
 // Listar todos os clientes (API JSON)
-app.post('/salvar-cliente', (req, res) => {
-
-    const { 
-        nome, 
-        cpf, 
-        telefone, 
-        email, 
-        senha, 
-        plano 
-    } = req.body;
-
-
-    const sql = `
-    INSERT INTO clientes 
-    (nome, cpf, telefone, email, senha, plano)
-    VALUES (?, ?, ?, ?, ?, ?)
-    `;
-
-
-    db.run(
-        sql,
-        [
-            nome,
-            cpf,
-            telefone,
-            email,
-            senha,
-            plano
-        ],
-
-        (err) => {
-
-            if (err) {
-                return res.status(500)
-                .send("Erro ao salvar aluno: " + err.message);
-            }
-
-
-            res.redirect('/matricula.html');
-
-        }
-    );
-
+app.get('/listar-clientes', (req, res) => {
+    const sql = `SELECT * FROM clientes ORDER BY nome ASC`;
+    db.all(sql, [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
 });
 
 /* ==========================================================================
