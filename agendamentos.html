@@ -9,7 +9,611 @@
 <body>
 
 <nav>
-    <a href="index.html">Início</a>
+    <a href="index.html">Início</a<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link rel="stylesheet" href="estilo.css">
+
+    <title>BioMentoria - Conteúdos</title>
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================================
+     MENU
+=========================================================== -->
+
+<nav>
+
+    <a href="index.html">
+        Início
+    </a>
+
+    <a href="clientes.html">
+        Matrícula
+    </a>
+
+    <a href="servicos.html">
+        Planos
+    </a>
+
+    <a href="agendamentos.html">
+        Conteúdos
+    </a>
+
+    <a href="consulta_agendamentos.html">
+        Contato
+    </a>
+
+</nav>
+
+
+<!-- ==========================================================
+     CABEÇALHO
+=========================================================== -->
+
+<header class="banner">
+
+    <h1>
+        Conteúdos de Biologia
+    </h1>
+
+    <p>
+        Veja as aulas disponíveis para o seu plano
+    </p>
+
+</header>
+
+
+<!-- ==========================================================
+     CONTEÚDO
+=========================================================== -->
+
+<div class="container">
+
+
+    <!-- ======================================================
+         INFORMAÇÕES DO ALUNO
+    ======================================================= -->
+
+    <div class="card">
+
+        <h2>
+            Informações do Aluno
+        </h2>
+
+
+        <p>
+
+            <strong>Aluno:</strong>
+
+            <span id="nomeAluno">
+                Carregando...
+            </span>
+
+        </p>
+
+
+        <p>
+
+            <strong>Plano contratado:</strong>
+
+            <span id="planoAluno">
+                Carregando...
+            </span>
+
+        </p>
+
+
+        <p id="mensagemAluno">
+            Buscando informações do aluno...
+        </p>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         CONTEÚDOS
+    ======================================================= -->
+
+    <div
+        class="card"
+        id="cardConteudos"
+        style="display: none;"
+    >
+
+        <h2>
+            Conteúdos Disponíveis
+        </h2>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Aula
+                    </th>
+
+                    <th>
+                        Nível
+                    </th>
+
+                    <th>
+                        Acesso
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="lista-servicos-agendados">
+
+            </tbody>
+
+        </table>
+
+
+        <div
+            style="
+                text-align:right;
+                margin-top:15px;
+            "
+        >
+
+            <h3 id="totalAulas">
+                Total de Aulas: 0
+            </h3>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- ==========================================================
+     RODAPÉ
+=========================================================== -->
+
+<footer class="rodape">
+
+    <p>
+        &copy; 2026 BioMentoria - Plataforma de Biologia
+    </p>
+
+</footer>
+
+
+
+<script>
+
+
+// ============================================================
+// PEGAR O ID DO ALUNO NA URL
+// ============================================================
+
+const parametros =
+    new URLSearchParams(window.location.search);
+
+
+let alunoId =
+    parametros.get('aluno_id');
+
+
+// ============================================================
+// FUNÇÃO PARA CARREGAR O ALUNO
+// ============================================================
+
+function carregarAluno(id) {
+
+    fetch('/aluno/' + id)
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    'Aluno não encontrado.'
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(aluno => {
+
+            // Nome
+            document.getElementById(
+                'nomeAluno'
+            ).textContent = aluno.nome;
+
+
+            // Plano
+            document.getElementById(
+                'planoAluno'
+            ).textContent =
+                formatarPlano(aluno.plano);
+
+
+            // Mensagem
+            document.getElementById(
+                'mensagemAluno'
+            ).textContent =
+                'Aluno identificado com sucesso.';
+
+
+            // Carrega as aulas
+            carregarConteudos(aluno.plano);
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+
+            document.getElementById(
+                'nomeAluno'
+            ).textContent =
+                'Aluno não encontrado';
+
+
+            document.getElementById(
+                'planoAluno'
+            ).textContent =
+                '-';
+
+
+            document.getElementById(
+                'mensagemAluno'
+            ).textContent =
+                'Não foi possível identificar o aluno.';
+
+
+            document.getElementById(
+                'cardConteudos'
+            ).style.display = 'none';
+
+        });
+
+}
+
+
+// ============================================================
+// FORMATAR NOME DO PLANO
+// ============================================================
+
+function formatarPlano(plano) {
+
+    if (!plano) {
+        return 'Não informado';
+    }
+
+
+    if (plano.toLowerCase() === 'basico') {
+
+        return 'Básico';
+
+    }
+
+
+    if (plano.toLowerCase() === 'intermediario') {
+
+        return 'Intermediário';
+
+    }
+
+
+    if (plano.toLowerCase() === 'premium') {
+
+        return 'Premium';
+
+    }
+
+
+    return plano;
+
+}
+
+
+// ============================================================
+// CARREGAR CONTEÚDOS
+// ============================================================
+
+function carregarConteudos(plano) {
+
+    const tabela =
+        document.getElementById(
+            'lista-servicos-agendados'
+        );
+
+
+    tabela.innerHTML = '';
+
+
+    let aulas = [];
+
+
+    // --------------------------------------------------------
+    // PLANO BÁSICO
+    // --------------------------------------------------------
+
+    if (
+        plano &&
+        plano.toLowerCase() === 'basico'
+    ) {
+
+        aulas = [
+
+            [
+                'Introdução à Biologia',
+                'Básico'
+            ],
+
+            [
+                'Citologia',
+                'Básico'
+            ],
+
+            [
+                'Água e Sais Minerais',
+                'Básico'
+            ],
+
+            [
+                'Organelas Celulares',
+                'Básico'
+            ]
+
+        ];
+
+    }
+
+
+    // --------------------------------------------------------
+    // PLANO INTERMEDIÁRIO
+    // --------------------------------------------------------
+
+    else if (
+        plano &&
+        plano.toLowerCase() === 'intermediario'
+    ) {
+
+        aulas = [
+
+            [
+                'Introdução à Biologia',
+                'Básico'
+            ],
+
+            [
+                'Citologia',
+                'Básico'
+            ],
+
+            [
+                'Água e Sais Minerais',
+                'Básico'
+            ],
+
+            [
+                'Organelas Celulares',
+                'Básico'
+            ],
+
+            [
+                'Histologia',
+                'Intermediário'
+            ],
+
+            [
+                'Genética',
+                'Intermediário'
+            ],
+
+            [
+                'Ecologia',
+                'Intermediário'
+            ]
+
+        ];
+
+    }
+
+
+    // --------------------------------------------------------
+    // PLANO PREMIUM
+    // --------------------------------------------------------
+
+    else if (
+        plano &&
+        plano.toLowerCase() === 'premium'
+    ) {
+
+        aulas = [
+
+            [
+                'Introdução à Biologia',
+                'Básico'
+            ],
+
+            [
+                'Citologia',
+                'Básico'
+            ],
+
+            [
+                'Água e Sais Minerais',
+                'Básico'
+            ],
+
+            [
+                'Organelas Celulares',
+                'Básico'
+            ],
+
+            [
+                'Histologia',
+                'Intermediário'
+            ],
+
+            [
+                'Genética',
+                'Intermediário'
+            ],
+
+            [
+                'Ecologia',
+                'Intermediário'
+            ],
+
+            [
+                'Fisiologia Humana',
+                'Avançado'
+            ],
+
+            [
+                'Biotecnologia',
+                'Avançado'
+            ],
+
+            [
+                'Botânica Completa',
+                'Avançado'
+            ],
+
+            [
+                'Zoologia Completa',
+                'Avançado'
+            ],
+
+            [
+                'Preparação ENEM',
+                'Premium'
+            ]
+
+        ];
+
+    }
+
+
+    // --------------------------------------------------------
+    // MOSTRAR AS AULAS
+    // --------------------------------------------------------
+
+    aulas.forEach(aula => {
+
+        tabela.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${aula[0]}
+                </td>
+
+                <td>
+                    ${aula[1]}
+                </td>
+
+                <td>
+                    Liberado
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    // Total
+    document.getElementById(
+        'totalAulas'
+    ).textContent =
+        'Total de Aulas: ' + aulas.length;
+
+
+    // Mostra o card
+    document.getElementById(
+        'cardConteudos'
+    ).style.display = 'block';
+
+}
+
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+window.onload = function () {
+
+
+    // --------------------------------------------------------
+    // SE EXISTE ID NA URL
+    // --------------------------------------------------------
+
+    if (alunoId) {
+
+        carregarAluno(alunoId);
+
+    }
+
+
+    // --------------------------------------------------------
+    // SE NÃO EXISTE ID
+    // --------------------------------------------------------
+
+    else {
+
+        document.getElementById(
+            'nomeAluno'
+        ).textContent =
+            'Nenhum aluno selecionado';
+
+
+        document.getElementById(
+            'planoAluno'
+        ).textContent =
+            '-';
+
+
+        document.getElementById(
+            'mensagemAluno'
+        ).textContent =
+            'Realize uma matrícula para acessar os conteúdos.';
+
+    }
+
+};
+
+
+</script>
+
+
+</body>
+
+</html>
+
     <a href="clientes.html">Matrícula</a>
     <a href="servicos.html">Planos</a>
     <a href="agendamentos.html">Conteúdos</a>
