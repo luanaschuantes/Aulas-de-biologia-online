@@ -23,7 +23,9 @@ const db = new sqlite3.Database('./siscristovao.db');
 
 db.serialize(() => {
 
+    // ========================================================
     // TABELA DE ALUNOS
+    // ========================================================
 
     db.run(`
         CREATE TABLE IF NOT EXISTS clientes (
@@ -37,41 +39,57 @@ db.serialize(() => {
     `);
 
 
-    // Caso o banco antigo não tenha email
+    // ========================================================
+    // GARANTIR COLUNA EMAIL
+    // ========================================================
 
-    db.run(`ALTER TABLE clientes ADD COLUMN email TEXT`, (err) => {
+    db.run(
+        `ALTER TABLE clientes ADD COLUMN email TEXT`,
+        (err) => {
 
-        if (
-            err &&
-            !err.message.includes('duplicate column name')
-        ) {
-            console.log(
-                'Erro ao adicionar email:',
-                err.message
-            );
+            if (
+                err &&
+                !err.message.includes('duplicate column name')
+            ) {
+
+                console.log(
+                    'Erro ao adicionar email:',
+                    err.message
+                );
+
+            }
+
         }
+    );
 
-    });
 
+    // ========================================================
+    // GARANTIR COLUNA PLANO
+    // ========================================================
 
-    // Caso o banco antigo não tenha plano
+    db.run(
+        `ALTER TABLE clientes ADD COLUMN plano TEXT`,
+        (err) => {
 
-    db.run(`ALTER TABLE clientes ADD COLUMN plano TEXT`, (err) => {
+            if (
+                err &&
+                !err.message.includes('duplicate column name')
+            ) {
 
-        if (
-            err &&
-            !err.message.includes('duplicate column name')
-        ) {
-            console.log(
-                'Erro ao adicionar plano:',
-                err.message
-            );
+                console.log(
+                    'Erro ao adicionar plano:',
+                    err.message
+                );
+
+            }
+
         }
+    );
 
-    });
 
-
+    // ========================================================
     // TABELA DE SERVIÇOS
+    // ========================================================
 
     db.run(`
         CREATE TABLE IF NOT EXISTS servicos (
@@ -83,7 +101,9 @@ db.serialize(() => {
     `);
 
 
+    // ========================================================
     // TABELA DE AGENDAMENTOS
+    // ========================================================
 
     db.run(`
         CREATE TABLE IF NOT EXISTS agendamentos (
@@ -93,12 +113,15 @@ db.serialize(() => {
             responsavel TEXT NOT NULL,
             total REAL NOT NULL,
             tempo_total INTEGER NOT NULL,
-            FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+            FOREIGN KEY (cliente_id)
+                REFERENCES clientes(id)
         )
     `);
 
 
-    // TABELA DE ITENS DO AGENDAMENTO
+    // ========================================================
+    // TABELA DE ITENS
+    // ========================================================
 
     db.run(`
         CREATE TABLE IF NOT EXISTS itens_agendamento (
@@ -106,8 +129,10 @@ db.serialize(() => {
             agendamento_id INTEGER NOT NULL,
             servico_id INTEGER NOT NULL,
             preco_cobrado REAL NOT NULL,
-            FOREIGN KEY (agendamento_id) REFERENCES agendamentos(id),
-            FOREIGN KEY (servico_id) REFERENCES servicos(id)
+            FOREIGN KEY (agendamento_id)
+                REFERENCES agendamentos(id),
+            FOREIGN KEY (servico_id)
+                REFERENCES servicos(id)
         )
     `);
 
@@ -115,7 +140,7 @@ db.serialize(() => {
 
 
 // ============================================================
-// MÓDULO DE MATRÍCULA
+// MATRÍCULA
 // ============================================================
 
 
@@ -133,7 +158,9 @@ app.post('/salvar-cliente', (req, res) => {
     } = req.body;
 
 
-    // Verificar campos obrigatórios
+    // --------------------------------------------------------
+    // VERIFICAR CAMPOS OBRIGATÓRIOS
+    // --------------------------------------------------------
 
     if (!nome || !email) {
 
@@ -154,6 +181,26 @@ app.post('/salvar-cliente', (req, res) => {
     }
 
 
+    // --------------------------------------------------------
+    // LIMPAR DADOS
+    // --------------------------------------------------------
+
+    const nomeLimpo = nome.trim();
+
+    const cpfLimpo =
+        cpf ? cpf.trim() : '';
+
+    const telefoneLimpo =
+        telefone ? telefone.trim() : '';
+
+    const emailLimpo =
+        email.trim().toLowerCase();
+
+
+    // --------------------------------------------------------
+    // SALVAR ALUNO
+    // --------------------------------------------------------
+
     const sql = `
         INSERT INTO clientes
         (
@@ -170,10 +217,10 @@ app.post('/salvar-cliente', (req, res) => {
     db.run(
         sql,
         [
-            nome.trim(),
-            cpf ? cpf.trim() : '',
-            telefone ? telefone.trim() : '',
-            email.trim().toLowerCase()
+            nomeLimpo,
+            cpfLimpo,
+            telefoneLimpo,
+            emailLimpo
         ],
         function (err) {
 
@@ -201,20 +248,24 @@ app.post('/salvar-cliente', (req, res) => {
             }
 
 
-            // ID EXATO GERADO PELO BANCO
+            // ------------------------------------------------
+            // ID EXATO DO NOVO ALUNO
+            // ------------------------------------------------
 
             const alunoId = this.lastID;
 
 
             console.log(
                 'Novo aluno cadastrado:',
-                nome,
+                nomeLimpo,
                 '| ID:',
                 alunoId
             );
 
 
-            // Vai para a página de planos
+            // ------------------------------------------------
+            // IR PARA ESCOLHA DO PLANO
+            // ------------------------------------------------
 
             res.redirect(
                 `/servicos.html?aluno_id=${alunoId}`
@@ -238,10 +289,17 @@ app.post('/salvar-plano', (req, res) => {
     } = req.body;
 
 
-    // Verificar ID
+    // --------------------------------------------------------
+    // CONVERTER ID
+    // --------------------------------------------------------
 
-    const alunoId = Number(aluno_id);
+    const alunoId =
+        Number(aluno_id);
 
+
+    // --------------------------------------------------------
+    // VERIFICAR ID
+    // --------------------------------------------------------
 
     if (
         !Number.isInteger(alunoId) ||
@@ -253,7 +311,7 @@ app.post('/salvar-plano', (req, res) => {
             <h2>Erro</h2>
 
             <p>
-                Aluno não identificado.
+                Não foi possível identificar o aluno.
             </p>
 
             <a href="/clientes.html">
@@ -265,27 +323,30 @@ app.post('/salvar-plano', (req, res) => {
     }
 
 
-    // Verificar plano
+    // --------------------------------------------------------
+    // PLANOS PERMITIDOS
+    // --------------------------------------------------------
 
     const planosPermitidos = [
-        'basico',
-        'intermediario',
-        'premium'
+        'simples',
+        'completo'
     ];
 
 
-    if (!planosPermitidos.includes(plano)) {
+    if (
+        !planosPermitidos.includes(plano)
+    ) {
 
         return res.status(400).send(`
 
-            <h2>Erro</h2>
+            <h2>Plano inválido</h2>
 
             <p>
-                Plano inválido.
+                Escolha um plano válido.
             </p>
 
             <a href="/servicos.html?aluno_id=${alunoId}">
-                Voltar para planos
+                Voltar para os planos
             </a>
 
         `);
@@ -293,19 +354,30 @@ app.post('/salvar-plano', (req, res) => {
     }
 
 
-    // Primeiro verifica se o aluno existe
+    // --------------------------------------------------------
+    // VERIFICAR SE O ALUNO EXISTE
+    // --------------------------------------------------------
 
     db.get(
-        `SELECT id FROM clientes WHERE id = ?`,
+        `
+            SELECT id, nome
+            FROM clientes
+            WHERE id = ?
+        `,
         [alunoId],
         (err, aluno) => {
 
             if (err) {
 
-                return res.status(500).send(
-                    'Erro ao consultar aluno: ' +
-                    err.message
-                );
+                return res.status(500).send(`
+
+                    <h2>Erro no banco de dados</h2>
+
+                    <p>
+                        ${err.message}
+                    </p>
+
+                `);
 
             }
 
@@ -329,18 +401,20 @@ app.post('/salvar-plano', (req, res) => {
             }
 
 
-            // Atualiza somente o aluno correto
-
-            const sql = `
-                UPDATE clientes
-                SET plano = ?
-                WHERE id = ?
-            `;
-
+            // ------------------------------------------------
+            // SALVAR PLANO NO ALUNO CORRETO
+            // ------------------------------------------------
 
             db.run(
-                sql,
-                [plano, alunoId],
+                `
+                    UPDATE clientes
+                    SET plano = ?
+                    WHERE id = ?
+                `,
+                [
+                    plano,
+                    alunoId
+                ],
                 function (err) {
 
                     if (err) {
@@ -363,14 +437,18 @@ app.post('/salvar-plano', (req, res) => {
 
 
                     console.log(
-                        'Plano salvo:',
+                        'Plano escolhido:',
                         plano,
-                        '| Aluno ID:',
+                        '| Aluno:',
+                        aluno.nome,
+                        '| ID:',
                         alunoId
                     );
 
 
-                    // Vai para os conteúdos
+                    // ------------------------------------------------
+                    // IR PARA OS CONTEÚDOS
+                    // ------------------------------------------------
 
                     res.redirect(
                         `/agendamentos.html?aluno_id=${alunoId}`
@@ -391,7 +469,8 @@ app.post('/salvar-plano', (req, res) => {
 
 app.get('/aluno/:id', (req, res) => {
 
-    const alunoId = Number(req.params.id);
+    const alunoId =
+        Number(req.params.id);
 
 
     if (
@@ -451,7 +530,7 @@ app.get('/aluno/:id', (req, res) => {
 
 
 // ============================================================
-// BUSCAR ÚLTIMO ALUNO CADASTRADO
+// BUSCAR ÚLTIMO ALUNO
 // ============================================================
 
 app.get('/ultimo-aluno', (req, res) => {
@@ -543,7 +622,7 @@ app.get('/listar-clientes', (req, res) => {
 
 
 // ============================================================
-// MÓDULO DE SERVIÇOS
+// SERVIÇOS
 // ============================================================
 
 
@@ -560,6 +639,26 @@ app.post('/salvar-servico', (req, res) => {
     } = req.body;
 
 
+    const precoNumerico =
+        parseFloat(preco);
+
+    const tempoNumerico =
+        parseInt(tempo_estimado);
+
+
+    if (
+        !descricao ||
+        isNaN(precoNumerico) ||
+        isNaN(tempoNumerico)
+    ) {
+
+        return res.status(400).send(
+            'Dados do serviço inválidos.'
+        );
+
+    }
+
+
     const sql = `
         INSERT INTO servicos
         (
@@ -574,9 +673,9 @@ app.post('/salvar-servico', (req, res) => {
     db.run(
         sql,
         [
-            descricao,
-            parseFloat(preco),
-            parseInt(tempo_estimado)
+            descricao.trim(),
+            precoNumerico,
+            tempoNumerico
         ],
         (err) => {
 
@@ -634,7 +733,7 @@ app.get('/listar-servicos', (req, res) => {
 
 
 // ============================================================
-// MÓDULO DE AGENDAMENTOS
+// AGENDAMENTOS
 // ============================================================
 
 
@@ -882,6 +981,10 @@ app.listen(3000, () => {
 
     console.log(
         '👨‍🎓 Matrícula de alunos ativada'
+    );
+
+    console.log(
+        '💰 Planos: Simples R$15 | Completo R$30'
     );
 
     console.log(
