@@ -23,9 +23,7 @@ const db = new sqlite3.Database('./siscristovao.db');
 
 db.serialize(() => {
 
-    // --------------------------------------------------------
     // TABELA DE ALUNOS
-    // --------------------------------------------------------
 
     db.run(`
         CREATE TABLE IF NOT EXISTS clientes (
@@ -39,31 +37,41 @@ db.serialize(() => {
     `);
 
 
-    // --------------------------------------------------------
-    // ADICIONA COLUNAS AO BANCO ANTIGO, SE NECESSÁRIO
-    // --------------------------------------------------------
+    // Caso o banco antigo não tenha email
 
     db.run(`ALTER TABLE clientes ADD COLUMN email TEXT`, (err) => {
 
-        if (err && !err.message.includes('duplicate column name')) {
-            console.log('Erro ao adicionar email:', err.message);
+        if (
+            err &&
+            !err.message.includes('duplicate column name')
+        ) {
+            console.log(
+                'Erro ao adicionar email:',
+                err.message
+            );
         }
 
     });
 
+
+    // Caso o banco antigo não tenha plano
 
     db.run(`ALTER TABLE clientes ADD COLUMN plano TEXT`, (err) => {
 
-        if (err && !err.message.includes('duplicate column name')) {
-            console.log('Erro ao adicionar plano:', err.message);
+        if (
+            err &&
+            !err.message.includes('duplicate column name')
+        ) {
+            console.log(
+                'Erro ao adicionar plano:',
+                err.message
+            );
         }
 
     });
 
 
-    // --------------------------------------------------------
     // TABELA DE SERVIÇOS
-    // --------------------------------------------------------
 
     db.run(`
         CREATE TABLE IF NOT EXISTS servicos (
@@ -75,9 +83,7 @@ db.serialize(() => {
     `);
 
 
-    // --------------------------------------------------------
     // TABELA DE AGENDAMENTOS
-    // --------------------------------------------------------
 
     db.run(`
         CREATE TABLE IF NOT EXISTS agendamentos (
@@ -92,9 +98,7 @@ db.serialize(() => {
     `);
 
 
-    // --------------------------------------------------------
     // TABELA DE ITENS DO AGENDAMENTO
-    // --------------------------------------------------------
 
     db.run(`
         CREATE TABLE IF NOT EXISTS itens_agendamento (
@@ -115,9 +119,9 @@ db.serialize(() => {
 // ============================================================
 
 
-// ------------------------------------------------------------
+// ============================================================
 // SALVAR NOVO ALUNO
-// ------------------------------------------------------------
+// ============================================================
 
 app.post('/salvar-cliente', (req, res) => {
 
@@ -125,24 +129,26 @@ app.post('/salvar-cliente', (req, res) => {
         nome,
         cpf,
         telefone,
-        email,
-        plano
+        email
     } = req.body;
 
 
-    // Verifica campos obrigatórios
-    if (!nome || !email || !plano) {
+    // Verificar campos obrigatórios
+
+    if (!nome || !email) {
 
         return res.status(400).send(`
+
             <h2>Erro na matrícula</h2>
 
             <p>
-                Nome, e-mail e plano são obrigatórios.
+                Nome e e-mail são obrigatórios.
             </p>
 
             <a href="/clientes.html">
                 Voltar para matrícula
             </a>
+
         `);
 
     }
@@ -157,7 +163,7 @@ app.post('/salvar-cliente', (req, res) => {
             email,
             plano
         )
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, NULL)
     `;
 
 
@@ -167,8 +173,7 @@ app.post('/salvar-cliente', (req, res) => {
             nome.trim(),
             cpf ? cpf.trim() : '',
             telefone ? telefone.trim() : '',
-            email.trim().toLowerCase(),
-            plano
+            email.trim().toLowerCase()
         ],
         function (err) {
 
@@ -180,6 +185,7 @@ app.post('/salvar-cliente', (req, res) => {
                 );
 
                 return res.status(500).send(`
+
                     <h2>Erro ao realizar matrícula</h2>
 
                     <p>
@@ -189,14 +195,13 @@ app.post('/salvar-cliente', (req, res) => {
                     <a href="/clientes.html">
                         Voltar
                     </a>
+
                 `);
 
             }
 
 
-            // ------------------------------------------------
-            // ID EXATO DO ALUNO RECÉM-CADASTRADO
-            // ------------------------------------------------
+            // ID EXATO GERADO PELO BANCO
 
             const alunoId = this.lastID;
 
@@ -209,12 +214,169 @@ app.post('/salvar-cliente', (req, res) => {
             );
 
 
-            // ------------------------------------------------
-            // MANDA O ID PARA A PÁGINA DE CONTEÚDOS
-            // ------------------------------------------------
+            // Vai para a página de planos
 
             res.redirect(
-                `/agendamentos.html?aluno_id=${alunoId}`
+                `/servicos.html?aluno_id=${alunoId}`
+            );
+
+        }
+    );
+
+});
+
+
+// ============================================================
+// SALVAR PLANO DO ALUNO
+// ============================================================
+
+app.post('/salvar-plano', (req, res) => {
+
+    const {
+        aluno_id,
+        plano
+    } = req.body;
+
+
+    // Verificar ID
+
+    const alunoId = Number(aluno_id);
+
+
+    if (
+        !Number.isInteger(alunoId) ||
+        alunoId <= 0
+    ) {
+
+        return res.status(400).send(`
+
+            <h2>Erro</h2>
+
+            <p>
+                Aluno não identificado.
+            </p>
+
+            <a href="/clientes.html">
+                Voltar para matrícula
+            </a>
+
+        `);
+
+    }
+
+
+    // Verificar plano
+
+    const planosPermitidos = [
+        'basico',
+        'intermediario',
+        'premium'
+    ];
+
+
+    if (!planosPermitidos.includes(plano)) {
+
+        return res.status(400).send(`
+
+            <h2>Erro</h2>
+
+            <p>
+                Plano inválido.
+            </p>
+
+            <a href="/servicos.html?aluno_id=${alunoId}">
+                Voltar para planos
+            </a>
+
+        `);
+
+    }
+
+
+    // Primeiro verifica se o aluno existe
+
+    db.get(
+        `SELECT id FROM clientes WHERE id = ?`,
+        [alunoId],
+        (err, aluno) => {
+
+            if (err) {
+
+                return res.status(500).send(
+                    'Erro ao consultar aluno: ' +
+                    err.message
+                );
+
+            }
+
+
+            if (!aluno) {
+
+                return res.status(404).send(`
+
+                    <h2>Aluno não encontrado</h2>
+
+                    <p>
+                        O aluno informado não existe.
+                    </p>
+
+                    <a href="/clientes.html">
+                        Voltar
+                    </a>
+
+                `);
+
+            }
+
+
+            // Atualiza somente o aluno correto
+
+            const sql = `
+                UPDATE clientes
+                SET plano = ?
+                WHERE id = ?
+            `;
+
+
+            db.run(
+                sql,
+                [plano, alunoId],
+                function (err) {
+
+                    if (err) {
+
+                        return res.status(500).send(`
+
+                            <h2>Erro ao salvar plano</h2>
+
+                            <p>
+                                ${err.message}
+                            </p>
+
+                            <a href="/servicos.html?aluno_id=${alunoId}">
+                                Voltar
+                            </a>
+
+                        `);
+
+                    }
+
+
+                    console.log(
+                        'Plano salvo:',
+                        plano,
+                        '| Aluno ID:',
+                        alunoId
+                    );
+
+
+                    // Vai para os conteúdos
+
+                    res.redirect(
+                        `/agendamentos.html?aluno_id=${alunoId}`
+                    );
+
+                }
             );
 
         }
@@ -232,7 +394,10 @@ app.get('/aluno/:id', (req, res) => {
     const alunoId = Number(req.params.id);
 
 
-    if (!Number.isInteger(alunoId) || alunoId <= 0) {
+    if (
+        !Number.isInteger(alunoId) ||
+        alunoId <= 0
+    ) {
 
         return res.status(400).json({
             error: 'ID de aluno inválido.'
@@ -382,9 +547,9 @@ app.get('/listar-clientes', (req, res) => {
 // ============================================================
 
 
-// ------------------------------------------------------------
+// ============================================================
 // SALVAR SERVIÇO
-// ------------------------------------------------------------
+// ============================================================
 
 app.post('/salvar-servico', (req, res) => {
 
@@ -418,7 +583,8 @@ app.post('/salvar-servico', (req, res) => {
             if (err) {
 
                 return res.status(500).send(
-                    'Erro ao salvar serviço: ' + err.message
+                    'Erro ao salvar serviço: ' +
+                    err.message
                 );
 
             }
@@ -432,9 +598,9 @@ app.post('/salvar-servico', (req, res) => {
 });
 
 
-// ------------------------------------------------------------
+// ============================================================
 // LISTAR SERVIÇOS
-// ------------------------------------------------------------
+// ============================================================
 
 app.get('/listar-servicos', (req, res) => {
 
@@ -472,9 +638,9 @@ app.get('/listar-servicos', (req, res) => {
 // ============================================================
 
 
-// ------------------------------------------------------------
+// ============================================================
 // FINALIZAR AGENDAMENTO
-// ------------------------------------------------------------
+// ============================================================
 
 app.post('/finalizar-agendamento', (req, res) => {
 
@@ -488,11 +654,19 @@ app.post('/finalizar-agendamento', (req, res) => {
     } = req.body;
 
 
-    if (!cliente_id || !data || !responsavel) {
+    if (
+        !cliente_id ||
+        !data ||
+        !responsavel
+    ) {
 
         return res.status(400).json({
+
             success: false,
-            error: 'Dados do agendamento incompletos.'
+
+            error:
+                'Dados do agendamento incompletos.'
+
         });
 
     }
@@ -517,22 +691,26 @@ app.post('/finalizar-agendamento', (req, res) => {
             cliente_id,
             data,
             responsavel,
-            total,
-            tempo_total
+            total || 0,
+            tempo_total || 0
         ],
         function (err) {
 
             if (err) {
 
                 return res.status(500).json({
+
                     success: false,
+
                     error: err.message
+
                 });
 
             }
 
 
-            const agendamentoId = this.lastID;
+            const agendamentoId =
+                this.lastID;
 
 
             const sqlDetalhe = `
@@ -546,7 +724,8 @@ app.post('/finalizar-agendamento', (req, res) => {
             `;
 
 
-            const stmt = db.prepare(sqlDetalhe);
+            const stmt =
+                db.prepare(sqlDetalhe);
 
 
             if (Array.isArray(servicos)) {
@@ -569,16 +748,24 @@ app.post('/finalizar-agendamento', (req, res) => {
                 if (errFinalize) {
 
                     return res.status(500).json({
+
                         success: false,
-                        error: errFinalize.message
+
+                        error:
+                            errFinalize.message
+
                     });
 
                 }
 
 
                 res.json({
+
                     success: true,
-                    agendamento_id: agendamentoId
+
+                    agendamento_id:
+                        agendamentoId
+
                 });
 
             });
@@ -589,9 +776,9 @@ app.post('/finalizar-agendamento', (req, res) => {
 });
 
 
-// ------------------------------------------------------------
+// ============================================================
 // LISTAR AGENDAMENTOS
-// ------------------------------------------------------------
+// ============================================================
 
 app.get('/listar-agendamentos', (req, res) => {
 
@@ -632,9 +819,9 @@ app.get('/listar-agendamentos', (req, res) => {
 });
 
 
-// ------------------------------------------------------------
+// ============================================================
 // DETALHES DO AGENDAMENTO
-// ------------------------------------------------------------
+// ============================================================
 
 app.get('/detalhes-agendamento/:id', (req, res) => {
 
@@ -681,10 +868,24 @@ app.get('/detalhes-agendamento/:id', (req, res) => {
 
 app.listen(3000, () => {
 
-    console.log('==============================================');
-    console.log('🚀 BioMentoria rodando na porta 3000');
-    console.log('📂 Banco: siscristovao.db');
-    console.log('👨‍🎓 Matrícula de alunos ativada');
-    console.log('==============================================');
+    console.log(
+        '=============================================='
+    );
+
+    console.log(
+        '🚀 BioMentoria rodando na porta 3000'
+    );
+
+    console.log(
+        '📂 Banco: siscristovao.db'
+    );
+
+    console.log(
+        '👨‍🎓 Matrícula de alunos ativada'
+    );
+
+    console.log(
+        '=============================================='
+    );
 
 });
