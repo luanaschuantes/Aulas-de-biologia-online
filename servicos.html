@@ -1,85 +1,292 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="estilo.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="estilo.css"
+    >
+
     <title>BioMentoria - Planos</title>
+
 </head>
 
 <body>
 
 <nav>
+
     <a href="index.html">Início</a>
+
     <a href="clientes.html">Matrícula</a>
+
     <a href="servicos.html">Planos</a>
+
     <a href="agendamentos.html">Conteúdos</a>
+
     <a href="consulta_agendamentos.html">Contato</a>
+
 </nav>
 
+
 <header class="banner">
+
     <h1>Planos BioMentoria</h1>
-    <p>Escolha o plano ideal para seus estudos em Biologia</p>
+
+    <p>
+        Escolha o plano ideal para seus estudos em Biologia
+    </p>
+
 </header>
+
 
 <div class="container">
 
-    <!-- INTRO -->
+
+    <!-- INTRODUÇÃO -->
+
     <div class="card">
+
         <h2>Planos disponíveis</h2>
+
         <p>
-            Escolha o plano que melhor atende aos seus objetivos de estudo.
-            Todos os planos incluem acesso à plataforma BioMentoria e conteúdos organizados por nível.
+            Escolha o plano que melhor atende aos seus objetivos
+            de estudo. Todos os planos incluem acesso à plataforma
+            BioMentoria e conteúdos organizados por nível.
         </p>
+
     </div>
 
+
     <!-- PLANO BÁSICO -->
+
     <div class="card">
+
         <h2>📘 Plano Básico</h2>
+
         <h3>R$ 20,00</h3>
 
         <ul>
-            <li>Acesso aos conteúdos essenciais</li>
-            <li>Materiais introdutórios de Biologia</li>
-            <li>Estudo organizado por temas</li>
+
+            <li>
+                Acesso aos conteúdos essenciais
+            </li>
+
+            <li>
+                Materiais introdutórios de Biologia
+            </li>
+
+            <li>
+                Estudo organizado por temas
+            </li>
+
         </ul>
 
-        <a href="agendamentos.html" class="btn">Escolher Plano</a>
+
+        <form
+            action="/salvar-plano"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="plano"
+                value="basico"
+            >
+
+            <input
+                type="hidden"
+                name="aluno_id"
+                id="alunoIdBasico"
+            >
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Escolher Plano
+            </button>
+
+        </form>
+
     </div>
 
+
     <!-- PLANO INTERMEDIÁRIO -->
+
     <div class="card">
+
         <h2>📗 Plano Intermediário</h2>
+
         <h3>R$ 40,00</h3>
 
         <ul>
-            <li>Conteúdo completo da plataforma</li>
-            <li>Exercícios práticos</li>
-            <li>Revisões e aprofundamento dos temas</li>
+
+            <li>
+                Conteúdo completo da plataforma
+            </li>
+
+            <li>
+                Exercícios práticos
+            </li>
+
+            <li>
+                Revisões e aprofundamento dos temas
+            </li>
+
         </ul>
 
-        <a href="agendamentos.html" class="btn">Escolher Plano</a>
+
+        <form
+            action="/salvar-plano"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="plano"
+                value="intermediario"
+            >
+
+            <input
+                type="hidden"
+                name="aluno_id"
+                id="alunoIdIntermediario"
+            >
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Escolher Plano
+            </button>
+
+        </form>
+
     </div>
 
+
     <!-- PLANO PREMIUM -->
+
     <div class="card">
+
         <h2>🏆 Plano Premium</h2>
+
         <h3>R$ 60,00</h3>
 
         <ul>
-            <li>Acesso total a todos os conteúdos</li>
-            <li>Materiais avançados e completos</li>
-            <li>Revisões aprofundadas</li>
-            <li>Melhor custo-benefício da plataforma</li>
+
+            <li>
+                Acesso total a todos os conteúdos
+            </li>
+
+            <li>
+                Materiais avançados e completos
+            </li>
+
+            <li>
+                Revisões aprofundadas
+            </li>
+
+            <li>
+                Melhor custo-benefício da plataforma
+            </li>
+
         </ul>
 
-        <a href="agendamentos.html" class="btn">Escolher Plano</a>
+
+        <form
+            action="/salvar-plano"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="plano"
+                value="premium"
+            >
+
+            <input
+                type="hidden"
+                name="aluno_id"
+                id="alunoIdPremium"
+            >
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Escolher Plano
+            </button>
+
+        </form>
+
     </div>
+
 
 </div>
 
+
 <footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Todos os Direitos Reservados</p>
+
+    <p>
+        &copy; 2026 BioMentoria - Todos os Direitos Reservados
+    </p>
+
 </footer>
 
+
+<script>
+
+
+// Pega o ID do aluno que veio da matrícula
+
+const parametros =
+    new URLSearchParams(window.location.search);
+
+const alunoId =
+    parametros.get('aluno_id');
+
+
+// Coloca o ID nos três formulários
+
+document.getElementById(
+    'alunoIdBasico'
+).value = alunoId || '';
+
+
+document.getElementById(
+    'alunoIdIntermediario'
+).value = alunoId || '';
+
+
+document.getElementById(
+    'alunoIdPremium'
+).value = alunoId || '';
+
+
+// Se não houver aluno identificado,
+// impede a escolha do plano
+
+if (!alunoId) {
+
+    alert(
+        'Nenhum aluno foi identificado. ' +
+        'Realize a matrícula primeiro.'
+    );
+
+}
+
+</script>
+
+
 </body>
+
 </html>
