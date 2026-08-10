@@ -1,6 +1,7 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
-const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
+const session = require('express-session');
 
 const app = express();
 
@@ -9,130 +10,63 @@ const app = express();
 // CONFIGURAÇÕES
 // ============================================================
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('.'));
-
-// Banco de dados
-const db = new sqlite3.Database('./siscristovao.db');
 
 
 // ============================================================
-// CRIAÇÃO DAS TABELAS
+// SESSÃO DE LOGIN
+// ============================================================
+
+app.use(
+    session({
+        secret: 'biomentoria-segredo-2026',
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24
+        }
+    })
+);
+
+
+// ============================================================
+// ARQUIVOS HTML / CSS / JS
+// ============================================================
+
+app.use(express.static('.'));
+
+
+// ============================================================
+// BANCO DE DADOS
+// ============================================================
+
+const db =
+    new sqlite3.Database('./biomentoria.db');
+
+
+// ============================================================
+// CRIAR TABELA DE ALUNOS
 // ============================================================
 
 db.serialize(() => {
 
-    // ========================================================
-    // TABELA DE ALUNOS
-    // ========================================================
-
     db.run(`
         CREATE TABLE IF NOT EXISTS clientes (
+
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+
             nome TEXT NOT NULL,
+
             cpf TEXT,
+
             telefone TEXT,
-            email TEXT,
-            plano TEXT
-        )
-    `);
 
+            email TEXT UNIQUE NOT NULL,
 
-    // ========================================================
-    // GARANTIR COLUNA EMAIL
-    // ========================================================
+            senha TEXT NOT NULL
 
-    db.run(
-        `ALTER TABLE clientes ADD COLUMN email TEXT`,
-        (err) => {
-
-            if (
-                err &&
-                !err.message.includes('duplicate column name')
-            ) {
-
-                console.log(
-                    'Erro ao adicionar email:',
-                    err.message
-                );
-
-            }
-
-        }
-    );
-
-
-    // ========================================================
-    // GARANTIR COLUNA PLANO
-    // ========================================================
-
-    db.run(
-        `ALTER TABLE clientes ADD COLUMN plano TEXT`,
-        (err) => {
-
-            if (
-                err &&
-                !err.message.includes('duplicate column name')
-            ) {
-
-                console.log(
-                    'Erro ao adicionar plano:',
-                    err.message
-                );
-
-            }
-
-        }
-    );
-
-
-    // ========================================================
-    // TABELA DE SERVIÇOS
-    // ========================================================
-
-    db.run(`
-        CREATE TABLE IF NOT EXISTS servicos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            descricao TEXT NOT NULL,
-            preco REAL NOT NULL,
-            tempo_estimado INTEGER NOT NULL
-        )
-    `);
-
-
-    // ========================================================
-    // TABELA DE AGENDAMENTOS
-    // ========================================================
-
-    db.run(`
-        CREATE TABLE IF NOT EXISTS agendamentos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            cliente_id INTEGER NOT NULL,
-            data TEXT NOT NULL,
-            responsavel TEXT NOT NULL,
-            total REAL NOT NULL,
-            tempo_total INTEGER NOT NULL,
-            FOREIGN KEY (cliente_id)
-                REFERENCES clientes(id)
-        )
-    `);
-
-
-    // ========================================================
-    // TABELA DE ITENS
-    // ========================================================
-
-    db.run(`
-        CREATE TABLE IF NOT EXISTS itens_agendamento (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            agendamento_id INTEGER NOT NULL,
-            servico_id INTEGER NOT NULL,
-            preco_cobrado REAL NOT NULL,
-            FOREIGN KEY (agendamento_id)
-                REFERENCES agendamentos(id),
-            FOREIGN KEY (servico_id)
-                REFERENCES servicos(id)
         )
     `);
 
@@ -140,40 +74,89 @@ db.serialize(() => {
 
 
 // ============================================================
-// MATRÍCULA
+// CADASTRO
 // ============================================================
 
-
-// ============================================================
-// SALVAR NOVO ALUNO
-// ============================================================
-
-app.post('/salvar-cliente', (req, res) => {
+app.post('/salvar-cliente', async (req, res) => {
 
     const {
         nome,
         cpf,
         telefone,
-        email
+        email,
+        senha,
+        confirmarSenha
     } = req.body;
 
 
     // --------------------------------------------------------
-    // VERIFICAR CAMPOS OBRIGATÓRIOS
+    // VERIFICAR CAMPOS
     // --------------------------------------------------------
 
-    if (!nome || !email) {
+    if (
+        !nome ||
+        !email ||
+        !senha ||
+        !confirmarSenha
+    ) {
 
         return res.status(400).send(`
 
-            <h2>Erro na matrícula</h2>
+            <h2>Cadastro incompleto</h2>
 
             <p>
-                Nome e e-mail são obrigatórios.
+                Preencha todos os campos obrigatórios.
             </p>
 
             <a href="/clientes.html">
-                Voltar para matrícula
+                Voltar
+            </a>
+
+        `);
+
+    }
+
+
+    // --------------------------------------------------------
+    // VERIFICAR SENHAS
+    // --------------------------------------------------------
+
+    if (senha !== confirmarSenha) {
+
+        return res.status(400).send(`
+
+            <h2>Senhas diferentes</h2>
+
+            <p>
+                As senhas digitadas não são iguais.
+            </p>
+
+            <a href="/clientes.html">
+                Voltar
+            </a>
+
+        `);
+
+    }
+
+
+    // --------------------------------------------------------
+    // TAMANHO DA SENHA
+    // --------------------------------------------------------
+
+    if (senha.length < 6) {
+
+        return res.status(400).send(`
+
+            <h2>Senha inválida</h2>
+
+            <p>
+                A senha precisa ter pelo menos
+                6 caracteres.
+            </p>
+
+            <a href="/clientes.html">
+                Voltar
             </a>
 
         `);
@@ -185,7 +168,8 @@ app.post('/salvar-cliente', (req, res) => {
     // LIMPAR DADOS
     // --------------------------------------------------------
 
-    const nomeLimpo = nome.trim();
+    const nomeLimpo =
+        nome.trim();
 
     const cpfLimpo =
         cpf ? cpf.trim() : '';
@@ -198,183 +182,28 @@ app.post('/salvar-cliente', (req, res) => {
 
 
     // --------------------------------------------------------
-    // SALVAR ALUNO
-    // --------------------------------------------------------
-
-    const sql = `
-        INSERT INTO clientes
-        (
-            nome,
-            cpf,
-            telefone,
-            email,
-            plano
-        )
-        VALUES (?, ?, ?, ?, NULL)
-    `;
-
-
-    db.run(
-        sql,
-        [
-            nomeLimpo,
-            cpfLimpo,
-            telefoneLimpo,
-            emailLimpo
-        ],
-        function (err) {
-
-            if (err) {
-
-                console.error(
-                    'Erro ao salvar aluno:',
-                    err.message
-                );
-
-                return res.status(500).send(`
-
-                    <h2>Erro ao realizar matrícula</h2>
-
-                    <p>
-                        Não foi possível salvar o aluno.
-                    </p>
-
-                    <a href="/clientes.html">
-                        Voltar
-                    </a>
-
-                `);
-
-            }
-
-
-            // ------------------------------------------------
-            // ID EXATO DO NOVO ALUNO
-            // ------------------------------------------------
-
-            const alunoId = this.lastID;
-
-
-            console.log(
-                'Novo aluno cadastrado:',
-                nomeLimpo,
-                '| ID:',
-                alunoId
-            );
-
-
-            // ------------------------------------------------
-            // IR PARA ESCOLHA DO PLANO
-            // ------------------------------------------------
-
-            res.redirect(
-                `/servicos.html?aluno_id=${alunoId}`
-            );
-
-        }
-    );
-
-});
-
-
-// ============================================================
-// SALVAR PLANO DO ALUNO
-// ============================================================
-
-app.post('/salvar-plano', (req, res) => {
-
-    const {
-        aluno_id,
-        plano
-    } = req.body;
-
-
-    // --------------------------------------------------------
-    // CONVERTER ID
-    // --------------------------------------------------------
-
-    const alunoId =
-        Number(aluno_id);
-
-
-    // --------------------------------------------------------
-    // VERIFICAR ID
-    // --------------------------------------------------------
-
-    if (
-        !Number.isInteger(alunoId) ||
-        alunoId <= 0
-    ) {
-
-        return res.status(400).send(`
-
-            <h2>Erro</h2>
-
-            <p>
-                Não foi possível identificar o aluno.
-            </p>
-
-            <a href="/clientes.html">
-                Voltar para matrícula
-            </a>
-
-        `);
-
-    }
-
-
-    // --------------------------------------------------------
-    // PLANOS PERMITIDOS
-    // --------------------------------------------------------
-
-    const planosPermitidos = [
-        'simples',
-        'completo'
-    ];
-
-
-    if (
-        !planosPermitidos.includes(plano)
-    ) {
-
-        return res.status(400).send(`
-
-            <h2>Plano inválido</h2>
-
-            <p>
-                Escolha um plano válido.
-            </p>
-
-            <a href="/servicos.html?aluno_id=${alunoId}">
-                Voltar para os planos
-            </a>
-
-        `);
-
-    }
-
-
-    // --------------------------------------------------------
-    // VERIFICAR SE O ALUNO EXISTE
+    // VERIFICAR SE E-MAIL JÁ EXISTE
     // --------------------------------------------------------
 
     db.get(
         `
-            SELECT id, nome
+            SELECT id
             FROM clientes
-            WHERE id = ?
+            WHERE email = ?
         `,
-        [alunoId],
-        (err, aluno) => {
+        [emailLimpo],
+        async (err, aluno) => {
 
             if (err) {
 
+                console.error(err);
+
                 return res.status(500).send(`
 
-                    <h2>Erro no banco de dados</h2>
+                    <h2>Erro</h2>
 
                     <p>
-                        ${err.message}
+                        Erro ao consultar o banco de dados.
                     </p>
 
                 `);
@@ -382,18 +211,18 @@ app.post('/salvar-plano', (req, res) => {
             }
 
 
-            if (!aluno) {
+            if (aluno) {
 
-                return res.status(404).send(`
+                return res.status(400).send(`
 
-                    <h2>Aluno não encontrado</h2>
+                    <h2>E-mail já cadastrado</h2>
 
                     <p>
-                        O aluno informado não existe.
+                        Este e-mail já possui uma conta.
                     </p>
 
-                    <a href="/clientes.html">
-                        Voltar
+                    <a href="/login.html">
+                        Fazer login
                     </a>
 
                 `);
@@ -402,32 +231,63 @@ app.post('/salvar-plano', (req, res) => {
 
 
             // ------------------------------------------------
-            // SALVAR PLANO NO ALUNO CORRETO
+            // CRIPTOGRAFAR SENHA
             // ------------------------------------------------
 
+            const senhaCriptografada =
+                await bcrypt.hash(
+                    senha,
+                    10
+                );
+
+
+            // ------------------------------------------------
+            // SALVAR ALUNO
+            // ------------------------------------------------
+
+            const sql = `
+
+                INSERT INTO clientes
+                (
+                    nome,
+                    cpf,
+                    telefone,
+                    email,
+                    senha
+                )
+
+                VALUES (?, ?, ?, ?, ?)
+
+            `;
+
+
             db.run(
-                `
-                    UPDATE clientes
-                    SET plano = ?
-                    WHERE id = ?
-                `,
+                sql,
                 [
-                    plano,
-                    alunoId
+                    nomeLimpo,
+                    cpfLimpo,
+                    telefoneLimpo,
+                    emailLimpo,
+                    senhaCriptografada
                 ],
                 function (err) {
 
                     if (err) {
 
+                        console.error(
+                            'Erro ao cadastrar:',
+                            err.message
+                        );
+
                         return res.status(500).send(`
 
-                            <h2>Erro ao salvar plano</h2>
+                            <h2>Erro no cadastro</h2>
 
                             <p>
-                                ${err.message}
+                                Não foi possível criar sua conta.
                             </p>
 
-                            <a href="/servicos.html?aluno_id=${alunoId}">
+                            <a href="/clientes.html">
                                 Voltar
                             </a>
 
@@ -437,21 +297,19 @@ app.post('/salvar-plano', (req, res) => {
 
 
                     console.log(
-                        'Plano escolhido:',
-                        plano,
-                        '| Aluno:',
-                        aluno.nome,
+                        'Novo aluno cadastrado:',
+                        nomeLimpo,
                         '| ID:',
-                        alunoId
+                        this.lastID
                     );
 
 
-                    // ------------------------------------------------
-                    // IR PARA OS CONTEÚDOS
-                    // ------------------------------------------------
+                    // ----------------------------------------
+                    // MANDAR PARA LOGIN
+                    // ----------------------------------------
 
                     res.redirect(
-                        `/agendamentos.html?aluno_id=${alunoId}`
+                        '/login.html'
                     );
 
                 }
@@ -464,64 +322,160 @@ app.post('/salvar-plano', (req, res) => {
 
 
 // ============================================================
-// BUSCAR ALUNO PELO ID
+// LOGIN
 // ============================================================
 
-app.get('/aluno/:id', (req, res) => {
+app.post('/login', (req, res) => {
 
-    const alunoId =
-        Number(req.params.id);
+    const {
+        email,
+        senha
+    } = req.body;
 
 
-    if (
-        !Number.isInteger(alunoId) ||
-        alunoId <= 0
-    ) {
+    // --------------------------------------------------------
+    // VERIFICAR CAMPOS
+    // --------------------------------------------------------
 
-        return res.status(400).json({
-            error: 'ID de aluno inválido.'
-        });
+    if (!email || !senha) {
+
+        return res.status(400).send(`
+
+            <h2>Login incompleto</h2>
+
+            <p>
+                Digite seu e-mail e sua senha.
+            </p>
+
+            <a href="/login.html">
+                Voltar para o login
+            </a>
+
+        `);
 
     }
 
 
-    const sql = `
-        SELECT
-            id,
-            nome,
-            cpf,
-            telefone,
-            email,
-            plano
-        FROM clientes
-        WHERE id = ?
-    `;
+    const emailLimpo =
+        email.trim().toLowerCase();
 
+
+    // --------------------------------------------------------
+    // PROCURAR ALUNO
+    // --------------------------------------------------------
 
     db.get(
-        sql,
-        [alunoId],
-        (err, aluno) => {
+        `
+            SELECT
+                id,
+                nome,
+                email,
+                senha
+            FROM clientes
+            WHERE email = ?
+        `,
+        [emailLimpo],
+        async (err, aluno) => {
 
             if (err) {
 
-                return res.status(500).json({
-                    error: err.message
-                });
+                console.error(err);
+
+                return res.status(500).send(`
+
+                    <h2>Erro</h2>
+
+                    <p>
+                        Erro no banco de dados.
+                    </p>
+
+                `);
 
             }
 
+
+            // ------------------------------------------------
+            // E-MAIL NÃO EXISTE
+            // ------------------------------------------------
 
             if (!aluno) {
 
-                return res.status(404).json({
-                    error: 'Aluno não encontrado.'
-                });
+                return res.status(401).send(`
+
+                    <h2>Login inválido</h2>
+
+                    <p>
+                        E-mail ou senha incorretos.
+                    </p>
+
+                    <a href="/login.html">
+                        Tentar novamente
+                    </a>
+
+                `);
 
             }
 
 
-            res.json(aluno);
+            // ------------------------------------------------
+            // COMPARAR SENHA
+            // ------------------------------------------------
+
+            const senhaCorreta =
+                await bcrypt.compare(
+                    senha,
+                    aluno.senha
+                );
+
+
+            if (!senhaCorreta) {
+
+                return res.status(401).send(`
+
+                    <h2>Login inválido</h2>
+
+                    <p>
+                        E-mail ou senha incorretos.
+                    </p>
+
+                    <a href="/login.html">
+                        Tentar novamente
+                    </a>
+
+                `);
+
+            }
+
+
+            // ------------------------------------------------
+            // CRIAR LOGIN
+            // ------------------------------------------------
+
+            req.session.alunoId =
+                aluno.id;
+
+            req.session.nomeAluno =
+                aluno.nome;
+
+            req.session.emailAluno =
+                aluno.email;
+
+
+            console.log(
+                'Aluno entrou:',
+                aluno.nome,
+                '| ID:',
+                aluno.id
+            );
+
+
+            // ------------------------------------------------
+            // IR PARA AS AULAS
+            // ------------------------------------------------
+
+            res.redirect(
+                '/agendamentos.html'
+            );
 
         }
     );
@@ -530,465 +484,215 @@ app.get('/aluno/:id', (req, res) => {
 
 
 // ============================================================
-// BUSCAR ÚLTIMO ALUNO
+// VERIFICAR SE ESTÁ LOGADO
 // ============================================================
 
-app.get('/ultimo-aluno', (req, res) => {
+function exigirLogin(
+    req,
+    res,
+    next
+) {
 
-    const sql = `
-        SELECT
-            id,
-            nome,
-            cpf,
-            telefone,
-            email,
-            plano
-        FROM clientes
-        ORDER BY id DESC
-        LIMIT 1
-    `;
+    if (!req.session.alunoId) {
 
-
-    db.get(
-        sql,
-        [],
-        (err, aluno) => {
-
-            if (err) {
-
-                return res.status(500).json({
-                    error: err.message
-                });
-
-            }
-
-
-            if (!aluno) {
-
-                return res.status(404).json({
-                    error: 'Nenhum aluno cadastrado.'
-                });
-
-            }
-
-
-            res.json(aluno);
-
-        }
-    );
-
-});
-
-
-// ============================================================
-// LISTAR ALUNOS
-// ============================================================
-
-app.get('/listar-clientes', (req, res) => {
-
-    const sql = `
-        SELECT
-            id,
-            nome,
-            cpf,
-            telefone,
-            email,
-            plano
-        FROM clientes
-        ORDER BY nome ASC
-    `;
-
-
-    db.all(
-        sql,
-        [],
-        (err, rows) => {
-
-            if (err) {
-
-                return res.status(500).json({
-                    error: err.message
-                });
-
-            }
-
-
-            res.json(rows);
-
-        }
-    );
-
-});
-
-
-// ============================================================
-// SERVIÇOS
-// ============================================================
-
-
-// ============================================================
-// SALVAR SERVIÇO
-// ============================================================
-
-app.post('/salvar-servico', (req, res) => {
-
-    const {
-        descricao,
-        preco,
-        tempo_estimado
-    } = req.body;
-
-
-    const precoNumerico =
-        parseFloat(preco);
-
-    const tempoNumerico =
-        parseInt(tempo_estimado);
-
-
-    if (
-        !descricao ||
-        isNaN(precoNumerico) ||
-        isNaN(tempoNumerico)
-    ) {
-
-        return res.status(400).send(
-            'Dados do serviço inválidos.'
+        return res.redirect(
+            '/login.html'
         );
 
     }
 
 
-    const sql = `
-        INSERT INTO servicos
-        (
-            descricao,
-            preco,
-            tempo_estimado
-        )
-        VALUES (?, ?, ?)
-    `;
+    next();
 
-
-    db.run(
-        sql,
-        [
-            descricao.trim(),
-            precoNumerico,
-            tempoNumerico
-        ],
-        (err) => {
-
-            if (err) {
-
-                return res.status(500).send(
-                    'Erro ao salvar serviço: ' +
-                    err.message
-                );
-
-            }
-
-
-            res.redirect('/servicos.html');
-
-        }
-    );
-
-});
+}
 
 
 // ============================================================
-// LISTAR SERVIÇOS
+// PROTEGER A PÁGINA DE AULAS
 // ============================================================
 
-app.get('/listar-servicos', (req, res) => {
+app.get(
+    '/agendamentos.html',
+    exigirLogin,
+    (req, res) => {
 
-    const sql = `
-        SELECT *
-        FROM servicos
-        ORDER BY descricao ASC
-    `;
-
-
-    db.all(
-        sql,
-        [],
-        (err, rows) => {
-
-            if (err) {
-
-                return res.status(500).json({
-                    error: err.message
-                });
-
-            }
-
-
-            res.json(rows);
-
-        }
-    );
-
-});
-
-
-// ============================================================
-// AGENDAMENTOS
-// ============================================================
-
-
-// ============================================================
-// FINALIZAR AGENDAMENTO
-// ============================================================
-
-app.post('/finalizar-agendamento', (req, res) => {
-
-    const {
-        cliente_id,
-        data,
-        responsavel,
-        total,
-        tempo_total,
-        servicos
-    } = req.body;
-
-
-    if (
-        !cliente_id ||
-        !data ||
-        !responsavel
-    ) {
-
-        return res.status(400).json({
-
-            success: false,
-
-            error:
-                'Dados do agendamento incompletos.'
-
-        });
+        res.sendFile(
+            __dirname +
+            '/agendamentos.html'
+        );
 
     }
+);
 
 
-    const sqlMestre = `
-        INSERT INTO agendamentos
-        (
-            cliente_id,
-            data,
-            responsavel,
-            total,
-            tempo_total
-        )
-        VALUES (?, ?, ?, ?, ?)
-    `;
+// ============================================================
+// DADOS DO ALUNO LOGADO
+// ============================================================
 
+app.get(
+    '/meu-aluno',
+    exigirLogin,
+    (req, res) => {
 
-    db.run(
-        sqlMestre,
-        [
-            cliente_id,
-            data,
-            responsavel,
-            total || 0,
-            tempo_total || 0
-        ],
-        function (err) {
+        db.get(
+            `
+                SELECT
+                    id,
+                    nome,
+                    email
+                FROM clientes
+                WHERE id = ?
+            `,
+            [req.session.alunoId],
+            (err, aluno) => {
 
-            if (err) {
-
-                return res.status(500).json({
-
-                    success: false,
-
-                    error: err.message
-
-                });
-
-            }
-
-
-            const agendamentoId =
-                this.lastID;
-
-
-            const sqlDetalhe = `
-                INSERT INTO itens_agendamento
-                (
-                    agendamento_id,
-                    servico_id,
-                    preco_cobrado
-                )
-                VALUES (?, ?, ?)
-            `;
-
-
-            const stmt =
-                db.prepare(sqlDetalhe);
-
-
-            if (Array.isArray(servicos)) {
-
-                servicos.forEach(item => {
-
-                    stmt.run(
-                        agendamentoId,
-                        item.id,
-                        item.preco
-                    );
-
-                });
-
-            }
-
-
-            stmt.finalize((errFinalize) => {
-
-                if (errFinalize) {
+                if (err) {
 
                     return res.status(500).json({
-
-                        success: false,
-
-                        error:
-                            errFinalize.message
-
+                        erro:
+                            'Erro no banco de dados.'
                     });
 
                 }
 
 
-                res.json({
+                if (!aluno) {
 
-                    success: true,
+                    return res.status(404).json({
+                        erro:
+                            'Aluno não encontrado.'
+                    });
 
-                    agendamento_id:
-                        agendamentoId
+                }
 
-                });
 
+                res.json(aluno);
+
+            }
+        );
+
+    }
+);
+
+
+// ============================================================
+// VERIFICAR LOGIN PELO JAVASCRIPT
+// ============================================================
+
+app.get(
+    '/verificar-login',
+    (req, res) => {
+
+        if (!req.session.alunoId) {
+
+            return res.json({
+                logado: false
             });
 
         }
-    );
-
-});
 
 
-// ============================================================
-// LISTAR AGENDAMENTOS
-// ============================================================
+        res.json({
 
-app.get('/listar-agendamentos', (req, res) => {
+            logado: true,
 
-    const sql = `
-        SELECT
-            a.id,
-            a.data,
-            a.responsavel,
-            a.total,
-            a.tempo_total,
-            c.nome AS nome_cliente
-        FROM agendamentos a
-        INNER JOIN clientes c
-            ON a.cliente_id = c.id
-        ORDER BY a.id DESC
-    `;
+            aluno: {
+                id:
+                    req.session.alunoId,
 
+                nome:
+                    req.session.nomeAluno,
 
-    db.all(
-        sql,
-        [],
-        (err, rows) => {
-
-            if (err) {
-
-                return res.status(500).json({
-                    error: err.message
-                });
-
+                email:
+                    req.session.emailAluno
             }
 
+        });
 
-            res.json(rows);
-
-        }
-    );
-
-});
+    }
+);
 
 
 // ============================================================
-// DETALHES DO AGENDAMENTO
+// SAIR DA CONTA
 // ============================================================
 
-app.get('/detalhes-agendamento/:id', (req, res) => {
+app.get(
+    '/logout',
+    (req, res) => {
 
-    const { id } = req.params;
+        req.session.destroy(
+            (err) => {
+
+                if (err) {
+
+                    console.error(
+                        'Erro ao sair:',
+                        err
+                    );
+
+                }
 
 
-    const sql = `
-        SELECT
-            i.preco_cobrado,
-            s.descricao,
-            s.tempo_estimado
-        FROM itens_agendamento i
-        INNER JOIN servicos s
-            ON i.servico_id = s.id
-        WHERE i.agendamento_id = ?
-    `;
-
-
-    db.all(
-        sql,
-        [id],
-        (err, rows) => {
-
-            if (err) {
-
-                return res.status(500).json({
-                    error: err.message
-                });
+                res.redirect(
+                    '/login.html'
+                );
 
             }
+        );
+
+    }
+);
 
 
-            res.json(rows);
+// ============================================================
+// INÍCIO
+// ============================================================
 
-        }
-    );
+app.get(
+    '/',
+    (req, res) => {
 
-});
+        res.sendFile(
+            __dirname +
+            '/index.html'
+        );
+
+    }
+);
 
 
 // ============================================================
 // INICIAR SERVIDOR
 // ============================================================
 
-app.listen(3000, () => {
+app.listen(
+    3000,
+    () => {
 
-    console.log(
-        '=============================================='
-    );
+        console.log(
+            '=============================================='
+        );
 
-    console.log(
-        '🚀 BioMentoria rodando na porta 3000'
-    );
+        console.log(
+            '🚀 BioMentoria funcionando!'
+        );
 
-    console.log(
-        '📂 Banco: siscristovao.db'
-    );
+        console.log(
+            '🌐 http://localhost:3000'
+        );
 
-    console.log(
-        '👨‍🎓 Matrícula de alunos ativada'
-    );
+        console.log(
+            '🔐 Sistema de cadastro e login ativado'
+        );
 
-    console.log(
-        '💰 Planos: Simples R$15 | Completo R$30'
-    );
+        console.log(
+            '📚 Aulas protegidas por login'
+        );
 
-    console.log(
-        '=============================================='
-    );
+        console.log(
+            '=============================================='
+        );
 
-});
+    }
+);
