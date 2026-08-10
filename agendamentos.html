@@ -17,7 +17,7 @@
         href="estilo.css"
     >
 
-    <title>BioMentoria - Conteúdos</title>
+    <title>BioMentoria - Aulas de Biologia</title>
 
 </head>
 
@@ -33,11 +33,7 @@
 
     <a href="index.html">Início</a>
 
-    <a href="clientes.html">Matrícula</a>
-
-    <a href="servicos.html">Planos</a>
-
-    <a href="agendamentos.html">Conteúdos</a>
+    <a href="agendamentos.html">Aulas</a>
 
     <a href="consulta_agendamentos.html">Contato</a>
 
@@ -48,97 +44,21 @@
      TÍTULO
 ====================================================== -->
 
-<h1>Conteúdos de Biologia</h1>
+<h1>📚 Aulas de Biologia</h1>
 
 <p>
-    Estude, responda exercícios e acompanhe seu aprendizado.
+    Todo o conteúdo é gratuito e está disponível para todos.
 </p>
 
 
 <!-- =====================================================
-     INFORMAÇÕES DO ALUNO
-====================================================== -->
-
-<section class="card">
-
-    <h2>
-        Olá,
-        <span id="nomeAluno">Aluno</span>!
-    </h2>
-
-    <p>
-
-        Seu plano atual:
-
-        <strong id="planoAluno">
-            Carregando...
-        </strong>
-
-    </p>
-
-</section>
-
-
-<!-- =====================================================
-     PLANO SIMPLES
+     CONTEÚDO
 ====================================================== -->
 
 <section
-    id="conteudoSimples"
+    id="conteudo"
     class="card"
-    style="display:none;"
 >
-
-    <h2>🧠 Plano Simples</h2>
-
-    <p>
-        No Plano Simples você tem acesso aos quizzes
-        de Biologia para testar seus conhecimentos.
-    </p>
-
-
-    <h3>📝 Quizzes de Biologia</h3>
-
-    <div id="quizContainer"></div>
-
-    <br>
-
-    <button
-        class="btn"
-        type="button"
-        onclick="novoQuiz()"
-    >
-        Nova rodada
-    </button>
-
-    <p
-        id="resultadoQuiz"
-        style="margin-top:20px;font-weight:bold;"
-    ></p>
-
-</section>
-
-
-<!-- =====================================================
-     PLANO COMPLETO
-====================================================== -->
-
-<section
-    id="conteudoCompleto"
-    class="card"
-    style="display:none;"
->
-
-    <h2>📚 Plano Completo</h2>
-
-    <p>
-
-        Parabéns! Você possui acesso ao Plano Completo.
-
-        Aqui estão disponíveis todas as aulas de Biologia,
-        além dos quizzes e exercícios.
-
-    </p>
 
 
     <!-- =================================================
@@ -423,12 +343,48 @@
 
 
     <!-- =================================================
-         EXERCÍCIOS
+         QUIZ
+    ================================================== -->
+
+    <article class="card">
+
+        <h2>🧠 Quiz de Biologia</h2>
+
+        <p>
+            Teste seus conhecimentos respondendo às questões.
+        </p>
+
+        <div id="quizContainer"></div>
+
+        <br>
+
+        <button
+            class="btn"
+            type="button"
+            onclick="novoQuiz()"
+        >
+            Nova pergunta
+        </button>
+
+        <p
+            id="resultadoQuiz"
+            style="margin-top:20px;font-weight:bold;"
+        ></p>
+
+    </article>
+
+
+    <!-- =================================================
+         LISTA DE EXERCÍCIOS
     ================================================== -->
 
     <article class="card">
 
         <h2>📝 Lista de Exercícios</h2>
+
+        <p>
+            Resolva os exercícios abaixo e confira sua pontuação.
+        </p>
 
         <div id="exerciciosContainer"></div>
 
@@ -454,40 +410,12 @@
 
 
 <!-- =====================================================
-     CASO NÃO TENHA PLANO
-====================================================== -->
-
-<section
-    id="semPlano"
-    class="card"
-    style="display:none;"
->
-
-    <h2>Plano não encontrado</h2>
-
-    <p>
-        Não foi possível identificar o plano deste aluno.
-    </p>
-
-    <br>
-
-    <a
-        href="servicos.html"
-        class="btn"
-    >
-        Escolher plano
-    </a>
-
-</section>
-
-
-<!-- =====================================================
      RODAPÉ
 ====================================================== -->
 
 <p>
 
-    &copy; 2026 BioMentoria - Plataforma de Biologia
+    &copy; 2026 BioMentoria - Plataforma gratuita de Biologia
 
 </p>
 
@@ -497,164 +425,6 @@
 ====================================================== -->
 
 <script>
-
-
-// ========================================================
-// PEGAR ID DO ALUNO
-// ========================================================
-
-const parametros =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
-const alunoId =
-    parametros.get('aluno_id');
-
-
-// ========================================================
-// VERIFICAR ID
-// ========================================================
-
-if (!alunoId) {
-
-    document.getElementById(
-        'planoAluno'
-    ).textContent =
-        'Não identificado';
-
-    document.getElementById(
-        'semPlano'
-    ).style.display = 'block';
-
-}
-
-
-// ========================================================
-// BUSCAR ALUNO
-// ========================================================
-
-if (alunoId) {
-
-    fetch(`/aluno/${alunoId}`)
-
-        .then(response => {
-
-            if (!response.ok) {
-
-                throw new Error(
-                    'Aluno não encontrado'
-                );
-
-            }
-
-            return response.json();
-
-        })
-
-        .then(aluno => {
-
-
-            // ============================================
-            // NOME
-            // ============================================
-
-            document.getElementById(
-                'nomeAluno'
-            ).textContent =
-                aluno.nome;
-
-
-            // ============================================
-            // PLANO
-            // ============================================
-
-            const plano =
-                aluno.plano;
-
-
-            const planoFormatado =
-                plano === 'simples'
-                    ? 'Plano Simples'
-                    : plano === 'completo'
-                        ? 'Plano Completo'
-                        : 'Não identificado';
-
-
-            document.getElementById(
-                'planoAluno'
-            ).textContent =
-                planoFormatado;
-
-
-            // ============================================
-            // MOSTRAR CONTEÚDO
-            // ============================================
-
-            if (plano === 'simples') {
-
-                document.getElementById(
-                    'conteudoSimples'
-                ).style.display = 'block';
-
-
-                document.getElementById(
-                    'conteudoCompleto'
-                ).style.display = 'none';
-
-
-                iniciarQuiz();
-
-            }
-
-
-            else if (plano === 'completo') {
-
-                document.getElementById(
-                    'conteudoSimples'
-                ).style.display = 'block';
-
-
-                document.getElementById(
-                    'conteudoCompleto'
-                ).style.display = 'block';
-
-
-                iniciarQuiz();
-
-                carregarExercicios();
-
-            }
-
-
-            else {
-
-                document.getElementById(
-                    'semPlano'
-                ).style.display = 'block';
-
-            }
-
-        })
-
-        .catch(error => {
-
-            console.error(error);
-
-            document.getElementById(
-                'planoAluno'
-            ).textContent =
-                'Erro ao carregar plano';
-
-            document.getElementById(
-                'semPlano'
-            ).style.display =
-                'block';
-
-        });
-
-}
 
 
 // ========================================================
@@ -734,13 +504,6 @@ const perguntas = [
     }
 
 ];
-
-
-function iniciarQuiz() {
-
-    novoQuiz();
-
-}
 
 
 function novoQuiz() {
@@ -1059,6 +822,23 @@ function corrigirExercicios() {
         `Você acertou ${pontos} de 3 exercícios.`;
 
 }
+
+
+// ========================================================
+// INICIAR CONTEÚDO AUTOMATICAMENTE
+// ========================================================
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        novoQuiz();
+
+        carregarExercicios();
+
+    }
+);
+
 
 </script>
 
