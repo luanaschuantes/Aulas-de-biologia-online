@@ -23,19 +23,14 @@ app.use(
         secret: 'biomentoria-segredo-2026',
         resave: false,
         saveUninitialized: false,
+
         cookie: {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24
+            maxAge: 1000 * 60 * 60 * 24,
+            sameSite: 'lax'
         }
     })
 );
-
-
-// ============================================================
-// ARQUIVOS HTML / CSS / JS
-// ============================================================
-
-app.use(express.static('.'));
 
 
 // ============================================================
@@ -74,8 +69,75 @@ db.serialize(() => {
 
 
 // ============================================================
-// CADASTRO
+// MIDDLEWARE - EXIGIR LOGIN
 // ============================================================
+
+function exigirLogin(req, res, next) {
+
+    // Verifica se existe um aluno logado
+    if (!req.session.alunoId) {
+
+        // Se não estiver logado,
+        // não permite acessar a página.
+        return res.redirect('/login.html');
+
+    }
+
+    // Se estiver logado,
+    // permite continuar.
+    next();
+
+}
+
+
+// ============================================================
+// PROTEGER A PÁGINA DE AULAS
+// ============================================================
+//
+// IMPORTANTE:
+// Esta rota precisa ficar ANTES de:
+//
+//     app.use(express.static('.'));
+//
+// Assim o Express não entrega
+// agendamentos.html diretamente sem verificar login.
+// ============================================================
+
+app.get(
+    '/agendamentos.html',
+    exigirLogin,
+    (req, res) => {
+
+        res.sendFile(
+            __dirname + '/agendamentos.html'
+        );
+
+    }
+);
+
+
+// ============================================================
+// ARQUIVOS HTML / CSS / JS
+// ============================================================
+//
+// Depois da rota protegida, liberamos os arquivos
+// públicos do site.
+//
+// index.html
+// clientes.html
+// login.html
+// estilo.css
+// imagens
+// JavaScript público
+// etc.
+// ============================================================
+
+app.use(express.static('.'));
+
+
+ // ============================================================
+ // CADASTRO
+ // ============================================================
 
 app.post('/salvar-cliente', async (req, res) => {
 
@@ -206,10 +268,18 @@ app.post('/salvar-cliente', async (req, res) => {
                         Erro ao consultar o banco de dados.
                     </p>
 
+                    <a href="/clientes.html">
+                        Voltar
+                    </a>
+
                 `);
 
             }
 
+
+            // ------------------------------------------------
+            // E-MAIL JÁ CADASTRADO
+            // ------------------------------------------------
 
             if (aluno) {
 
@@ -304,9 +374,9 @@ app.post('/salvar-cliente', async (req, res) => {
                     );
 
 
-                    // ----------------------------------------
-                    // MANDAR PARA LOGIN
-                    // ----------------------------------------
+                    // ------------------------------------------------
+                    // ENVIAR PARA LOGIN
+                    // ------------------------------------------------
 
                     res.redirect(
                         '/login.html'
@@ -356,6 +426,10 @@ app.post('/login', (req, res) => {
     }
 
 
+    // --------------------------------------------------------
+    // LIMPAR E-MAIL
+    // --------------------------------------------------------
+
     const emailLimpo =
         email.trim().toLowerCase();
 
@@ -389,13 +463,17 @@ app.post('/login', (req, res) => {
                         Erro no banco de dados.
                     </p>
 
+                    <a href="/login.html">
+                        Voltar
+                    </a>
+
                 `);
 
             }
 
 
             // ------------------------------------------------
-            // E-MAIL NÃO EXISTE
+            // ALUNO NÃO ENCONTRADO
             // ------------------------------------------------
 
             if (!aluno) {
@@ -448,81 +526,76 @@ app.post('/login', (req, res) => {
 
 
             // ------------------------------------------------
-            // CRIAR LOGIN
+            // REGENERAR SESSÃO
+            // ------------------------------------------------
+            //
+            // Isso cria uma nova sessão depois do login.
             // ------------------------------------------------
 
-            req.session.alunoId =
-                aluno.id;
+            req.session.regenerate(
+                (err) => {
 
-            req.session.nomeAluno =
-                aluno.nome;
+                    if (err) {
 
-            req.session.emailAluno =
-                aluno.email;
+                        console.error(
+                            'Erro ao criar sessão:',
+                            err
+                        );
+
+                        return res.status(500).send(`
+
+                            <h2>Erro no login</h2>
+
+                            <p>
+                                Não foi possível iniciar sua sessão.
+                            </p>
+
+                            <a href="/login.html">
+                                Tentar novamente
+                            </a>
+
+                        `);
+
+                    }
 
 
-            console.log(
-                'Aluno entrou:',
-                aluno.nome,
-                '| ID:',
-                aluno.id
-            );
+                    // ------------------------------------------------
+                    // SALVAR DADOS DO ALUNO NA SESSÃO
+                    // ------------------------------------------------
+
+                    req.session.alunoId =
+                        aluno.id;
+
+                    req.session.nomeAluno =
+                        aluno.nome;
+
+                    req.session.emailAluno =
+                        aluno.email;
 
 
-            // ------------------------------------------------
-            // IR PARA AS AULAS
-            // ------------------------------------------------
+                    console.log(
+                        'Aluno entrou:',
+                        aluno.nome,
+                        '| ID:',
+                        aluno.id
+                    );
 
-            res.redirect(
-                '/agendamentos.html'
+
+                    // ------------------------------------------------
+                    // ENVIAR PARA AS AULAS
+                    // ------------------------------------------------
+
+                    res.redirect(
+                        '/agendamentos.html'
+                    );
+
+                }
             );
 
         }
     );
 
 });
-
-
-// ============================================================
-// VERIFICAR SE ESTÁ LOGADO
-// ============================================================
-
-function exigirLogin(
-    req,
-    res,
-    next
-) {
-
-    if (!req.session.alunoId) {
-
-        return res.redirect(
-            '/login.html'
-        );
-
-    }
-
-
-    next();
-
-}
-
-
-// ============================================================
-// PROTEGER A PÁGINA DE AULAS
-// ============================================================
-
-app.get(
-    '/agendamentos.html',
-    exigirLogin,
-    (req, res) => {
-
-        res.sendFile(
-            __dirname +
-            '/agendamentos.html'
-        );
-
-    }
-);
 
 
 // ============================================================
@@ -597,6 +670,7 @@ app.get(
             logado: true,
 
             aluno: {
+
                 id:
                     req.session.alunoId,
 
@@ -605,6 +679,7 @@ app.get(
 
                 email:
                     req.session.emailAluno
+
             }
 
         });
@@ -646,7 +721,7 @@ app.get(
 
 
 // ============================================================
-// INÍCIO
+// PÁGINA INICIAL
 // ============================================================
 
 app.get(
@@ -654,8 +729,7 @@ app.get(
     (req, res) => {
 
         res.sendFile(
-            __dirname +
-            '/index.html'
+            __dirname + '/index.html'
         );
 
     }
