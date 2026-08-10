@@ -1,345 +1,414 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <html lang="pt-BR"> <head>
+<meta charset="UTF-8">
 
-<html lang="pt-BR">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-<head>
+<link
+    rel="stylesheet"
+    href="estilo.css"
+>
 
-    <meta charset="UTF-8">
+<title>BioMentoria - Aulas de Biologia</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<style>
 
-    <link
-        rel="stylesheet"
-        href="estilo.css"
-    >
+    /* ==========================================
+       BLOQUEAR VISUALIZAÇÃO ATÉ VERIFICAR LOGIN
+    ========================================== */
 
-    <title>BioMentoria - Aulas de Biologia</title>
+    body {
+        visibility: hidden;
+    }
 
-</head>
+    body.autorizado {
+        visibility: visible;
+    }
 
+    #verificandoLogin {
 
-<body>
+        min-height: 100vh;
 
+        display: flex;
 
-<!-- =====================================================
+        justify-content: center;
+
+        align-items: center;
+
+        text-align: center;
+
+        padding: 20px;
+
+        background:
+            linear-gradient(
+                180deg,
+                #f7faf9,
+                #eef6f1
+            );
+
+    }
+
+    #verificandoLogin .card {
+
+        width: 90%;
+
+        max-width: 500px;
+
+        margin: 0;
+
+    }
+
+</style>
+
+</head> <body> <!-- ===================================================== VERIFICANDO LOGIN ====================================================== --> <div id="verificandoLogin">
+<div class="card">
+
+    <h2>
+        🔐 Verificando acesso...
+    </h2>
+
+    <p>
+        Aguarde enquanto verificamos sua conta.
+    </p>
+
+</div>
+
+</div> <!-- ===================================================== CONTEÚDO PROTEGIDO ====================================================== --> <div id="conteudoProtegido" style="display:none;" >
+<!-- =================================================
      MENU
-====================================================== -->
+================================================== -->
 
 <nav>
 
-    <a href="index.html">Início</a>
+    <a href="index.html">
+        Início
+    </a>
 
-    <a href="agendamentos.html">Aulas</a>
+    <a href="agendamentos.html">
+        Aulas
+    </a>
 
-    <a href="consulta_agendamentos.html">Contato</a>
+    <a href="consulta_agendamentos.html">
+        Contato
+    </a>
+
+    <a href="/logout">
+        Sair
+    </a>
 
 </nav>
 
+<!-- =================================================
+     BANNER
+================================================== -->
 
-<!-- =====================================================
-     TÍTULO
-====================================================== -->
+<section class="banner">
 
-<h1>📚 Aulas de Biologia</h1>
+    <span class="gratuito">
+        🔓 Conteúdo gratuito
+    </span>
 
-<p>
-    Todo o conteúdo é gratuito e está disponível para todos.
-</p>
+    <h1>
+        📚 Aulas de Biologia
+    </h1>
 
+    <p id="mensagemAluno">
+        Bem-vindo à sua área de estudos!
+    </p>
 
-<!-- =====================================================
+</section>
+
+<!-- =================================================
      CONTEÚDO
-====================================================== -->
+================================================== -->
 
-<section
-    id="conteudo"
-    class="card"
->
-
+<main class="container">
 
     <!-- =================================================
-         AULA 1 - CITOLOGIA
+         AVISO DE ACESSO
+    ================================================== -->
+
+    <section class="card access-box">
+
+        <h2>
+            🎓 Área de Estudos
+        </h2>
+
+        <p>
+            Você está conectado à sua conta.
+            Todo o conteúdo abaixo está disponível
+            gratuitamente para você.
+        </p>
+
+    </section>
+
+    <!-- =================================================
+         AULA 1
     ================================================== -->
 
     <article class="card">
 
-        <h2>🔬 Aula 1 - Citologia</h2>
+        <h2>
+            🔬 Aula 1 - Citologia
+        </h2>
 
-        <h3>A célula</h3>
+        <h3>
+            A célula
+        </h3>
 
         <p>
-
             A célula é a unidade básica dos seres vivos.
             Todos os organismos são formados por uma ou mais
             células.
-
         </p>
 
         <p>
-
             As células podem ser classificadas em
             <strong>procariontes</strong> e
             <strong>eucariontes</strong>.
-
             As células procariontes não possuem núcleo
             delimitado por membrana, enquanto as células
             eucariontes possuem núcleo organizado.
-
         </p>
 
         <p>
-
             Entre as principais estruturas celulares estão
             as mitocôndrias, ribossomos, complexo golgiense,
             retículo endoplasmático e núcleo.
-
         </p>
 
     </article>
 
-
     <!-- =================================================
-         AULA 2 - GENÉTICA
+         AULA 2
     ================================================== -->
 
     <article class="card">
 
-        <h2>🧬 Aula 2 - Genética</h2>
+        <h2>
+            🧬 Aula 2 - Genética
+        </h2>
 
-        <h3>Genes, DNA e hereditariedade</h3>
+        <h3>
+            Genes, DNA e hereditariedade
+        </h3>
 
         <p>
-
             A genética é a área da Biologia responsável pelo
             estudo da hereditariedade e da transmissão das
             características dos seres vivos.
-
         </p>
 
         <p>
-
             O DNA é a molécula que armazena as informações
             genéticas. Os genes são segmentos do DNA que
             participam da determinação de características
             dos organismos.
-
         </p>
 
         <p>
-
             A transmissão das características dos pais para
             os descendentes ocorre por meio da hereditariedade.
-
         </p>
 
-        <h3>Leis de Mendel</h3>
+        <h3>
+            Leis de Mendel
+        </h3>
 
         <p>
-
             Gregor Mendel realizou experimentos com ervilhas
             e estabeleceu princípios importantes para o estudo
             da hereditariedade.
-
         </p>
 
     </article>
 
-
     <!-- =================================================
-         AULA 3 - ECOLOGIA
+         AULA 3
     ================================================== -->
 
     <article class="card">
 
-        <h2>🌱 Aula 3 - Ecologia</h2>
+        <h2>
+            🌱 Aula 3 - Ecologia
+        </h2>
 
-        <h3>Relações entre os seres vivos e o ambiente</h3>
+        <h3>
+            Relações entre os seres vivos e o ambiente
+        </h3>
 
         <p>
-
             A Ecologia estuda as relações dos seres vivos
             entre si e com o ambiente em que vivem.
-
         </p>
 
         <p>
-
             Os organismos fazem parte de populações,
             comunidades e ecossistemas.
-
         </p>
 
-        <h3>Cadeias alimentares</h3>
+        <h3>
+            Cadeias alimentares
+        </h3>
 
         <p>
-
             Nas cadeias alimentares, a energia passa de um
             organismo para outro através da alimentação.
-
         </p>
 
         <p>
-
             Os produtores, como as plantas, produzem seu
             próprio alimento. Os consumidores obtêm energia
             alimentando-se de outros organismos.
-
         </p>
 
         <p>
-
             Os decompositores participam da decomposição
             da matéria orgânica e da reciclagem de nutrientes.
-
         </p>
 
     </article>
 
-
     <!-- =================================================
-         AULA 4 - EVOLUÇÃO
+         AULA 4
     ================================================== -->
 
     <article class="card">
 
-        <h2>🦎 Aula 4 - Evolução</h2>
+        <h2>
+            🦎 Aula 4 - Evolução
+        </h2>
 
-        <h3>Evolução dos seres vivos</h3>
+        <h3>
+            Evolução dos seres vivos
+        </h3>
 
         <p>
-
             A evolução biológica corresponde às mudanças
             que ocorrem nas populações ao longo das gerações.
-
         </p>
 
         <p>
-
             Charles Darwin propôs a teoria da seleção natural,
             segundo a qual indivíduos com características
             vantajosas podem apresentar maior sucesso
             reprodutivo em determinadas condições ambientais.
-
         </p>
 
         <p>
-
             A seleção natural, mutações, recombinação genética
             e outros processos contribuem para a diversidade
             dos seres vivos.
-
         </p>
 
     </article>
 
-
     <!-- =================================================
-         AULA 5 - FISIOLOGIA
+         AULA 5
     ================================================== -->
 
     <article class="card">
 
-        <h2>🫀 Aula 5 - Fisiologia Humana</h2>
+        <h2>
+            🫀 Aula 5 - Fisiologia Humana
+        </h2>
 
-        <h3>Funcionamento do organismo</h3>
+        <h3>
+            Funcionamento do organismo
+        </h3>
 
         <p>
-
             A fisiologia estuda o funcionamento dos organismos
             e de seus sistemas.
-
         </p>
 
-        <h3>Sistema Digestório</h3>
+        <h3>
+            Sistema Digestório
+        </h3>
 
         <p>
-
             O sistema digestório é responsável pela digestão
             dos alimentos e pela absorção de nutrientes.
-
         </p>
 
-        <h3>Sistema Respiratório</h3>
+        <h3>
+            Sistema Respiratório
+        </h3>
 
         <p>
-
             O sistema respiratório permite as trocas gasosas,
             possibilitando a entrada de oxigênio e a eliminação
             de gás carbônico.
-
         </p>
 
-        <h3>Sistema Circulatório</h3>
+        <h3>
+            Sistema Circulatório
+        </h3>
 
         <p>
-
             O sistema circulatório transporta sangue, oxigênio,
             nutrientes e outras substâncias pelo organismo.
-
         </p>
 
-        <h3>Sistema Nervoso</h3>
+        <h3>
+            Sistema Nervoso
+        </h3>
 
         <p>
-
             O sistema nervoso coordena diversas funções do
             organismo e permite a percepção e resposta
             aos estímulos do ambiente.
-
         </p>
 
     </article>
 
-
     <!-- =================================================
-         AULA 6 - BOTÂNICA
+         AULA 6
     ================================================== -->
 
     <article class="card">
 
-        <h2>🌿 Aula 6 - Botânica</h2>
+        <h2>
+            🌿 Aula 6 - Botânica
+        </h2>
 
-        <h3>Estudo das plantas</h3>
+        <h3>
+            Estudo das plantas
+        </h3>
 
         <p>
-
             A Botânica é a área da Biologia dedicada ao estudo
             das plantas.
-
         </p>
 
         <p>
-
             As plantas são organismos eucariontes,
             multicelulares e, em sua maioria, autotróficos,
             realizando fotossíntese.
-
         </p>
 
-        <h3>Fotossíntese</h3>
+        <h3>
+            Fotossíntese
+        </h3>
 
         <p>
-
             Na fotossíntese, as plantas utilizam energia
             luminosa para produzir matéria orgânica a partir
             de água e gás carbônico.
-
         </p>
 
-        <h3>Estruturas vegetais</h3>
+        <h3>
+            Estruturas vegetais
+        </h3>
 
         <p>
-
             Entre as principais estruturas das plantas estão
             raízes, caules, folhas, flores, frutos e sementes.
-
         </p>
 
     </article>
-
 
     <!-- =================================================
          QUIZ
@@ -347,7 +416,9 @@
 
     <article class="card">
 
-        <h2>🧠 Quiz de Biologia</h2>
+        <h2>
+            🧠 Quiz de Biologia
+        </h2>
 
         <p>
             Teste seus conhecimentos respondendo às questões.
@@ -372,14 +443,15 @@
 
     </article>
 
-
     <!-- =================================================
-         LISTA DE EXERCÍCIOS
+         EXERCÍCIOS
     ================================================== -->
 
     <article class="card">
 
-        <h2>📝 Lista de Exercícios</h2>
+        <h2>
+            📝 Lista de Exercícios
+        </h2>
 
         <p>
             Resolva os exercícios abaixo e confira sua pontuação.
@@ -404,27 +476,121 @@
 
     </article>
 
+</main>
 
-</section>
-
-
-<!-- =====================================================
+<!-- =================================================
      RODAPÉ
-====================================================== -->
+================================================== -->
 
-<p>
+<footer class="rodape">
 
-    &copy; 2026 BioMentoria - Plataforma gratuita de Biologia
+    <p>
+        &copy; 2026 BioMentoria -
+        Plataforma gratuita de Biologia
+    </p>
 
-</p>
+</footer>
 
+</div> <!-- ===================================================== JAVASCRIPT ====================================================== --> <script>
+// ========================================================
+// VERIFICAR LOGIN
+// ========================================================
 
-<!-- =====================================================
-     JAVASCRIPT
-====================================================== -->
+async function verificarAcesso() {
 
-<script>
+try {
 
+    const resposta =
+        await fetch(
+            '/verificar-login',
+            {
+                method: 'GET',
+                credentials: 'same-origin',
+                cache: 'no-store'
+            }
+        );
+
+    if (!resposta.ok) {
+
+        window.location.replace(
+            '/login.html'
+        );
+
+        return;
+
+    }
+
+    const dados =
+        await resposta.json();
+
+    // -----------------------------------------------
+    // USUÁRIO NÃO ESTÁ LOGADO
+    // -----------------------------------------------
+
+    if (!dados.logado) {
+
+        window.location.replace(
+            '/login.html'
+        );
+
+        return;
+
+    }
+
+    // -----------------------------------------------
+    // USUÁRIO ESTÁ LOGADO
+    // -----------------------------------------------
+
+    const mensagemAluno =
+        document.getElementById(
+            'mensagemAluno'
+        );
+
+    if (
+        dados.aluno &&
+        dados.aluno.nome
+    ) {
+
+        mensagemAluno.textContent =
+            `Olá, ${dados.aluno.nome}! Bem-vindo à sua área de estudos.`;
+
+    }
+
+    document.getElementById(
+        'verificandoLogin'
+    ).style.display = 'none';
+
+    document.getElementById(
+        'conteudoProtegido'
+    ).style.display = 'block';
+
+    document.body.classList.add(
+        'autorizado'
+    );
+
+    // Carregar somente depois
+    // da confirmação do login.
+
+    novoQuiz();
+
+    carregarExercicios();
+
+}
+
+catch (erro) {
+
+    console.error(
+        'Erro ao verificar login:',
+        erro
+    );
+
+    window.location.replace(
+        '/login.html'
+    );
+
+}
+
+}
 
 // ========================================================
 // QUIZ
@@ -432,167 +598,158 @@
 
 const perguntas = [
 
-    {
-        pergunta:
-            'Qual é a unidade básica dos seres vivos?',
+{
+    pergunta:
+        'Qual é a unidade básica dos seres vivos?',
 
-        respostas: [
-            'Célula',
-            'Órgão',
-            'Tecido',
-            'Sistema'
-        ],
+    respostas: [
+        'Célula',
+        'Órgão',
+        'Tecido',
+        'Sistema'
+    ],
 
-        correta: 0
-    },
+    correta: 0
+},
 
-    {
-        pergunta:
-            'Qual molécula armazena a informação genética?',
+{
+    pergunta:
+        'Qual molécula armazena a informação genética?',
 
-        respostas: [
-            'Glicose',
-            'DNA',
-            'Água',
-            'Lipídio'
-        ],
+    respostas: [
+        'Glicose',
+        'DNA',
+        'Água',
+        'Lipídio'
+    ],
 
-        correta: 1
-    },
+    correta: 1
+},
 
-    {
-        pergunta:
-            'Qual processo permite que as plantas produzam matéria orgânica usando luz?',
+{
+    pergunta:
+        'Qual processo permite que as plantas produzam matéria orgânica usando luz?',
 
-        respostas: [
-            'Respiração',
-            'Digestão',
-            'Fotossíntese',
-            'Fermentação'
-        ],
+    respostas: [
+        'Respiração',
+        'Digestão',
+        'Fotossíntese',
+        'Fermentação'
+    ],
 
-        correta: 2
-    },
+    correta: 2
+},
 
-    {
-        pergunta:
-            'Quem é conhecido pelos estudos clássicos de hereditariedade com ervilhas?',
+{
+    pergunta:
+        'Quem é conhecido pelos estudos clássicos de hereditariedade com ervilhas?',
 
-        respostas: [
-            'Charles Darwin',
-            'Gregor Mendel',
-            'Louis Pasteur',
-            'Robert Hooke'
-        ],
+    respostas: [
+        'Charles Darwin',
+        'Gregor Mendel',
+        'Louis Pasteur',
+        'Robert Hooke'
+    ],
 
-        correta: 1
-    },
+    correta: 1
+},
 
-    {
-        pergunta:
-            'Qual área da Biologia estuda as relações dos seres vivos com o ambiente?',
+{
+    pergunta:
+        'Qual área da Biologia estuda as relações dos seres vivos com o ambiente?',
 
-        respostas: [
-            'Ecologia',
-            'Botânica',
-            'Citologia',
-            'Anatomia'
-        ],
+    respostas: [
+        'Ecologia',
+        'Botânica',
+        'Citologia',
+        'Anatomia'
+    ],
 
-        correta: 0
-    }
+    correta: 0
+}
 
 ];
 
-
 function novoQuiz() {
 
-    const container =
-        document.getElementById(
-            'quizContainer'
-        );
-
-
-    const resultado =
-        document.getElementById(
-            'resultadoQuiz'
-        );
-
-
-    resultado.textContent = '';
-
-
-    const pergunta =
-        perguntas[
-            Math.floor(
-                Math.random() *
-                perguntas.length
-            )
-        ];
-
-
-    let html =
-        `<h3>${pergunta.pergunta}</h3>`;
-
-
-    pergunta.respostas.forEach(
-        (resposta, indice) => {
-
-            html += `
-
-                <button
-                    type="button"
-                    class="btn"
-                    style="display:block;margin:8px 0;"
-                    onclick="responderQuiz(${indice}, ${pergunta.correta})"
-                >
-                    ${resposta}
-                </button>
-
-            `;
-
-        }
+const container =
+    document.getElementById(
+        'quizContainer'
     );
 
+const resultado =
+    document.getElementById(
+        'resultadoQuiz'
+    );
 
-    container.innerHTML = html;
+resultado.textContent = '';
+
+const pergunta =
+    perguntas[
+        Math.floor(
+            Math.random() *
+            perguntas.length
+        )
+    ];
+
+let html =
+    `<h3>${pergunta.pergunta}</h3>`;
+
+pergunta.respostas.forEach(
+    (resposta, indice) => {
+
+        html += `
+
+            <button
+                type="button"
+                class="btn"
+                style="display:block;margin:8px 0;"
+                onclick="responderQuiz(${indice}, ${pergunta.correta})"
+            >
+                ${resposta}
+            </button>
+
+        `;
+
+    }
+);
+
+container.innerHTML =
+    html;
 
 }
-
 
 function responderQuiz(
-    resposta,
-    correta
+resposta,
+correta
 ) {
 
-    const resultado =
-        document.getElementById(
-            'resultadoQuiz'
-        );
+const resultado =
+    document.getElementById(
+        'resultadoQuiz'
+    );
 
+if (resposta === correta) {
 
-    if (resposta === correta) {
+    resultado.textContent =
+        '✅ Resposta correta! Muito bem!';
 
-        resultado.textContent =
-            '✅ Resposta correta! Muito bem!';
-
-        resultado.style.color =
-            'green';
-
-    }
-
-    else {
-
-        resultado.textContent =
-            '❌ Resposta incorreta. Tente novamente!';
-
-        resultado.style.color =
-            'red';
-
-    }
+    resultado.style.color =
+        'green';
 
 }
 
+else {
+
+    resultado.textContent =
+        '❌ Resposta incorreta. Tente novamente!';
+
+    resultado.style.color =
+        'red';
+
+}
+
+}
 
 // ========================================================
 // EXERCÍCIOS
@@ -600,248 +757,237 @@ function responderQuiz(
 
 function carregarExercicios() {
 
-    const container =
-        document.getElementById(
-            'exerciciosContainer'
-        );
+const container =
+    document.getElementById(
+        'exerciciosContainer'
+    );
 
+container.innerHTML = `
 
-    container.innerHTML = `
+    <div>
 
-        <div>
+        <p>
 
-            <p>
-                <strong>1.</strong>
-                Qual estrutura contém o material genético
-                nas células eucariontes?
-            </p>
+            <strong>1.</strong>
+            Qual estrutura contém o material genético
+            nas células eucariontes?
 
-            <label>
+        </p>
 
-                <input
-                    type="radio"
-                    name="q1"
-                    value="a"
-                >
+        <label>
 
-                Mitocôndria
+            <input
+                type="radio"
+                name="q1"
+                value="a"
+            >
 
-            </label>
+            Mitocôndria
 
-            <br>
-
-            <label>
-
-                <input
-                    type="radio"
-                    name="q1"
-                    value="b"
-                >
-
-                Núcleo
-
-            </label>
-
-            <br>
-
-            <label>
-
-                <input
-                    type="radio"
-                    name="q1"
-                    value="c"
-                >
-
-                Ribossomo
-
-            </label>
-
-        </div>
-
+        </label>
 
         <br>
 
+        <label>
 
-        <div>
+            <input
+                type="radio"
+                name="q1"
+                value="b"
+            >
 
-            <p>
-                <strong>2.</strong>
-                Qual processo é responsável pela produção
-                de alimento pelas plantas?
-            </p>
+            Núcleo
 
-            <label>
-
-                <input
-                    type="radio"
-                    name="q2"
-                    value="a"
-                >
-
-                Fotossíntese
-
-            </label>
-
-            <br>
-
-            <label>
-
-                <input
-                    type="radio"
-                    name="q2"
-                    value="b"
-                >
-
-                Digestão
-
-            </label>
-
-            <br>
-
-            <label>
-
-                <input
-                    type="radio"
-                    name="q2"
-                    value="c"
-                >
-
-                Respiração
-
-            </label>
-
-        </div>
-
+        </label>
 
         <br>
 
+        <label>
 
-        <div>
+            <input
+                type="radio"
+                name="q1"
+                value="c"
+            >
 
-            <p>
-                <strong>3.</strong>
-                Qual área estuda as relações entre os seres
-                vivos e o ambiente?
-            </p>
+            Ribossomo
 
-            <label>
+        </label>
 
-                <input
-                    type="radio"
-                    name="q3"
-                    value="a"
-                >
+    </div>
 
-                Genética
+    <br>
 
-            </label>
+    <div>
 
-            <br>
+        <p>
 
-            <label>
+            <strong>2.</strong>
+            Qual processo é responsável pela produção
+            de alimento pelas plantas?
 
-                <input
-                    type="radio"
-                    name="q3"
-                    value="b"
-                >
+        </p>
 
-                Ecologia
+        <label>
 
-            </label>
+            <input
+                type="radio"
+                name="q2"
+                value="a"
+            >
 
-            <br>
+            Fotossíntese
 
-            <label>
+        </label>
 
-                <input
-                    type="radio"
-                    name="q3"
-                    value="c"
-                >
+        <br>
 
-                Botânica
+        <label>
 
-            </label>
+            <input
+                type="radio"
+                name="q2"
+                value="b"
+            >
 
-        </div>
+            Digestão
 
-    `;
+        </label>
+
+        <br>
+
+        <label>
+
+            <input
+                type="radio"
+                name="q2"
+                value="c"
+            >
+
+            Respiração
+
+        </label>
+
+    </div>
+
+    <br>
+
+    <div>
+
+        <p>
+
+            <strong>3.</strong>
+            Qual área estuda as relações entre os seres
+            vivos e o ambiente?
+
+        </p>
+
+        <label>
+
+            <input
+                type="radio"
+                name="q3"
+                value="a"
+            >
+
+            Genética
+
+        </label>
+
+        <br>
+
+        <label>
+
+            <input
+                type="radio"
+                name="q3"
+                value="b"
+            >
+
+            Ecologia
+
+        </label>
+
+        <br>
+
+        <label>
+
+            <input
+                type="radio"
+                name="q3"
+                value="c"
+            >
+
+            Botânica
+
+        </label>
+
+    </div>
+
+`;
 
 }
-
 
 function corrigirExercicios() {
 
-    let pontos = 0;
+let pontos = 0;
 
+const q1 =
+    document.querySelector(
+        'input[name="q1"]:checked'
+    );
 
-    const q1 =
-        document.querySelector(
-            'input[name="q1"]:checked'
-        );
+const q2 =
+    document.querySelector(
+        'input[name="q2"]:checked'
+    );
 
+const q3 =
+    document.querySelector(
+        'input[name="q3"]:checked'
+    );
 
-    const q2 =
-        document.querySelector(
-            'input[name="q2"]:checked'
-        );
+if (
+    q1 &&
+    q1.value === 'b'
+) {
 
-
-    const q3 =
-        document.querySelector(
-            'input[name="q3"]:checked'
-        );
-
-
-    if (q1 && q1.value === 'b') {
-
-        pontos++;
-
-    }
-
-
-    if (q2 && q2.value === 'a') {
-
-        pontos++;
-
-    }
-
-
-    if (q3 && q3.value === 'b') {
-
-        pontos++;
-
-    }
-
-
-    document.getElementById(
-        'resultadoExercicios'
-    ).textContent =
-        `Você acertou ${pontos} de 3 exercícios.`;
+    pontos++;
 
 }
 
+if (
+    q2 &&
+    q2.value === 'a'
+) {
+
+    pontos++;
+
+}
+
+if (
+    q3 &&
+    q3.value === 'b'
+) {
+
+    pontos++;
+
+}
+
+document.getElementById(
+    'resultadoExercicios'
+).textContent =
+    `Você acertou ${pontos} de 3 exercícios.`;
+
+}
 
 // ========================================================
-// INICIAR CONTEÚDO AUTOMATICAMENTE
+// INICIAR PÁGINA
 // ========================================================
 
 document.addEventListener(
-    'DOMContentLoaded',
-    function () {
-
-        novoQuiz();
-
-        carregarExercicios();
-
-    }
+'DOMContentLoaded',
+verificarAcesso
 );
 
-
-</script>
-
-
-</body>
-
-</html>
+</script> </body> </html>
