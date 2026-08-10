@@ -1,5 +1,7 @@
+```html
 <!DOCTYPE html>
-<html lang="pt-br">
+
+<html lang="pt-BR">
 
 <head>
 
@@ -19,156 +21,405 @@
 
 </head>
 
+
 <body>
 
 
-<!-- MENU -->
+<!-- =====================================================
+     MENU
+====================================================== -->
 
 <nav>
 
-    <a href="index.html">Início</a>
+    <a href="index.html">
+        Início
+    </a>
 
-    <a href="clientes.html">Matrícula</a>
+    <a href="clientes.html">
+        Criar conta
+    </a>
 
-    <a href="servicos.html">Planos</a>
+    <a href="login.html">
+        Entrar
+    </a>
 
-    <a href="agendamentos.html">Conteúdos</a>
+    <a href="agendamentos.html">
+        Aulas
+    </a>
 
-    <a href="consulta_agendamentos.html">Contato</a>
+    <a href="consulta_agendamentos.html">
+        Contato
+    </a>
 
 </nav>
 
 
-<!-- CABEÇALHO -->
+<!-- =====================================================
+     TÍTULO
+====================================================== -->
 
-<header class="banner">
+<h1>
+    Cadastro de Alunos
+</h1>
 
-    <h1>Matrícula de Alunos</h1>
+<p>
+    Crie sua conta gratuitamente para ter acesso
+    às aulas, quizzes e exercícios de Biologia.
+</p>
+
+
+<!-- =====================================================
+     EXPLICAÇÃO
+====================================================== -->
+
+<div class="card">
+
+    <h2>
+        📚 A BioMentoria é gratuita
+    </h2>
 
     <p>
-        Cadastre seus dados para começar
-        sua jornada na BioMentoria.
+
+        A BioMentoria é uma plataforma educacional
+        voltada para o estudo de Biologia.
+
     </p>
 
-</header>
+    <p>
 
+        Todo o conteúdo da plataforma é gratuito.
+        Não existem planos pagos e você não precisa
+        realizar nenhum pagamento para estudar.
 
-<!-- CONTEÚDO -->
+    </p>
 
-<div class="container">
+    <p>
 
-    <div class="card">
+        Para acessar as aulas, basta criar sua conta
+        e fazer login. Depois de entrar, você terá
+        acesso à área de estudos com textos,
+        quizzes e listas de exercícios.
 
-        <h2>Cadastro do Aluno</h2>
-
-        <p>
-            Preencha seus dados abaixo.
-            Depois do cadastro, você poderá
-            escolher o plano ideal para seus estudos.
-        </p>
-
-
-        <!-- FORMULÁRIO -->
-
-        <form
-            action="/salvar-cliente"
-            method="POST"
-        >
-
-
-            <!-- NOME -->
-
-            <label for="nome">
-                Nome completo:
-            </label>
-
-            <input
-                type="text"
-                id="nome"
-                name="nome"
-                placeholder="Digite seu nome completo"
-                required
-            >
-
-
-            <!-- CPF -->
-
-            <label for="cpf">
-                CPF:
-            </label>
-
-            <input
-                type="text"
-                id="cpf"
-                name="cpf"
-                placeholder="Digite seu CPF"
-            >
-
-
-            <!-- TELEFONE -->
-
-            <label for="telefone">
-                Telefone:
-            </label>
-
-            <input
-                type="text"
-                id="telefone"
-                name="telefone"
-                placeholder="Digite seu telefone"
-            >
-
-
-            <!-- E-MAIL -->
-
-            <label for="email">
-                E-mail:
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Digite seu e-mail"
-                required
-            >
-
-
-            <br>
-            <br>
-
-
-            <!-- BOTÃO -->
-
-            <button
-                class="btn"
-                type="submit"
-            >
-
-                Continuar para os Planos
-
-            </button>
-
-
-        </form>
-
-    </div>
+    </p>
 
 </div>
 
 
-<!-- RODAPÉ -->
+<!-- =====================================================
+     COMO FUNCIONA
+====================================================== -->
 
-<footer class="rodape">
+<div class="card">
+
+    <h2>
+        Como funciona?
+    </h2>
+
+    <ol>
+
+        <li>
+
+            <strong>
+                1º - Crie sua conta
+            </strong>
+
+            <br>
+
+            Informe seus dados e crie uma senha
+            para acessar a plataforma.
+
+        </li>
+
+
+        <li>
+
+            <strong>
+                2º - Faça login
+            </strong>
+
+            <br>
+
+            Entre utilizando seu e-mail e sua senha.
+
+        </li>
+
+
+        <li>
+
+            <strong>
+                3º - Acesse as aulas
+            </strong>
+
+            <br>
+
+            Após o login, você será direcionado
+            automaticamente para a área de estudos.
+
+        </li>
+
+
+        <li>
+
+            <strong>
+                4º - Estude gratuitamente
+            </strong>
+
+            <br>
+
+            Leia os conteúdos, responda aos quizzes
+            e faça as listas de exercícios.
+
+        </li>
+
+    </ol>
+
+</div>
+
+
+<!-- =====================================================
+     CADASTRO
+====================================================== -->
+
+<div class="card">
+
+    <h2>
+        Criar minha conta
+    </h2>
 
     <p>
-        &copy; 2026 BioMentoria -
-        Plataforma de Biologia
+
+        Preencha seus dados abaixo.
+        O cadastro é totalmente gratuito.
+
     </p>
 
-</footer>
+
+    <br>
+
+
+    <form
+        action="/salvar-cliente"
+        method="POST"
+    >
+
+
+        <!-- NOME -->
+
+        <label for="nome">
+            Nome completo:
+        </label>
+
+        <input
+            type="text"
+            id="nome"
+            name="nome"
+            placeholder="Digite seu nome completo"
+            autocomplete="name"
+            required
+        >
+
+
+        <!-- CPF -->
+
+        <label for="cpf">
+            CPF:
+        </label>
+
+        <input
+            type="text"
+            id="cpf"
+            name="cpf"
+            placeholder="Digite seu CPF"
+            autocomplete="off"
+        >
+
+
+        <!-- TELEFONE -->
+
+        <label for="telefone">
+            Telefone:
+        </label>
+
+        <input
+            type="tel"
+            id="telefone"
+            name="telefone"
+            placeholder="Digite seu telefone"
+            autocomplete="tel"
+        >
+
+
+        <!-- E-MAIL -->
+
+        <label for="email">
+            E-mail:
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Digite seu e-mail"
+            autocomplete="email"
+            required
+        >
+
+
+        <!-- SENHA -->
+
+        <label for="senha">
+            Senha:
+        </label>
+
+        <input
+            type="password"
+            id="senha"
+            name="senha"
+            placeholder="Crie uma senha com pelo menos 6 caracteres"
+            minlength="6"
+            autocomplete="new-password"
+            required
+        >
+
+
+        <!-- CONFIRMAR SENHA -->
+
+        <label for="confirmarSenha">
+            Confirmar senha:
+        </label>
+
+        <input
+            type="password"
+            id="confirmarSenha"
+            name="confirmarSenha"
+            placeholder="Digite a senha novamente"
+            minlength="6"
+            autocomplete="new-password"
+            required
+        >
+
+
+        <p
+            id="erroSenha"
+            style="
+                display:none;
+                color:#b42318;
+                font-weight:600;
+                margin-bottom:20px;
+            "
+        >
+            As senhas não são iguais.
+        </p>
+
+
+        <!-- BOTÃO -->
+
+        <button
+            class="btn"
+            type="submit"
+        >
+
+            Criar minha conta gratuitamente
+
+        </button>
+
+
+    </form>
+
+</div>
+
+
+<!-- =====================================================
+     LOGIN
+====================================================== -->
+
+<div class="card">
+
+    <h2>
+        Já possui uma conta?
+    </h2>
+
+    <p>
+
+        Se você já possui cadastro,
+        faça login para acessar suas aulas.
+
+    </p>
+
+    <br>
+
+    <a
+        href="login.html"
+        class="btn"
+    >
+        Entrar na BioMentoria
+    </a>
+
+</div>
+
+
+<!-- =====================================================
+     RODAPÉ
+====================================================== -->
+
+<p>
+
+    &copy; 2026 BioMentoria -
+    Plataforma gratuita de Biologia
+
+</p>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+const formulario =
+    document.querySelector('form');
+
+const senha =
+    document.getElementById('senha');
+
+const confirmarSenha =
+    document.getElementById('confirmarSenha');
+
+const erroSenha =
+    document.getElementById('erroSenha');
+
+
+formulario.addEventListener(
+    'submit',
+    function(event) {
+
+        if (
+            senha.value !==
+            confirmarSenha.value
+        ) {
+
+            event.preventDefault();
+
+            erroSenha.style.display =
+                'block';
+
+            confirmarSenha.focus();
+
+            return;
+
+        }
+
+
+        erroSenha.style.display =
+            'none';
+
+    }
+);
+
+</script>
 
 
 </body>
 
 </html>
+```
