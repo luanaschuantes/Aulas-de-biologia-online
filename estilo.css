@@ -1,12 +1,5 @@
-```css
 /* =====================================
    BIOMENTORIA - VISUAL UNIFICADO
-   PLATAFORMA GRATUITA DE BIOLOGIA
-===================================== */
-
-
-/* =====================================
-   RESET
 ===================================== */
 
 * {
@@ -15,15 +8,12 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     min-height: 100%;
 }
 
-
 body {
-
     font-family:
         'Segoe UI',
         Arial,
@@ -40,7 +30,6 @@ body {
     color: #374151;
 
     display: flex;
-
     flex-direction: column;
 
     min-height: 100vh;
@@ -54,7 +43,6 @@ body {
 ===================================== */
 
 nav {
-
     width: 100%;
 
     background:
@@ -67,15 +55,12 @@ nav {
     padding: 18px 5%;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
     gap: 32px;
 
     position: sticky;
-
     top: 0;
 
     z-index: 999;
@@ -84,15 +69,12 @@ nav {
         0 5px 20px rgba(0, 0, 0, .15);
 }
 
-
 nav a {
-
     color: white;
 
     text-decoration: none;
 
     font-weight: 600;
-
     font-size: 16px;
 
     padding: 8px 4px;
@@ -102,19 +84,15 @@ nav a {
     transition: .3s;
 }
 
-
 nav a::after {
-
     content: "";
 
     position: absolute;
 
     left: 0;
-
     bottom: 0;
 
     width: 0;
-
     height: 2px;
 
     background: #80ffd2;
@@ -122,52 +100,44 @@ nav a::after {
     transition: .3s;
 }
 
-
 nav a:hover {
-
     color: #80ffd2;
-
 }
 
-
 nav a:hover::after {
-
     width: 100%;
-
 }
 
 
 /* =====================================
-   BANNER / HERO
+   BANNER PRINCIPAL
+   FOTO SOMENTE NO TOPO
 ===================================== */
 
 .banner {
-
     width: 100%;
 
-    min-height: 500px;
+    /* antes era 500px */
+    min-height: 360px;
 
     display: flex;
 
     flex-direction: column;
 
     justify-content: center;
-
     align-items: center;
 
     text-align: center;
 
-    padding: 80px 20px;
+    padding: 55px 20px;
 
     color: white;
 
     background:
-
         linear-gradient(
-            rgba(6, 64, 47, .72),
-            rgba(6, 64, 47, .72)
+            rgba(6, 64, 47, .55),
+            rgba(6, 64, 47, .65)
         ),
-
         url("./fundo.jpg");
 
     background-size: cover;
@@ -180,14 +150,14 @@ nav a:hover::after {
 }
 
 
-.banner::before {
+/* brilho decorativo */
 
+.banner::before {
     content: "";
 
     position: absolute;
 
     width: 400px;
-
     height: 400px;
 
     border-radius: 50%;
@@ -196,20 +166,15 @@ nav a:hover::after {
         rgba(128, 255, 210, .08);
 
     top: -180px;
-
     right: -120px;
-
 }
 
-
 .banner::after {
-
     content: "";
 
     position: absolute;
 
     width: 300px;
-
     height: 300px;
 
     border-radius: 50%;
@@ -218,14 +183,15 @@ nav a:hover::after {
         rgba(128, 255, 210, .06);
 
     bottom: -160px;
-
     left: -100px;
-
 }
 
 
-.banner h1 {
+/* =====================================
+   TÍTULO DO BANNER
+===================================== */
 
+.banner h1 {
     font-size:
         clamp(45px, 7vw, 72px);
 
@@ -235,6 +201,8 @@ nav a:hover::after {
 
     margin-bottom: 15px;
 
+    color: white;
+
     text-shadow:
         0 4px 15px rgba(0, 0, 0, .35);
 
@@ -243,9 +211,7 @@ nav a:hover::after {
     z-index: 2;
 }
 
-
 .banner p {
-
     color: white;
 
     font-size:
@@ -269,7 +235,6 @@ nav a:hover::after {
 ===================================== */
 
 .gratuito {
-
     display: inline-block;
 
     padding: 9px 20px;
@@ -302,7 +267,6 @@ nav a:hover::after {
 ===================================== */
 
 .container {
-
     width: 90%;
 
     max-width: 1200px;
@@ -316,39 +280,30 @@ nav a:hover::after {
 
 
 /* =====================================
-   CARDS
+   CARDS REMOVIDOS
+   DEIXA O CONTEÚDO CONTÍNUO
 ===================================== */
 
 .card {
+    background: transparent;
 
-    background:
-        rgba(255, 255, 255, .88);
+    margin: 55px 0;
 
-    margin: 35px 0;
+    padding: 10px 0;
 
-    padding: 35px;
+    border: none;
 
-    border:
-        1px solid #e0ebe5;
+    border-radius: 0;
 
-    border-radius: 22px;
+    box-shadow: none;
 
-    box-shadow:
-        0 10px 35px rgba(6, 64, 47, .07);
-
-    transition:
-        transform .3s,
-        box-shadow .3s;
+    transition: none;
 }
 
-
 .card:hover {
+    transform: none;
 
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 15px 40px rgba(6, 64, 47, .10);
+    box-shadow: none;
 }
 
 
@@ -357,14 +312,10 @@ nav a:hover::after {
 ===================================== */
 
 h1 {
-
     color: #06402f;
-
 }
 
-
 h2 {
-
     color: #06402f;
 
     font-size:
@@ -375,9 +326,7 @@ h2 {
     line-height: 1.2;
 }
 
-
 h3 {
-
     color: #07553e;
 
     margin-top: 15px;
@@ -391,7 +340,6 @@ h3 {
 ===================================== */
 
 p {
-
     font-size: 17px;
 
     line-height: 1.8;
@@ -399,9 +347,7 @@ p {
     margin-bottom: 15px;
 }
 
-
 strong {
-
     color: #06402f;
 }
 
@@ -412,14 +358,10 @@ strong {
 
 ul,
 ol {
-
     padding-left: 25px;
-
 }
 
-
 li {
-
     margin: 12px 0;
 
     font-size: 17px;
@@ -429,11 +371,11 @@ li {
 
 
 /* =====================================
-   GRID DE RECURSOS
+   RECURSOS
+   SEM CAIXAS
 ===================================== */
 
 .features {
-
     display: grid;
 
     grid-template-columns:
@@ -442,62 +384,45 @@ li {
             minmax(220px, 1fr)
         );
 
-    gap: 20px;
+    gap: 35px;
 
-    margin-top: 25px;
+    margin-top: 30px;
 }
-
 
 .feature {
+    padding: 5px 0;
 
-    padding: 25px;
+    background: transparent;
 
-    border-radius: 18px;
+    border: none;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f5faf7,
-            #eaf6ef
-        );
+    border-radius: 0;
 
-    border:
-        1px solid #dcebe2;
+    box-shadow: none;
 
-    transition: .3s;
+    transition: none;
 }
-
 
 .feature:hover {
+    transform: none;
 
-    transform:
-        translateY(-5px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(6, 64, 47, .10);
+    box-shadow: none;
 }
 
-
 .feature-icon {
-
     font-size: 36px;
 
     margin-bottom: 10px;
 }
 
-
 .feature h3 {
-
     margin:
         5px 0 8px;
 
     color: #06402f;
 }
 
-
 .feature p {
-
     margin-bottom: 0;
 
     font-size: 15px;
@@ -507,11 +432,11 @@ li {
 
 
 /* =====================================
-   ETAPAS / COMO FUNCIONA
+   COMO FUNCIONA
+   SEM CARDS
 ===================================== */
 
 .steps {
-
     display: grid;
 
     grid-template-columns:
@@ -520,43 +445,34 @@ li {
             minmax(220px, 1fr)
         );
 
-    gap: 20px;
+    gap: 35px;
 
-    margin-top: 25px;
+    margin-top: 30px;
 }
-
 
 .step {
+    padding: 5px 0;
 
-    padding: 25px;
+    background: transparent;
 
-    background: #f7faf8;
+    border: none;
 
-    border:
-        1px solid #dcebe2;
+    border-radius: 0;
 
-    border-radius: 18px;
+    border-top: none;
 
-    border-top:
-        4px solid #159a60;
+    box-shadow: none;
 
-    transition: .3s;
+    transition: none;
 }
-
 
 .step:hover {
+    transform: none;
 
-    transform:
-        translateY(-4px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(6, 64, 47, .08);
+    box-shadow: none;
 }
 
-
 .step-number {
-
     display: inline-flex;
 
     align-items: center;
@@ -564,7 +480,6 @@ li {
     justify-content: center;
 
     width: 42px;
-
     height: 42px;
 
     margin-bottom: 12px;
@@ -587,53 +502,39 @@ li {
         rgba(6, 64, 47, .20);
 }
 
-
 .step h3 {
-
     color: #06402f;
 
     margin-bottom: 8px;
 }
 
-
 .step p {
-
     font-size: 15px;
 
     color: #52615a;
-
 }
 
 
 /* =====================================
    CAIXA DE ACESSO
+   SEM CAIXA
 ===================================== */
 
 .access-box {
-
     text-align: center;
 
-    background:
-        linear-gradient(
-            135deg,
-            #eaf8ef,
-            #f7fcf9
-        );
+    background: transparent;
 
-    border:
-        1px solid #cde8d7;
+    border: none;
+
+    box-shadow: none;
 }
-
 
 .access-box h2 {
-
     color: #06402f;
-
 }
 
-
 .access-box p {
-
     max-width: 750px;
 
     margin:
@@ -643,48 +544,38 @@ li {
 
 /* =====================================
    BANNER DE GRATUIDADE
+   SEM CAIXA
 ===================================== */
 
 .free-banner {
-
     display: flex;
 
     align-items: center;
 
     gap: 15px;
 
-    padding: 20px;
+    padding: 15px 0;
 
     margin-top: 25px;
 
-    border-radius: 16px;
+    border-radius: 0;
 
-    background:
-        linear-gradient(
-            135deg,
-            #e9f8ef,
-            #f3fbf6
-        );
+    background: transparent;
 
-    border:
-        1px solid #c9e9d4;
+    border: none;
 }
 
-
 .free-banner strong {
-
     color: #087541;
-
 }
 
 
 /* =====================================
-   ÁREA DE BOTÕES
+   BOTÕES
 ===================================== */
 
 .hero-buttons,
 .access-buttons {
-
     display: flex;
 
     justify-content: center;
@@ -698,14 +589,8 @@ li {
     margin-top: 25px;
 }
 
-
-/* =====================================
-   BOTÕES
-===================================== */
-
 .btn,
 button {
-
     background:
         linear-gradient(
             135deg,
@@ -732,18 +617,15 @@ button {
 
     font-size: 16px;
 
-    transition:
-        .3s;
+    transition: .3s;
 
     box-shadow:
         0 7px 18px
         rgba(6, 64, 47, .18);
 }
 
-
 .btn:hover,
 button:hover {
-
     background:
         linear-gradient(
             135deg,
@@ -761,11 +643,10 @@ button:hover {
 
 
 /* =====================================
-   BOTÃO PRINCIPAL VERDE
+   BOTÃO VERDE
 ===================================== */
 
 .green-btn {
-
     background:
         linear-gradient(
             135deg,
@@ -776,9 +657,7 @@ button:hover {
     color: white;
 }
 
-
 .green-btn:hover {
-
     background:
         linear-gradient(
             135deg,
@@ -793,8 +672,7 @@ button:hover {
 ===================================== */
 
 .outline-btn {
-
-    background: white;
+    background: transparent;
 
     color: #087052;
 
@@ -804,9 +682,7 @@ button:hover {
     box-shadow: none;
 }
 
-
 .outline-btn:hover {
-
     background: #eaf8ef;
 
     color: #06402f;
@@ -818,7 +694,6 @@ button:hover {
 ===================================== */
 
 label {
-
     display: block;
 
     color: #06402f;
@@ -828,11 +703,9 @@ label {
     margin-bottom: 8px;
 }
 
-
 input,
 select,
 textarea {
-
     width: 100%;
 
     padding: 14px 16px;
@@ -855,11 +728,9 @@ textarea {
     transition: .2s;
 }
 
-
 input:focus,
 select:focus,
 textarea:focus {
-
     outline: none;
 
     border-color: #087052;
@@ -875,7 +746,6 @@ textarea:focus {
 ===================================== */
 
 table {
-
     width: 100%;
 
     background: white;
@@ -891,9 +761,7 @@ table {
         rgba(0,0,0,.06);
 }
 
-
 th {
-
     background:
         linear-gradient(
             135deg,
@@ -908,18 +776,14 @@ th {
     text-align: left;
 }
 
-
 td {
-
     padding: 15px;
 
     border-bottom:
         1px solid #eee;
 }
 
-
 tr:hover {
-
     background: #f0faf6;
 }
 
@@ -929,23 +793,16 @@ tr:hover {
 ===================================== */
 
 #quizContainer {
-
     margin-top: 20px;
-
 }
 
-
 #quizContainer h3 {
-
     font-size: 22px;
 
     margin-bottom: 20px;
-
 }
 
-
 #quizContainer button {
-
     width: 100%;
 
     max-width: 600px;
@@ -966,9 +823,7 @@ tr:hover {
     box-shadow: none;
 }
 
-
 #quizContainer button:hover {
-
     background: #e2f4e9;
 
     color: #06402f;
@@ -983,14 +838,10 @@ tr:hover {
 ===================================== */
 
 #exerciciosContainer {
-
     margin-top: 20px;
-
 }
 
-
 #exerciciosContainer > div {
-
     padding: 20px;
 
     margin-bottom: 18px;
@@ -1003,9 +854,7 @@ tr:hover {
         1px solid #dcebe2;
 }
 
-
 #exerciciosContainer label {
-
     display: inline-block;
 
     color: #374151;
@@ -1013,12 +862,9 @@ tr:hover {
     font-weight: 500;
 
     margin-bottom: 5px;
-
 }
 
-
 #exerciciosContainer input[type="radio"] {
-
     width: auto;
 
     margin-right: 8px;
@@ -1033,31 +879,21 @@ tr:hover {
 
 #resultadoQuiz,
 #resultadoExercicios {
-
     padding: 12px 16px;
 
     border-radius: 10px;
 
     background: #f1f7f4;
-
 }
 
 
 /* =====================================
    SEPARADORES
+   REMOVIDOS
 ===================================== */
 
 hr {
-
-    border: none;
-
-    height: 1px;
-
-    background:
-        #dce8e2;
-
-    margin:
-        30px 0;
+    display: none;
 }
 
 
@@ -1067,7 +903,6 @@ hr {
 
 footer,
 .rodape {
-
     margin-top: auto;
 
     background:
@@ -1086,10 +921,8 @@ footer,
     width: 100%;
 }
 
-
 footer p,
 .rodape p {
-
     color: #dcebe2;
 
     font-size: 15px;
@@ -1104,124 +937,81 @@ footer p,
 
 @media (max-width: 768px) {
 
-
     nav {
-
         flex-wrap: wrap;
 
         gap: 10px 18px;
 
         padding:
             15px 12px;
-
     }
-
 
     nav a {
-
         font-size: 14px;
-
     }
-
 
     .banner {
-
-        min-height: 430px;
+        min-height: 340px;
 
         padding:
-            60px 20px;
-
+            50px 20px;
     }
-
 
     .banner h1 {
-
         font-size: 42px;
-
     }
-
 
     .banner p {
-
         font-size: 18px;
-
     }
-
 
     .container {
-
         width: 92%;
-
     }
-
 
     .card {
-
-        padding: 25px 20px;
+        padding: 10px 0;
 
         margin:
-            25px 0;
-
+            40px 0;
     }
-
 
     h2 {
-
         font-size: 29px;
-
     }
-
 
     p {
-
         font-size: 16px;
-
     }
-
 
     li {
-
         font-size: 16px;
-
     }
-
 
     .features,
     .steps {
-
         grid-template-columns: 1fr;
-
     }
-
 
     .hero-buttons,
     .access-buttons {
-
         flex-direction: column;
 
         width: 100%;
-
     }
-
 
     .hero-buttons .btn,
     .access-buttons .btn {
-
         width: 100%;
 
         max-width: 320px;
 
         text-align: center;
-
     }
-
 
     .free-banner {
-
         align-items: flex-start;
-
     }
-
 }
 
 
@@ -1231,44 +1021,31 @@ footer p,
 
 @media (max-width: 420px) {
 
+    .banner {
+        min-height: 320px;
+    }
 
     .banner h1 {
-
         font-size: 36px;
-
     }
-
 
     .banner p {
-
         font-size: 17px;
-
     }
-
 
     .card {
-
-        padding: 20px 16px;
-
+        padding: 10px 0;
     }
-
 
     h2 {
-
         font-size: 26px;
-
     }
-
 
     .btn,
     button {
-
         padding:
             13px 22px;
 
         font-size: 15px;
-
     }
-
 }
-```
