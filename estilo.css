@@ -124,18 +124,17 @@ nav a:hover::after {
 
 
 /* =========================================================
-   BANNER / CAPA
+   BANNER SOMENTE NA PÁGINA INICIAL
    ========================================================= */
 
 .banner {
     width: 100%;
 
-    min-height: 430px;
+    height: 380px;
 
-    padding: 80px 20px;
+    padding: 50px 20px;
 
     display: flex;
-
     flex-direction: column;
 
     justify-content: center;
@@ -151,48 +150,17 @@ nav a:hover::after {
 
     background:
         linear-gradient(
-            rgba(4, 61, 44, .72),
-            rgba(4, 61, 44, .78)
+            rgba(4, 61, 44, .58),
+            rgba(4, 61, 44, .68)
         ),
         url("./fundo.jpg");
 
     background-size: cover;
-
     background-position: center;
-}
+    background-repeat: no-repeat;
 
-.banner::before {
-    content: "";
-
-    position: absolute;
-
-    width: 420px;
-    height: 420px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(128, 255, 210, .08);
-
-    top: -210px;
-    right: -120px;
-}
-
-.banner::after {
-    content: "";
-
-    position: absolute;
-
-    width: 320px;
-    height: 320px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(128, 255, 210, .06);
-
-    bottom: -180px;
-    left: -120px;
+    box-shadow:
+        0 8px 25px rgba(6, 64, 47, .15);
 }
 
 .banner h1 {
@@ -202,33 +170,31 @@ nav a:hover::after {
     color: white;
 
     font-size:
-        clamp(38px, 6vw, 68px);
+        clamp(38px, 6vw, 64px);
 
     font-weight: 900;
 
-    letter-spacing: 1px;
-
-    margin-bottom: 18px;
+    margin: 10px 0 15px;
 
     text-shadow:
-        0 4px 15px rgba(0, 0, 0, .4);
+        0 3px 12px rgba(0, 0, 0, .45);
 }
 
 .banner p {
     position: relative;
     z-index: 2;
 
-    max-width: 850px;
+    max-width: 800px;
 
     color: white;
 
     font-size:
-        clamp(17px, 2.5vw, 24px);
+        clamp(16px, 2.2vw, 21px);
 
     line-height: 1.6;
 
     text-shadow:
-        0 3px 8px rgba(0, 0, 0, .45);
+        0 2px 8px rgba(0, 0, 0, .5);
 }
 
 
