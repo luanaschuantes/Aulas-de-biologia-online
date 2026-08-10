@@ -1,5 +1,7 @@
+```html
 <!DOCTYPE html>
-<html lang="pt-br">
+
+<html lang="pt-BR">
 
 <head>
 
@@ -23,9 +25,9 @@
 <body>
 
 
-<!-- =========================================================
+<!-- =====================================================
      MENU
-========================================================= -->
+====================================================== -->
 
 <nav>
 
@@ -42,150 +44,395 @@
 </nav>
 
 
-<!-- =========================================================
-     BANNER
-========================================================= -->
+<!-- =====================================================
+     TÍTULO
+====================================================== -->
 
-<header class="banner">
+<h1>Conteúdos de Biologia</h1>
 
-    <h1>Conteúdos de Biologia</h1>
+<p>
+    Estude, responda exercícios e acompanhe seu aprendizado.
+</p>
+
+
+<!-- =====================================================
+     INFORMAÇÕES DO ALUNO
+====================================================== -->
+
+<section class="card">
+
+    <h2>
+        Olá,
+        <span id="nomeAluno">Aluno</span>!
+    </h2>
 
     <p>
-        Estude, responda exercícios e acompanhe seu aprendizado
+
+        Seu plano atual:
+
+        <strong id="planoAluno">
+            Carregando...
+        </strong>
+
     </p>
 
-</header>
+</section>
 
 
-<!-- =========================================================
-     CONTEÚDO
-========================================================= -->
+<!-- =====================================================
+     PLANO SIMPLES
+====================================================== -->
 
-<main class="container">
+<section
+    id="conteudoSimples"
+    class="card"
+    style="display:none;"
+>
+
+    <h2>🧠 Plano Simples</h2>
+
+    <p>
+        No Plano Simples você tem acesso aos quizzes
+        de Biologia para testar seus conhecimentos.
+    </p>
 
 
-    <!-- INFORMAÇÕES DO ALUNO -->
+    <h3>📝 Quizzes de Biologia</h3>
 
-    <section class="card">
+    <div id="quizContainer"></div>
 
-        <h2>Olá, <span id="nomeAluno">Aluno</span>!</h2>
+    <br>
+
+    <button
+        class="btn"
+        type="button"
+        onclick="novoQuiz()"
+    >
+        Nova rodada
+    </button>
+
+    <p
+        id="resultadoQuiz"
+        style="margin-top:20px;font-weight:bold;"
+    ></p>
+
+</section>
+
+
+<!-- =====================================================
+     PLANO COMPLETO
+====================================================== -->
+
+<section
+    id="conteudoCompleto"
+    class="card"
+    style="display:none;"
+>
+
+    <h2>📚 Plano Completo</h2>
+
+    <p>
+
+        Parabéns! Você possui acesso ao Plano Completo.
+
+        Aqui estão disponíveis todas as aulas de Biologia,
+        além dos quizzes e exercícios.
+
+    </p>
+
+
+    <!-- =================================================
+         AULA 1 - CITOLOGIA
+    ================================================== -->
+
+    <article class="card">
+
+        <h2>🔬 Aula 1 - Citologia</h2>
+
+        <h3>A célula</h3>
 
         <p>
-            Seu plano atual:
-            <strong id="planoAluno">Carregando...</strong>
+
+            A célula é a unidade básica dos seres vivos.
+            Todos os organismos são formados por uma ou mais
+            células.
+
         </p>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         PLANO SIMPLES
-    ====================================================== -->
-
-    <section
-        id="conteudoSimples"
-        class="card"
-        style="display:none;"
-    >
-
-        <h2>🧠 Quizzes de Biologia</h2>
 
         <p>
-            Responda às perguntas abaixo.
-            Quando você responder, o sistema mostrará
-            imediatamente se sua resposta está correta.
+
+            As células podem ser classificadas em
+            <strong>procariontes</strong> e
+            <strong>eucariontes</strong>.
+
+            As células procariontes não possuem núcleo
+            delimitado por membrana, enquanto as células
+            eucariontes possuem núcleo organizado.
+
         </p>
 
+        <p>
 
-        <div id="quizContainer"></div>
+            Entre as principais estruturas celulares estão
+            as mitocôndrias, ribossomos, complexo golgiense,
+            retículo endoplasmático e núcleo.
 
+        </p>
 
-        <br>
-
-
-        <button
-            class="btn"
-            type="button"
-            onclick="novoQuiz()"
-        >
-            Nova rodada
-        </button>
+    </article>
 
 
-        <p
-            id="resultadoQuiz"
-            style="margin-top:20px;font-weight:bold;"
-        ></p>
+    <!-- =================================================
+         AULA 2 - GENÉTICA
+    ================================================== -->
 
-    </section>
+    <article class="card">
 
+        <h2>🧬 Aula 2 - Genética</h2>
 
+        <h3>Genes, DNA e hereditariedade</h3>
 
-    <!-- =====================================================
-         PLANO COMPLETO
-    ====================================================== -->
+        <p>
 
-    <section
-        id="conteudoCompleto"
-        class="card"
-        style="display:none;"
-    >
+            A genética é a área da Biologia responsável pelo
+            estudo da hereditariedade e da transmissão das
+            características dos seres vivos.
 
-        <h2>📚 Aula de Biologia</h2>
+        </p>
 
+        <p>
 
-        <article>
+            O DNA é a molécula que armazena as informações
+            genéticas. Os genes são segmentos do DNA que
+            participam da determinação de características
+            dos organismos.
 
-            <h3>Citologia: a célula</h3>
+        </p>
 
-            <p>
+        <p>
 
-                A célula é a unidade básica dos seres vivos.
-                Todos os organismos são formados por uma ou mais
-                células. Alguns seres vivos possuem apenas uma célula,
-                como muitas bactérias, enquanto outros são formados
-                por trilhões de células.
+            A transmissão das características dos pais para
+            os descendentes ocorre por meio da hereditariedade.
 
-            </p>
+        </p>
 
-            <p>
+        <h3>Leis de Mendel</h3>
 
-                As células podem ser classificadas em
-                <strong>procariontes</strong> e
-                <strong>eucariontes</strong>.
+        <p>
 
-                As células procariontes não possuem núcleo delimitado
-                por membrana. Já as células eucariontes possuem um
-                núcleo organizado, onde está localizado grande parte
-                do material genético.
+            Gregor Mendel realizou experimentos com ervilhas
+            e estabeleceu princípios importantes para o estudo
+            da hereditariedade.
 
-            </p>
+        </p>
 
-            <p>
-
-                Nas células eucariontes também encontramos diversas
-                organelas, como mitocôndrias, ribossomos, complexo
-                golgiense e retículo endoplasmático. Cada uma dessas
-                estruturas desempenha funções importantes para o
-                funcionamento celular.
-
-            </p>
-
-        </article>
+    </article>
 
 
-        <br>
+    <!-- =================================================
+         AULA 3 - ECOLOGIA
+    ================================================== -->
 
+    <article class="card">
+
+        <h2>🌱 Aula 3 - Ecologia</h2>
+
+        <h3>Relações entre os seres vivos e o ambiente</h3>
+
+        <p>
+
+            A Ecologia estuda as relações dos seres vivos
+            entre si e com o ambiente em que vivem.
+
+        </p>
+
+        <p>
+
+            Os organismos fazem parte de populações,
+            comunidades e ecossistemas.
+
+        </p>
+
+        <h3>Cadeias alimentares</h3>
+
+        <p>
+
+            Nas cadeias alimentares, a energia passa de um
+            organismo para outro através da alimentação.
+
+        </p>
+
+        <p>
+
+            Os produtores, como as plantas, produzem seu
+            próprio alimento. Os consumidores obtêm energia
+            alimentando-se de outros organismos.
+
+        </p>
+
+        <p>
+
+            Os decompositores participam da decomposição
+            da matéria orgânica e da reciclagem de nutrientes.
+
+        </p>
+
+    </article>
+
+
+    <!-- =================================================
+         AULA 4 - EVOLUÇÃO
+    ================================================== -->
+
+    <article class="card">
+
+        <h2>🦎 Aula 4 - Evolução</h2>
+
+        <h3>Evolução dos seres vivos</h3>
+
+        <p>
+
+            A evolução biológica corresponde às mudanças
+            que ocorrem nas populações ao longo das gerações.
+
+        </p>
+
+        <p>
+
+            Charles Darwin propôs a teoria da seleção natural,
+            segundo a qual indivíduos com características
+            vantajosas podem apresentar maior sucesso
+            reprodutivo em determinadas condições ambientais.
+
+        </p>
+
+        <p>
+
+            A seleção natural, mutações, recombinação genética
+            e outros processos contribuem para a diversidade
+            dos seres vivos.
+
+        </p>
+
+    </article>
+
+
+    <!-- =================================================
+         AULA 5 - FISIOLOGIA
+    ================================================== -->
+
+    <article class="card">
+
+        <h2>🫀 Aula 5 - Fisiologia Humana</h2>
+
+        <h3>Funcionamento do organismo</h3>
+
+        <p>
+
+            A fisiologia estuda o funcionamento dos organismos
+            e de seus sistemas.
+
+        </p>
+
+        <h3>Sistema Digestório</h3>
+
+        <p>
+
+            O sistema digestório é responsável pela digestão
+            dos alimentos e pela absorção de nutrientes.
+
+        </p>
+
+        <h3>Sistema Respiratório</h3>
+
+        <p>
+
+            O sistema respiratório permite as trocas gasosas,
+            possibilitando a entrada de oxigênio e a eliminação
+            de gás carbônico.
+
+        </p>
+
+        <h3>Sistema Circulatório</h3>
+
+        <p>
+
+            O sistema circulatório transporta sangue, oxigênio,
+            nutrientes e outras substâncias pelo organismo.
+
+        </p>
+
+        <h3>Sistema Nervoso</h3>
+
+        <p>
+
+            O sistema nervoso coordena diversas funções do
+            organismo e permite a percepção e resposta
+            aos estímulos do ambiente.
+
+        </p>
+
+    </article>
+
+
+    <!-- =================================================
+         AULA 6 - BOTÂNICA
+    ================================================== -->
+
+    <article class="card">
+
+        <h2>🌿 Aula 6 - Botânica</h2>
+
+        <h3>Estudo das plantas</h3>
+
+        <p>
+
+            A Botânica é a área da Biologia dedicada ao estudo
+            das plantas.
+
+        </p>
+
+        <p>
+
+            As plantas são organismos eucariontes,
+            multicelulares e, em sua maioria, autotróficos,
+            realizando fotossíntese.
+
+        </p>
+
+        <h3>Fotossíntese</h3>
+
+        <p>
+
+            Na fotossíntese, as plantas utilizam energia
+            luminosa para produzir matéria orgânica a partir
+            de água e gás carbônico.
+
+        </p>
+
+        <h3>Estruturas vegetais</h3>
+
+        <p>
+
+            Entre as principais estruturas das plantas estão
+            raízes, caules, folhas, flores, frutos e sementes.
+
+        </p>
+
+    </article>
+
+
+    <!-- =================================================
+         EXERCÍCIOS
+    ================================================== -->
+
+    <article class="card">
 
         <h2>📝 Lista de Exercícios</h2>
 
-
         <div id="exerciciosContainer"></div>
 
-
         <br>
-
 
         <button
             class="btn"
@@ -195,294 +442,102 @@
             Corrigir exercícios
         </button>
 
-
         <p
             id="resultadoExercicios"
             style="margin-top:20px;font-weight:bold;"
         ></p>
 
-    </section>
+    </article>
 
 
-
-    <!-- =====================================================
-         CASO NÃO TENHA PLANO
-    ====================================================== -->
-
-    <section
-        id="semPlano"
-        class="card"
-        style="display:none;"
-    >
-
-        <h2>Plano não encontrado</h2>
-
-        <p>
-            Não foi possível identificar o plano deste aluno.
-        </p>
-
-        <br>
-
-        <a
-            href="servicos.html"
-            class="btn"
-        >
-            Escolher plano
-        </a>
-
-    </section>
+</section>
 
 
-</main>
+<!-- =====================================================
+     CASO NÃO TENHA PLANO
+====================================================== -->
 
+<section
+    id="semPlano"
+    class="card"
+    style="display:none;"
+>
 
-<!-- =========================================================
-     RODAPÉ
-========================================================= -->
-
-<footer class="rodape">
+    <h2>Plano não encontrado</h2>
 
     <p>
-        &copy; 2026 BioMentoria - Plataforma de Biologia
+        Não foi possível identificar o plano deste aluno.
     </p>
 
-</footer>
+    <br>
+
+    <a
+        href="servicos.html"
+        class="btn"
+    >
+        Escolher plano
+    </a>
+
+</section>
 
 
+<!-- =====================================================
+     RODAPÉ
+====================================================== -->
+
+<p>
+
+    &copy; 2026 BioMentoria - Plataforma de Biologia
+
+</p>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
 
 <script>
 
 
-// ============================================================
+// ========================================================
 // PEGAR ID DO ALUNO
-// ============================================================
+// ========================================================
 
 const parametros =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
+
 
 const alunoId =
     parametros.get('aluno_id');
 
 
+// ========================================================
+// VERIFICAR ID
+// ========================================================
 
-// ============================================================
-// BANCO DE PERGUNTAS DO PLANO SIMPLES
-// ============================================================
+if (!alunoId) {
 
-const perguntasQuiz = [
+    document.getElementById(
+        'planoAluno'
+    ).textContent =
+        'Não identificado';
 
-    {
-        pergunta: "Qual é a unidade básica dos seres vivos?",
+    document.getElementById(
+        'semPlano'
+    ).style.display = 'block';
 
-        alternativas: [
-            "Órgão",
-            "Célula",
-            "Tecido",
-            "Sistema"
-        ],
+}
 
-        correta: 1
-    },
 
+// ========================================================
+// BUSCAR ALUNO
+// ========================================================
 
-    {
-        pergunta: "Qual organela é responsável pela produção de energia na célula?",
+if (alunoId) {
 
-        alternativas: [
-            "Mitocôndria",
-            "Ribossomo",
-            "Lisossomo",
-            "Núcleo"
-        ],
-
-        correta: 0
-    },
-
-
-    {
-        pergunta: "Onde está localizado o material genético nas células eucariontes?",
-
-        alternativas: [
-            "Na parede celular",
-            "No núcleo",
-            "No citoplasma",
-            "No ribossomo"
-        ],
-
-        correta: 1
-    },
-
-
-    {
-        pergunta: "Qual estrutura controla a entrada e saída de substâncias da célula?",
-
-        alternativas: [
-            "Membrana plasmática",
-            "Mitocôndria",
-            "Núcleo",
-            "Ribossomo"
-        ],
-
-        correta: 0
-    },
-
-
-    {
-        pergunta: "Qual molécula contém as informações genéticas dos seres vivos?",
-
-        alternativas: [
-            "ATP",
-            "Glicose",
-            "DNA",
-            "Água"
-        ],
-
-        correta: 2
-    },
-
-
-    {
-        pergunta: "Qual organela participa da produção de proteínas?",
-
-        alternativas: [
-            "Ribossomo",
-            "Lisossomo",
-            "Vacúolo",
-            "Mitocôndria"
-        ],
-
-        correta: 0
-    },
-
-
-    {
-        pergunta: "Como são chamadas as células que não possuem núcleo delimitado por membrana?",
-
-        alternativas: [
-            "Eucariontes",
-            "Procariontes",
-            "Diploides",
-            "Germinativas"
-        ],
-
-        correta: 1
-    },
-
-
-    {
-        pergunta: "Qual processo permite que uma célula se divida em duas células geneticamente semelhantes?",
-
-        alternativas: [
-            "Mitose",
-            "Fotossíntese",
-            "Respiração",
-            "Digestão"
-        ],
-
-        correta: 0
-    },
-
-
-    {
-        pergunta: "Qual é o principal pigmento responsável pela fotossíntese nas plantas?",
-
-        alternativas: [
-            "Hemoglobina",
-            "Clorofila",
-            "Melanina",
-            "Queratina"
-        ],
-
-        correta: 1
-    },
-
-
-    {
-        pergunta: "Qual sistema do corpo humano é responsável pelo transporte do sangue?",
-
-        alternativas: [
-            "Sistema digestório",
-            "Sistema respiratório",
-            "Sistema circulatório",
-            "Sistema nervoso"
-        ],
-
-        correta: 2
-    }
-
-];
-
-
-
-// ============================================================
-// EXERCÍCIOS DO PLANO COMPLETO
-// ============================================================
-
-const exercicios = [
-
-    {
-        pergunta:
-            "1. Qual é a principal diferença entre uma célula procarionte e uma eucarionte?",
-
-        resposta:
-            "A célula procarionte não possui núcleo delimitado por membrana, enquanto a célula eucarionte possui."
-    },
-
-
-    {
-        pergunta:
-            "2. Explique a principal função das mitocôndrias.",
-
-        resposta:
-            "As mitocôndrias participam da produção de energia para a célula por meio da respiração celular."
-    },
-
-
-    {
-        pergunta:
-            "3. Qual é a função do DNA?",
-
-        resposta:
-            "O DNA armazena as informações genéticas dos organismos."
-    },
-
-
-    {
-        pergunta:
-            "4. O que são organelas celulares?",
-
-        resposta:
-            "São estruturas presentes nas células que desempenham funções específicas importantes para o funcionamento celular."
-    },
-
-
-    {
-        pergunta:
-            "5. Qual é a importância da membrana plasmática?",
-
-        resposta:
-            "Ela delimita a célula e controla a entrada e saída de substâncias."
-    }
-
-];
-
-
-
-// ============================================================
-// CARREGAR ALUNO
-// ============================================================
-
-function carregarAluno() {
-
-    if (!alunoId) {
-
-        mostrarSemPlano();
-
-        return;
-    }
-
-
-    fetch('/aluno/' + alunoId)
+    fetch(`/aluno/${alunoId}`)
 
         .then(response => {
 
@@ -498,161 +553,195 @@ function carregarAluno() {
 
         })
 
-
         .then(aluno => {
+
+
+            // ============================================
+            // NOME
+            // ============================================
 
             document.getElementById(
                 'nomeAluno'
-            ).textContent = aluno.nome;
+            ).textContent =
+                aluno.nome;
 
+
+            // ============================================
+            // PLANO
+            // ============================================
 
             const plano =
-                (aluno.plano || '').toLowerCase();
+                aluno.plano;
+
+
+            const planoFormatado =
+                plano === 'simples'
+                    ? 'Plano Simples'
+                    : plano === 'completo'
+                        ? 'Plano Completo'
+                        : 'Não identificado';
 
 
             document.getElementById(
                 'planoAluno'
             ).textContent =
-                formatarPlano(plano);
+                planoFormatado;
 
 
-            mostrarConteudo(plano);
+            // ============================================
+            // MOSTRAR CONTEÚDO
+            // ============================================
+
+            if (plano === 'simples') {
+
+                document.getElementById(
+                    'conteudoSimples'
+                ).style.display = 'block';
+
+
+                document.getElementById(
+                    'conteudoCompleto'
+                ).style.display = 'none';
+
+
+                iniciarQuiz();
+
+            }
+
+
+            else if (plano === 'completo') {
+
+                document.getElementById(
+                    'conteudoSimples'
+                ).style.display = 'block';
+
+
+                document.getElementById(
+                    'conteudoCompleto'
+                ).style.display = 'block';
+
+
+                iniciarQuiz();
+
+                carregarExercicios();
+
+            }
+
+
+            else {
+
+                document.getElementById(
+                    'semPlano'
+                ).style.display = 'block';
+
+            }
 
         })
-
 
         .catch(error => {
 
             console.error(error);
 
             document.getElementById(
-                'nomeAluno'
+                'planoAluno'
             ).textContent =
-                'Aluno não encontrado';
+                'Erro ao carregar plano';
 
-            mostrarSemPlano();
+            document.getElementById(
+                'semPlano'
+            ).style.display =
+                'block';
 
         });
 
 }
 
 
+// ========================================================
+// QUIZ
+// ========================================================
 
-// ============================================================
-// FORMATAR PLANO
-// ============================================================
+const perguntas = [
 
-function formatarPlano(plano) {
+    {
+        pergunta:
+            'Qual é a unidade básica dos seres vivos?',
 
-    if (
-        plano === 'simples' ||
-        plano === 'basico'
-    ) {
+        respostas: [
+            'Célula',
+            'Órgão',
+            'Tecido',
+            'Sistema'
+        ],
 
-        return 'Plano Simples - R$ 15/mês';
+        correta: 0
+    },
 
+    {
+        pergunta:
+            'Qual molécula armazena a informação genética?',
+
+        respostas: [
+            'Glicose',
+            'DNA',
+            'Água',
+            'Lipídio'
+        ],
+
+        correta: 1
+    },
+
+    {
+        pergunta:
+            'Qual processo permite que as plantas produzam matéria orgânica usando luz?',
+
+        respostas: [
+            'Respiração',
+            'Digestão',
+            'Fotossíntese',
+            'Fermentação'
+        ],
+
+        correta: 2
+    },
+
+    {
+        pergunta:
+            'Quem é conhecido pelos estudos clássicos de hereditariedade com ervilhas?',
+
+        respostas: [
+            'Charles Darwin',
+            'Gregor Mendel',
+            'Louis Pasteur',
+            'Robert Hooke'
+        ],
+
+        correta: 1
+    },
+
+    {
+        pergunta:
+            'Qual área da Biologia estuda as relações dos seres vivos com o ambiente?',
+
+        respostas: [
+            'Ecologia',
+            'Botânica',
+            'Citologia',
+            'Anatomia'
+        ],
+
+        correta: 0
     }
 
-
-    if (
-        plano === 'completo' ||
-        plano === 'premium'
-    ) {
-
-        return 'Plano Completo - R$ 30/mês';
-
-    }
+];
 
 
-    return 'Não informado';
+function iniciarQuiz() {
+
+    novoQuiz();
 
 }
 
-
-
-// ============================================================
-// MOSTRAR CONTEÚDO
-// ============================================================
-
-function mostrarConteudo(plano) {
-
-    document.getElementById(
-        'conteudoSimples'
-    ).style.display = 'none';
-
-
-    document.getElementById(
-        'conteudoCompleto'
-    ).style.display = 'none';
-
-
-    document.getElementById(
-        'semPlano'
-    ).style.display = 'none';
-
-
-
-    // PLANO SIMPLES
-
-    if (
-        plano === 'simples' ||
-        plano === 'basico'
-    ) {
-
-        document.getElementById(
-            'conteudoSimples'
-        ).style.display = 'block';
-
-
-        novoQuiz();
-
-        return;
-    }
-
-
-
-    // PLANO COMPLETO
-
-    if (
-        plano === 'completo' ||
-        plano === 'premium'
-    ) {
-
-        document.getElementById(
-            'conteudoCompleto'
-        ).style.display = 'block';
-
-
-        carregarExercicios();
-
-        return;
-    }
-
-
-
-    mostrarSemPlano();
-
-}
-
-
-
-// ============================================================
-// MOSTRAR SEM PLANO
-// ============================================================
-
-function mostrarSemPlano() {
-
-    document.getElementById(
-        'semPlano'
-    ).style.display = 'block';
-
-}
-
-
-
-// ============================================================
-// NOVO QUIZ
-// ============================================================
 
 function novoQuiz() {
 
@@ -668,168 +757,84 @@ function novoQuiz() {
         );
 
 
-    container.innerHTML = '';
-
     resultado.textContent = '';
 
 
-
-    // Embaralha as perguntas
-
-    const perguntas =
-        [...perguntasQuiz]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 5);
-
-
-
-    perguntas.forEach((questao, indice) => {
+    const pergunta =
+        perguntas[
+            Math.floor(
+                Math.random() *
+                perguntas.length
+            )
+        ];
 
 
-        const div =
-            document.createElement('div');
+    let html =
+        `<h3>${pergunta.pergunta}</h3>`;
 
 
-        div.style.marginBottom = '35px';
+    pergunta.respostas.forEach(
+        (resposta, indice) => {
+
+            html += `
+
+                <button
+                    type="button"
+                    class="btn"
+                    style="display:block;margin:8px 0;"
+                    onclick="responderQuiz(${indice}, ${pergunta.correta})"
+                >
+                    ${resposta}
+                </button>
+
+            `;
+
+        }
+    );
 
 
-        const titulo =
-            document.createElement('h3');
-
-
-        titulo.textContent =
-            (indice + 1) +
-            '. ' +
-            questao.pergunta;
-
-
-        div.appendChild(titulo);
-
-
-
-        questao.alternativas.forEach(
-            (alternativa, index) => {
-
-
-                const botao =
-                    document.createElement('button');
-
-
-                botao.type = 'button';
-
-
-                botao.textContent =
-                    alternativa;
-
-
-                botao.style.display = 'block';
-
-                botao.style.width = '100%';
-
-                botao.style.margin =
-                    '10px 0';
-
-                botao.style.textAlign =
-                    'left';
-
-
-
-                botao.onclick = function () {
-
-                    verificarResposta(
-                        botao,
-                        index,
-                        questao.correta,
-                        div
-                    );
-
-                };
-
-
-                div.appendChild(botao);
-
-            }
-        );
-
-
-        container.appendChild(div);
-
-    });
+    container.innerHTML = html;
 
 }
 
 
-
-// ============================================================
-// VERIFICAR RESPOSTA DO QUIZ
-// ============================================================
-
-function verificarResposta(
-    botao,
+function responderQuiz(
     resposta,
-    correta,
-    container
+    correta
 ) {
 
-
-    const botoes =
-        container.querySelectorAll(
-            'button'
+    const resultado =
+        document.getElementById(
+            'resultadoQuiz'
         );
-
-
-    // Impede responder novamente
-
-    botoes.forEach(btn => {
-
-        btn.disabled = true;
-
-    });
-
 
 
     if (resposta === correta) {
 
-        botao.style.background =
-            '#198754';
+        resultado.textContent =
+            '✅ Resposta correta! Muito bem!';
 
-        botao.style.color =
-            'white';
-
-
-        botao.textContent +=
-            ' ✓ Correto!';
+        resultado.style.color =
+            'green';
 
     }
 
     else {
 
-        botao.style.background =
-            '#dc3545';
+        resultado.textContent =
+            '❌ Resposta incorreta. Tente novamente!';
 
-        botao.style.color =
-            'white';
-
-
-        botao.textContent +=
-            ' ✗ Errado!';
-
-
-        botoes[correta].style.background =
-            '#198754';
-
-        botoes[correta].style.color =
-            'white';
+        resultado.style.color =
+            'red';
 
     }
 
 }
 
 
-
-// ============================================================
-// CARREGAR EXERCÍCIOS
-// ============================================================
+// ========================================================
+// EXERCÍCIOS
+// ========================================================
 
 function carregarExercicios() {
 
@@ -839,156 +844,221 @@ function carregarExercicios() {
         );
 
 
-    container.innerHTML = '';
+    container.innerHTML = `
+
+        <div>
+
+            <p>
+                <strong>1.</strong>
+                Qual estrutura contém o material genético
+                nas células eucariontes?
+            </p>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="q1"
+                    value="a"
+                >
+
+                Mitocôndria
+
+            </label>
+
+            <br>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="q1"
+                    value="b"
+                >
+
+                Núcleo
+
+            </label>
+
+            <br>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="q1"
+                    value="c"
+                >
+
+                Ribossomo
+
+            </label>
+
+        </div>
 
 
-    exercicios.forEach(
-        (exercicio, index) => {
+        <br>
 
 
-            const div =
-                document.createElement('div');
+        <div>
+
+            <p>
+                <strong>2.</strong>
+                Qual processo é responsável pela produção
+                de alimento pelas plantas?
+            </p>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="q2"
+                    value="a"
+                >
+
+                Fotossíntese
+
+            </label>
+
+            <br>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="q2"
+                    value="b"
+                >
+
+                Digestão
+
+            </label>
+
+            <br>
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="q2"
+                    value="c"
+                >
+
+                Respiração
+
+            </label>
+
+        </div>
 
 
-            div.style.marginBottom =
-                '30px';
+        <br>
 
 
+        <div>
 
-            const pergunta =
-                document.createElement('h3');
+            <p>
+                <strong>3.</strong>
+                Qual área estuda as relações entre os seres
+                vivos e o ambiente?
+            </p>
 
+            <label>
 
-            pergunta.textContent =
-                exercicio.pergunta;
+                <input
+                    type="radio"
+                    name="q3"
+                    value="a"
+                >
 
+                Genética
 
-            div.appendChild(
-                pergunta
-            );
+            </label>
 
+            <br>
 
+            <label>
 
-            const textarea =
-                document.createElement('textarea');
+                <input
+                    type="radio"
+                    name="q3"
+                    value="b"
+                >
 
+                Ecologia
 
-            textarea.id =
-                'resposta-' + index;
+            </label>
 
+            <br>
 
-            textarea.placeholder =
-                'Digite sua resposta...';
+            <label>
 
+                <input
+                    type="radio"
+                    name="q3"
+                    value="c"
+                >
 
-            textarea.rows = 5;
+                Botânica
 
+            </label>
 
-            div.appendChild(
-                textarea
-            );
+        </div>
 
-
-
-            const resposta =
-                document.createElement('p');
-
-
-            resposta.id =
-                'correcao-' + index;
-
-
-            resposta.style.display =
-                'none';
-
-
-            resposta.style.background =
-                '#f0faf6';
-
-
-            resposta.style.padding =
-                '15px';
-
-
-            resposta.style.borderRadius =
-                '12px';
-
-
-            resposta.style.marginTop =
-                '10px';
-
-
-            div.appendChild(
-                resposta
-            );
-
-
-            container.appendChild(
-                div
-            );
-
-        }
-    );
+    `;
 
 }
 
 
-
-// ============================================================
-// CORRIGIR EXERCÍCIOS
-// ============================================================
-
 function corrigirExercicios() {
 
-    exercicios.forEach(
-        (exercicio, index) => {
+    let pontos = 0;
 
 
-            const resposta =
-                document.getElementById(
-                    'resposta-' + index
-                );
+    const q1 =
+        document.querySelector(
+            'input[name="q1"]:checked'
+        );
 
 
-            const correcao =
-                document.getElementById(
-                    'correcao-' + index
-                );
+    const q2 =
+        document.querySelector(
+            'input[name="q2"]:checked'
+        );
 
 
-            correcao.style.display =
-                'block';
+    const q3 =
+        document.querySelector(
+            'input[name="q3"]:checked'
+        );
 
 
-            correcao.innerHTML =
+    if (q1 && q1.value === 'b') {
 
-                '<strong>Resposta esperada:</strong><br>' +
+        pontos++;
 
-                exercicio.resposta;
+    }
 
-        }
-    );
+
+    if (q2 && q2.value === 'a') {
+
+        pontos++;
+
+    }
+
+
+    if (q3 && q3.value === 'b') {
+
+        pontos++;
+
+    }
 
 
     document.getElementById(
         'resultadoExercicios'
     ).textContent =
-        'Exercícios corrigidos! Compare suas respostas com as respostas esperadas.';
+        `Você acertou ${pontos} de 3 exercícios.`;
 
 }
-
-
-
-// ============================================================
-// INICIAR
-// ============================================================
-
-window.onload = function () {
-
-    carregarAluno();
-
-};
-
 
 </script>
 
@@ -996,3 +1066,4 @@ window.onload = function () {
 </body>
 
 </html>
+```
