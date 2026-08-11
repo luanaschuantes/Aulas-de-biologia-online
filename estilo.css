@@ -41,6 +41,8 @@ body {
 
     display: flex;
     flex-direction: column;
+
+    padding-top: 70px; /* espaço para a barra fixa */
 }
 
 
@@ -50,9 +52,9 @@ body {
 
 nav {
     width: 100%;
-    min-height: 70px;
+    height: 70px;
 
-    padding: 14px 5%;
+    padding: 0 5%;
 
     display: flex;
     justify-content: center;
@@ -70,8 +72,9 @@ nav {
     box-shadow:
         0 5px 20px rgba(0, 0, 0, .15);
 
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     z-index: 1000;
 }
 
@@ -1231,11 +1234,12 @@ body:not(.pagina-inicial) > .card {
 @media (max-width: 768px) {
 
     nav {
+        height: 70px;
         gap:
             8px 18px;
 
         padding:
-            13px 10px;
+            0 10px;
     }
 
     nav a {
@@ -1378,6 +1382,7 @@ body:not(.pagina-inicial) > .card {
 @media (max-width: 420px) {
 
     nav {
+        height: 70px;
         gap:
             6px 12px;
     }
