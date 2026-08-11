@@ -42,7 +42,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    padding-top: 70px; /* espaço para a barra fixa */
+    padding-top: 70px;
 }
 
 
@@ -228,136 +228,49 @@ body.pagina-inicial .banner {
 
 
 /* =========================================================
-   BANNER ANTIGO
-   Compatibilidade com páginas que usam .banner
+   BANNER DAS PÁGINAS INTERNAS (padrão verde e centralizado)
    ========================================================= */
 
 .banner {
     width: 100%;
+    text-align: center;
+    padding: 35px 20px 20px;
 }
 
 .banner h1 {
-    position: relative;
-
-    z-index: 2;
-
-    color: white;
-
-    font-size:
-        clamp(38px, 6vw, 64px);
-
+    color: #159a60;
+    font-size: clamp(32px, 5vw, 50px);
     font-weight: 900;
-
-    margin: 10px 0 15px;
-
-    text-shadow:
-        0 3px 12px
-        rgba(0, 0, 0, .45);
+    margin: 20px auto 10px;
+    text-align: center;
+    text-shadow: none;
 }
 
 .banner p {
-    position: relative;
-
-    z-index: 2;
-
+    color: #52615a;
     max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.6;
+    text-shadow: none;
+}
 
+
+/* =========================================================
+   PÁGINA INICIAL - título branco
+   ========================================================= */
+
+body.pagina-inicial .hero h1,
+body.pagina-inicial .banner h1 {
     color: white;
-
-    font-size:
-        clamp(16px, 2.2vw, 21px);
-
-    line-height: 1.6;
-
-    text-shadow:
-        0 2px 8px
-        rgba(0, 0, 0, .5);
+    text-shadow: 0 3px 12px rgba(0, 0, 0, .45);
 }
 
-
-/* =========================================================
-   CORREÇÃO DA PÁGINA LOGIN
-   ========================================================= */
-
-body.pagina-login .banner {
-    text-align: center;
-
-    padding:
-        35px 20px 20px;
-}
-
-body.pagina-login .banner h1 {
-    color: #159a60;
-
-    font-size:
-        clamp(32px, 5vw, 50px);
-
-    margin:
-        20px auto 10px;
-
-    text-align: center;
-
-    text-shadow: none;
-}
-
-body.pagina-login .banner p {
-    color: #52615a;
-
-    max-width: 800px;
-
-    margin:
-        0 auto;
-
-    text-align: center;
-
-    font-size: 17px;
-
-    line-height: 1.6;
-
-    text-shadow: none;
-}
-
-
-/* =========================================================
-   CORREÇÃO DA PÁGINA CONTATO
-   ========================================================= */
-
-body.pagina-contato .banner {
-    text-align: center;
-
-    padding:
-        35px 20px 20px;
-}
-
-body.pagina-contato .banner h1 {
-    color: #159a60;
-
-    font-size:
-        clamp(32px, 5vw, 50px);
-
-    margin:
-        20px auto 10px;
-
-    text-align: center;
-
-    text-shadow: none;
-}
-
-body.pagina-contato .banner p {
-    color: #52615a;
-
-    max-width: 800px;
-
-    margin:
-        0 auto;
-
-    text-align: center;
-
-    font-size: 17px;
-
-    line-height: 1.6;
-
-    text-shadow: none;
+body.pagina-inicial .hero p,
+body.pagina-inicial .banner p {
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, .5);
 }
 
 
@@ -455,16 +368,6 @@ h3 {
 }
 
 
-/*
-   Na página inicial o título do hero é branco.
-*/
-
-body.pagina-inicial .hero h1,
-body.pagina-inicial .banner h1 {
-    color: white;
-}
-
-
 /* =========================================================
    TEXTOS
    ========================================================= */
@@ -539,11 +442,6 @@ body > p {
 }
 
 
-/*
-   Cards que estão diretamente no body,
-   como no clientes.html.
-*/
-
 body > .card {
     width: 90%;
 
@@ -554,18 +452,10 @@ body > .card {
 }
 
 
-/* =========================================================
-   CARDS DENTRO DE CONTAINER
-   ========================================================= */
-
 .container .card {
     width: 100%;
 }
 
-
-/* =========================================================
-   CARDS DENTRO DE CARDS
-   ========================================================= */
 
 .card .card {
     background:
@@ -1278,145 +1168,93 @@ body:not(.pagina-inicial) > .card {
 
     nav {
         height: 70px;
-        gap:
-            8px 18px;
-
-        padding:
-            0 10px;
+        gap: 8px 18px;
+        padding: 0 10px;
     }
 
     nav a {
         font-size: 14px;
     }
 
-
     body.pagina-inicial .hero,
     body.pagina-inicial .banner {
-
         min-height: 400px;
-
-        padding:
-            60px 20px;
-
+        padding: 60px 20px;
         border-radius: 18px;
     }
 
-
     .hero h1,
     .banner h1 {
-        font-size: 40px;
+        font-size: 34px;
     }
-
 
     .hero p,
     .banner p {
-        font-size: 18px;
+        font-size: 17px;
     }
-
 
     .container {
         width: 92%;
     }
 
-
     .card {
-        padding:
-            25px 20px;
-
-        margin:
-            20px 0;
-
+        padding: 25px 20px;
+        margin: 20px 0;
         border-radius: 18px;
     }
 
-
     body:not(.pagina-inicial) > .card {
         width: 92%;
-
-        padding:
-            25px 20px;
-
-        margin:
-            20px auto;
+        padding: 25px 20px;
+        margin: 20px auto;
     }
-
 
     h1 {
         font-size: 34px;
-
         margin-top: 28px;
     }
-
 
     h2 {
         font-size: 29px;
     }
 
-
     p {
         font-size: 16px;
     }
 
-
     li {
         font-size: 16px;
     }
-
 
     .features,
     .steps {
         grid-template-columns: 1fr;
     }
 
-
     .hero-buttons,
     .access-buttons {
         flex-direction: column;
-
         width: 100%;
     }
-
 
     .hero-buttons .btn,
     .access-buttons .btn {
         width: 100%;
-
         max-width: 320px;
-
         text-align: center;
     }
-
 
     .free-banner {
         align-items: flex-start;
     }
 
-
     table {
         display: block;
-
         overflow-x: auto;
     }
 
-
-    /* =============================================
-       LOGIN E CONTATO NO CELULAR
-       ============================================= */
-
-    body.pagina-login .banner,
-    body.pagina-contato .banner {
-        padding:
-            30px 16px 15px;
-    }
-
-    body.pagina-login .banner h1,
-    body.pagina-contato .banner h1 {
-        font-size: 34px;
-    }
-
-    body.pagina-login .banner p,
-    body.pagina-contato .banner p {
-        font-size: 17px;
+    .banner {
+        padding: 30px 16px 15px;
     }
 }
 
@@ -1429,98 +1267,61 @@ body:not(.pagina-inicial) > .card {
 
     nav {
         height: 70px;
-        gap:
-            6px 12px;
+        gap: 6px 12px;
     }
-
 
     nav a {
         font-size: 13px;
     }
 
-
     body.pagina-inicial .hero,
     body.pagina-inicial .banner {
-
         min-height: 360px;
-
-        padding:
-            50px 16px;
+        padding: 50px 16px;
     }
-
 
     .hero h1,
     .banner h1 {
-        font-size: 34px;
+        font-size: 30px;
     }
-
 
     .hero p,
     .banner p {
-        font-size: 17px;
+        font-size: 16px;
     }
-
 
     .container {
         width: 94%;
     }
 
-
     .card {
-        padding:
-            20px 16px;
+        padding: 20px 16px;
     }
-
 
     body:not(.pagina-inicial) > .card {
         width: 94%;
-
-        padding:
-            20px 16px;
+        padding: 20px 16px;
     }
-
 
     h1 {
         font-size: 30px;
     }
 
-
     h2 {
         font-size: 25px;
     }
-
 
     h3 {
         font-size: 19px;
     }
 
-
     .btn,
     button {
-        padding:
-            12px 21px;
-
+        padding: 12px 21px;
         font-size: 15px;
     }
 
-
-    /* =============================================
-       LOGIN E CONTATO EM CELULARES PEQUENOS
-       ============================================= */
-
-    body.pagina-login .banner,
-    body.pagina-contato .banner {
-        padding:
-            25px 14px 10px;
-    }
-
-    body.pagina-login .banner h1,
-    body.pagina-contato .banner h1 {
-        font-size: 30px;
-    }
-
-    body.pagina-login .banner p,
-    body.pagina-contato .banner p {
-        font-size: 16px;
+    .banner {
+        padding: 25px 14px 10px;
     }
 }
