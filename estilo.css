@@ -228,7 +228,7 @@ body.pagina-inicial .banner {
 
 
 /* =========================================================
-   BANNER DAS PÁGINAS INTERNAS (verde e centralizado)
+   BANNER DAS PÁGINAS INTERNAS (verde forte e centralizado)
    ========================================================= */
 
 .banner {
@@ -238,7 +238,7 @@ body.pagina-inicial .banner {
 }
 
 .banner h1 {
-    color: #159a60 !important;
+    color: #06402f !important;
     font-size: clamp(32px, 5vw, 50px);
     font-weight: 900;
     margin: 20px auto 10px;
@@ -247,7 +247,7 @@ body.pagina-inicial .banner {
 }
 
 .banner p {
-    color: #52615a !important;
+    color: #087052 !important;
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
