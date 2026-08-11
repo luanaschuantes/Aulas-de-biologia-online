@@ -43,40 +43,34 @@ body {
     flex-direction: column;
 }
 
-
 /* =========================================================
-   MENU
+   MENU PADRÃO DO SITE
    ========================================================= */
 
 nav {
     width: 100%;
-
     min-height: 70px;
 
     padding: 14px 5%;
 
     display: flex;
-
     justify-content: center;
     align-items: center;
 
     flex-wrap: wrap;
-
     gap: 10px 30px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #063d2d,
-            #07563f
-        );
+    background: linear-gradient(
+        135deg,
+        #063d2d,
+        #07563f
+    );
 
     box-shadow:
         0 5px 20px rgba(0, 0, 0, .15);
 
     position: sticky;
     top: 0;
-
     z-index: 1000;
 }
 
@@ -86,7 +80,6 @@ nav a {
     text-decoration: none;
 
     font-size: 16px;
-
     font-weight: 700;
 
     padding: 8px 5px;
@@ -114,7 +107,6 @@ nav a::after {
 
 nav a:hover {
     color: #80ffd2;
-
     transform: translateY(-1px);
 }
 
