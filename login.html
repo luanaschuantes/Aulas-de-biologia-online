@@ -1,207 +1,58 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <link
-        rel="stylesheet"
-        href="estilo.css"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
     <title>BioMentoria - Entrar</title>
-
 </head>
-
-
 <body class="pagina-login">
 
-
-<!-- =====================================================
-     MENU
-====================================================== -->
-
 <nav>
-
-    <a href="index.html">
-        Início
-    </a>
-
-    <a href="clientes.html">
-        Se cadastrar ou já tenho uma conta
-    </a>
-
-    <a href="login.html">
-        Entrar
-    </a>
-
-    <a href="agendamentos.html">
-        Fazer aulas
-    </a>
-
-    <a href="consulta_agendamentos.html">
-        Contato
-    </a>
-
-    <a href="/logout">
-        Fechar sessão
-    </a>
-
+    <a href="index.html">Início</a>
+    <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
+    <a href="login.html">Entrar</a>
+    <a href="agendamentos.html">Fazer aulas</a>
+    <a href="consulta_agendamentos.html">Contato</a>
+    <a href="/logout">Fechar sessão</a>
 </nav>
 
-
-<!-- =====================================================
-     TÍTULO
-====================================================== -->
-
 <section class="banner">
-
-    <h1>
-        Entrar na BioMentoria
-    </h1>
-
-    <p>
-        Faça login para acessar gratuitamente
-        suas aulas, quizzes e exercícios.
-    </p>
-
+    <h1>Entrar na BioMentoria</h1>
+    <p>Faça login para acessar gratuitamente suas aulas, quizzes e exercícios.</p>
 </section>
-
-
-<!-- =====================================================
-     LOGIN
-====================================================== -->
 
 <main class="container">
 
     <section class="card">
-
-        <h2>
-            🔐 Acesse sua conta
-        </h2>
-
-        <p>
-
-            Digite o e-mail e a senha que você
-            cadastrou na BioMentoria.
-
-        </p>
-
-
+        <h2>🔐 Acesse sua conta</h2>
+        <p>Digite o e-mail e a senha que você cadastrou na BioMentoria.</p>
         <br>
+        <form action="/login" method="POST">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" autocomplete="email" required>
 
-
-        <form
-            action="/login"
-            method="POST"
-        >
-
-
-            <!-- E-MAIL -->
-
-            <label for="email">
-                E-mail:
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Digite seu e-mail"
-                autocomplete="email"
-                required
-            >
-
-
-            <!-- SENHA -->
-
-            <label for="senha">
-                Senha:
-            </label>
-
-            <input
-                type="password"
-                id="senha"
-                name="senha"
-                placeholder="Digite sua senha"
-                autocomplete="current-password"
-                required
-            >
-
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
 
             <br>
-
-
-            <!-- BOTÃO -->
-
-            <button
-                class="btn"
-                type="submit"
-            >
-                Entrar
-            </button>
-
-
+            <button class="btn" type="submit">Entrar</button>
         </form>
-
     </section>
 
-
-    <!-- =================================================
-         CRIAR CONTA
-    ================================================== -->
-
     <section class="card">
-
-        <h2>
-            Ainda não possui uma conta?
-        </h2>
-
-        <p>
-
-            Crie sua conta gratuitamente e tenha
-            acesso às aulas, quizzes e exercícios
-            de Biologia.
-
-        </p>
-
-
+        <h2>Ainda não possui uma conta?</h2>
+        <p>Crie sua conta gratuitamente e tenha acesso às aulas, quizzes e exercícios de Biologia.</p>
         <br>
-
-
-        <a
-            href="clientes.html"
-            class="btn"
-        >
-            Criar conta grátis
-        </a>
-
+        <a href="clientes.html" class="btn">Criar conta grátis</a>
     </section>
 
 </main>
 
-
-<!-- =====================================================
-     RODAPÉ
-====================================================== -->
-
 <footer class="rodape">
-
-    <p>
-        &copy; 2026 BioMentoria -
-        Plataforma gratuita de Biologia
-    </p>
-
+    <p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p>
+    <p>Educação acessível para todos.</p>
 </footer>
 
-
 </body>
-
 </html>
