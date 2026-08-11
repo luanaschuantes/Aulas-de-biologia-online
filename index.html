@@ -1,4 +1,10 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head>
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+```
 <meta charset="UTF-8">
 
 <meta
@@ -27,44 +33,35 @@
         line-height: 1.6;
     }
 
-    nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 28px;
-        padding: 18px 20px;
-        background: #ffffff;
-        border-bottom: 1px solid #e5ebe7;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
+    /*
+    =====================================================
+    O MENU NÃO FICA MAIS AQUI.
 
-    nav a {
-        color: #245c43;
-        text-decoration: none;
-        font-weight: 600;
-        transition: 0.2s;
-    }
+    O nav agora usa o estilo do arquivo:
+    estilo.css
 
-    nav a:hover {
-        color: #138a52;
-    }
+    =====================================================
+    */
 
     .hero {
         max-width: 1100px;
         margin: 50px auto 30px;
         padding: 70px 35px;
         border-radius: 24px;
+
         background:
             linear-gradient(
                 135deg,
                 #0e7545,
                 #159a60
             );
+
         color: white;
         text-align: center;
-        box-shadow: 0 15px 40px rgba(14, 117, 69, 0.20);
+
+        box-shadow:
+            0 15px 40px
+            rgba(14, 117, 69, 0.20);
     }
 
     .hero h1 {
@@ -214,12 +211,14 @@
 
     .access-box {
         text-align: center;
+
         background:
             linear-gradient(
                 135deg,
                 #eaf8ef,
                 #f7fcf9
             );
+
         border: 1px solid #cde8d7;
     }
 
@@ -288,16 +287,6 @@
 
     @media (max-width: 700px) {
 
-        nav {
-            gap: 14px;
-            flex-wrap: wrap;
-            padding: 15px 10px;
-        }
-
-        nav a {
-            font-size: 0.9rem;
-        }
-
         .hero {
             margin: 20px 15px;
             padding: 50px 22px;
@@ -315,8 +304,19 @@
     }
 
 </style>
+```
 
-</head> <body> <!-- ===================================================== MENU PADRÃO ====================================================== --> <nav>
+</head>
+
+<body class="pagina-inicial">
+
+<!-- =====================================================
+     MENU PADRÃO
+====================================================== -->
+
+<nav>
+
+```
 <a href="index.html">
     Início
 </a>
@@ -340,8 +340,17 @@
 <a href="/logout">
     Fechar sessão
 </a>
+```
 
-</nav> <!-- ===================================================== HERO ====================================================== --> <section class="hero">
+</nav>
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+```
 <span class="gratuito">
     🎓 100% GRATUITO
 </span>
@@ -373,29 +382,36 @@
     </a>
 
 </div>
+```
 
-</section> <main class="container"> <!-- ===================================================== AVISO GRATUITO ====================================================== --> <section class="card access-box">
+</section>
+
+<main class="container">
+
+<!-- =====================================================
+     AVISO GRATUITO
+====================================================== -->
+
+<section class="card access-box">
+
+```
 <h2>
     📖 Educação gratuita para todos
 </h2>
 
 <p>
-
     A BioMentoria não possui planos pagos.
     Todo o conteúdo educacional da plataforma é
     disponibilizado gratuitamente.
-
 </p>
 
 <p>
-
     Para acessar a área de aulas, quizzes e exercícios,
     basta criar sua conta ou fazer login.
 
     <strong>
         Você não precisa pagar nenhuma mensalidade.
     </strong>
-
 </p>
 
 <div class="access-buttons">
@@ -415,26 +431,31 @@
     </a>
 
 </div>
+```
 
-</section> <!-- ===================================================== SOBRE A BIOMENTORIA ====================================================== --> <section class="card">
+</section>
+
+<!-- =====================================================
+     SOBRE A BIOMENTORIA
+====================================================== -->
+
+<section class="card">
+
+```
 <h2>
     🌱 Sobre a BioMentoria
 </h2>
 
 <p>
-
     A BioMentoria é uma plataforma educacional dedicada
     ao ensino de Biologia. Nosso objetivo é tornar o
     aprendizado mais simples, organizado e acessível.
-
 </p>
 
 <p>
-
     Aqui você encontra conteúdos para estudar,
     revisar conhecimentos e praticar através de
     quizzes e listas de exercícios.
-
 </p>
 
 <div class="free-banner">
@@ -457,14 +478,22 @@
     </div>
 
 </div>
+```
 
-</section> <!-- ===================================================== RECURSOS ====================================================== --> <section class="card">
+</section>
+
+<!-- =====================================================
+     RECURSOS
+====================================================== -->
+
+<section class="card">
+
+```
 <h2>
     📚 O que você encontra aqui?
 </h2>
 
 <div class="features">
-
 
     <div class="feature">
 
@@ -537,10 +566,18 @@
 
     </div>
 
-
 </div>
+```
 
-</section> <!-- ===================================================== COMO FUNCIONA ====================================================== --> <section class="card">
+</section>
+
+<!-- =====================================================
+     COMO FUNCIONA
+====================================================== -->
+
+<section class="card">
+
+```
 <h2>
     🚀 Como funciona?
 </h2>
@@ -550,9 +587,7 @@
     nem escolha de planos.
 </p>
 
-
 <div class="steps">
-
 
     <div class="step">
 
@@ -625,19 +660,25 @@
 
     </div>
 
-
 </div>
+```
 
-</section> <!-- ===================================================== CHAMADA FINAL ====================================================== --> <section class="card access-box">
+</section>
+
+<!-- =====================================================
+     CHAMADA FINAL
+====================================================== -->
+
+<section class="card access-box">
+
+```
 <h2>
     🎓 Pronto para começar?
 </h2>
 
 <p>
-
     Crie sua conta gratuitamente e tenha acesso
     à área de estudos da BioMentoria.
-
 </p>
 
 <p>
@@ -665,8 +706,19 @@
     </a>
 
 </div>
+```
 
-</section> </main> <!-- ===================================================== RODAPÉ ====================================================== --> <footer>
+</section>
+
+</main>
+
+<!-- =====================================================
+     RODAPÉ
+====================================================== -->
+
+<footer>
+
+```
 <p>
     &copy; 2026 BioMentoria - Plataforma gratuita de Biologia
 </p>
@@ -674,5 +726,9 @@
 <p>
     Educação acessível para todos.
 </p>
+```
 
-</footer> </body> </html>
+</footer>
+
+</body>
+</html>
