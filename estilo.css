@@ -228,7 +228,7 @@ body.pagina-inicial .banner {
 
 
 /* =========================================================
-   BANNER DAS PÁGINAS INTERNAS (padrão verde e centralizado)
+   BANNER DAS PÁGINAS INTERNAS (verde e centralizado)
    ========================================================= */
 
 .banner {
@@ -238,22 +238,22 @@ body.pagina-inicial .banner {
 }
 
 .banner h1 {
-    color: #159a60;
+    color: #159a60 !important;
     font-size: clamp(32px, 5vw, 50px);
     font-weight: 900;
     margin: 20px auto 10px;
     text-align: center;
-    text-shadow: none;
+    text-shadow: none !important;
 }
 
 .banner p {
-    color: #52615a;
+    color: #52615a !important;
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
     font-size: 17px;
     line-height: 1.6;
-    text-shadow: none;
+    text-shadow: none !important;
 }
 
 
@@ -263,14 +263,14 @@ body.pagina-inicial .banner {
 
 body.pagina-inicial .hero h1,
 body.pagina-inicial .banner h1 {
-    color: white;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, .45);
+    color: white !important;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, .45) !important;
 }
 
 body.pagina-inicial .hero p,
 body.pagina-inicial .banner p {
-    color: white;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, .5);
+    color: white !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, .5) !important;
 }
 
 
