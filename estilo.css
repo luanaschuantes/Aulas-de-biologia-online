@@ -23,7 +23,7 @@ body {
     line-height: 1.7;
     display: flex;
     flex-direction: column;
-    padding-top: 72px;
+    padding-top: 78px;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -33,38 +33,39 @@ body {
 
 nav {
     width: 100%;
-    height: 72px;
-    padding: 0 4%;
+    min-height: 72px;
+    height: auto;
+    padding: 14px 3%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px 28px;
+    gap: 6px 18px;
     background: linear-gradient(135deg, #043528 0%, #06402f 50%, #0a5c3f 100%);
     box-shadow: 0 4px 24px rgba(4, 53, 40, 0.25);
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
-    backdrop-filter: blur(8px);
 }
 
 nav a {
     color: rgba(255, 255, 255, 0.92);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
-    padding: 8px 4px;
+    padding: 6px 4px;
     position: relative;
     transition: color 0.25s ease, transform 0.25s ease;
     letter-spacing: 0.01em;
+    white-space: nowrap;
 }
 
 nav a::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 2px;
+    bottom: 1px;
     width: 0;
     height: 2px;
     background: #7dffc8;
@@ -696,20 +697,31 @@ body:not(.pagina-inicial) > .card {
    RESPONSIVO
    ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     nav {
-        height: auto;
-        min-height: 72px;
-        padding: 12px 12px;
-        gap: 6px 16px;
+        padding: 12px 2%;
+        gap: 6px 12px;
     }
 
     nav a {
         font-size: 13px;
     }
+}
+
+@media (max-width: 768px) {
+    nav {
+        min-height: 72px;
+        height: auto;
+        padding: 12px 10px;
+        gap: 6px 12px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
 
     body {
-        padding-top: 80px;
+        padding-top: 90px;
     }
 
     body.pagina-inicial .hero {
@@ -790,7 +802,7 @@ body:not(.pagina-inicial) > .card {
 
 @media (max-width: 420px) {
     nav a {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     body.pagina-inicial .hero {
