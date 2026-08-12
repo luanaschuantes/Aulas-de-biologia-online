@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css">
     <title>BioMentoria - Entrar</title>
+    <style>
+        .aviso-erro {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #f5c2c2;
+            color: #b42318;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .aviso-ok {
+            display: none;
+            background: #ecfdf3;
+            border: 1px solid #abe0c0;
+            color: #087541;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body class="pagina-login">
 
@@ -15,7 +37,7 @@
     <a href="agendamentos.html">Fazer aulas</a>
     <a href="aulas-particulares.html">Aulas particulares</a>
     <a href="consulta_agendamentos.html">Contato</a>
-    <a href="/logout">Fechar sessão</a>
+    <a href="/logout" onclick="return confirmarSair(event)">Fechar sessão</a>
 </nav>
 
 <section class="banner">
@@ -29,6 +51,15 @@
         <h2>🔐 Acesse sua conta</h2>
         <p>Digite o e-mail e a senha que você cadastrou na BioMentoria.</p>
         <br>
+
+        <div id="avisoErro" class="aviso-erro">
+            ❌ E-mail ou senha incorretos. Tente novamente.
+        </div>
+
+        <div id="avisoOk" class="aviso-ok">
+            ✅ Conta criada com sucesso! Agora faça login.
+        </div>
+
         <form action="/login" method="POST">
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" placeholder="Digite seu e-mail" autocomplete="email" required>
@@ -41,12 +72,43 @@
         </form>
     </section>
 
+    <section class="card">
+        <h2>Ainda não possui uma conta?</h2>
+        <p>Crie sua conta gratuitamente e tenha acesso às aulas, quizzes e exercícios de Biologia.</p>
+        <br>
+        <a href="clientes.html" class="btn">Criar conta grátis</a>
+    </section>
+
 </main>
 
 <footer class="rodape">
     <p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p>
     <p>Educação acessível para todos.</p>
 </footer>
+
+<script>
+function confirmarSair(event) {
+    if (!confirm('Tem certeza que deseja fechar a sessão?')) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+
+(function () {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('erro') === '1') {
+        const el = document.getElementById('avisoErro');
+        if (el) el.style.display = 'block';
+    }
+
+    if (params.get('ok') === '1') {
+        const el = document.getElementById('avisoOk');
+        if (el) el.style.display = 'block';
+    }
+})();
+</script>
 
 </body>
 </html>
