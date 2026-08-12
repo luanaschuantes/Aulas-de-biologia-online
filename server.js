@@ -17,7 +17,7 @@ app.use(express.json());
 
 
 // ============================================================
-// SESSÃO DE LOGIN
+// SESSÃO DE LOGIN (permanece logado até "Fechar sessão")
 // ============================================================
 
 app.use(
@@ -25,10 +25,12 @@ app.use(
         secret: 'biomentoria-segredo-2026',
         resave: false,
         saveUninitialized: false,
+        rolling: true,
 
         cookie: {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24,
+            // 30 dias — só sai ao clicar em Fechar sessão
+            maxAge: 1000 * 60 * 60 * 24 * 30,
             sameSite: 'lax'
         }
     })
@@ -184,7 +186,7 @@ app.post('/salvar-cliente', async (req, res) => {
                         }
 
                         console.log('Novo aluno cadastrado:', nomeLimpo, '| ID:', this.lastID);
-                        res.redirect('/login.html');
+                        res.redirect('/login.html?ok=1');
                     }
                 );
             } catch (hashErr) {
@@ -201,18 +203,14 @@ app.post('/salvar-cliente', async (req, res) => {
 
 
 // ============================================================
-// LOGIN
+// LOGIN — erros voltam para login.html com aviso na tela
 // ============================================================
 
 app.post('/login', (req, res) => {
     const { email, senha } = req.body;
 
     if (!email || !senha) {
-        return res.status(400).send(`
-            <h2>Login incompleto</h2>
-            <p>Digite seu e-mail e sua senha.</p>
-            <a href="/login.html">Voltar para o login</a>
-        `);
+        return res.redirect('/login.html?erro=1');
     }
 
     const emailLimpo = email.trim().toLowerCase();
@@ -223,19 +221,11 @@ app.post('/login', (req, res) => {
         async (err, aluno) => {
             if (err) {
                 console.error(err);
-                return res.status(500).send(`
-                    <h2>Erro</h2>
-                    <p>Erro no banco de dados.</p>
-                    <a href="/login.html">Voltar</a>
-                `);
+                return res.redirect('/login.html?erro=1');
             }
 
             if (!aluno) {
-                return res.status(401).send(`
-                    <h2>Login inválido</h2>
-                    <p>E-mail ou senha incorretos.</p>
-                    <a href="/login.html">Tentar novamente</a>
-                `);
+                return res.redirect('/login.html?erro=1');
             }
 
             let senhaCorreta = false;
@@ -243,37 +233,32 @@ app.post('/login', (req, res) => {
                 senhaCorreta = await bcrypt.compare(senha, aluno.senha);
             } catch (compareErr) {
                 console.error('Erro ao comparar senha:', compareErr);
-                return res.status(500).send(`
-                    <h2>Erro no login</h2>
-                    <p>Não foi possível verificar a senha.</p>
-                    <a href="/login.html">Tentar novamente</a>
-                `);
+                return res.redirect('/login.html?erro=1');
             }
 
             if (!senhaCorreta) {
-                return res.status(401).send(`
-                    <h2>Login inválido</h2>
-                    <p>E-mail ou senha incorretos.</p>
-                    <a href="/login.html">Tentar novamente</a>
-                `);
+                return res.redirect('/login.html?erro=1');
             }
 
             req.session.regenerate((err) => {
                 if (err) {
                     console.error('Erro ao criar sessão:', err);
-                    return res.status(500).send(`
-                        <h2>Erro no login</h2>
-                        <p>Não foi possível iniciar sua sessão.</p>
-                        <a href="/login.html">Tentar novamente</a>
-                    `);
+                    return res.redirect('/login.html?erro=1');
                 }
 
                 req.session.alunoId = aluno.id;
                 req.session.nomeAluno = aluno.nome;
                 req.session.emailAluno = aluno.email;
 
-                console.log('Aluno entrou:', aluno.nome, '| ID:', aluno.id);
-                res.redirect('/agendamentos.html');
+                // Garante que a sessão seja salva antes do redirect
+                req.session.save((saveErr) => {
+                    if (saveErr) {
+                        console.error('Erro ao salvar sessão:', saveErr);
+                        return res.redirect('/login.html?erro=1');
+                    }
+                    console.log('Aluno entrou:', aluno.nome, '| ID:', aluno.id);
+                    res.redirect('/agendamentos.html');
+                });
             });
         }
     );
