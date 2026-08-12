@@ -1,235 +1,88 @@
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<link
-    rel="stylesheet"
-    href="estilo.css"
->
-
-<title>BioMentoria - Planos</title>
-
-
-<!-- =====================================================
-     MENU
-====================================================== -->
-
-<a href="index.html">Início</a>
-
-<a href="clientes.html">Matrícula</a>
-
-<a href="servicos.html">Planos</a>
-
-<a href="agendamentos.html">Conteúdos</a>
-
-<a href="consulta_agendamentos.html">Contato</a>
-
-
-<!-- =====================================================
-     TÍTULO
-====================================================== -->
-
-<h1>Planos BioMentoria</h1>
-
-<p>
-    Escolha o plano ideal para seus estudos em Biologia
-</p>
-
-
-<!-- =====================================================
-     INTRODUÇÃO
-====================================================== -->
-
-<div class="card">
-
-    <h2>Planos disponíveis</h2>
-
-    <p>
-        Escolha o plano que melhor atende aos seus objetivos
-        de estudo. O Plano Simples oferece acesso aos conteúdos
-        essenciais, enquanto o Plano Completo libera todas as
-        aulas e conteúdos da BioMentoria.
-    </p>
-
-</div>
-
-
-<!-- =====================================================
-     PLANO SIMPLES
-====================================================== -->
-
-<div class="card">
-
-    <h2>📘 Plano Simples</h2>
-
-    <h3>R$ 20,00</h3>
-
-    <ul>
-
-        <li>
-            Acesso aos conteúdos essenciais
-        </li>
-
-        <li>
-            Quizzes de Biologia
-        </li>
-
-        <li>
-            Estudo organizado por temas
-        </li>
-
-        <li>
-            Exercícios básicos de Biologia
-        </li>
-
-    </ul>
-
-
-    <form
-        action="/salvar-plano"
-        method="POST"
-    >
-
-        <input
-            type="hidden"
-            name="plano"
-            value="simples"
-        >
-
-        <input
-            type="hidden"
-            name="aluno_id"
-            id="alunoIdSimples"
-        >
-
-        <button
-            type="submit"
-            class="btn"
-        >
-            Escolher Plano Simples
-        </button>
-
-    </form>
-
-</div>
-
-
-<!-- =====================================================
-     PLANO COMPLETO
-====================================================== -->
-
-<div class="card">
-
-    <h2>📚 Plano Completo</h2>
-
-    <h3>R$ 30,00</h3>
-
-    <p>
-        Tenha acesso completo à plataforma BioMentoria,
-        incluindo todas as aulas de Biologia.
-    </p>
-
-    <ul>
-
-        <li>
-            Todos os conteúdos do Plano Simples
-        </li>
-
-        <li>
-            📚 Todas as aulas de Biologia
-        </li>
-
-        <li>
-            🧬 Aulas completas e aprofundadas
-        </li>
-
-        <li>
-            📝 Lista de exercícios
-        </li>
-
-        <li>
-            🧠 Quizzes de Biologia
-        </li>
-
-        <li>
-            📖 Conteúdos organizados por temas
-        </li>
-
-        <li>
-            🎓 Acesso completo aos materiais de estudo
-        </li>
-
-    </ul>
-
-
-    <form
-        action="/salvar-plano"
-        method="POST"
-    >
-
-        <input
-            type="hidden"
-            name="plano"
-            value="completo"
-        >
-
-        <input
-            type="hidden"
-            name="aluno_id"
-            id="alunoIdCompleto"
-        >
-
-        <button
-            type="submit"
-            class="btn"
-        >
-            Escolher Plano Completo
-        </button>
-
-    </form>
-
-</div>
-
-
-<!-- =====================================================
-     RODAPÉ
-====================================================== -->
-
-<p>
-    &copy; 2026 BioMentoria - Todos os Direitos Reservados
-</p>
-
-
-<!-- =====================================================
-     PEGAR ID DO ALUNO NA URL
-====================================================== -->
-
-<script>
-
-    const parametros =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    const alunoId =
-        parametros.get('aluno_id');
-
-
-    /*
-     * Coloca o ID do aluno
-     * nos dois formulários.
-     */
-
-    document.getElementById(
-        'alunoIdSimples'
-    ).value = alunoId;
-
-
-    document.getElementById(
-        'alunoIdCompleto'
-    ).value = alunoId;
-
-</script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>BioMentoria - Serviços</title>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Início</a>
+    <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
+    <a href="login.html">Entrar</a>
+    <a href="agendamentos.html">Fazer aulas</a>
+    <a href="aulas-particulares.html">Aulas particulares</a>
+    <a href="consulta_agendamentos.html">Contato</a>
+    <a href="/logout">Fechar sessão</a>
+</nav>
+
+<section class="banner">
+    <h1>Serviços BioMentoria</h1>
+    <p>Conteúdo online gratuito e opção de aulas particulares.</p>
+</section>
+
+<main class="container">
+
+    <section class="card access-box">
+        <h2>💚 Plataforma 100% gratuita</h2>
+        <p>
+            Todo o conteúdo educacional da BioMentoria — aulas, quizzes e exercícios —
+            é disponibilizado <strong>gratuitamente</strong>. Não existem planos pagos
+            para acessar a área de estudos online.
+        </p>
+        <br>
+        <a href="clientes.html" class="btn green-btn">Criar conta grátis</a>
+        <a href="login.html" class="btn outline-btn">Já tenho conta</a>
+    </section>
+
+    <section class="card">
+        <h2>📚 O que está incluído de graça</h2>
+        <ul>
+            <li>Aulas de Biologia (textos organizados por tema)</li>
+            <li>Quizzes interativos</li>
+            <li>Listas de exercícios</li>
+            <li>Estudo no seu próprio ritmo</li>
+        </ul>
+        <br>
+        <a href="agendamentos.html" class="btn">Acessar as aulas</a>
+    </section>
+
+    <section class="card">
+        <h2>👩‍🏫 Aulas particulares (opcional)</h2>
+        <p>
+            Se quiser um acompanhamento mais próximo, a BioMentoria também oferece
+            <strong>aulas particulares</strong> com horários combinados.
+        </p>
+        <ul>
+            <li>2 aulas por semana</li>
+            <li>1 hora por aula</li>
+            <li>R$ 45,00 por aula</li>
+            <li>Foco personalizado em Biologia</li>
+        </ul>
+        <br>
+        <a href="aulas-particulares.html" class="btn">Saiba mais sobre aulas particulares</a>
+    </section>
+
+    <section class="card">
+        <h2>📞 Contato</h2>
+        <p>Dúvidas? Fale conosco pelo WhatsApp ou e-mail.</p>
+        <p>
+            <strong>WhatsApp:</strong> (46) 99971-3928<br>
+            <strong>E-mail:</strong> schuantesluana25@gmail.com
+        </p>
+        <br>
+        <a href="https://wa.me/5546999713928" target="_blank" class="btn green-btn">Abrir WhatsApp</a>
+        <a href="consulta_agendamentos.html" class="btn outline-btn">Página de contato</a>
+    </section>
+
+</main>
+
+<footer class="rodape">
+    <p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p>
+    <p>Educação acessível para todos.</p>
+</footer>
+
+</body>
+</html>
