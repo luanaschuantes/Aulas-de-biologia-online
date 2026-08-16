@@ -177,6 +177,19 @@
     </article>
 
     <article class="card">
+        <h2>🪄 Aulas geradas por IA</h2>
+        <p>A IA cria uma aula nova com texto, quiz e exercícios. Ao terminar, seu progresso fica salvo e você pode gerar o próximo conteúdo.</p>
+
+        <div id="listaAulasIa">Carregando suas aulas...</div>
+
+        <br>
+        <button class="btn" type="button" id="botaoGerarAula" onclick="gerarNovaAula()">Gerar nova aula</button>
+        <p id="avisoAulaIa" style="margin-top:12px;font-weight:bold;"></p>
+
+        <div id="aulaGerada" style="display:none;margin-top:20px;"></div>
+    </article>
+
+    <article class="card">
         <h2>🤖 BioBot - Tutor de Biologia com IA</h2>
         <p>Pergunte qualquer dúvida de Biologia e receba a explicação na hora.</p>
 
@@ -254,10 +267,254 @@ try {
 
     novoQuiz();
     carregarExercicios();
+    carregarAulasIa();
 } catch (erro) {
     console.error('Erro ao verificar login:', erro);
     window.location.replace('/login.html');
 }
+}
+
+// ============================================================
+// AULAS GERADAS POR IA (com progresso salvo)
+// ============================================================
+
+let aulaAtual = null;
+
+function escaparHtml(texto) {
+    const area = document.createElement('div');
+    area.textContent = texto;
+    return area.innerHTML;
+}
+
+function dataCurta(iso) {
+    if (!iso) {
+        return '';
+    }
+    return new Date(iso).toLocaleDateString('pt-BR');
+}
+
+async function carregarAulasIa() {
+    const lista = document.getElementById('listaAulasIa');
+
+    try {
+        const resposta = await fetch('/api/aulas', { credentials: 'same-origin' });
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            lista.textContent = dados.erro || 'Não foi possível carregar suas aulas.';
+            return;
+        }
+
+        if (dados.aulas.length === 0) {
+            lista.innerHTML = '<p>Você ainda não tem aulas geradas. Clique em <strong>Gerar nova aula</strong> para começar.</p>';
+            return;
+        }
+
+        const concluidas = dados.aulas.filter((aula) => aula.concluida_em).length;
+
+        lista.innerHTML =
+            `<p><strong>Seu progresso:</strong> ${concluidas} de ${dados.aulas.length} aulas concluídas.</p>` +
+            dados.aulas
+                .map((aula) => {
+                    const situacao = aula.concluida_em
+                        ? `✅ concluída em ${dataCurta(aula.concluida_em)} — ${aula.acertos}/${aula.total} acertos`
+                        : '⏳ em andamento';
+
+                    return `
+                    <p style="margin:6px 0;">
+                        <button class="btn" type="button" onclick="abrirAula(${aula.id})">Abrir</button>
+                        <strong>${escaparHtml(aula.titulo)}</strong> — ${situacao}
+                    </p>`;
+                })
+                .join('');
+    } catch (erro) {
+        console.error('Erro ao carregar aulas:', erro);
+        lista.textContent = 'Erro de conexão ao carregar suas aulas.';
+    }
+}
+
+function montarQuestoes(questoes, prefixo, campo) {
+    return questoes
+        .map((questao, indice) => {
+            const alternativas = questao[campo]
+                .map(
+                    (alternativa, posicao) => `
+                    <label style="display:block;margin:4px 0;">
+                        <input type="radio" name="${prefixo}${indice}" value="${posicao}">
+                        ${escaparHtml(alternativa)}
+                    </label>`
+                )
+                .join('');
+
+            return `
+            <div id="${prefixo}bloco${indice}" style="margin-bottom:14px;">
+                <p><strong>${indice + 1}.</strong> ${escaparHtml(questao.pergunta)}</p>
+                ${alternativas}
+            </div>`;
+        })
+        .join('');
+}
+
+function mostrarAula(dados) {
+    aulaAtual = dados;
+
+    const area = document.getElementById('aulaGerada');
+    const aula = dados.aula;
+
+    const secoes = aula.secoes
+        .map(
+            (secao) => `
+            <h4>${escaparHtml(secao.subtitulo || '')}</h4>
+            <p>${escaparHtml(secao.texto)}</p>`
+        )
+        .join('');
+
+    area.innerHTML = `
+        <h3>${escaparHtml(aula.titulo)}</h3>
+        ${secoes}
+
+        <h3>🧠 Quiz da aula</h3>
+        ${montarQuestoes(aula.quiz, 'quizIa', 'respostas')}
+
+        <h3>📝 Exercícios da aula</h3>
+        ${montarQuestoes(aula.exercicios, 'exercicioIa', 'alternativas')}
+
+        <button class="btn" type="button" onclick="finalizarAula()">Corrigir e concluir aula</button>
+        <p id="resultadoAulaIa" style="margin-top:14px;font-weight:bold;"></p>
+    `;
+
+    area.style.display = 'block';
+    area.scrollIntoView({ behavior: 'smooth' });
+
+    if (dados.concluida_em) {
+        document.getElementById('resultadoAulaIa').textContent =
+            `Você já concluiu esta aula com ${dados.acertos}/${dados.total} acertos. Pode responder de novo para treinar.`;
+    }
+}
+
+async function abrirAula(id) {
+    const aviso = document.getElementById('avisoAulaIa');
+    aviso.textContent = 'Abrindo aula...';
+
+    try {
+        const resposta = await fetch(`/api/aulas/${id}`, { credentials: 'same-origin' });
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            aviso.textContent = dados.erro || 'Não foi possível abrir a aula.';
+            return;
+        }
+
+        aviso.textContent = '';
+        mostrarAula(dados);
+    } catch (erro) {
+        console.error('Erro ao abrir aula:', erro);
+        aviso.textContent = 'Erro de conexão ao abrir a aula.';
+    }
+}
+
+async function gerarNovaAula() {
+    const botao = document.getElementById('botaoGerarAula');
+    const aviso = document.getElementById('avisoAulaIa');
+
+    botao.disabled = true;
+    aviso.textContent = 'A IA está preparando um conteúdo novo...';
+
+    try {
+        const resposta = await fetch('/api/aulas/gerar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: '{}'
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            aviso.textContent = dados.erro || 'Não foi possível gerar a aula.';
+            return;
+        }
+
+        aviso.textContent = '';
+        mostrarAula(dados);
+        carregarAulasIa();
+    } catch (erro) {
+        console.error('Erro ao gerar aula:', erro);
+        aviso.textContent = 'Erro de conexão ao gerar a aula.';
+    } finally {
+        botao.disabled = false;
+    }
+}
+
+function lerRespostas(questoes, prefixo) {
+    return questoes.map((questao, indice) => {
+        const marcada = document.querySelector(`input[name="${prefixo}${indice}"]:checked`);
+        return marcada ? Number(marcada.value) : -1;
+    });
+}
+
+function marcarCorrecao(questoes, prefixo, resultado) {
+    resultado.forEach((item, indice) => {
+        const bloco = document.getElementById(`${prefixo}bloco${indice}`);
+        const anterior = bloco.querySelector('.correcaoIa');
+        if (anterior) {
+            anterior.remove();
+        }
+
+        const aviso = document.createElement('p');
+        aviso.className = 'correcaoIa';
+        aviso.style.margin = '4px 0';
+
+        if (item.acertou) {
+            aviso.style.color = 'green';
+            aviso.textContent = '✅ Resposta correta!';
+        } else {
+            aviso.style.color = 'red';
+            const campo = questoes[indice].respostas || questoes[indice].alternativas;
+            aviso.textContent = `❌ Resposta correta: ${campo[item.correta]}`;
+        }
+
+        bloco.appendChild(aviso);
+    });
+}
+
+async function finalizarAula() {
+    if (!aulaAtual) {
+        return;
+    }
+
+    const resultadoTexto = document.getElementById('resultadoAulaIa');
+    resultadoTexto.textContent = 'Corrigindo...';
+
+    try {
+        const resposta = await fetch(`/api/aulas/${aulaAtual.id}/responder`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                quiz: lerRespostas(aulaAtual.aula.quiz, 'quizIa'),
+                exercicios: lerRespostas(aulaAtual.aula.exercicios, 'exercicioIa')
+            })
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            resultadoTexto.textContent = dados.erro || 'Não foi possível corrigir a aula.';
+            return;
+        }
+
+        marcarCorrecao(aulaAtual.aula.quiz, 'quizIa', dados.quiz);
+        marcarCorrecao(aulaAtual.aula.exercicios, 'exercicioIa', dados.exercicios);
+
+        resultadoTexto.textContent =
+            `Você acertou ${dados.acertos} de ${dados.total}. Aula concluída e salva! Clique em "Gerar nova aula" para o próximo conteúdo.`;
+
+        carregarAulasIa();
+    } catch (erro) {
+        console.error('Erro ao corrigir aula:', erro);
+        resultadoTexto.textContent = 'Erro de conexão ao corrigir a aula.';
+    }
 }
 
 function adicionarMensagemIa(texto, autor) {
