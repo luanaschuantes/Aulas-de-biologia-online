@@ -39,6 +39,46 @@
         margin: 0;
     }
 
+    #conversaIa {
+        max-height: 340px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #d8e6de;
+        border-radius: 10px;
+        background: #f9fdfb;
+    }
+
+    .mensagemIa {
+        margin: 8px 0;
+        padding: 10px 12px;
+        border-radius: 10px;
+        white-space: pre-wrap;
+        line-height: 1.5;
+    }
+
+    .mensagemIa.aluno {
+        background: #e3f0ff;
+    }
+
+    .mensagemIa.bot {
+        background: #e8f6ee;
+    }
+
+    .formIa {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+    }
+
+    .formIa input {
+        flex: 1 1 220px;
+        padding: 10px;
+        border: 1px solid #cbd8d2;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
 </style>
 
 </head> <body>
@@ -137,6 +177,26 @@
     </article>
 
     <article class="card">
+        <h2>🤖 BioBot - Tutor de Biologia com IA</h2>
+        <p>Pergunte qualquer dúvida de Biologia e receba a explicação na hora.</p>
+
+        <div id="conversaIa">
+            <div class="mensagemIa bot">Olá! Sou o BioBot. Pergunte algo como "o que é fotossíntese?" ou "qual a diferença entre célula procarionte e eucarionte?".</div>
+        </div>
+
+        <form class="formIa" id="formIa" autocomplete="off">
+            <input
+                type="text"
+                id="perguntaIa"
+                maxlength="500"
+                placeholder="Escreva sua dúvida de Biologia"
+                required
+            >
+            <button class="btn" type="submit" id="botaoIa">Perguntar</button>
+        </form>
+    </article>
+
+    <article class="card">
         <h2>🧠 Quiz de Biologia</h2>
         <p>Teste seus conhecimentos respondendo às questões.</p>
         <div id="quizContainer"></div>
@@ -198,6 +258,58 @@ try {
     console.error('Erro ao verificar login:', erro);
     window.location.replace('/login.html');
 }
+}
+
+function adicionarMensagemIa(texto, autor) {
+    const conversa = document.getElementById('conversaIa');
+    const mensagem = document.createElement('div');
+    mensagem.className = `mensagemIa ${autor}`;
+    mensagem.textContent = texto;
+    conversa.appendChild(mensagem);
+    conversa.scrollTop = conversa.scrollHeight;
+    return mensagem;
+}
+
+async function perguntarIa(evento) {
+    evento.preventDefault();
+
+    const campo = document.getElementById('perguntaIa');
+    const botao = document.getElementById('botaoIa');
+    const pergunta = campo.value.trim();
+
+    if (!pergunta) {
+        return;
+    }
+
+    adicionarMensagemIa(pergunta, 'aluno');
+    campo.value = '';
+    botao.disabled = true;
+
+    const carregando = adicionarMensagemIa('Pensando...', 'bot');
+
+    try {
+        const resposta = await fetch('/api/ia-tutor', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ pergunta })
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            carregando.textContent = dados.erro || 'Não foi possível responder agora.';
+            return;
+        }
+
+        carregando.textContent = dados.resposta;
+    } catch (erro) {
+        console.error('Erro ao falar com o tutor:', erro);
+        carregando.textContent = 'Erro de conexão. Tente novamente.';
+    } finally {
+        botao.disabled = false;
+        campo.focus();
+    }
 }
 
 const perguntas = [
@@ -371,7 +483,10 @@ function corrigirExercicios() {
         `Você acertou ${pontos} de 10 exercícios.`;
 }
 
-document.addEventListener('DOMContentLoaded', verificarAcesso);
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('formIa').addEventListener('submit', perguntarIa);
+    verificarAcesso();
+});
 </script>
 </body>
 </html>

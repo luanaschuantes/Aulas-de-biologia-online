@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const path = require('path');
+const { responderPergunta, iaConfigurada } = require('./ia-tutor');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -307,6 +308,38 @@ app.get('/verificar-login', (req, res) => {
 
 
 // ============================================================
+// TUTOR DE BIOLOGIA COM IA
+// ============================================================
+
+function exigirLoginApi(req, res, next) {
+    if (!req.session.alunoId) {
+        return res.status(401).json({ erro: 'Entre na sua conta para usar o tutor.' });
+    }
+    next();
+}
+
+app.post('/api/ia-tutor', exigirLoginApi, async (req, res) => {
+    const pergunta = typeof req.body.pergunta === 'string' ? req.body.pergunta.trim() : '';
+
+    if (!pergunta) {
+        return res.status(400).json({ erro: 'Escreva uma pergunta sobre Biologia.' });
+    }
+
+    if (pergunta.length > 500) {
+        return res.status(400).json({ erro: 'A pergunta é muito longa. Use até 500 caracteres.' });
+    }
+
+    try {
+        const { resposta, fonte } = await responderPergunta(pergunta);
+        res.json({ resposta, fonte });
+    } catch (erro) {
+        console.error('Erro no tutor de IA:', erro);
+        res.status(500).json({ erro: 'Não foi possível responder agora. Tente novamente.' });
+    }
+});
+
+
+// ============================================================
 // SAIR DA CONTA
 // ============================================================
 
@@ -339,5 +372,10 @@ app.listen(PORT, '0.0.0.0', () => {
     console.log(`🌐 http://localhost:${PORT}`);
     console.log('🔐 Sistema de cadastro e login ativado');
     console.log('📚 Aulas protegidas por login');
+    console.log(
+        iaConfigurada()
+            ? '🤖 Tutor de IA ativo (OpenAI)'
+            : '🤖 Tutor de IA respondendo com o conteúdo das aulas (defina OPENAI_API_KEY para usar a OpenAI)'
+    );
     console.log('==============================================');
 });
