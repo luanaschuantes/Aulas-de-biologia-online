@@ -3,278 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="estilo.css">
-
     <title>BioMentoria - Entrar</title>
-
     <style>
-
-        .aviso {
+        .aviso-erro {
             display: none;
+            background: #fef2f2;
+            border: 1px solid #f5c2c2;
+            color: #b42318;
             padding: 14px 18px;
             border-radius: 12px;
             margin-bottom: 20px;
             font-weight: 600;
         }
-
-        .aviso-erro {
-            background: #fef2f2;
-            border: 1px solid #f5c2c2;
-            color: #b42318;
-        }
-
         .aviso-ok {
+            display: none;
             background: #ecfdf3;
             border: 1px solid #abe0c0;
             color: #087541;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
-
     </style>
-
 </head>
-
 <body class="pagina-login">
 
 <nav>
-
     <a href="index.html">Início</a>
-
     <a href="clientes.html">Criar conta</a>
-
     <a href="login.html">Entrar</a>
-
     <a href="agendamentos.html">Fazer aulas</a>
-
     <a href="aulas-particulares.html">Aulas particulares</a>
-
     <a href="consulta_agendamentos.html">Contato</a>
-
-    <a href="#" onclick="fecharSessao()">Fechar sessão</a>
-
+    <a href="/logout" onclick="return confirmarSair(event)">Fechar sessão</a>
 </nav>
 
 <section class="banner">
-
     <h1>Entrar na BioMentoria</h1>
-
-    <p>
-        Já possui cadastro?
-        Faça login para acessar suas aulas,
-        quizzes e exercícios.
-    </p>
-
+    <p>Já possui cadastro? Faça login para acessar suas aulas, quizzes e exercícios.</p>
 </section>
 
 <main class="container">
 
     <section class="card">
-
         <h2>🔐 Acesse sua conta</h2>
-
-        <p>
-            Digite o e-mail e a senha que você cadastrou
-            na BioMentoria.
-        </p>
-
+        <p>Digite o e-mail e a senha que você cadastrou na BioMentoria.</p>
         <br>
 
-        <div id="avisoErro" class="aviso aviso-erro">
-            ❌ E-mail ou senha incorretos.
+        <div id="avisoErro" class="aviso-erro">
+            ❌ E-mail ou senha incorretos. Tente novamente.
         </div>
 
-        <div id="avisoOk" class="aviso aviso-ok">
+        <div id="avisoOk" class="aviso-ok">
             ✅ Conta criada com sucesso! Agora faça login.
         </div>
 
-        <form id="loginForm">
-
+        <form action="/login" method="POST">
             <label for="email">E-mail:</label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Digite seu e-mail"
-                autocomplete="email"
-                required
-            >
+            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" autocomplete="email" required>
 
             <label for="senha">Senha:</label>
-
-            <input
-                type="password"
-                id="senha"
-                placeholder="Digite sua senha"
-                autocomplete="current-password"
-                required
-            >
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
 
             <br>
-
-            <button class="btn" type="submit">
-                Entrar
-            </button>
-
+            <button class="btn" type="submit">Entrar</button>
         </form>
-
     </section>
 
-
     <section class="card">
-
         <h2>Ainda não possui uma conta?</h2>
-
-        <p>
-            Crie sua conta gratuitamente e tenha acesso
-            às aulas, quizzes e exercícios de Biologia.
-        </p>
-
+        <p>Crie sua conta gratuitamente e tenha acesso às aulas, quizzes e exercícios de Biologia.</p>
         <br>
-
-        <a href="clientes.html" class="btn">
-            Criar conta grátis
-        </a>
-
+        <a href="clientes.html" class="btn">Criar conta grátis</a>
     </section>
 
 </main>
 
 <footer class="rodape">
-
-    <p>
-        &copy; 2026 BioMentoria -
-        Plataforma gratuita de Biologia
-    </p>
-
-    <p>
-        Educação acessível para todos.
-    </p>
-
+    <p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p>
+    <p>Educação acessível para todos.</p>
 </footer>
 
-
 <script>
-
-// LOGIN
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    const email = document
-        .getElementById("email")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const senha = document
-        .getElementById("senha")
-        .value;
-
-    const avisoErro = document.getElementById("avisoErro");
-
-    const avisoOk = document.getElementById("avisoOk");
-
-    avisoErro.style.display = "none";
-
-    avisoOk.style.display = "none";
-
-
-    // Procurar usuário
-    const dadosUsuario = localStorage.getItem(
-        "biomentoria_usuario_" + email
-    );
-
-
-    // Usuário não encontrado
-    if (!dadosUsuario) {
-
-        avisoErro.textContent =
-            "❌ E-mail ou senha incorretos.";
-
-        avisoErro.style.display = "block";
-
-        return;
+function confirmarSair(event) {
+    if (!confirm('Tem certeza que deseja fechar a sessão?')) {
+        event.preventDefault();
+        return false;
     }
-
-
-    const usuario = JSON.parse(dadosUsuario);
-
-
-    // Verificar senha
-    if (usuario.senha !== senha) {
-
-        avisoErro.textContent =
-            "❌ E-mail ou senha incorretos.";
-
-        avisoErro.style.display = "block";
-
-        return;
-    }
-
-
-    // Login correto
-    localStorage.setItem(
-        "biomentoria_sessao",
-        JSON.stringify({
-            nome: usuario.nome,
-            email: usuario.email
-        })
-    );
-
-
-    avisoOk.textContent =
-        "✅ Login realizado com sucesso!";
-
-    avisoOk.style.display = "block";
-
-
-    // Redirecionar
-    setTimeout(function() {
-
-        window.location.href = "index.html";
-
-    }, 1000);
-
-});
-
-
-// Verificar mensagem de cadastro
-(function() {
-
-    const params =
-        new URLSearchParams(window.location.search);
-
-    if (params.get("ok") === "1") {
-
-        const aviso =
-            document.getElementById("avisoOk");
-
-        aviso.textContent =
-            "✅ Conta criada com sucesso! Agora faça login.";
-
-        aviso.style.display = "block";
-    }
-
-})();
-
-
-// Fechar sessão
-function fecharSessao() {
-
-    const confirmar = confirm(
-        "Tem certeza que deseja fechar a sessão?"
-    );
-
-    if (confirmar) {
-
-        localStorage.removeItem(
-            "biomentoria_sessao"
-        );
-
-        window.location.href = "login.html";
-    }
+    return true;
 }
 
+(function () {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('erro') === '1') {
+        const el = document.getElementById('avisoErro');
+        if (el) el.style.display = 'block';
+    }
+
+    if (params.get('ok') === '1') {
+        const el = document.getElementById('avisoOk');
+        if (el) el.style.display = 'block';
+    }
+})();
 </script>
 
 </body>
