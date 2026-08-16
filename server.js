@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const path = require('path');
+const { responderPergunta, gerarAula, iaConfigurada } = require('./ia-tutor');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -54,7 +55,7 @@ const db = new sqlite3.Database(
 
 
 // ============================================================
-// CRIAR TABELA DE ALUNOS
+// CRIAR TABELAS
 // ============================================================
 
 db.serialize(() => {
@@ -66,6 +67,23 @@ db.serialize(() => {
             telefone TEXT,
             email TEXT UNIQUE NOT NULL,
             senha TEXT NOT NULL
+        )
+    `);
+
+    // Aulas geradas pela IA e o progresso de cada aluno.
+    db.run(`
+        CREATE TABLE IF NOT EXISTS aulas_ia (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            aluno_id INTEGER NOT NULL,
+            tema TEXT NOT NULL,
+            titulo TEXT NOT NULL,
+            conteudo TEXT NOT NULL,
+            fonte TEXT NOT NULL,
+            criada_em TEXT NOT NULL,
+            concluida_em TEXT,
+            acertos INTEGER,
+            total INTEGER,
+            FOREIGN KEY (aluno_id) REFERENCES clientes (id)
         )
     `);
 });
@@ -307,6 +325,201 @@ app.get('/verificar-login', (req, res) => {
 
 
 // ============================================================
+// TUTOR DE BIOLOGIA COM IA
+// ============================================================
+
+function exigirLoginApi(req, res, next) {
+    if (!req.session.alunoId) {
+        return res.status(401).json({ erro: 'Entre na sua conta para usar o tutor.' });
+    }
+    next();
+}
+
+app.post('/api/ia-tutor', exigirLoginApi, async (req, res) => {
+    const pergunta = typeof req.body.pergunta === 'string' ? req.body.pergunta.trim() : '';
+
+    if (!pergunta) {
+        return res.status(400).json({ erro: 'Escreva uma pergunta sobre Biologia.' });
+    }
+
+    if (pergunta.length > 500) {
+        return res.status(400).json({ erro: 'A pergunta é muito longa. Use até 500 caracteres.' });
+    }
+
+    try {
+        const { resposta, fonte } = await responderPergunta(pergunta);
+        res.json({ resposta, fonte });
+    } catch (erro) {
+        console.error('Erro no tutor de IA:', erro);
+        res.status(500).json({ erro: 'Não foi possível responder agora. Tente novamente.' });
+    }
+});
+
+
+// ============================================================
+// AULAS GERADAS PELA IA (salvas por aluno)
+// ============================================================
+
+// Remove o gabarito antes de enviar a aula para o navegador.
+function aulaSemGabarito(conteudo) {
+    return {
+        tema: conteudo.tema,
+        titulo: conteudo.titulo,
+        secoes: conteudo.secoes,
+        quiz: conteudo.quiz.map((questao) => ({
+            pergunta: questao.pergunta,
+            respostas: questao.respostas
+        })),
+        exercicios: conteudo.exercicios.map((questao) => ({
+            pergunta: questao.pergunta,
+            alternativas: questao.alternativas
+        }))
+    };
+}
+
+app.get('/api/aulas', exigirLoginApi, (req, res) => {
+    db.all(
+        `SELECT id, tema, titulo, fonte, criada_em, concluida_em, acertos, total
+         FROM aulas_ia WHERE aluno_id = ? ORDER BY id`,
+        [req.session.alunoId],
+        (err, aulas) => {
+            if (err) {
+                console.error('Erro ao listar aulas:', err.message);
+                return res.status(500).json({ erro: 'Erro ao carregar suas aulas.' });
+            }
+            res.json({ aulas });
+        }
+    );
+});
+
+app.get('/api/aulas/:id', exigirLoginApi, (req, res) => {
+    db.get(
+        `SELECT * FROM aulas_ia WHERE id = ? AND aluno_id = ?`,
+        [req.params.id, req.session.alunoId],
+        (err, aula) => {
+            if (err) {
+                console.error('Erro ao abrir aula:', err.message);
+                return res.status(500).json({ erro: 'Erro ao abrir a aula.' });
+            }
+            if (!aula) {
+                return res.status(404).json({ erro: 'Aula não encontrada.' });
+            }
+
+            res.json({
+                id: aula.id,
+                fonte: aula.fonte,
+                criada_em: aula.criada_em,
+                concluida_em: aula.concluida_em,
+                acertos: aula.acertos,
+                total: aula.total,
+                aula: aulaSemGabarito(JSON.parse(aula.conteudo))
+            });
+        }
+    );
+});
+
+app.post('/api/aulas/gerar', exigirLoginApi, (req, res) => {
+    db.all(
+        `SELECT tema FROM aulas_ia WHERE aluno_id = ?`,
+        [req.session.alunoId],
+        async (err, linhas) => {
+            if (err) {
+                console.error('Erro ao consultar temas já estudados:', err.message);
+                return res.status(500).json({ erro: 'Erro ao gerar a aula.' });
+            }
+
+            try {
+                const conteudo = await gerarAula(linhas.map((linha) => linha.tema));
+
+                db.run(
+                    `INSERT INTO aulas_ia (aluno_id, tema, titulo, conteudo, fonte, criada_em)
+                     VALUES (?, ?, ?, ?, ?, ?)`,
+                    [
+                        req.session.alunoId,
+                        conteudo.tema,
+                        conteudo.titulo,
+                        JSON.stringify(conteudo),
+                        conteudo.fonte,
+                        new Date().toISOString()
+                    ],
+                    function (erroInsert) {
+                        if (erroInsert) {
+                            console.error('Erro ao salvar aula:', erroInsert.message);
+                            return res.status(500).json({ erro: 'Erro ao salvar a aula.' });
+                        }
+
+                        res.json({
+                            id: this.lastID,
+                            fonte: conteudo.fonte,
+                            aula: aulaSemGabarito(conteudo)
+                        });
+                    }
+                );
+            } catch (erroIa) {
+                console.error('Erro ao gerar aula:', erroIa);
+                res.status(500).json({ erro: 'Não foi possível gerar a aula agora.' });
+            }
+        }
+    );
+});
+
+app.post('/api/aulas/:id/responder', exigirLoginApi, (req, res) => {
+    const respostasQuiz = Array.isArray(req.body.quiz) ? req.body.quiz : [];
+    const respostasExercicios = Array.isArray(req.body.exercicios) ? req.body.exercicios : [];
+
+    db.get(
+        `SELECT * FROM aulas_ia WHERE id = ? AND aluno_id = ?`,
+        [req.params.id, req.session.alunoId],
+        (err, aula) => {
+            if (err) {
+                console.error('Erro ao corrigir aula:', err.message);
+                return res.status(500).json({ erro: 'Erro ao corrigir a aula.' });
+            }
+            if (!aula) {
+                return res.status(404).json({ erro: 'Aula não encontrada.' });
+            }
+
+            const conteudo = JSON.parse(aula.conteudo);
+
+            const corrigir = (questoes, respostas) =>
+                questoes.map((questao, indice) => ({
+                    correta: questao.correta,
+                    acertou: respostas[indice] === questao.correta
+                }));
+
+            const resultadoQuiz = corrigir(conteudo.quiz, respostasQuiz);
+            const resultadoExercicios = corrigir(conteudo.exercicios, respostasExercicios);
+
+            const acertos =
+                resultadoQuiz.filter((item) => item.acertou).length +
+                resultadoExercicios.filter((item) => item.acertou).length;
+            const total = resultadoQuiz.length + resultadoExercicios.length;
+            const concluidaEm = new Date().toISOString();
+
+            db.run(
+                `UPDATE aulas_ia SET concluida_em = ?, acertos = ?, total = ? WHERE id = ?`,
+                [concluidaEm, acertos, total, aula.id],
+                (erroUpdate) => {
+                    if (erroUpdate) {
+                        console.error('Erro ao salvar progresso:', erroUpdate.message);
+                        return res.status(500).json({ erro: 'Erro ao salvar seu progresso.' });
+                    }
+
+                    res.json({
+                        acertos,
+                        total,
+                        concluida_em: concluidaEm,
+                        quiz: resultadoQuiz,
+                        exercicios: resultadoExercicios
+                    });
+                }
+            );
+        }
+    );
+});
+
+
+// ============================================================
 // SAIR DA CONTA
 // ============================================================
 
@@ -339,5 +552,10 @@ app.listen(PORT, '0.0.0.0', () => {
     console.log(`🌐 http://localhost:${PORT}`);
     console.log('🔐 Sistema de cadastro e login ativado');
     console.log('📚 Aulas protegidas por login');
+    console.log(
+        iaConfigurada()
+            ? '🤖 Tutor de IA ativo (OpenAI)'
+            : '🤖 Tutor de IA respondendo com o conteúdo das aulas (defina OPENAI_API_KEY para usar a OpenAI)'
+    );
     console.log('==============================================');
 });

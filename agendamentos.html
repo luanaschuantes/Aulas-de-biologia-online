@@ -39,6 +39,46 @@
         margin: 0;
     }
 
+    #conversaIa {
+        max-height: 340px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #d8e6de;
+        border-radius: 10px;
+        background: #f9fdfb;
+    }
+
+    .mensagemIa {
+        margin: 8px 0;
+        padding: 10px 12px;
+        border-radius: 10px;
+        white-space: pre-wrap;
+        line-height: 1.5;
+    }
+
+    .mensagemIa.aluno {
+        background: #e3f0ff;
+    }
+
+    .mensagemIa.bot {
+        background: #e8f6ee;
+    }
+
+    .formIa {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+    }
+
+    .formIa input {
+        flex: 1 1 220px;
+        padding: 10px;
+        border: 1px solid #cbd8d2;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
 </style>
 
 </head> <body>
@@ -137,6 +177,39 @@
     </article>
 
     <article class="card">
+        <h2>🪄 Aulas geradas por IA</h2>
+        <p>A IA cria uma aula nova com texto, quiz e exercícios. Ao terminar, seu progresso fica salvo e você pode gerar o próximo conteúdo.</p>
+
+        <div id="listaAulasIa">Carregando suas aulas...</div>
+
+        <br>
+        <button class="btn" type="button" id="botaoGerarAula" onclick="gerarNovaAula()">Gerar nova aula</button>
+        <p id="avisoAulaIa" style="margin-top:12px;font-weight:bold;"></p>
+
+        <div id="aulaGerada" style="display:none;margin-top:20px;"></div>
+    </article>
+
+    <article class="card">
+        <h2>🤖 BioBot - Tutor de Biologia com IA</h2>
+        <p>Pergunte qualquer dúvida de Biologia e receba a explicação na hora.</p>
+
+        <div id="conversaIa">
+            <div class="mensagemIa bot">Olá! Sou o BioBot. Pergunte algo como "o que é fotossíntese?" ou "qual a diferença entre célula procarionte e eucarionte?".</div>
+        </div>
+
+        <form class="formIa" id="formIa" autocomplete="off">
+            <input
+                type="text"
+                id="perguntaIa"
+                maxlength="500"
+                placeholder="Escreva sua dúvida de Biologia"
+                required
+            >
+            <button class="btn" type="submit" id="botaoIa">Perguntar</button>
+        </form>
+    </article>
+
+    <article class="card">
         <h2>🧠 Quiz de Biologia</h2>
         <p>Teste seus conhecimentos respondendo às questões.</p>
         <div id="quizContainer"></div>
@@ -194,10 +267,306 @@ try {
 
     novoQuiz();
     carregarExercicios();
+    carregarAulasIa();
 } catch (erro) {
     console.error('Erro ao verificar login:', erro);
     window.location.replace('/login.html');
 }
+}
+
+// ============================================================
+// AULAS GERADAS POR IA (com progresso salvo)
+// ============================================================
+
+let aulaAtual = null;
+
+function escaparHtml(texto) {
+    const area = document.createElement('div');
+    area.textContent = texto;
+    return area.innerHTML;
+}
+
+function dataCurta(iso) {
+    if (!iso) {
+        return '';
+    }
+    return new Date(iso).toLocaleDateString('pt-BR');
+}
+
+async function carregarAulasIa() {
+    const lista = document.getElementById('listaAulasIa');
+
+    try {
+        const resposta = await fetch('/api/aulas', { credentials: 'same-origin' });
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            lista.textContent = dados.erro || 'Não foi possível carregar suas aulas.';
+            return;
+        }
+
+        if (dados.aulas.length === 0) {
+            lista.innerHTML = '<p>Você ainda não tem aulas geradas. Clique em <strong>Gerar nova aula</strong> para começar.</p>';
+            return;
+        }
+
+        const concluidas = dados.aulas.filter((aula) => aula.concluida_em).length;
+
+        lista.innerHTML =
+            `<p><strong>Seu progresso:</strong> ${concluidas} de ${dados.aulas.length} aulas concluídas.</p>` +
+            dados.aulas
+                .map((aula) => {
+                    const situacao = aula.concluida_em
+                        ? `✅ concluída em ${dataCurta(aula.concluida_em)} — ${aula.acertos}/${aula.total} acertos`
+                        : '⏳ em andamento';
+
+                    return `
+                    <p style="margin:6px 0;">
+                        <button class="btn" type="button" onclick="abrirAula(${aula.id})">Abrir</button>
+                        <strong>${escaparHtml(aula.titulo)}</strong> — ${situacao}
+                    </p>`;
+                })
+                .join('');
+    } catch (erro) {
+        console.error('Erro ao carregar aulas:', erro);
+        lista.textContent = 'Erro de conexão ao carregar suas aulas.';
+    }
+}
+
+function montarQuestoes(questoes, prefixo, campo) {
+    return questoes
+        .map((questao, indice) => {
+            const alternativas = questao[campo]
+                .map(
+                    (alternativa, posicao) => `
+                    <label style="display:block;margin:4px 0;">
+                        <input type="radio" name="${prefixo}${indice}" value="${posicao}">
+                        ${escaparHtml(alternativa)}
+                    </label>`
+                )
+                .join('');
+
+            return `
+            <div id="${prefixo}bloco${indice}" style="margin-bottom:14px;">
+                <p><strong>${indice + 1}.</strong> ${escaparHtml(questao.pergunta)}</p>
+                ${alternativas}
+            </div>`;
+        })
+        .join('');
+}
+
+function mostrarAula(dados) {
+    aulaAtual = dados;
+
+    const area = document.getElementById('aulaGerada');
+    const aula = dados.aula;
+
+    const secoes = aula.secoes
+        .map(
+            (secao) => `
+            <h4>${escaparHtml(secao.subtitulo || '')}</h4>
+            <p>${escaparHtml(secao.texto)}</p>`
+        )
+        .join('');
+
+    area.innerHTML = `
+        <h3>${escaparHtml(aula.titulo)}</h3>
+        ${secoes}
+
+        <h3>🧠 Quiz da aula</h3>
+        ${montarQuestoes(aula.quiz, 'quizIa', 'respostas')}
+
+        <h3>📝 Exercícios da aula</h3>
+        ${montarQuestoes(aula.exercicios, 'exercicioIa', 'alternativas')}
+
+        <button class="btn" type="button" onclick="finalizarAula()">Corrigir e concluir aula</button>
+        <p id="resultadoAulaIa" style="margin-top:14px;font-weight:bold;"></p>
+    `;
+
+    area.style.display = 'block';
+    area.scrollIntoView({ behavior: 'smooth' });
+
+    if (dados.concluida_em) {
+        document.getElementById('resultadoAulaIa').textContent =
+            `Você já concluiu esta aula com ${dados.acertos}/${dados.total} acertos. Pode responder de novo para treinar.`;
+    }
+}
+
+async function abrirAula(id) {
+    const aviso = document.getElementById('avisoAulaIa');
+    aviso.textContent = 'Abrindo aula...';
+
+    try {
+        const resposta = await fetch(`/api/aulas/${id}`, { credentials: 'same-origin' });
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            aviso.textContent = dados.erro || 'Não foi possível abrir a aula.';
+            return;
+        }
+
+        aviso.textContent = '';
+        mostrarAula(dados);
+    } catch (erro) {
+        console.error('Erro ao abrir aula:', erro);
+        aviso.textContent = 'Erro de conexão ao abrir a aula.';
+    }
+}
+
+async function gerarNovaAula() {
+    const botao = document.getElementById('botaoGerarAula');
+    const aviso = document.getElementById('avisoAulaIa');
+
+    botao.disabled = true;
+    aviso.textContent = 'A IA está preparando um conteúdo novo...';
+
+    try {
+        const resposta = await fetch('/api/aulas/gerar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: '{}'
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            aviso.textContent = dados.erro || 'Não foi possível gerar a aula.';
+            return;
+        }
+
+        aviso.textContent = '';
+        mostrarAula(dados);
+        carregarAulasIa();
+    } catch (erro) {
+        console.error('Erro ao gerar aula:', erro);
+        aviso.textContent = 'Erro de conexão ao gerar a aula.';
+    } finally {
+        botao.disabled = false;
+    }
+}
+
+function lerRespostas(questoes, prefixo) {
+    return questoes.map((questao, indice) => {
+        const marcada = document.querySelector(`input[name="${prefixo}${indice}"]:checked`);
+        return marcada ? Number(marcada.value) : -1;
+    });
+}
+
+function marcarCorrecao(questoes, prefixo, resultado) {
+    resultado.forEach((item, indice) => {
+        const bloco = document.getElementById(`${prefixo}bloco${indice}`);
+        const anterior = bloco.querySelector('.correcaoIa');
+        if (anterior) {
+            anterior.remove();
+        }
+
+        const aviso = document.createElement('p');
+        aviso.className = 'correcaoIa';
+        aviso.style.margin = '4px 0';
+
+        if (item.acertou) {
+            aviso.style.color = 'green';
+            aviso.textContent = '✅ Resposta correta!';
+        } else {
+            aviso.style.color = 'red';
+            const campo = questoes[indice].respostas || questoes[indice].alternativas;
+            aviso.textContent = `❌ Resposta correta: ${campo[item.correta]}`;
+        }
+
+        bloco.appendChild(aviso);
+    });
+}
+
+async function finalizarAula() {
+    if (!aulaAtual) {
+        return;
+    }
+
+    const resultadoTexto = document.getElementById('resultadoAulaIa');
+    resultadoTexto.textContent = 'Corrigindo...';
+
+    try {
+        const resposta = await fetch(`/api/aulas/${aulaAtual.id}/responder`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                quiz: lerRespostas(aulaAtual.aula.quiz, 'quizIa'),
+                exercicios: lerRespostas(aulaAtual.aula.exercicios, 'exercicioIa')
+            })
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            resultadoTexto.textContent = dados.erro || 'Não foi possível corrigir a aula.';
+            return;
+        }
+
+        marcarCorrecao(aulaAtual.aula.quiz, 'quizIa', dados.quiz);
+        marcarCorrecao(aulaAtual.aula.exercicios, 'exercicioIa', dados.exercicios);
+
+        resultadoTexto.textContent =
+            `Você acertou ${dados.acertos} de ${dados.total}. Aula concluída e salva! Clique em "Gerar nova aula" para o próximo conteúdo.`;
+
+        carregarAulasIa();
+    } catch (erro) {
+        console.error('Erro ao corrigir aula:', erro);
+        resultadoTexto.textContent = 'Erro de conexão ao corrigir a aula.';
+    }
+}
+
+function adicionarMensagemIa(texto, autor) {
+    const conversa = document.getElementById('conversaIa');
+    const mensagem = document.createElement('div');
+    mensagem.className = `mensagemIa ${autor}`;
+    mensagem.textContent = texto;
+    conversa.appendChild(mensagem);
+    conversa.scrollTop = conversa.scrollHeight;
+    return mensagem;
+}
+
+async function perguntarIa(evento) {
+    evento.preventDefault();
+
+    const campo = document.getElementById('perguntaIa');
+    const botao = document.getElementById('botaoIa');
+    const pergunta = campo.value.trim();
+
+    if (!pergunta) {
+        return;
+    }
+
+    adicionarMensagemIa(pergunta, 'aluno');
+    campo.value = '';
+    botao.disabled = true;
+
+    const carregando = adicionarMensagemIa('Pensando...', 'bot');
+
+    try {
+        const resposta = await fetch('/api/ia-tutor', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ pergunta })
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            carregando.textContent = dados.erro || 'Não foi possível responder agora.';
+            return;
+        }
+
+        carregando.textContent = dados.resposta;
+    } catch (erro) {
+        console.error('Erro ao falar com o tutor:', erro);
+        carregando.textContent = 'Erro de conexão. Tente novamente.';
+    } finally {
+        botao.disabled = false;
+        campo.focus();
+    }
 }
 
 const perguntas = [
@@ -371,7 +740,10 @@ function corrigirExercicios() {
         `Você acertou ${pontos} de 10 exercícios.`;
 }
 
-document.addEventListener('DOMContentLoaded', verificarAcesso);
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('formIa').addEventListener('submit', perguntarIa);
+    verificarAcesso();
+});
 </script>
 </body>
 </html>
