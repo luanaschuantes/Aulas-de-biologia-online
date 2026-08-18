@@ -84,12 +84,16 @@ function exigirLogin(req, res, next) {
 
 
 // ============================================================
-// PROTEGER A PÁGINA DE AULAS
+// PROTEGER AULAS E ATIVIDADES
 // (precisa ficar ANTES do express.static)
 // ============================================================
 
 app.get('/agendamentos.html', exigirLogin, (req, res) => {
     res.sendFile(path.join(__dirname, 'agendamentos.html'));
+});
+
+app.get('/atividades.html', exigirLogin, (req, res) => {
+    res.sendFile(path.join(__dirname, 'atividades.html'));
 });
 
 
@@ -338,6 +342,6 @@ app.listen(PORT, '0.0.0.0', () => {
     console.log('🚀 BioMentoria funcionando!');
     console.log(`🌐 http://localhost:${PORT}`);
     console.log('🔐 Sistema de cadastro e login ativado');
-    console.log('📚 Aulas protegidas por login');
+    console.log('📚 Aulas e atividades protegidas por login');
     console.log('==============================================');
 });
