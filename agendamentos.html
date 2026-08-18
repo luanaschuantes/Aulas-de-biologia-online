@@ -201,39 +201,121 @@ try {
 }
 
 const perguntas = [
-{
-    pergunta: 'Qual é a unidade básica dos seres vivos?',
-    respostas: ['Célula', 'Órgão', 'Tecido', 'Sistema'],
-    correta: 0
-},
-{
-    pergunta: 'Qual molécula armazena a informação genética?',
-    respostas: ['Glicose', 'DNA', 'Água', 'Lipídio'],
-    correta: 1
-},
-{
-    pergunta: 'Qual processo permite que as plantas produzam matéria orgânica usando luz?',
-    respostas: ['Respiração', 'Digestão', 'Fotossíntese', 'Fermentação'],
-    correta: 2
-},
-{
-    pergunta: 'Quem é conhecido pelos estudos clássicos de hereditariedade com ervilhas?',
-    respostas: ['Charles Darwin', 'Gregor Mendel', 'Louis Pasteur', 'Robert Hooke'],
-    correta: 1
-},
-{
-    pergunta: 'Qual área da Biologia estuda as relações dos seres vivos com o ambiente?',
-    respostas: ['Ecologia', 'Botânica', 'Citologia', 'Anatomia'],
-    correta: 0
-}
+    {
+        pergunta: 'Qual organela é responsável pela produção de energia na célula?',
+        respostas: ['Ribossomo', 'Mitocôndria', 'Vacúolo', 'Lisossomo'],
+        correta: 1
+    },
+    {
+        pergunta: 'As células eucariontes se diferenciam das procariontes principalmente por possuírem:',
+        respostas: ['Parede celular', 'Núcleo delimitado por membrana', 'Citoplasma', 'Membrana plasmática'],
+        correta: 1
+    },
+    {
+        pergunta: 'Qual estrutura celular participa da síntese de proteínas?',
+        respostas: ['Mitocôndria', 'Complexo golgiense', 'Ribossomo', 'Centríolo'],
+        correta: 2
+    },
+    {
+        pergunta: 'Os genes são segmentos de qual molécula?',
+        respostas: ['RNA mensageiro', 'Proteína', 'DNA', 'Lipídio'],
+        correta: 2
+    },
+    {
+        pergunta: 'A transmissão de características dos pais para os filhos é chamada de:',
+        respostas: ['Mutação', 'Hereditariedade', 'Seleção natural', 'Fotossíntese'],
+        correta: 1
+    },
+    {
+        pergunta: 'Qual cientista realizou experimentos com ervilhas e estabeleceu leis da hereditariedade?',
+        respostas: ['Charles Darwin', 'Gregor Mendel', 'Watson e Crick', 'Louis Pasteur'],
+        correta: 1
+    },
+    {
+        pergunta: 'Em uma cadeia alimentar, quem ocupa o primeiro nível trófico?',
+        respostas: ['Consumidores primários', 'Decompositores', 'Produtores', 'Consumidores secundários'],
+        correta: 2
+    },
+    {
+        pergunta: 'O conjunto de populações de diferentes espécies que vivem em uma mesma área forma:',
+        respostas: ['Uma população', 'Uma comunidade', 'Um organismo', 'Um gene'],
+        correta: 1
+    },
+    {
+        pergunta: 'Os decompositores têm como principal função:',
+        respostas: ['Produzir oxigênio', 'Reciclar nutrientes da matéria orgânica', 'Fazer fotossíntese', 'Caçar presas'],
+        correta: 1
+    },
+    {
+        pergunta: 'Segundo a seleção natural, indivíduos com características vantajosas tendem a:',
+        respostas: ['Desaparecer rapidamente', 'Ter maior sucesso reprodutivo', 'Não se reproduzir', 'Virar fósseis'],
+        correta: 1
+    },
+    {
+        pergunta: 'Qual processo contribui para a diversidade dos seres vivos ao longo das gerações?',
+        respostas: ['Digestão', 'Mutações e seleção natural', 'Respiração celular', 'Fotossíntese apenas'],
+        correta: 1
+    },
+    {
+        pergunta: 'A evolução biológica se refere principalmente a mudanças que ocorrem:',
+        respostas: ['Em um único indivíduo ao longo da vida', 'Nas populações ao longo das gerações', 'Apenas em plantas', 'Somente em laboratório'],
+        correta: 1
+    },
+    {
+        pergunta: 'Qual sistema coordena funções do corpo e responde a estímulos do ambiente?',
+        respostas: ['Sistema digestório', 'Sistema nervoso', 'Sistema urinário', 'Sistema ósseo'],
+        correta: 1
+    },
+    {
+        pergunta: 'A absorção de nutrientes ocorre principalmente no:',
+        respostas: ['Sistema respiratório', 'Sistema digestório', 'Sistema nervoso', 'Sistema muscular'],
+        correta: 1
+    },
+    {
+        pergunta: 'O sangue transporta oxigênio e nutrientes pelo organismo graças ao:',
+        respostas: ['Sistema circulatório', 'Sistema digestório', 'Sistema excretor', 'Sistema linfático apenas'],
+        correta: 0
+    },
+    {
+        pergunta: 'Na fotossíntese, as plantas utilizam luz, água e gás carbônico para produzir:',
+        respostas: ['Apenas oxigênio', 'Matéria orgânica (alimento)', 'Apenas água', 'Proteínas do solo'],
+        correta: 1
+    },
+    {
+        pergunta: 'Qual estrutura vegetal geralmente é responsável pela absorção de água e sais minerais?',
+        respostas: ['Folha', 'Flor', 'Raiz', 'Fruto'],
+        correta: 2
+    },
+    {
+        pergunta: 'A maioria das plantas é considerada autotrófica porque:',
+        respostas: ['Se alimenta de outros animais', 'Produz o próprio alimento', 'Não precisa de água', 'Não tem células'],
+        correta: 1
+    }
 ];
+
+let perguntasDisponiveis = [];
+
+function embaralhar(lista) {
+    const copia = lista.slice();
+    for (let i = copia.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = copia[i];
+        copia[i] = copia[j];
+        copia[j] = temp;
+    }
+    return copia;
+}
 
 function novoQuiz() {
     const container = document.getElementById('quizContainer');
     const resultado = document.getElementById('resultadoQuiz');
     resultado.textContent = '';
 
-    const pergunta = perguntas[Math.floor(Math.random() * perguntas.length)];
+    if (perguntasDisponiveis.length === 0) {
+        perguntasDisponiveis = embaralhar(perguntas);
+    }
+
+    const pergunta = perguntasDisponiveis.pop();
     let html = `<h3>${pergunta.pergunta}</h3>`;
 
     pergunta.respostas.forEach((resposta, indice) => {
