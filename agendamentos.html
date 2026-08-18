@@ -1,28 +1,13 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<link
-    rel="stylesheet"
-    href="estilo.css"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="estilo.css">
 <title>BioMentoria - Aulas de Biologia</title>
-
 <style>
-
-    body {
-        visibility: hidden;
-    }
-
-    body.autorizado {
-        visibility: visible;
-    }
-
+    body { visibility: hidden; }
+    body.autorizado { visibility: visible; }
     #verificandoLogin {
         min-height: 100vh;
         display: flex;
@@ -32,16 +17,14 @@
         padding: 20px;
         background: linear-gradient(180deg, #f7faf9, #eef6f1);
     }
-
     #verificandoLogin .card {
         width: 90%;
         max-width: 500px;
         margin: 0;
     }
-
 </style>
-
-</head> <body>
+</head>
+<body>
 
 <div id="verificandoLogin">
 <div class="card">
@@ -57,6 +40,7 @@
     <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
     <a href="login.html">Entrar</a>
     <a href="agendamentos.html">Fazer aulas</a>
+    <a href="atividades.html">Atividades</a>
     <a href="consulta_agendamentos.html">Contato</a>
     <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
@@ -71,7 +55,10 @@
 
     <section class="card access-box">
         <h2>🎓 Área de Estudos</h2>
-        <p>Você está conectado à sua conta. Todo o conteúdo abaixo está disponível gratuitamente para você.</p>
+        <p>Você está conectado à sua conta. Leia as aulas abaixo e, quando estiver pronto, faça as atividades.</p>
+        <p style="margin-top:16px;">
+            <a href="atividades.html" class="btn">Ir para Quiz e Exercícios →</a>
+        </p>
     </section>
 
     <article class="card">
@@ -136,23 +123,13 @@
         <p>Entre as principais estruturas das plantas estão raízes, caules, folhas, flores, frutos e sementes.</p>
     </article>
 
-    <article class="card">
-        <h2>🧠 Quiz de Biologia</h2>
-        <p>Teste seus conhecimentos respondendo às questões.</p>
-        <div id="quizContainer"></div>
-        <br>
-        <button class="btn" type="button" onclick="novoQuiz()">Nova pergunta</button>
-        <p id="resultadoQuiz" style="margin-top:20px;font-weight:bold;"></p>
-    </article>
-
-    <article class="card">
-        <h2>📝 Lista de Exercícios</h2>
-        <p>Resolva os exercícios abaixo e confira sua pontuação.</p>
-        <div id="exerciciosContainer"></div>
-        <br>
-        <button class="btn" type="button" onclick="corrigirExercicios()">Corrigir exercícios</button>
-        <p id="resultadoExercicios" style="margin-top:20px;font-weight:bold;"></p>
-    </article>
+    <section class="card" style="text-align:center;">
+        <h2>📝 Próximo passo</h2>
+        <p>Depois de estudar as aulas, teste seus conhecimentos nas atividades.</p>
+        <p style="margin-top:16px;">
+            <a href="atividades.html" class="btn">Ir para Quiz e Exercícios →</a>
+        </p>
+    </section>
 
 </main>
 
@@ -191,266 +168,10 @@ try {
     document.getElementById('verificandoLogin').style.display = 'none';
     document.getElementById('conteudoProtegido').style.display = 'block';
     document.body.classList.add('autorizado');
-
-    novoQuiz();
-    carregarExercicios();
 } catch (erro) {
     console.error('Erro ao verificar login:', erro);
     window.location.replace('/login.html');
 }
-}
-
-const perguntas = [
-    {
-        pergunta: 'Qual organela é responsável pela produção de energia na célula?',
-        respostas: ['Ribossomo', 'Mitocôndria', 'Vacúolo', 'Lisossomo'],
-        correta: 1
-    },
-    {
-        pergunta: 'As células eucariontes se diferenciam das procariontes principalmente por possuírem:',
-        respostas: ['Parede celular', 'Núcleo delimitado por membrana', 'Citoplasma', 'Membrana plasmática'],
-        correta: 1
-    },
-    {
-        pergunta: 'Qual estrutura celular participa da síntese de proteínas?',
-        respostas: ['Mitocôndria', 'Complexo golgiense', 'Ribossomo', 'Centríolo'],
-        correta: 2
-    },
-    {
-        pergunta: 'Os genes são segmentos de qual molécula?',
-        respostas: ['RNA mensageiro', 'Proteína', 'DNA', 'Lipídio'],
-        correta: 2
-    },
-    {
-        pergunta: 'A transmissão de características dos pais para os filhos é chamada de:',
-        respostas: ['Mutação', 'Hereditariedade', 'Seleção natural', 'Fotossíntese'],
-        correta: 1
-    },
-    {
-        pergunta: 'Qual cientista realizou experimentos com ervilhas e estabeleceu leis da hereditariedade?',
-        respostas: ['Charles Darwin', 'Gregor Mendel', 'Watson e Crick', 'Louis Pasteur'],
-        correta: 1
-    },
-    {
-        pergunta: 'Em uma cadeia alimentar, quem ocupa o primeiro nível trófico?',
-        respostas: ['Consumidores primários', 'Decompositores', 'Produtores', 'Consumidores secundários'],
-        correta: 2
-    },
-    {
-        pergunta: 'O conjunto de populações de diferentes espécies que vivem em uma mesma área forma:',
-        respostas: ['Uma população', 'Uma comunidade', 'Um organismo', 'Um gene'],
-        correta: 1
-    },
-    {
-        pergunta: 'Os decompositores têm como principal função:',
-        respostas: ['Produzir oxigênio', 'Reciclar nutrientes da matéria orgânica', 'Fazer fotossíntese', 'Caçar presas'],
-        correta: 1
-    },
-    {
-        pergunta: 'Segundo a seleção natural, indivíduos com características vantajosas tendem a:',
-        respostas: ['Desaparecer rapidamente', 'Ter maior sucesso reprodutivo', 'Não se reproduzir', 'Virar fósseis'],
-        correta: 1
-    },
-    {
-        pergunta: 'Qual processo contribui para a diversidade dos seres vivos ao longo das gerações?',
-        respostas: ['Digestão', 'Mutações e seleção natural', 'Respiração celular', 'Fotossíntese apenas'],
-        correta: 1
-    },
-    {
-        pergunta: 'A evolução biológica se refere principalmente a mudanças que ocorrem:',
-        respostas: ['Em um único indivíduo ao longo da vida', 'Nas populações ao longo das gerações', 'Apenas em plantas', 'Somente em laboratório'],
-        correta: 1
-    },
-    {
-        pergunta: 'Qual sistema coordena funções do corpo e responde a estímulos do ambiente?',
-        respostas: ['Sistema digestório', 'Sistema nervoso', 'Sistema urinário', 'Sistema ósseo'],
-        correta: 1
-    },
-    {
-        pergunta: 'A absorção de nutrientes ocorre principalmente no:',
-        respostas: ['Sistema respiratório', 'Sistema digestório', 'Sistema nervoso', 'Sistema muscular'],
-        correta: 1
-    },
-    {
-        pergunta: 'O sangue transporta oxigênio e nutrientes pelo organismo graças ao:',
-        respostas: ['Sistema circulatório', 'Sistema digestório', 'Sistema excretor', 'Sistema linfático apenas'],
-        correta: 0
-    },
-    {
-        pergunta: 'Na fotossíntese, as plantas utilizam luz, água e gás carbônico para produzir:',
-        respostas: ['Apenas oxigênio', 'Matéria orgânica (alimento)', 'Apenas água', 'Proteínas do solo'],
-        correta: 1
-    },
-    {
-        pergunta: 'Qual estrutura vegetal geralmente é responsável pela absorção de água e sais minerais?',
-        respostas: ['Folha', 'Flor', 'Raiz', 'Fruto'],
-        correta: 2
-    },
-    {
-        pergunta: 'A maioria das plantas é considerada autotrófica porque:',
-        respostas: ['Se alimenta de outros animais', 'Produz o próprio alimento', 'Não precisa de água', 'Não tem células'],
-        correta: 1
-    }
-];
-
-let perguntasDisponiveis = [];
-
-function embaralhar(lista) {
-    const copia = lista.slice();
-    for (let i = copia.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const temp = copia[i];
-        copia[i] = copia[j];
-        copia[j] = temp;
-    }
-    return copia;
-}
-
-function novoQuiz() {
-    const container = document.getElementById('quizContainer');
-    const resultado = document.getElementById('resultadoQuiz');
-    resultado.textContent = '';
-
-    if (perguntasDisponiveis.length === 0) {
-        perguntasDisponiveis = embaralhar(perguntas);
-    }
-
-    const pergunta = perguntasDisponiveis.pop();
-    let html = `<h3>${pergunta.pergunta}</h3>`;
-
-    pergunta.respostas.forEach((resposta, indice) => {
-        html += `
-            <button type="button" class="btn" style="display:block;margin:8px 0;"
-                onclick="responderQuiz(${indice}, ${pergunta.correta})">
-                ${resposta}
-            </button>
-        `;
-    });
-
-    container.innerHTML = html;
-}
-
-function responderQuiz(resposta, correta) {
-    const resultado = document.getElementById('resultadoQuiz');
-    if (resposta === correta) {
-        resultado.textContent = '✅ Resposta correta! Muito bem!';
-        resultado.style.color = 'green';
-    } else {
-        resultado.textContent = '❌ Resposta incorreta. Tente novamente!';
-        resultado.style.color = 'red';
-    }
-}
-
-function carregarExercicios() {
-    const container = document.getElementById('exerciciosContainer');
-
-    container.innerHTML = `
-    <div>
-        <p><strong>1.</strong> Qual estrutura contém o material genético nas células eucariontes?</p>
-        <label><input type="radio" name="q1" value="a"> Mitocôndria</label><br>
-        <label><input type="radio" name="q1" value="b"> Núcleo</label><br>
-        <label><input type="radio" name="q1" value="c"> Ribossomo</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>2.</strong> Qual processo é responsável pela produção de alimento pelas plantas?</p>
-        <label><input type="radio" name="q2" value="a"> Fotossíntese</label><br>
-        <label><input type="radio" name="q2" value="b"> Digestão</label><br>
-        <label><input type="radio" name="q2" value="c"> Respiração</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>3.</strong> Qual área estuda as relações entre os seres vivos e o ambiente?</p>
-        <label><input type="radio" name="q3" value="a"> Genética</label><br>
-        <label><input type="radio" name="q3" value="b"> Ecologia</label><br>
-        <label><input type="radio" name="q3" value="c"> Botânica</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>4.</strong> Quem propôs a teoria da seleção natural?</p>
-        <label><input type="radio" name="q4" value="a"> Gregor Mendel</label><br>
-        <label><input type="radio" name="q4" value="b"> Charles Darwin</label><br>
-        <label><input type="radio" name="q4" value="c"> Louis Pasteur</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>5.</strong> Qual molécula armazena as informações genéticas dos seres vivos?</p>
-        <label><input type="radio" name="q5" value="a"> Proteína</label><br>
-        <label><input type="radio" name="q5" value="b"> DNA</label><br>
-        <label><input type="radio" name="q5" value="c"> Glicose</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>6.</strong> Qual sistema é responsável pelo transporte de sangue, oxigênio e nutrientes?</p>
-        <label><input type="radio" name="q6" value="a"> Sistema digestório</label><br>
-        <label><input type="radio" name="q6" value="b"> Sistema respiratório</label><br>
-        <label><input type="radio" name="q6" value="c"> Sistema circulatório</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>7.</strong> Células que não possuem núcleo delimitado por membrana são chamadas de:</p>
-        <label><input type="radio" name="q7" value="a"> Eucariontes</label><br>
-        <label><input type="radio" name="q7" value="b"> Procariontes</label><br>
-        <label><input type="radio" name="q7" value="c"> Autótrofas</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>8.</strong> Na cadeia alimentar, os organismos que produzem o próprio alimento são os:</p>
-        <label><input type="radio" name="q8" value="a"> Consumidores</label><br>
-        <label><input type="radio" name="q8" value="b"> Decompositores</label><br>
-        <label><input type="radio" name="q8" value="c"> Produtores</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>9.</strong> Qual sistema permite as trocas gasosas (entrada de oxigênio e saída de gás carbônico)?</p>
-        <label><input type="radio" name="q9" value="a"> Sistema nervoso</label><br>
-        <label><input type="radio" name="q9" value="b"> Sistema respiratório</label><br>
-        <label><input type="radio" name="q9" value="c"> Sistema digestório</label>
-    </div>
-    <br>
-
-    <div>
-        <p><strong>10.</strong> Gregor Mendel é conhecido principalmente pelos estudos de:</p>
-        <label><input type="radio" name="q10" value="a"> Evolução das espécies</label><br>
-        <label><input type="radio" name="q10" value="b"> Hereditariedade com ervilhas</label><br>
-        <label><input type="radio" name="q10" value="c"> Estrutura da célula</label>
-    </div>
-    `;
-}
-
-function corrigirExercicios() {
-    let pontos = 0;
-
-    const gabarito = {
-        q1: 'b',
-        q2: 'a',
-        q3: 'b',
-        q4: 'b',
-        q5: 'b',
-        q6: 'c',
-        q7: 'b',
-        q8: 'c',
-        q9: 'b',
-        q10: 'b'
-    };
-
-    for (let i = 1; i <= 10; i++) {
-        const resposta = document.querySelector('input[name="q' + i + '"]:checked');
-        if (resposta && resposta.value === gabarito['q' + i]) {
-            pontos++;
-        }
-    }
-
-    document.getElementById('resultadoExercicios').textContent =
-        `Você acertou ${pontos} de 10 exercícios.`;
 }
 
 document.addEventListener('DOMContentLoaded', verificarAcesso);
