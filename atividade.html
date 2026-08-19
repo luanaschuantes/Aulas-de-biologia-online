@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="estilo.css">
+<title>BioMentoria - Atividade</title>
+<style>
+body { visibility: hidden; }
+body.autorizado { visibility: visible; }
+#verificandoLogin {
+  min-height: 100vh; display: flex; justify-content: center; align-items: center;
+  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
+}
+#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
+</style>
+</head>
+<body>
+<div id="verificandoLogin"><div class="card">
+  <h2>🔐 Verificando acesso...</h2>
+  <p>Aguarde enquanto verificamos sua conta.</p>
+</div></div>
+<div id="conteudoProtegido" style="display:none;">
+<nav>
+  <a href="index.html">Início</a>
+  <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
+  <a href="login.html">Entrar</a>
+  <a href="agendamentos.html">Fazer aulas</a>
+  <a href="atividades.html">Atividades</a>
+  <a href="consulta_agendamentos.html">Contato</a>
+  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+</nav>
+<section class="banner">
+  <span class="gratuito">🔓 Conteúdo gratuito</span>
+  <h1 id="tituloBanner">📝 Atividade</h1>
+  <p id="mensagemAluno">Quiz e exercícios desta aula</p>
+</section>
+<main class="container">
+  <p>
+    <a href="atividades.html" class="btn">← Todas as atividades</a>
+    <a href="#" class="btn" id="linkAula">Ler a aula</a>
+  </p>
+  <article class="card">
+    <h2 id="tituloQuiz">🧠 Quiz (10 perguntas)</h2>
+    <p>Perguntas só sobre este conteúdo. Não se repetem até acabar o banco.</p>
+    <div id="quizContainer"></div><br>
+    <button class="btn" type="button" onclick="novoQuiz()">Nova pergunta</button>
+    <p id="resultadoQuiz" style="margin-top:20px;font-weight:bold;"></p>
+  </article>
+  <article class="card">
+    <h2 id="tituloEx">📝 Exercícios (10 questões)</h2>
+    <p>Marque as alternativas e clique em corrigir.</p>
+    <div id="exerciciosContainer"></div><br>
+    <button class="btn" type="button" onclick="corrigirExercicios()">Corrigir exercícios</button>
+    <p id="resultadoExercicios" style="margin-top:20px;font-weight:bold;"></p>
+  </article>
+</main>
+<footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p></footer>
+</div>
+<script src="atividades-data.js"></script>
+<script>
+let perguntas = [];
+let perguntasDisponiveis = [];
+let exercicios = [];
+
+function getTema() {
+  const p = new URLSearchParams(window.location.search);
+  return p.get('tema') || 'citologia';
+}
+
+async function verificarAcesso() {
+  try {
+    const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
+    if (!resposta.ok) { window.location.replace('/login.html'); return; }
+    const dados = await resposta.json();
+    if (!dados.logado) { window.location.replace('/login.html'); return; }
+
+    const key = getTema();
+    const temaAtual = TEMAS[key];
+    if (!temaAtual) { window.location.replace('/atividades.html'); return; }
+
+    const el = document.getElementById('mensagemAluno');
+    if (el && dados.aluno && dados.aluno.nome) {
+      el.textContent = 'Olá, ' + dados.aluno.nome + '! Pratique ' + temaAtual.titulo + '.';
+    }
+
+    document.getElementById('tituloBanner').textContent = temaAtual.emoji + ' Atividades — ' + temaAtual.titulo;
+    document.getElementById('tituloQuiz').textContent = '🧠 Quiz de ' + temaAtual.titulo + ' (10 perguntas)';
+    document.getElementById('tituloEx').textContent = '📝 Exercícios de ' + temaAtual.titulo + ' (10 questões)';
+    document.getElementById('linkAula').href = 'aula-' + key + '.html';
+    document.getElementById('linkAula').textContent = 'Ler a aula de ' + temaAtual.titulo;
+
+    perguntas = temaAtual.quiz;
+    exercicios = temaAtual.ex;
+
+    document.getElementById('verificandoLogin').style.display = 'none';
+    document.getElementById('conteudoProtegido').style.display = 'block';
+    document.body.classList.add('autorizado');
+
+    novoQuiz();
+    carregarExercicios();
+  } catch (e) {
+    console.error(e);
+    window.location.replace('/login.html');
+  }
+}
+
+function embaralhar(lista) {
+  const copia = lista.slice();
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = copia[i]; copia[i] = copia[j]; copia[j] = t;
+  }
+  return copia;
+}
+
+function novoQuiz() {
+  const container = document.getElementById('quizContainer');
+  const resultado = document.getElementById('resultadoQuiz');
+  resultado.textContent = '';
+  if (perguntasDisponiveis.length === 0) perguntasDisponiveis = embaralhar(perguntas);
+  const pergunta = perguntasDisponiveis.pop();
+  let html = '<h3>' + pergunta.pergunta + '</h3>';
+  pergunta.respostas.forEach(function(resposta, indice) {
+    html += '<button type="button" class="btn" style="display:block;margin:8px 0;" onclick="responderQuiz(' + indice + ', ' + pergunta.correta + ')">' + resposta + '</button>';
+  });
+  container.innerHTML = html;
+}
+
+function responderQuiz(resposta, correta) {
+  const resultado = document.getElementById('resultadoQuiz');
+  if (resposta === correta) {
+    resultado.textContent = '✅ Resposta correta! Muito bem!';
+    resultado.style.color = 'green';
+  } else {
+    resultado.textContent = '❌ Resposta incorreta. Tente novamente!';
+    resultado.style.color = 'red';
+  }
+}
+
+function carregarExercicios() {
+  let html = '';
+  exercicios.forEach(function(item, i) {
+    const n = i + 1;
+    html += '<div><p><strong>' + n + '.</strong> ' + item.pergunta + '</p>';
+    item.opcoes.forEach(function(op) {
+      html += '<label><input type="radio" name="q' + n + '" value="' + op.v + '"> ' + op.t + '</label><br>';
+    });
+    html += '</div><br>';
+  });
+  document.getElementById('exerciciosContainer').innerHTML = html;
+}
+
+function corrigirExercicios() {
+  let pontos = 0;
+  exercicios.forEach(function(item, i) {
+    const n = i + 1;
+    const r = document.querySelector('input[name="q' + n + '"]:checked');
+    if (r && r.value === item.correta) pontos++;
+  });
+  document.getElementById('resultadoExercicios').textContent = 'Você acertou ' + pontos + ' de 10 exercícios.';
+}
+
+document.addEventListener('DOMContentLoaded', verificarAcesso);
+</script>
+</body>
+</html>
