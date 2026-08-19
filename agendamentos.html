@@ -4,35 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="estilo.css">
-<title>BioMentoria - Aulas de Biologia</title>
+<title>BioMentoria - Aulas</title>
 <style>
     body { visibility: hidden; }
     body.autorizado { visibility: visible; }
     #verificandoLogin {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-        background: linear-gradient(180deg, #f7faf9, #eef6f1);
+        min-height: 100vh; display: flex; justify-content: center; align-items: center;
+        text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
     }
-    #verificandoLogin .card {
-        width: 90%;
-        max-width: 500px;
-        margin: 0;
+    #verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
+    .grade-aulas {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 18px; margin-top: 12px;
     }
+    .card-aula {
+        display: block; text-decoration: none; color: inherit;
+        transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;
+    }
+    .card-aula:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+    .card-aula .resumo { color: #555; font-size: 0.95rem; margin-top: 8px; }
+    .card-aula .tag {
+        display: inline-block; font-size: 0.8rem; padding: 4px 10px;
+        border-radius: 999px; background: #e8f5ee; color: #1b6b3a; margin-bottom: 8px;
+    }
+    .artigo-corpo p { line-height: 1.6; margin-bottom: 12px; }
 </style>
 </head>
 <body>
-
-<div id="verificandoLogin">
-<div class="card">
+<div id="verificandoLogin"><div class="card">
     <h2>🔐 Verificando acesso...</h2>
     <p>Aguarde enquanto verificamos sua conta.</p>
-</div>
-</div>
-
+</div></div>
 <div id="conteudoProtegido" style="display:none;">
 
 <nav>
@@ -48,133 +50,71 @@
 <section class="banner">
     <span class="gratuito">🔓 Conteúdo gratuito</span>
     <h1>📚 Aulas de Biologia</h1>
-    <p id="mensagemAluno">Bem-vindo à sua área de estudos!</p>
+    <p id="mensagemAluno">Escolha uma aula para estudar</p>
 </section>
-
 <main class="container">
-
     <section class="card access-box">
-        <h2>🎓 Área de Estudos</h2>
-        <p>Você está conectado à sua conta. Leia as aulas abaixo e, quando estiver pronto, faça as atividades.</p>
-        <p style="margin-top:16px;">
-            <a href="atividades.html" class="btn">Ir para Quiz e Exercícios →</a>
-        </p>
+        <h2>🎓 Biblioteca de Aulas</h2>
+        <p>Clique em um card para abrir a aula completa, como um artigo.</p>
+        <p style="margin-top:12px;"><a href="atividades.html" class="btn">Ir para Atividades →</a></p>
     </section>
-
-    <article class="card">
-        <h2>🔬 Aula 1 - Citologia</h2>
-        <h3>A célula</h3>
-        <p>A célula é a unidade básica dos seres vivos. Todos os organismos são formados por uma ou mais células.</p>
-        <p>As células podem ser classificadas em <strong>procariontes</strong> e <strong>eucariontes</strong>. As células procariontes não possuem núcleo delimitado por membrana, enquanto as células eucariontes possuem núcleo organizado.</p>
-        <p>Entre as principais estruturas celulares estão as mitocôndrias, ribossomos, complexo golgiense, retículo endoplasmático e núcleo.</p>
-    </article>
-
-    <article class="card">
-        <h2>🧬 Aula 2 - Genética</h2>
-        <h3>Genes, DNA e hereditariedade</h3>
-        <p>A genética é a área da Biologia responsável pelo estudo da hereditariedade e da transmissão das características dos seres vivos.</p>
-        <p>O DNA é a molécula que armazena as informações genéticas. Os genes são segmentos do DNA que participam da determinação de características dos organismos.</p>
-        <p>A transmissão das características dos pais para os descendentes ocorre por meio da hereditariedade.</p>
-        <h3>Leis de Mendel</h3>
-        <p>Gregor Mendel realizou experimentos com ervilhas e estabeleceu princípios importantes para o estudo da hereditariedade.</p>
-    </article>
-
-    <article class="card">
-        <h2>🌱 Aula 3 - Ecologia</h2>
-        <h3>Relações entre os seres vivos e o ambiente</h3>
-        <p>A Ecologia estuda as relações dos seres vivos entre si e com o ambiente em que vivem.</p>
-        <p>Os organismos fazem parte de populações, comunidades e ecossistemas.</p>
-        <h3>Cadeias alimentares</h3>
-        <p>Nas cadeias alimentares, a energia passa de um organismo para outro através da alimentação.</p>
-        <p>Os produtores, como as plantas, produzem seu próprio alimento. Os consumidores obtêm energia alimentando-se de outros organismos.</p>
-        <p>Os decompositores participam da decomposição da matéria orgânica e da reciclagem de nutrientes.</p>
-    </article>
-
-    <article class="card">
-        <h2>🦎 Aula 4 - Evolução</h2>
-        <h3>Evolução dos seres vivos</h3>
-        <p>A evolução biológica corresponde às mudanças que ocorrem nas populações ao longo das gerações.</p>
-        <p>Charles Darwin propôs a teoria da seleção natural, segundo a qual indivíduos com características vantajosas podem apresentar maior sucesso reprodutivo em determinadas condições ambientais.</p>
-        <p>A seleção natural, mutações, recombinação genética e outros processos contribuem para a diversidade dos seres vivos.</p>
-    </article>
-
-    <article class="card">
-        <h2>🫀 Aula 5 - Fisiologia Humana</h2>
-        <h3>Funcionamento do organismo</h3>
-        <p>A fisiologia estuda o funcionamento dos organismos e de seus sistemas.</p>
-        <h3>Sistema Digestório</h3>
-        <p>O sistema digestório é responsável pela digestão dos alimentos e pela absorção de nutrientes.</p>
-        <h3>Sistema Respiratório</h3>
-        <p>O sistema respiratório permite as trocas gasosas, possibilitando a entrada de oxigênio e a eliminação de gás carbônico.</p>
-        <h3>Sistema Circulatório</h3>
-        <p>O sistema circulatório transporta sangue, oxigênio, nutrientes e outras substâncias pelo organismo.</p>
-        <h3>Sistema Nervoso</h3>
-        <p>O sistema nervoso coordena diversas funções do organismo e permite a percepção e resposta aos estímulos do ambiente.</p>
-    </article>
-
-    <article class="card">
-        <h2>🌿 Aula 6 - Botânica</h2>
-        <h3>Estudo das plantas</h3>
-        <p>A Botânica é a área da Biologia dedicada ao estudo das plantas.</p>
-        <p>As plantas são organismos eucariontes, multicelulares e, em sua maioria, autotróficos, realizando fotossíntese.</p>
-        <h3>Fotossíntese</h3>
-        <p>Na fotossíntese, as plantas utilizam energia luminosa para produzir matéria orgânica a partir de água e gás carbônico.</p>
-        <h3>Estruturas vegetais</h3>
-        <p>Entre as principais estruturas das plantas estão raízes, caules, folhas, flores, frutos e sementes.</p>
-    </article>
-
-    <section class="card" style="text-align:center;">
-        <h2>📝 Próximo passo</h2>
-        <p>Depois de estudar as aulas, teste seus conhecimentos nas atividades.</p>
-        <p style="margin-top:16px;">
-            <a href="atividades.html" class="btn">Ir para Quiz e Exercícios →</a>
-        </p>
-    </section>
-
+    <div class="grade-aulas">
+    <a class="card card-aula" href="aula-citologia.html">
+        <span class="tag">Aula 1</span>
+        <h2>🔬 Citologia</h2>
+        <p class="resumo">A célula, procariontes, eucariontes e organelas.</p>
+        <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Clique para ler a aula →</p>
+    </a>
+    <a class="card card-aula" href="aula-genetica.html">
+        <span class="tag">Aula 2</span>
+        <h2>🧬 Genética</h2>
+        <p class="resumo">DNA, genes, hereditariedade e Mendel.</p>
+        <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Clique para ler a aula →</p>
+    </a>
+    <a class="card card-aula" href="aula-ecologia.html">
+        <span class="tag">Aula 3</span>
+        <h2>🌱 Ecologia</h2>
+        <p class="resumo">Relações entre seres vivos, populações e cadeias alimentares.</p>
+        <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Clique para ler a aula →</p>
+    </a>
+    <a class="card card-aula" href="aula-evolucao.html">
+        <span class="tag">Aula 4</span>
+        <h2>🦎 Evolução</h2>
+        <p class="resumo">Seleção natural, Darwin e diversidade das espécies.</p>
+        <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Clique para ler a aula →</p>
+    </a>
+    <a class="card card-aula" href="aula-fisiologia.html">
+        <span class="tag">Aula 5</span>
+        <h2>🫀 Fisiologia Humana</h2>
+        <p class="resumo">Sistemas digestório, respiratório, circulatório e nervoso.</p>
+        <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Clique para ler a aula →</p>
+    </a>
+    <a class="card card-aula" href="aula-botanica.html">
+        <span class="tag">Aula 6</span>
+        <h2>🌿 Botânica</h2>
+        <p class="resumo">Plantas, fotossíntese e estruturas vegetais.</p>
+        <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Clique para ler a aula →</p>
+    </a>
+    </div>
 </main>
 
-<footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p>
-</footer>
-
+<footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p></footer>
 </div>
 
 <script>
 async function verificarAcesso() {
 try {
-    const resposta = await fetch('/verificar-login', {
-        method: 'GET',
-        credentials: 'same-origin',
-        cache: 'no-store'
-    });
-
-    if (!resposta.ok) {
-        window.location.replace('/login.html');
-        return;
-    }
-
+    const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
+    if (!resposta.ok) { window.location.replace('/login.html'); return; }
     const dados = await resposta.json();
-
-    if (!dados.logado) {
-        window.location.replace('/login.html');
-        return;
-    }
-
-    const mensagemAluno = document.getElementById('mensagemAluno');
-    if (dados.aluno && dados.aluno.nome) {
-        mensagemAluno.textContent = `Olá, ${dados.aluno.nome}! Bem-vindo à sua área de estudos.`;
-    }
-
+    if (!dados.logado) { window.location.replace('/login.html'); return; }
+    const el = document.getElementById('mensagemAluno');
+    if (el && dados.aluno && dados.aluno.nome) el.textContent = `Olá, ${dados.aluno.nome}!`;
     document.getElementById('verificandoLogin').style.display = 'none';
     document.getElementById('conteudoProtegido').style.display = 'block';
     document.body.classList.add('autorizado');
-} catch (erro) {
-    console.error('Erro ao verificar login:', erro);
-    window.location.replace('/login.html');
+} catch (e) { console.error(e); window.location.replace('/login.html'); }
 }
-}
-
 document.addEventListener('DOMContentLoaded', verificarAcesso);
 </script>
-</body>
-</html>
+</body></html>
