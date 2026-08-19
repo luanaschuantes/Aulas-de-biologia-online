@@ -13,6 +13,10 @@ body.autorizado { visibility: visible; }
   text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
 }
 #verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
+.acerto { color: #1b6b3a; background: #e8f5ee; padding: 10px 12px; border-radius: 8px; margin: 8px 0; }
+.erro { color: #8b1a1a; background: #fde8e8; padding: 10px 12px; border-radius: 8px; margin: 8px 0; }
+.quiz-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.resultado-box { font-size: 1.15rem; font-weight: bold; margin-top: 16px; }
 </style>
 </head>
 <body>
@@ -40,19 +44,22 @@ body.autorizado { visibility: visible; }
     <a href="atividades.html" class="btn">← Todas as atividades</a>
     <a href="#" class="btn" id="linkAula">Ler a aula</a>
   </p>
+
   <article class="card">
     <h2 id="tituloQuiz">🧠 Quiz (10 perguntas)</h2>
-    <p>Perguntas só sobre este conteúdo. Não se repetem até acabar o banco.</p>
-    <div id="quizContainer"></div><br>
-    <button class="btn" type="button" onclick="novoQuiz()">Nova pergunta</button>
-    <p id="resultadoQuiz" style="margin-top:20px;font-weight:bold;"></p>
+    <p>Cada pergunta tem <strong>apenas uma chance</strong>. No final aparece só a porcentagem de acerto.</p>
+    <p id="quizProgresso" style="font-weight:bold;"></p>
+    <div id="quizContainer"></div>
+    <p id="resultadoQuiz" class="resultado-box"></p>
+    <button class="btn" type="button" id="btnReiniciarQuiz" style="display:none;" onclick="reiniciarQuiz()">Refazer quiz</button>
   </article>
+
   <article class="card">
     <h2 id="tituloEx">📝 Exercícios (10 questões)</h2>
-    <p>Marque as alternativas e clique em corrigir.</p>
+    <p>Responda todas e clique em corrigir. Você verá o que acertou, o que errou e a explicação.</p>
     <div id="exerciciosContainer"></div><br>
-    <button class="btn" type="button" onclick="corrigirExercicios()">Corrigir exercícios</button>
-    <p id="resultadoExercicios" style="margin-top:20px;font-weight:bold;"></p>
+    <button class="btn" type="button" id="btnCorrigir" onclick="corrigirExercicios()">Corrigir exercícios</button>
+    <div id="resultadoExercicios" style="margin-top:20px;"></div>
   </article>
 </main>
 <footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p></footer>
@@ -60,12 +67,24 @@ body.autorizado { visibility: visible; }
 <script src="atividades-data.js"></script>
 <script>
 let perguntas = [];
-let perguntasDisponiveis = [];
 let exercicios = [];
+let quizFila = [];
+let quizIndice = 0;
+let quizAcertos = 0;
+let quizRespondendo = false;
 
 function getTema() {
   const p = new URLSearchParams(window.location.search);
   return p.get('tema') || 'citologia';
+}
+
+function embaralhar(lista) {
+  const copia = lista.slice();
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = copia[i]; copia[i] = copia[j]; copia[j] = t;
+  }
+  return copia;
 }
 
 async function verificarAcesso() {
@@ -97,7 +116,7 @@ async function verificarAcesso() {
     document.getElementById('conteudoProtegido').style.display = 'block';
     document.body.classList.add('autorizado');
 
-    novoQuiz();
+    reiniciarQuiz();
     carregarExercicios();
   } catch (e) {
     console.error(e);
@@ -105,60 +124,98 @@ async function verificarAcesso() {
   }
 }
 
-function embaralhar(lista) {
-  const copia = lista.slice();
-  for (let i = copia.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const t = copia[i]; copia[i] = copia[j]; copia[j] = t;
-  }
-  return copia;
+function reiniciarQuiz() {
+  quizFila = embaralhar(perguntas);
+  quizIndice = 0;
+  quizAcertos = 0;
+  quizRespondendo = false;
+  document.getElementById('resultadoQuiz').textContent = '';
+  document.getElementById('btnReiniciarQuiz').style.display = 'none';
+  mostrarPerguntaQuiz();
 }
 
-function novoQuiz() {
+function mostrarPerguntaQuiz() {
   const container = document.getElementById('quizContainer');
-  const resultado = document.getElementById('resultadoQuiz');
-  resultado.textContent = '';
-  if (perguntasDisponiveis.length === 0) perguntasDisponiveis = embaralhar(perguntas);
-  const pergunta = perguntasDisponiveis.pop();
+  const prog = document.getElementById('quizProgresso');
+
+  if (quizIndice >= quizFila.length) {
+    const pct = Math.round((quizAcertos / quizFila.length) * 100);
+    prog.textContent = '';
+    container.innerHTML = '<p>Quiz finalizado.</p>';
+    document.getElementById('resultadoQuiz').textContent = 'Sua porcentagem de acerto: ' + pct + '%';
+    document.getElementById('btnReiniciarQuiz').style.display = 'inline-block';
+    return;
+  }
+
+  const pergunta = quizFila[quizIndice];
+  prog.textContent = 'Pergunta ' + (quizIndice + 1) + ' de ' + quizFila.length;
   let html = '<h3>' + pergunta.pergunta + '</h3>';
   pergunta.respostas.forEach(function(resposta, indice) {
-    html += '<button type="button" class="btn" style="display:block;margin:8px 0;" onclick="responderQuiz(' + indice + ', ' + pergunta.correta + ')">' + resposta + '</button>';
+    html += '<button type="button" class="btn quiz-btn" style="display:block;margin:8px 0;" data-i="' + indice + '">' + resposta + '</button>';
   });
   container.innerHTML = html;
-}
+  quizRespondendo = false;
 
-function responderQuiz(resposta, correta) {
-  const resultado = document.getElementById('resultadoQuiz');
-  if (resposta === correta) {
-    resultado.textContent = '✅ Resposta correta! Muito bem!';
-    resultado.style.color = 'green';
-  } else {
-    resultado.textContent = '❌ Resposta incorreta. Tente novamente!';
-    resultado.style.color = 'red';
-  }
+  container.querySelectorAll('.quiz-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (quizRespondendo) return;
+      quizRespondendo = true;
+      container.querySelectorAll('.quiz-btn').forEach(function(b) { b.disabled = true; });
+      const escolhida = parseInt(btn.getAttribute('data-i'), 10);
+      if (escolhida === pergunta.correta) quizAcertos++;
+      quizIndice++;
+      setTimeout(mostrarPerguntaQuiz, 350);
+    });
+  });
 }
 
 function carregarExercicios() {
   let html = '';
   exercicios.forEach(function(item, i) {
     const n = i + 1;
-    html += '<div><p><strong>' + n + '.</strong> ' + item.pergunta + '</p>';
+    html += '<div class="ex-item" data-n="' + n + '"><p><strong>' + n + '.</strong> ' + item.pergunta + '</p>';
     item.opcoes.forEach(function(op) {
       html += '<label><input type="radio" name="q' + n + '" value="' + op.v + '"> ' + op.t + '</label><br>';
     });
     html += '</div><br>';
   });
   document.getElementById('exerciciosContainer').innerHTML = html;
+  document.getElementById('resultadoExercicios').innerHTML = '';
+  document.getElementById('btnCorrigir').style.display = 'inline-block';
+}
+
+function textoOpcao(item, val) {
+  for (let i = 0; i < item.opcoes.length; i++) {
+    if (item.opcoes[i].v === val) return item.opcoes[i].t;
+  }
+  return val;
 }
 
 function corrigirExercicios() {
   let pontos = 0;
+  let html = '<h3>Painel de resultados</h3>';
+
   exercicios.forEach(function(item, i) {
     const n = i + 1;
     const r = document.querySelector('input[name="q' + n + '"]:checked');
-    if (r && r.value === item.correta) pontos++;
+    const marcada = r ? r.value : null;
+    const certa = item.correta;
+    const textoCerta = textoOpcao(item, certa);
+
+    if (marcada && marcada === certa) {
+      pontos++;
+      html += '<div class="acerto"><strong>' + n + '. Acertou.</strong> Resposta: ' + textoCerta + '</div>';
+    } else {
+      const textoMarcada = marcada ? textoOpcao(item, marcada) : 'não respondida';
+      html += '<div class="erro"><strong>' + n + '. Errou.</strong><br>' +
+        'Sua resposta: ' + textoMarcada + '<br>' +
+        'Resposta correta: ' + textoCerta + '<br>' +
+        'Por quê: ' + item.explicacao + '</div>';
+    }
   });
-  document.getElementById('resultadoExercicios').textContent = 'Você acertou ' + pontos + ' de 10 exercícios.';
+
+  html = '<p class="resultado-box">Você acertou ' + pontos + ' de 10 exercícios (' + Math.round(pontos * 10) + '%).</p>' + html;
+  document.getElementById('resultadoExercicios').innerHTML = html;
 }
 
 document.addEventListener('DOMContentLoaded', verificarAcesso);
