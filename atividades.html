@@ -6,114 +6,102 @@
 <link rel="stylesheet" href="estilo.css">
 <title>BioMentoria - Atividades</title>
 <style>
-    body { visibility: hidden; }
-    body.autorizado { visibility: visible; }
-    #verificandoLogin {
-        min-height: 100vh; display: flex; justify-content: center; align-items: center;
-        text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
-    }
-    #verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
-    .grade-aulas {
-        display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 18px; margin-top: 12px;
-    }
-    .card-aula {
-        display: block; text-decoration: none; color: inherit;
-        transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer;
-    }
-    .card-aula:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
-    .card-aula .resumo { color: #555; font-size: 0.95rem; margin-top: 8px; }
-    .card-aula .tag {
-        display: inline-block; font-size: 0.8rem; padding: 4px 10px;
-        border-radius: 999px; background: #e8f5ee; color: #1b6b3a; margin-bottom: 8px;
-    }
+body { visibility: hidden; }
+body.autorizado { visibility: visible; }
+#verificandoLogin {
+  min-height: 100vh; display: flex; justify-content: center; align-items: center;
+  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
+}
+#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
+.grade-aulas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; margin-top: 12px; }
+.card-aula { display: block; text-decoration: none; color: inherit; transition: transform 0.15s ease, box-shadow 0.15s ease; cursor: pointer; }
+.card-aula:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+.card-aula .resumo { color: #555; font-size: 0.95rem; margin-top: 8px; }
+.card-aula .tag { display: inline-block; font-size: 0.8rem; padding: 4px 10px; border-radius: 999px; background: #e8f5ee; color: #1b6b3a; margin-bottom: 8px; }
 </style>
 </head>
 <body>
 <div id="verificandoLogin"><div class="card">
-    <h2>🔐 Verificando acesso...</h2>
-    <p>Aguarde enquanto verificamos sua conta.</p>
+  <h2>🔐 Verificando acesso...</h2>
+  <p>Aguarde enquanto verificamos sua conta.</p>
 </div></div>
 <div id="conteudoProtegido" style="display:none;">
-
 <nav>
-    <a href="index.html">Início</a>
-    <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
-    <a href="login.html">Entrar</a>
-    <a href="agendamentos.html">Fazer aulas</a>
-    <a href="atividades.html">Atividades</a>
-    <a href="consulta_agendamentos.html">Contato</a>
-    <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+  <a href="index.html">Início</a>
+  <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
+  <a href="login.html">Entrar</a>
+  <a href="agendamentos.html">Fazer aulas</a>
+  <a href="atividades.html">Atividades</a>
+  <a href="consulta_agendamentos.html">Contato</a>
+  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
-
 <section class="banner">
-    <span class="gratuito">🔓 Conteúdo gratuito</span>
-    <h1>📝 Atividades por Aula</h1>
-    <p id="mensagemAluno">Escolha a aula para praticar</p>
+  <span class="gratuito">🔓 Conteúdo gratuito</span>
+  <h1>📝 Atividades por Aula</h1>
+  <p id="mensagemAluno">Escolha a aula para praticar</p>
 </section>
 <main class="container">
-    <section class="card access-box">
-        <h2>✏️ Pratique por tema</h2>
-        <p>Cada card leva ao quiz e aos exercícios daquela aula, para não misturar os conteúdos.</p>
-        <p style="margin-top:12px;"><a href="agendamentos.html" class="btn">← Voltar às Aulas</a></p>
-    </section>
-    <div class="grade-aulas">
-    <a class="card card-aula" href="atividade-citologia.html">
+  <section class="card access-box">
+    <h2>✏️ Pratique por tema</h2>
+    <p>Cada card leva ao quiz e aos exercícios daquela aula, para não misturar os conteúdos.</p>
+    <p style="margin-top:12px;"><a href="agendamentos.html" class="btn">← Voltar às Aulas</a></p>
+  </section>
+  <div class="grade-aulas">
+    <a class="card card-aula" href="atividade.html?tema=citologia">
         <span class="tag">Atividades</span>
         <h2>🔬 Citologia</h2>
         <p class="resumo">10 perguntas de quiz + 10 exercícios sobre Citologia.</p>
         <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Abrir atividades →</p>
     </a>
-    <a class="card card-aula" href="atividade-genetica.html">
+    <a class="card card-aula" href="atividade.html?tema=genetica">
         <span class="tag">Atividades</span>
         <h2>🧬 Genética</h2>
         <p class="resumo">10 perguntas de quiz + 10 exercícios sobre Genética.</p>
         <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Abrir atividades →</p>
     </a>
-    <a class="card card-aula" href="atividade-ecologia.html">
+    <a class="card card-aula" href="atividade.html?tema=ecologia">
         <span class="tag">Atividades</span>
         <h2>🌱 Ecologia</h2>
         <p class="resumo">10 perguntas de quiz + 10 exercícios sobre Ecologia.</p>
         <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Abrir atividades →</p>
     </a>
-    <a class="card card-aula" href="atividade-evolucao.html">
+    <a class="card card-aula" href="atividade.html?tema=evolucao">
         <span class="tag">Atividades</span>
         <h2>🦎 Evolução</h2>
         <p class="resumo">10 perguntas de quiz + 10 exercícios sobre Evolução.</p>
         <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Abrir atividades →</p>
     </a>
-    <a class="card card-aula" href="atividade-fisiologia.html">
+    <a class="card card-aula" href="atividade.html?tema=fisiologia">
         <span class="tag">Atividades</span>
         <h2>🫀 Fisiologia Humana</h2>
         <p class="resumo">10 perguntas de quiz + 10 exercícios sobre Fisiologia Humana.</p>
         <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Abrir atividades →</p>
     </a>
-    <a class="card card-aula" href="atividade-botanica.html">
+    <a class="card card-aula" href="atividade.html?tema=botanica">
         <span class="tag">Atividades</span>
         <h2>🌿 Botânica</h2>
         <p class="resumo">10 perguntas de quiz + 10 exercícios sobre Botânica.</p>
         <p style="margin-top:10px;font-weight:bold;color:#1b6b3a;">Abrir atividades →</p>
     </a>
-    </div>
+  </div>
 </main>
-
 <footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p></footer>
 </div>
-
 <script>
 async function verificarAcesso() {
 try {
-    const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
-    if (!resposta.ok) { window.location.replace('/login.html'); return; }
-    const dados = await resposta.json();
-    if (!dados.logado) { window.location.replace('/login.html'); return; }
-    const el = document.getElementById('mensagemAluno');
-    if (el && dados.aluno && dados.aluno.nome) el.textContent = `Olá, ${dados.aluno.nome}!`;
-    document.getElementById('verificandoLogin').style.display = 'none';
-    document.getElementById('conteudoProtegido').style.display = 'block';
-    document.body.classList.add('autorizado');
+  const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
+  if (!resposta.ok) { window.location.replace('/login.html'); return; }
+  const dados = await resposta.json();
+  if (!dados.logado) { window.location.replace('/login.html'); return; }
+  const el = document.getElementById('mensagemAluno');
+  if (el && dados.aluno && dados.aluno.nome) el.textContent = 'Olá, ' + dados.aluno.nome + '!';
+  document.getElementById('verificandoLogin').style.display = 'none';
+  document.getElementById('conteudoProtegido').style.display = 'block';
+  document.body.classList.add('autorizado');
 } catch (e) { console.error(e); window.location.replace('/login.html'); }
 }
 document.addEventListener('DOMContentLoaded', verificarAcesso);
 </script>
-</body></html>
+</body>
+</html>
