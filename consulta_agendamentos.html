@@ -5,6 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioMentoria | Contato</title>
     <link rel="stylesheet" href="estilo.css">
+    <style>
+        .contato-intro {
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto 8px;
+        }
+        .contato-intro p {
+            color: #5a6b62;
+            font-size: 1.05rem;
+        }
+        .contato-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
+            margin-top: 8px;
+        }
+        .contato-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: 0 8px 28px rgba(4, 53, 40, 0.08);
+            border: 1px solid rgba(6, 64, 47, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .contato-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 36px rgba(4, 53, 40, 0.12);
+        }
+        .contato-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            background: linear-gradient(145deg, #e8f5ee, #d4efe0);
+            color: #06402f;
+        }
+        .contato-card h2 {
+            font-size: 1.25rem;
+            color: #06402f;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .contato-card p {
+            color: #5a6b62;
+            font-size: 0.98rem;
+            margin-bottom: 8px;
+        }
+        .contato-valor {
+            display: block;
+            margin: 14px 0 22px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #043528;
+            letter-spacing: 0.01em;
+        }
+        .contato-card .btn {
+            display: inline-block;
+            min-width: 160px;
+        }
+        .contato-rodape-msg {
+            text-align: center;
+            margin-top: 28px;
+            padding: 20px;
+            color: #5a6b62;
+            font-size: 0.95rem;
+        }
+    </style>
 </head>
 <body class="pagina-contato">
 
@@ -25,38 +97,41 @@
 
 <main class="container">
 
-    <section class="card">
+    <section class="card contato-intro">
         <h2>Fale conosco</h2>
         <p>
-            Tem dúvidas sobre o cadastro, o conteúdo da plataforma ou precisa de
-            alguma informação? Entre em contato pelos canais abaixo.
-            Responderemos o mais breve possível.
+            Dúvidas sobre cadastro, conteúdo da plataforma ou outras informações?
+            Escolha o canal de sua preferência. Responderemos o mais breve possível.
         </p>
     </section>
 
-    <section class="card">
-        <h2>📱 WhatsApp</h2>
-        <p>Atendimento rápido e direto pelo WhatsApp.</p>
-        <p style="margin-top: 10px; font-size: 1.15rem;">
-            <strong>(46) 99971-3928</strong>
-        </p>
-        <br>
-        <a href="https://wa.me/5546999713928" target="_blank" class="btn">
-            Abrir WhatsApp
-        </a>
-    </section>
+    <div class="contato-grid">
 
-    <section class="card">
-        <h2>📧 E-mail</h2>
-        <p>Prefere escrever? Envie sua mensagem por e-mail.</p>
-        <p style="margin-top: 10px; font-size: 1.15rem;">
-            <strong>schuantesluana25@gmail.com</strong>
-        </p>
-        <br>
-        <a href="mailto:schuantesluana25@gmail.com" class="btn">
-            Enviar e-mail
-        </a>
-    </section>
+        <div class="contato-card">
+            <div class="contato-icon">📱</div>
+            <h2>WhatsApp</h2>
+            <p>Atendimento rápido e direto</p>
+            <span class="contato-valor">(46) 99971-3928</span>
+            <a href="https://wa.me/5546999713928" target="_blank" rel="noopener" class="btn">
+                Abrir WhatsApp
+            </a>
+        </div>
+
+        <div class="contato-card">
+            <div class="contato-icon">📧</div>
+            <h2>E-mail</h2>
+            <p>Envie sua mensagem quando preferir</p>
+            <span class="contato-valor">schuantesluana25@gmail.com</span>
+            <a href="mailto:schuantesluana25@gmail.com" class="btn">
+                Enviar e-mail
+            </a>
+        </div>
+
+    </div>
+
+    <p class="contato-rodape-msg">
+        BioMentoria — educação em Biologia com simplicidade e qualidade.
+    </p>
 
 </main>
 
