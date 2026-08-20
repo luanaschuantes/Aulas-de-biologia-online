@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="estilo.css">
     <title>BioMentoria - Criar conta</title>
     <style>
+        body.pagina-cadastro {
+            background: linear-gradient(165deg, #e8f5ee 0%, #f0f7f3 35%, #e6f2eb 70%, #f6faf7 100%);
+        }
+
         body.pagina-cadastro .container {
             max-width: none;
             width: 94%;
@@ -14,33 +18,69 @@
         }
 
         .cadastro-area {
-            max-width: 720px;
-            margin: 8px auto 48px;
+            max-width: 680px;
+            margin: 12px auto 52px;
             padding: 0 8px;
         }
 
-        .cadastro-area .intro {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-        .cadastro-area .intro h2 {
-            color: #06402f;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+        .selo-gratis {
+            display: inline-block;
+            background: linear-gradient(135deg, #0a6b48, #0d8a5a);
+            color: #fff;
+            font-size: 0.78rem;
             font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 7px 16px;
+            border-radius: 50px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 14px rgba(10, 107, 72, 0.28);
         }
-        .cadastro-area .intro p {
+
+        .form-painel {
+            background: linear-gradient(180deg, #ffffff 0%, #f7fcf9 100%);
+            border-radius: 24px;
+            padding: 36px 32px 32px;
+            box-shadow:
+                0 8px 32px rgba(4, 53, 40, 0.1),
+                0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            border: 1px solid rgba(10, 107, 72, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-painel::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #043528, #0a6b48, #1aad6e, #0a6b48, #043528);
+        }
+
+        .form-painel .intro {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .form-painel .intro h2 {
+            color: #06402f;
+            font-size: 1.45rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        .form-painel .intro p {
             color: #5a6b62;
-            font-size: 1rem;
+            font-size: 0.98rem;
             line-height: 1.65;
             margin: 0 auto;
-            max-width: 520px;
+            max-width: 440px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6px 24px;
+            gap: 4px 20px;
         }
         .form-grid .campo-largo {
             grid-column: 1 / -1;
@@ -48,11 +88,11 @@
 
         .cadastro-area label {
             display: block;
-            font-weight: 600;
+            font-weight: 650;
             color: #06402f;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             margin-bottom: 6px;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         .cadastro-area input[type="text"],
@@ -62,47 +102,71 @@
             width: 100%;
             padding: 13px 16px;
             margin-bottom: 14px;
-            border: 1.5px solid #b8d0c4;
+            border: 1.5px solid #c5ddd0;
             border-radius: 12px;
             font-size: 1rem;
             font-family: inherit;
             color: #2d3a34;
-            background: transparent;
+            background: #f0f8f4;
             outline: none;
             transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
         }
 
+        .cadastro-area input:hover {
+            border-color: #8fc4a8;
+            background: #f5fbf7;
+        }
+
         .cadastro-area input:focus {
             border-color: #0a6b48;
-            background: rgba(255, 255, 255, 0.55);
-            box-shadow: 0 0 0 3px rgba(10, 107, 72, 0.12);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(10, 107, 72, 0.14);
         }
 
         .cadastro-area .btn-criar {
             width: 100%;
-            margin-top: 12px;
-            padding: 14px 20px;
-            font-size: 1.05rem;
+            margin-top: 10px;
+            padding: 15px 20px;
+            font-size: 1.08rem;
             font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
+            background: linear-gradient(135deg, #06402f 0%, #0a6b48 50%, #0d8a5a 100%);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(10, 107, 72, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cadastro-area .btn-criar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(10, 107, 72, 0.4);
         }
 
         .cadastro-extra {
             text-align: center;
-            margin-top: 36px;
-            padding-top: 28px;
-            border-top: 1px solid #c5d9ce;
+            margin-top: 28px;
+            padding: 22px 16px;
+            background: linear-gradient(135deg, rgba(10, 107, 72, 0.06), rgba(13, 138, 90, 0.08));
+            border-radius: 16px;
+            border: 1px solid rgba(10, 107, 72, 0.1);
         }
         .cadastro-extra p {
-            color: #5a6b62;
+            color: #3d5c4c;
             font-size: 0.95rem;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
+            font-weight: 500;
         }
         .cadastro-extra .btn {
             display: inline-block;
             min-width: 150px;
+            background: #fff;
+            color: #0a6b48;
+            border: 2px solid #0a6b48;
+            font-weight: 700;
+        }
+        .cadastro-extra .btn:hover {
+            background: #0a6b48;
+            color: #fff;
         }
 
         #erroSenha {
@@ -111,11 +175,18 @@
             font-weight: 600;
             margin: 4px 0 12px;
             grid-column: 1 / -1;
+            background: #fef3f2;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #f5c2c0;
         }
 
         @media (max-width: 640px) {
             .form-grid {
                 grid-template-columns: 1fr;
+            }
+            .form-painel {
+                padding: 28px 20px 24px;
             }
             body.pagina-cadastro .container {
                 width: 92%;
@@ -142,57 +213,63 @@
 
 <main class="container">
     <div class="cadastro-area">
-        <div class="intro">
-            <h2>Preencha seus dados</h2>
-            <p>
-                O cadastro é gratuito. Depois de criar a conta, faça login para
-                acessar todo o conteúdo de Biologia da plataforma.
-            </p>
+        <div style="text-align:center;">
+            <span class="selo-gratis">100% gratuito</span>
         </div>
 
-        <form action="/salvar-cliente" method="POST" autocomplete="on">
-            <div class="form-grid">
-                <div class="campo-largo">
-                    <label for="nome">Nome completo</label>
-                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" autocomplete="name" required>
-                </div>
-
-                <div>
-                    <label for="cpf">CPF</label>
-                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" autocomplete="off">
-                </div>
-
-                <div>
-                    <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
-                </div>
-
-                <div class="campo-largo">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required>
-                </div>
-
-                <div>
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" name="senha" placeholder="Mínimo 6 caracteres" minlength="6" autocomplete="new-password" required>
-                </div>
-
-                <div>
-                    <label for="confirmarSenha">Confirmar senha</label>
-                    <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a senha novamente" minlength="6" autocomplete="new-password" required>
-                </div>
-
-                <p id="erroSenha">As senhas não são iguais.</p>
-
-                <div class="campo-largo">
-                    <button class="btn btn-criar" type="submit">Criar minha conta gratuitamente</button>
-                </div>
+        <div class="form-painel">
+            <div class="intro">
+                <h2>Preencha seus dados</h2>
+                <p>
+                    Crie sua conta em poucos minutos e tenha acesso imediato
+                    ao conteúdo de Biologia da plataforma.
+                </p>
             </div>
-        </form>
 
-        <div class="cadastro-extra">
-            <p>Já possui uma conta?</p>
-            <a href="login.html" class="btn">Entrar</a>
+            <form action="/salvar-cliente" method="POST" autocomplete="on">
+                <div class="form-grid">
+                    <div class="campo-largo">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" autocomplete="name" required>
+                    </div>
+
+                    <div>
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" autocomplete="off">
+                    </div>
+
+                    <div>
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+                    </div>
+
+                    <div class="campo-largo">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+                    </div>
+
+                    <div>
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" placeholder="Mínimo 6 caracteres" minlength="6" autocomplete="new-password" required>
+                    </div>
+
+                    <div>
+                        <label for="confirmarSenha">Confirmar senha</label>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a senha novamente" minlength="6" autocomplete="new-password" required>
+                    </div>
+
+                    <p id="erroSenha">As senhas não são iguais.</p>
+
+                    <div class="campo-largo">
+                        <button class="btn btn-criar" type="submit">Criar minha conta gratuitamente</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="cadastro-extra">
+                <p>Já possui uma conta?</p>
+                <a href="login.html" class="btn">Entrar</a>
+            </div>
         </div>
     </div>
 </main>
