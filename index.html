@@ -7,65 +7,129 @@
     <link rel="stylesheet" href="estilo.css">
     <style>
         .pagina-inicial .container {
-            max-width: 1100px;
+            max-width: 1180px;
+            width: 94%;
         }
 
-        .bloco-solto {
-            width: 100%;
-            margin: 8px 0 36px;
+        /* Introdução em duas colunas */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px 48px;
+            align-items: start;
+            margin: 8px 0 40px;
             padding: 0 4px;
         }
-        .bloco-solto h2 {
+        .intro-grid h2 {
             color: #06402f;
-            font-size: 1.45rem;
+            font-size: 1.4rem;
             margin-bottom: 14px;
             font-weight: 700;
         }
-        .bloco-solto p {
+        .intro-grid p {
             color: #3d4f46;
             line-height: 1.75;
             margin-bottom: 12px;
-            max-width: 860px;
         }
-        .bloco-solto .btns-linha {
+        .intro-grid .btns-linha {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 18px;
+        }
+        .intro-lateral {
+            padding: 8px 0 0;
+        }
+        .intro-lateral .destaque-item {
+            margin-bottom: 22px;
+        }
+        .intro-lateral .destaque-item strong {
+            display: block;
+            color: #06402f;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+        .intro-lateral .destaque-item span {
+            color: #5a6b62;
+            font-size: 0.95rem;
+            line-height: 1.55;
         }
 
         .secao-card {
-            margin: 20px 0 36px;
+            margin: 16px 0 40px;
             width: 100%;
         }
         .secao-card h2 {
-            margin-bottom: 18px;
+            margin-bottom: 22px;
             color: #06402f;
+            text-align: center;
+        }
+
+        /* Passos e recursos ocupando a largura toda */
+        .pagina-inicial .steps {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .pagina-inicial .features {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .pagina-inicial .step,
+        .pagina-inicial .feature {
+            min-height: 150px;
         }
 
         .cta-final {
-            text-align: center;
-            margin: 40px 0 24px;
-            padding: 8px 4px 16px;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 32px;
+            align-items: center;
+            margin: 36px 0 28px;
+            padding: 8px 4px;
         }
         .cta-final h2 {
             color: #06402f;
             font-size: 1.4rem;
             margin-bottom: 10px;
+            text-align: left;
         }
         .cta-final p {
             color: #5a6b62;
-            margin-bottom: 10px;
-            max-width: 560px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 8px;
+            text-align: left;
+            max-width: none;
         }
         .cta-final .btns-linha {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 10px;
-            margin-top: 18px;
+            justify-content: flex-start;
+        }
+
+        @media (max-width: 900px) {
+            .intro-grid,
+            .cta-final {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .pagina-inicial .steps,
+            .pagina-inicial .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cta-final h2,
+            .cta-final p {
+                text-align: center;
+            }
+            .cta-final .btns-linha {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .pagina-inicial .steps,
+            .pagina-inicial .features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -96,32 +160,43 @@
 
 <main class="container">
 
-    <!-- Sem caixa branca -->
-    <div class="bloco-solto">
-        <h2>📖 Como funciona a BioMentoria?</h2>
-        <p>
-            A BioMentoria é uma plataforma de ensino de Biologia com
-            <strong>conteúdo online 100% gratuito</strong>.
-            Aqui você encontra aulas de Biologia, quizzes e listas de exercícios
-            para estudar e praticar no seu ritmo.
-        </p>
-        <p>
-            Além do conteúdo online, também oferecemos
-            <strong>aulas particulares presenciais</strong> em Capanema – PR,
-            no período da noite. Os detalhes estão na página de aulas particulares.
-        </p>
-        <p>
-            <strong>Para acessar o conteúdo online:</strong> basta criar uma conta
-            (gratuita) ou fazer login. Não há mensalidade nem planos pagos.
-        </p>
-        <div class="btns-linha">
-            <a href="clientes.html" class="btn">Criar cadastro gratuito</a>
-            <a href="login.html" class="btn">Já tenho cadastro</a>
-            <a href="aulas-particulares.html" class="btn">Aulas particulares</a>
+    <div class="intro-grid">
+        <div>
+            <h2>📖 Como funciona a BioMentoria?</h2>
+            <p>
+                A BioMentoria é uma plataforma de ensino de Biologia com
+                <strong>conteúdo online 100% gratuito</strong>.
+                Aqui você encontra aulas de Biologia, quizzes e listas de exercícios
+                para estudar e praticar no seu ritmo.
+            </p>
+            <p>
+                <strong>Para acessar:</strong> crie uma conta gratuita ou faça login.
+                Não há mensalidade nem planos pagos para usar as aulas, quizzes e exercícios.
+            </p>
+            <div class="btns-linha">
+                <a href="clientes.html" class="btn">Criar cadastro gratuito</a>
+                <a href="login.html" class="btn">Já tenho cadastro</a>
+            </div>
+        </div>
+        <div class="intro-lateral">
+            <div class="destaque-item">
+                <strong>🏫 Aulas particulares</strong>
+                <span>Presenciais em Capanema – PR, no período da noite. Detalhes na página de aulas particulares.</span>
+            </div>
+            <div class="destaque-item">
+                <strong>💚 100% gratuito online</strong>
+                <span>Textos, quizzes e exercícios sem cobrança de mensalidade.</span>
+            </div>
+            <div class="destaque-item">
+                <strong>🎯 No seu ritmo</strong>
+                <span>Estude quando quiser, no horário que preferir.</span>
+            </div>
+            <div class="btns-linha">
+                <a href="aulas-particulares.html" class="btn">Ver aulas particulares</a>
+            </div>
         </div>
     </div>
 
-    <!-- Com caixa branca -->
     <section class="card secao-card">
         <h2>🚀 Passo a passo para estudar online</h2>
         <div class="steps">
@@ -133,22 +208,21 @@
             <div class="step">
                 <span class="step-number">2</span>
                 <h3>Faça login</h3>
-                <p>Entre com seus dados para liberar o acesso às aulas e atividades.</p>
+                <p>Entre com seus dados para liberar o acesso.</p>
             </div>
             <div class="step">
                 <span class="step-number">3</span>
                 <h3>Acesse as aulas</h3>
-                <p>Entre na área de conteúdos e escolha o tema que deseja estudar.</p>
+                <p>Escolha o tema que deseja estudar.</p>
             </div>
             <div class="step">
                 <span class="step-number">4</span>
                 <h3>Pratique</h3>
-                <p>Faça o quiz e os exercícios para fixar o que aprendeu.</p>
+                <p>Faça o quiz e os exercícios.</p>
             </div>
         </div>
     </section>
 
-    <!-- Com caixa branca -->
     <section class="card secao-card">
         <h2>📚 O que você encontra no site</h2>
         <div class="features">
@@ -165,24 +239,25 @@
             <div class="feature">
                 <div class="feature-icon">📝</div>
                 <h3>Listas de exercícios</h3>
-                <p>Pratique o conteúdo com exercícios e gabarito comentado.</p>
+                <p>Pratique com exercícios e gabarito comentado.</p>
             </div>
             <div class="feature">
                 <div class="feature-icon">🎯</div>
                 <h3>Estude no seu ritmo</h3>
-                <p>Acesse quando quiser, sem mensalidade e sem pressão de horário.</p>
+                <p>Sem mensalidade e sem pressão de horário.</p>
             </div>
         </div>
     </section>
 
-    <!-- Sem caixa branca -->
     <div class="cta-final">
-        <h2>🎓 Pronto para começar?</h2>
-        <p>
-            Crie sua conta gratuitamente e tenha acesso imediato às aulas,
-            quizzes e exercícios de Biologia.
-        </p>
-        <p><strong>Conteúdo online: sem planos, sem mensalidade, sem pagamento.</strong></p>
+        <div>
+            <h2>🎓 Pronto para começar?</h2>
+            <p>
+                Crie sua conta gratuitamente e tenha acesso imediato às aulas,
+                quizzes e exercícios de Biologia.
+            </p>
+            <p><strong>Conteúdo online: sem planos, sem mensalidade, sem pagamento.</strong></p>
+        </div>
         <div class="btns-linha">
             <a href="clientes.html" class="btn">🚀 Criar cadastro</a>
             <a href="login.html" class="btn">Já tenho um cadastro</a>
