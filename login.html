@@ -5,6 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css">
     <title>BioMentoria - Entrar</title>
+    <style>
+        .login-wrap {
+            max-width: 440px;
+            margin: 0 auto 32px;
+        }
+        .login-card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 40px 36px 36px;
+            box-shadow: 0 10px 36px rgba(4, 53, 40, 0.1);
+            border: 1px solid rgba(6, 64, 47, 0.06);
+        }
+        .login-icon {
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.85rem;
+            background: linear-gradient(145deg, #e8f5ee, #d4efe0);
+        }
+        .login-card h2 {
+            text-align: center;
+            color: #06402f;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .login-card > p.login-sub {
+            text-align: center;
+            color: #5a6b62;
+            font-size: 0.98rem;
+            margin-bottom: 28px;
+        }
+        .login-card label {
+            display: block;
+            font-weight: 600;
+            color: #06402f;
+            font-size: 0.92rem;
+            margin-bottom: 6px;
+        }
+        .login-card input[type="email"],
+        .login-card input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #d4e5db;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: #2d3a34;
+            background: #f8fcfa;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 18px;
+            outline: none;
+        }
+        .login-card input:focus {
+            border-color: #0a6b48;
+            box-shadow: 0 0 0 3px rgba(10, 107, 72, 0.15);
+            background: #fff;
+        }
+        .login-card .btn-entrar {
+            width: 100%;
+            margin-top: 6px;
+            padding: 13px 20px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
+        .login-divider {
+            text-align: center;
+            margin: 28px 0 18px;
+            color: #8a9b92;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        .login-divider::before,
+        .login-divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 38%;
+            height: 1px;
+            background: #d4e5db;
+        }
+        .login-divider::before { left: 0; }
+        .login-divider::after { right: 0; }
+        .login-criar {
+            text-align: center;
+            padding: 22px 20px;
+            background: #f4faf7;
+            border-radius: 16px;
+            border: 1px solid rgba(6, 64, 47, 0.06);
+        }
+        .login-criar p {
+            color: #5a6b62;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+        }
+        .login-criar .btn {
+            display: inline-block;
+            min-width: 160px;
+        }
+    </style>
 </head>
 <body class="pagina-login">
 
@@ -19,29 +125,35 @@
 </nav>
 
 <section class="banner">
-    <h1>Entrar na BioMentoria</h1>
-    <p>Faça login para acessar gratuitamente suas aulas, quizzes e exercícios.</p>
+    <h1>Entrar</h1>
+    <p>Acesse sua conta para estudar gratuitamente</p>
 </section>
 
 <main class="container">
-    <section class="card">
-        <h2>🔐 Acesse sua conta</h2>
-        <p>Digite o e-mail e a senha que você cadastrou na BioMentoria.</p>
-        <br>
-        <form action="/login" method="POST">
-            <label for="email">E-mail</label><br>
-            <input type="email" id="email" name="email" required placeholder="seu@email.com"><br><br>
-            <label for="senha">Senha</label><br>
-            <input type="password" id="senha" name="senha" required placeholder="Sua senha"><br><br>
-            <button type="submit" class="btn">Entrar</button>
-        </form>
-    </section>
-    <section class="card">
-        <h2>Ainda não possui uma conta?</h2>
-        <p>Crie sua conta gratuitamente e tenha acesso às aulas, quizzes e exercícios de Biologia.</p>
-        <br>
-        <a href="clientes.html" class="btn">Criar conta</a>
-    </section>
+    <div class="login-wrap">
+        <div class="login-card">
+            <div class="login-icon">🔐</div>
+            <h2>Acesse sua conta</h2>
+            <p class="login-sub">Use o e-mail e a senha cadastrados na BioMentoria.</p>
+
+            <form action="/login" method="POST">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required placeholder="seu@email.com" autocomplete="email">
+
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required placeholder="Sua senha" autocomplete="current-password">
+
+                <button type="submit" class="btn btn-entrar">Entrar</button>
+            </form>
+
+            <div class="login-divider">ou</div>
+
+            <div class="login-criar">
+                <p>Ainda não tem uma conta? Cadastre-se gratuitamente.</p>
+                <a href="clientes.html" class="btn">Criar conta</a>
+            </div>
+        </div>
+    </div>
 </main>
 
 <footer class="rodape">
