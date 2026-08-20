@@ -6,29 +6,127 @@
     <title>BioMentoria - Biologia para Todos</title>
     <link rel="stylesheet" href="estilo.css">
     <style>
+        /* ===== HERO elegante e profissional ===== */
+        .pagina-inicial .hero {
+            width: 94%;
+            max-width: 1200px;
+            margin: 28px auto 40px;
+            min-height: 420px;
+            padding: 72px 48px 64px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            border-radius: 32px;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    125deg,
+                    rgba(2, 36, 28, 0.82) 0%,
+                    rgba(4, 53, 40, 0.75) 40%,
+                    rgba(6, 80, 55, 0.7) 100%
+                ),
+                url("./fundo.jpg");
+            background-size: cover;
+            background-position: center 35%;
+            background-repeat: no-repeat;
+            box-shadow:
+                0 24px 60px rgba(4, 53, 40, 0.28),
+                0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+        }
+
+        .pagina-inicial .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 20%, rgba(125, 255, 200, 0.08), transparent 55%);
+            pointer-events: none;
+        }
+
+        .pagina-inicial .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pagina-inicial .hero .gratuito {
+            background: rgba(255, 255, 255, 0.95);
+            color: #0a6b48;
+            padding: 9px 20px;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .pagina-inicial .hero h1 {
+            margin: 0 0 18px;
+            font-size: clamp(42px, 7vw, 72px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            text-shadow: 0 4px 28px rgba(0, 0, 0, 0.4);
+            line-height: 1.1;
+        }
+
+        .pagina-inicial .hero p {
+            max-width: 560px;
+            margin: 0 auto 32px;
+            font-size: clamp(16px, 2vw, 19px);
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.94);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+            font-weight: 400;
+        }
+
+        .pagina-inicial .hero-buttons {
+            gap: 14px;
+            margin-top: 0;
+        }
+
+        .pagina-inicial .btn-primary {
+            background: #ffffff;
+            color: #06402f;
+            padding: 15px 30px;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+        }
+        .pagina-inicial .btn-primary:hover {
+            background: #f0faf4;
+            transform: translateY(-2px);
+        }
+
+        .pagina-inicial .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1.5px solid rgba(255, 255, 255, 0.65);
+            padding: 15px 28px;
+            backdrop-filter: blur(6px);
+        }
+        .pagina-inicial .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         .pagina-inicial .container {
-            max-width: none;
+            max-width: 1180px;
             width: 94%;
             margin-left: auto;
             margin-right: auto;
         }
-        .pagina-inicial .hero {
-            width: 94%;
-            max-width: none;
-        }
 
         .intro-grid {
             display: grid;
-            grid-template-columns: 1.3fr 1fr;
+            grid-template-columns: 1.25fr 1fr;
             gap: 48px 56px;
             align-items: start;
-            margin: 12px 0 44px;
+            margin: 8px 0 48px;
             padding: 0 8px;
         }
         .intro-grid h2 {
             color: #06402f;
-            font-size: 1.5rem;
-            margin-bottom: 16px;
+            font-size: 1.45rem;
+            margin-bottom: 14px;
             font-weight: 700;
         }
         .intro-grid p {
@@ -41,73 +139,70 @@
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            margin-top: 22px;
+            margin-top: 20px;
         }
         .intro-lateral {
-            padding: 4px 0 0;
+            padding: 8px 0 0;
             display: grid;
-            gap: 20px;
-        }
-        .intro-lateral .destaque-item {
-            padding: 4px 0;
+            gap: 22px;
         }
         .intro-lateral .destaque-item strong {
             display: block;
             color: #06402f;
-            font-size: 1.08rem;
+            font-size: 1.05rem;
             margin-bottom: 6px;
         }
         .intro-lateral .destaque-item span {
             color: #5a6b62;
-            font-size: 0.98rem;
+            font-size: 0.97rem;
             line-height: 1.6;
         }
 
         .secao-card {
-            margin: 12px 0 44px;
+            margin: 8px 0 44px;
             width: 100%;
             padding: 40px 36px;
         }
         .secao-card h2 {
-            margin-bottom: 28px;
+            margin-bottom: 26px;
             color: #06402f;
             text-align: center;
-            font-size: 1.45rem;
+            font-size: 1.4rem;
         }
 
         .pagina-inicial .steps {
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 18px;
         }
         .pagina-inicial .features {
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 18px;
         }
         .pagina-inicial .step,
         .pagina-inicial .feature {
-            min-height: 170px;
-            padding: 28px 22px;
+            min-height: 160px;
+            padding: 26px 20px;
         }
 
         .cta-final {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
-            gap: 40px;
+            gap: 36px;
             align-items: center;
-            margin: 40px 0 36px;
-            padding: 12px 8px 20px;
+            margin: 36px 0 40px;
+            padding: 8px;
         }
         .cta-final h2 {
             color: #06402f;
-            font-size: 1.5rem;
-            margin-bottom: 12px;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
             text-align: left;
         }
         .cta-final p {
             color: #5a6b62;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: left;
-            font-size: 1.05rem;
+            font-size: 1.02rem;
             line-height: 1.7;
             max-width: none;
         }
@@ -135,6 +230,10 @@
             .cta-final .btns-linha {
                 justify-content: center;
             }
+            .pagina-inicial .hero {
+                min-height: 360px;
+                padding: 56px 28px;
+            }
         }
 
         @media (max-width: 560px) {
@@ -145,6 +244,11 @@
             .pagina-inicial .container,
             .pagina-inicial .hero {
                 width: 92%;
+            }
+            .pagina-inicial .hero {
+                border-radius: 22px;
+                min-height: 320px;
+                padding: 48px 22px;
             }
         }
     </style>
