@@ -8,18 +8,18 @@
     <style>
         /* ===== HERO elegante e profissional ===== */
         .pagina-inicial .hero {
-            width: 94%;
-            max-width: 1200px;
-            margin: 28px auto 40px;
-            min-height: 420px;
-            padding: 72px 48px 64px;
+            width: 100%;
+            max-width: none;
+            margin: 0 0 36px;
+            min-height: 52vh;
+            padding: 80px 48px 72px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: white;
-            border-radius: 32px;
+            border-radius: 0;
             position: relative;
             overflow: hidden;
             background:
@@ -31,11 +31,9 @@
                 ),
                 url("./fundo.jpg");
             background-size: cover;
-            background-position: center 35%;
+            background-position: center center;
             background-repeat: no-repeat;
-            box-shadow:
-                0 24px 60px rgba(4, 53, 40, 0.28),
-                0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+            box-shadow: 0 12px 40px rgba(4, 53, 40, 0.2);
         }
 
         .pagina-inicial .hero::after {
@@ -231,8 +229,10 @@
                 justify-content: center;
             }
             .pagina-inicial .hero {
-                min-height: 360px;
+                min-height: 42vh;
                 padding: 56px 28px;
+                width: 100%;
+                border-radius: 0;
             }
         }
 
@@ -241,13 +241,13 @@
             .pagina-inicial .features {
                 grid-template-columns: 1fr;
             }
-            .pagina-inicial .container,
-            .pagina-inicial .hero {
+            .pagina-inicial .container {
                 width: 92%;
             }
             .pagina-inicial .hero {
-                border-radius: 22px;
-                min-height: 320px;
+                width: 100%;
+                border-radius: 0;
+                min-height: 38vh;
                 padding: 48px 22px;
             }
         }
