@@ -5,6 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioMentoria | Aulas Particulares</title>
     <link rel="stylesheet" href="estilo.css">
+    <style>
+        .texto-solto {
+            max-width: 720px;
+            margin: 8px auto 28px;
+            padding: 0 8px;
+        }
+        .texto-solto h2 {
+            color: #06402f;
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+        }
+        .texto-solto p {
+            color: #3d4f46;
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+        .texto-solto ul {
+            margin: 8px 0 16px 22px;
+            color: #3d4f46;
+            line-height: 1.8;
+        }
+        .texto-solto .btns {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .secao-destaque {
+            margin: 28px 0;
+        }
+        .secao-destaque h2 {
+            margin-bottom: 8px;
+        }
+        .contato-bloco {
+            text-align: center;
+            max-width: 560px;
+            margin: 36px auto 20px;
+            padding: 0 8px;
+        }
+        .contato-bloco h2 {
+            color: #06402f;
+            margin-bottom: 10px;
+        }
+        .contato-bloco p {
+            color: #5a6b62;
+            margin-bottom: 10px;
+        }
+        .contato-dados {
+            margin: 16px 0 20px;
+            font-size: 1.05rem;
+            color: #043528;
+            font-weight: 600;
+            line-height: 1.7;
+        }
+        .contato-bloco .btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .final-bloco {
+            text-align: center;
+            max-width: 640px;
+            margin: 40px auto 24px;
+            padding: 0 8px;
+        }
+        .final-bloco p {
+            color: #5a6b62;
+            margin-bottom: 16px;
+        }
+        .final-bloco .btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -25,7 +102,8 @@
 
 <main class="container">
 
-    <section class="card access-box">
+    <!-- Introdução (sem caixa) -->
+    <div class="texto-solto">
         <h2>📚 Aulas particulares presenciais</h2>
         <p>
             Além do conteúdo online 100% gratuito da BioMentoria, oferecemos
@@ -37,9 +115,10 @@
             próximo para esclarecer dúvidas, revisar conteúdos e preparar o aluno
             com mais segurança para provas, ENEM e vestibulares.
         </p>
-    </section>
+    </div>
 
-    <section class="card">
+    <!-- COM caixa branca -->
+    <section class="card secao-destaque">
         <h2>Como funcionam as aulas</h2>
         <div class="steps">
             <div class="step">
@@ -65,7 +144,8 @@
         </div>
     </section>
 
-    <section class="card">
+    <!-- COM caixa branca -->
+    <section class="card secao-destaque">
         <h2>Resumo das condições</h2>
         <div class="features">
             <div class="feature">
@@ -89,59 +169,57 @@
                 <p>Valor por dia de aula, de forma clara e acessível.</p>
             </div>
         </div>
-        <p style="margin-top: 18px; line-height: 1.7;">
+        <p style="margin-top: 18px; line-height: 1.7; color: #3d4f46;">
             <strong>Importante:</strong> você escolhe em quais dias participar
             (só terça, só quinta ou as duas vezes na semana), conforme a sua disponibilidade.
             Entre em contato para confirmar horários, vagas e demais detalhes.
         </p>
     </section>
 
-    <section class="card">
+    <!-- Sem caixa -->
+    <div class="texto-solto">
         <h2>O que você pode esperar nas aulas</h2>
-        <ul style="margin: 8px 0 0 20px; line-height: 1.75;">
+        <ul>
             <li>Explicação clara e organizada dos conteúdos de Biologia</li>
             <li>Tempo para tirar dúvidas e revisar o que não ficou claro</li>
             <li>Prática com exercícios e preparação para provas</li>
             <li>Ritmo adaptado ao seu nível e aos seus objetivos</li>
             <li>Acompanhamento presencial e próximo, em Capanema – PR</li>
         </ul>
-    </section>
+    </div>
 
-    <section class="card">
+    <!-- Sem caixa -->
+    <div class="texto-solto">
         <h2>Para quem é indicado?</h2>
-        <ul style="margin: 8px 0 0 20px; line-height: 1.75;">
+        <ul>
             <li>Quem quer reforço em Biologia com acompanhamento presencial</li>
             <li>Quem precisa de mais tempo para tirar dúvidas</li>
             <li>Quem se prepara para provas, ENEM ou vestibulares</li>
             <li>Quem prefere estudar no período da noite, em Capanema – PR</li>
             <li>Quem deseja flexibilidade para ir um ou dois dias na semana</li>
         </ul>
-    </section>
+    </div>
 
-    <section class="card access-box">
+    <!-- Contato sem caixa -->
+    <div class="contato-bloco">
         <h2>📞 Quer saber mais ou reservar sua vaga?</h2>
         <p>
             Entre em contato para tirar dúvidas, combinar o dia (terça e/ou quinta)
-            e obter mais informações sobre as aulas particulares presenciais.
+            e obter mais informações.
         </p>
-        <p style="margin-top: 14px;">
-            <strong>WhatsApp:</strong> (46) 99971-3928<br>
-            <strong>E-mail:</strong> schuantesluana25@gmail.com
+        <p class="contato-dados">
+            WhatsApp: (46) 99971-3928<br>
+            E-mail: schuantesluana25@gmail.com
         </p>
-        <div class="access-buttons" style="margin-top: 16px;">
-            <a href="https://wa.me/5546999713928" target="_blank" class="btn green-btn">
-                Falar no WhatsApp
-            </a>
-            <a href="mailto:schuantesluana25@gmail.com" class="btn outline-btn">
-                Enviar e-mail
-            </a>
-            <a href="consulta_agendamentos.html" class="btn outline-btn">
-                Página de contato
-            </a>
+        <div class="btns">
+            <a href="https://wa.me/5546999713928" target="_blank" rel="noopener" class="btn">Falar no WhatsApp</a>
+            <a href="mailto:schuantesluana25@gmail.com" class="btn">Enviar e-mail</a>
+            <a href="consulta_agendamentos.html" class="btn">Página de contato</a>
         </div>
-    </section>
+    </div>
 
-    <section class="card">
+    <!-- Final sem caixa -->
+    <div class="final-bloco">
         <h2>💚 Continue estudando de graça também</h2>
         <p>
             As aulas online da BioMentoria (textos, quizzes e exercícios)
@@ -149,10 +227,11 @@
             presenciais são uma opção extra para quem deseja acompanhamento
             mais próximo em Capanema – PR.
         </p>
-        <br>
-        <a href="clientes.html" class="btn">Criar conta gratuita no site</a>
-        <a href="agendamentos.html" class="btn" style="margin-left: 8px;">Ver aulas online</a>
-    </section>
+        <div class="btns">
+            <a href="clientes.html" class="btn">Criar conta gratuita no site</a>
+            <a href="agendamentos.html" class="btn">Ver aulas online</a>
+        </div>
+    </div>
 
 </main>
 
