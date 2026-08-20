@@ -6,75 +6,124 @@
     <title>BioMentoria | Contato</title>
     <link rel="stylesheet" href="estilo.css">
     <style>
+        body.pagina-contato {
+            background: linear-gradient(165deg, #e8f5ee 0%, #f0f7f3 40%, #eef6f1 100%);
+        }
+
+        body.pagina-contato .container {
+            max-width: none;
+            width: 94%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .contato-intro {
             text-align: center;
-            max-width: 560px;
-            margin: 0 auto 8px;
+            max-width: 580px;
+            margin: 4px auto 36px;
+            padding: 0 8px;
+        }
+        .contato-intro h2 {
+            color: #06402f;
+            font-size: 1.45rem;
+            font-weight: 800;
+            margin-bottom: 12px;
         }
         .contato-intro p {
             color: #5a6b62;
             font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 0;
         }
+
         .contato-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 22px;
-            margin-top: 8px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 8px;
         }
-        .contato-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 36px 28px;
+
+        .contato-canal {
             text-align: center;
-            box-shadow: 0 8px 28px rgba(4, 53, 40, 0.08);
-            border: 1px solid rgba(6, 64, 47, 0.06);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: 36px 28px;
+            border-radius: 20px;
+            background: linear-gradient(160deg, rgba(255,255,255,0.55), rgba(232,245,238,0.7));
+            border: 1.5px solid rgba(10, 107, 72, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-        .contato-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 14px 36px rgba(4, 53, 40, 0.12);
+        .contato-canal:hover {
+            transform: translateY(-3px);
+            border-color: rgba(10, 107, 72, 0.3);
+            box-shadow: 0 12px 32px rgba(4, 53, 40, 0.1);
         }
+
         .contato-icon {
-            width: 64px;
-            height: 64px;
+            width: 72px;
+            height: 72px;
             margin: 0 auto 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
-            background: linear-gradient(145deg, #e8f5ee, #d4efe0);
-            color: #06402f;
+            font-size: 1.9rem;
+            background: linear-gradient(145deg, #0a6b48, #0d8a5a);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(10, 107, 72, 0.3);
         }
-        .contato-card h2 {
-            font-size: 1.25rem;
+
+        .contato-canal h2 {
+            font-size: 1.3rem;
             color: #06402f;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 700;
         }
-        .contato-card p {
+        .contato-canal p {
             color: #5a6b62;
             font-size: 0.98rem;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .contato-valor {
             display: block;
-            margin: 14px 0 22px;
-            font-size: 1.1rem;
+            margin: 16px 0 22px;
+            font-size: 1.12rem;
             font-weight: 700;
             color: #043528;
             letter-spacing: 0.01em;
+            word-break: break-word;
         }
-        .contato-card .btn {
+        .contato-canal .btn {
             display: inline-block;
-            min-width: 160px;
+            min-width: 170px;
+            background: linear-gradient(135deg, #06402f, #0a6b48);
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            box-shadow: 0 4px 14px rgba(10, 107, 72, 0.28);
         }
+        .contato-canal .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(10, 107, 72, 0.35);
+        }
+
         .contato-rodape-msg {
             text-align: center;
-            margin-top: 28px;
-            padding: 20px;
+            margin: 40px auto 24px;
+            padding: 0 12px;
             color: #5a6b62;
             font-size: 0.95rem;
+            max-width: 480px;
+        }
+
+        @media (max-width: 700px) {
+            .contato-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+            }
+            body.pagina-contato .container {
+                width: 92%;
+            }
         }
     </style>
 </head>
@@ -97,17 +146,16 @@
 
 <main class="container">
 
-    <section class="card contato-intro">
+    <div class="contato-intro">
         <h2>Fale conosco</h2>
         <p>
             Dúvidas sobre cadastro, conteúdo da plataforma ou outras informações?
             Escolha o canal de sua preferência. Responderemos o mais breve possível.
         </p>
-    </section>
+    </div>
 
     <div class="contato-grid">
-
-        <div class="contato-card">
+        <div class="contato-canal">
             <div class="contato-icon">📱</div>
             <h2>WhatsApp</h2>
             <p>Atendimento rápido e direto</p>
@@ -117,7 +165,7 @@
             </a>
         </div>
 
-        <div class="contato-card">
+        <div class="contato-canal">
             <div class="contato-icon">📧</div>
             <h2>E-mail</h2>
             <p>Envie sua mensagem quando preferir</p>
@@ -126,7 +174,6 @@
                 Enviar e-mail
             </a>
         </div>
-
     </div>
 
     <p class="contato-rodape-msg">
