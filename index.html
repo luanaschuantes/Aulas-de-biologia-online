@@ -5,6 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioMentoria - Biologia para Todos</title>
     <link rel="stylesheet" href="estilo.css">
+    <style>
+        .pagina-inicial .container {
+            max-width: 1100px;
+        }
+
+        .bloco-solto {
+            width: 100%;
+            margin: 8px 0 36px;
+            padding: 0 4px;
+        }
+        .bloco-solto h2 {
+            color: #06402f;
+            font-size: 1.45rem;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+        .bloco-solto p {
+            color: #3d4f46;
+            line-height: 1.75;
+            margin-bottom: 12px;
+            max-width: 860px;
+        }
+        .bloco-solto .btns-linha {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .secao-card {
+            margin: 20px 0 36px;
+            width: 100%;
+        }
+        .secao-card h2 {
+            margin-bottom: 18px;
+            color: #06402f;
+        }
+
+        .cta-final {
+            text-align: center;
+            margin: 40px 0 24px;
+            padding: 8px 4px 16px;
+        }
+        .cta-final h2 {
+            color: #06402f;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .cta-final p {
+            color: #5a6b62;
+            margin-bottom: 10px;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-final .btns-linha {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 18px;
+        }
+    </style>
 </head>
 <body class="pagina-inicial">
 
@@ -33,7 +96,8 @@
 
 <main class="container">
 
-    <section class="card access-box">
+    <!-- Sem caixa branca -->
+    <div class="bloco-solto">
         <h2>📖 Como funciona a BioMentoria?</h2>
         <p>
             A BioMentoria é uma plataforma de ensino de Biologia com
@@ -44,28 +108,27 @@
         <p>
             Além do conteúdo online, também oferecemos
             <strong>aulas particulares presenciais</strong> em Capanema – PR,
-            no período da noite. Os detalhes (dias, horários, valor e como participar)
-            estão na página de aulas particulares.
+            no período da noite. Os detalhes estão na página de aulas particulares.
         </p>
         <p>
             <strong>Para acessar o conteúdo online:</strong> basta criar uma conta
-            (gratuita) ou fazer login. Não há mensalidade nem planos pagos para
-            usar as aulas, quizzes e exercícios da plataforma.
+            (gratuita) ou fazer login. Não há mensalidade nem planos pagos.
         </p>
-        <div class="access-buttons">
-            <a href="clientes.html" class="btn green-btn">Criar cadastro gratuito</a>
-            <a href="login.html" class="btn outline-btn">Já tenho cadastro</a>
-            <a href="aulas-particulares.html" class="btn outline-btn">Aulas particulares</a>
+        <div class="btns-linha">
+            <a href="clientes.html" class="btn">Criar cadastro gratuito</a>
+            <a href="login.html" class="btn">Já tenho cadastro</a>
+            <a href="aulas-particulares.html" class="btn">Aulas particulares</a>
         </div>
-    </section>
+    </div>
 
-    <section class="card">
+    <!-- Com caixa branca -->
+    <section class="card secao-card">
         <h2>🚀 Passo a passo para estudar online</h2>
         <div class="steps">
             <div class="step">
                 <span class="step-number">1</span>
                 <h3>Crie sua conta</h3>
-                <p>Cadastre-se gratuitamente na plataforma com nome, e-mail e senha.</p>
+                <p>Cadastre-se gratuitamente com nome, e-mail e senha.</p>
             </div>
             <div class="step">
                 <span class="step-number">2</span>
@@ -85,7 +148,8 @@
         </div>
     </section>
 
-    <section class="card">
+    <!-- Com caixa branca -->
+    <section class="card secao-card">
         <h2>📚 O que você encontra no site</h2>
         <div class="features">
             <div class="feature">
@@ -111,18 +175,19 @@
         </div>
     </section>
 
-    <section class="card access-box">
+    <!-- Sem caixa branca -->
+    <div class="cta-final">
         <h2>🎓 Pronto para começar?</h2>
         <p>
             Crie sua conta gratuitamente e tenha acesso imediato às aulas,
             quizzes e exercícios de Biologia.
         </p>
         <p><strong>Conteúdo online: sem planos, sem mensalidade, sem pagamento.</strong></p>
-        <div class="access-buttons">
-            <a href="clientes.html" class="btn green-btn">🚀 Criar cadastro</a>
-            <a href="login.html" class="btn outline-btn">Já tenho um cadastro</a>
+        <div class="btns-linha">
+            <a href="clientes.html" class="btn">🚀 Criar cadastro</a>
+            <a href="login.html" class="btn">Já tenho um cadastro</a>
         </div>
-    </section>
+    </div>
 
 </main>
 
