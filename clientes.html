@@ -5,8 +5,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css">
     <title>BioMentoria - Criar conta</title>
+    <style>
+        body.pagina-cadastro .container {
+            max-width: none;
+            width: 94%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cadastro-area {
+            max-width: 720px;
+            margin: 8px auto 48px;
+            padding: 0 8px;
+        }
+
+        .cadastro-area .intro {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .cadastro-area .intro h2 {
+            color: #06402f;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .cadastro-area .intro p {
+            color: #5a6b62;
+            font-size: 1rem;
+            line-height: 1.65;
+            margin: 0 auto;
+            max-width: 520px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 24px;
+        }
+        .form-grid .campo-largo {
+            grid-column: 1 / -1;
+        }
+
+        .cadastro-area label {
+            display: block;
+            font-weight: 600;
+            color: #06402f;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            margin-top: 4px;
+        }
+
+        .cadastro-area input[type="text"],
+        .cadastro-area input[type="email"],
+        .cadastro-area input[type="tel"],
+        .cadastro-area input[type="password"] {
+            width: 100%;
+            padding: 13px 16px;
+            margin-bottom: 14px;
+            border: 1.5px solid #b8d0c4;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: #2d3a34;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .cadastro-area input:focus {
+            border-color: #0a6b48;
+            background: rgba(255, 255, 255, 0.55);
+            box-shadow: 0 0 0 3px rgba(10, 107, 72, 0.12);
+        }
+
+        .cadastro-area .btn-criar {
+            width: 100%;
+            margin-top: 12px;
+            padding: 14px 20px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .cadastro-extra {
+            text-align: center;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid #c5d9ce;
+        }
+        .cadastro-extra p {
+            color: #5a6b62;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+        }
+        .cadastro-extra .btn {
+            display: inline-block;
+            min-width: 150px;
+        }
+
+        #erroSenha {
+            display: none;
+            color: #b42318;
+            font-weight: 600;
+            margin: 4px 0 12px;
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 640px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            body.pagina-cadastro .container {
+                width: 92%;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="pagina-cadastro">
 
 <nav>
     <a href="index.html">Início</a>
@@ -20,71 +137,64 @@
 
 <section class="banner">
     <h1>Criar conta</h1>
-    <p>Cadastre-se gratuitamente para ter acesso às aulas, quizzes e exercícios de Biologia.</p>
+    <p>Cadastro gratuito para acessar aulas, quizzes e exercícios</p>
 </section>
 
 <main class="container">
-
-    <div class="card">
-        <h2>📚 A BioMentoria é gratuita</h2>
-        <p>A BioMentoria é uma plataforma educacional voltada para o estudo de Biologia.</p>
-        <p>Todo o conteúdo da plataforma é gratuito. Não existem planos pagos e você não precisa realizar nenhum pagamento para estudar.</p>
-        <p>Para acessar as aulas, basta criar sua conta e fazer login. Depois de entrar, você terá acesso à área de estudos com textos, quizzes e listas de exercícios.</p>
-    </div>
-
-    <div class="card">
-        <h2>Como funciona?</h2>
-        <ol>
-            <li>
-                <strong>1º - Crie sua conta</strong><br>
-                Informe seus dados e crie uma senha para acessar a plataforma.
-            </li>
-            <li>
-                <strong>2º - Faça login</strong><br>
-                Entre utilizando seu e-mail e sua senha.
-            </li>
-            <li>
-                <strong>3º - Acesse as aulas</strong><br>
-                Após o login, você será direcionado automaticamente para a área de estudos.
-            </li>
-            <li>
-                <strong>4º - Estude gratuitamente</strong><br>
-                Leia os conteúdos, responda aos quizzes e faça as listas de exercícios.
-            </li>
-        </ol>
-    </div>
-
-    <div class="card">
-        <h2>Criar minha conta</h2>
-        <p>Preencha seus dados abaixo. O cadastro é totalmente gratuito e destinado a quem ainda não possui conta.</p>
-        <br>
-        <form action="/salvar-cliente" method="POST">
-            <label for="nome">Nome completo:</label>
-            <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" autocomplete="name" required>
-
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" autocomplete="off">
-
-            <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone" autocomplete="tel">
-
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" autocomplete="email" required>
-
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" placeholder="Crie uma senha com pelo menos 6 caracteres" minlength="6" autocomplete="new-password" required>
-
-            <label for="confirmarSenha">Confirmar senha:</label>
-            <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a senha novamente" minlength="6" autocomplete="new-password" required>
-
-            <p id="erroSenha" style="display:none; color:#b42318; font-weight:600; margin-bottom:20px;">
-                As senhas não são iguais.
+    <div class="cadastro-area">
+        <div class="intro">
+            <h2>Preencha seus dados</h2>
+            <p>
+                O cadastro é gratuito. Depois de criar a conta, faça login para
+                acessar todo o conteúdo de Biologia da plataforma.
             </p>
+        </div>
 
-            <button class="btn" type="submit">Criar minha conta gratuitamente</button>
+        <form action="/salvar-cliente" method="POST" autocomplete="on">
+            <div class="form-grid">
+                <div class="campo-largo">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" autocomplete="name" required>
+                </div>
+
+                <div>
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" autocomplete="off">
+                </div>
+
+                <div>
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+                </div>
+
+                <div class="campo-largo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+                </div>
+
+                <div>
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Mínimo 6 caracteres" minlength="6" autocomplete="new-password" required>
+                </div>
+
+                <div>
+                    <label for="confirmarSenha">Confirmar senha</label>
+                    <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a senha novamente" minlength="6" autocomplete="new-password" required>
+                </div>
+
+                <p id="erroSenha">As senhas não são iguais.</p>
+
+                <div class="campo-largo">
+                    <button class="btn btn-criar" type="submit">Criar minha conta gratuitamente</button>
+                </div>
+            </div>
         </form>
-    </div>
 
+        <div class="cadastro-extra">
+            <p>Já possui uma conta?</p>
+            <a href="login.html" class="btn">Entrar</a>
+        </div>
+    </div>
 </main>
 
 <footer class="rodape">
