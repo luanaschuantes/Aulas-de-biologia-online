@@ -6,66 +6,68 @@
 <link rel="stylesheet" href="estilo.css">
 <title>BioMentoria - Evolução</title>
 <style>
-    body { visibility: hidden; }
-    body.autorizado { visibility: visible; }
-    #verificandoLogin {
-        min-height: 100vh; display: flex; justify-content: center; align-items: center;
-        text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
-    }
-    #verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
-    .artigo-corpo p { line-height: 1.6; margin-bottom: 12px; }
+body { visibility: hidden; }
+body.autorizado { visibility: visible; }
+#verificandoLogin {
+  min-height: 100vh; display: flex; justify-content: center; align-items: center;
+  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
+}
+#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
+.artigo-corpo p, .artigo-corpo li { line-height: 1.65; margin-bottom: 10px; }
+.artigo-corpo h3 { margin-top: 22px; color: #1b6b3a; }
+.artigo-corpo ul { margin: 8px 0 12px 20px; }
 </style>
 </head>
 <body>
 <div id="verificandoLogin"><div class="card">
-    <h2>🔐 Verificando acesso...</h2>
-    <p>Aguarde enquanto verificamos sua conta.</p>
+  <h2>🔐 Verificando acesso...</h2>
+  <p>Aguarde enquanto verificamos sua conta.</p>
 </div></div>
 <div id="conteudoProtegido" style="display:none;">
 <nav>
-    <a href="index.html">Início</a>
-    <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
-    <a href="login.html">Entrar</a>
-    <a href="agendamentos.html">Fazer aulas</a>
-    <a href="atividades.html">Atividades</a>
-    <a href="consulta_agendamentos.html">Contato</a>
-    <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+  <a href="index.html">Início</a>
+  <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
+  <a href="login.html">Entrar</a>
+  <a href="agendamentos.html">Fazer aulas</a>
+  <a href="atividades.html">Atividades</a>
+  <a href="consulta_agendamentos.html">Contato</a>
+  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
 <section class="banner">
-    <span class="gratuito">🔓 Conteúdo gratuito</span>
-    <h1>🦎 Evolução</h1>
-    <p id="mensagemAluno">Aula 4</p>
+  <span class="gratuito">🔓 Conteúdo gratuito</span>
+  <h1>🦎 Evolução</h1>
+  <p id="mensagemAluno">Aula 4</p>
 </section>
 <main class="container">
-    <p><a href="agendamentos.html" class="btn">← Voltar às aulas</a>
-       <a href="atividade.html?tema=evolucao" class="btn">Fazer atividades desta aula →</a></p>
-    <article class="card artigo-corpo">
-        <h2>Aula 4 — Evolução</h2>
-        <h3>Evolução dos seres vivos</h3>
-<p>A evolução biológica corresponde às mudanças nas populações ao longo das gerações.</p>
-<p>Charles Darwin propôs a <strong>seleção natural</strong>: indivíduos com características vantajosas podem ter maior sucesso reprodutivo.</p>
-<p>Seleção natural, mutações e recombinação genética contribuem para a diversidade dos seres vivos.</p>
-    </article>
-    <section class="card" style="text-align:center;">
-        <h2>📝 Praticar</h2>
-        <p>Depois de ler, pratique com quiz e exercícios só desta aula.</p>
-        <p><a href="atividade.html?tema=evolucao" class="btn">Atividades de Evolução →</a></p>
-    </section>
+  <p>
+    <a href="agendamentos.html" class="btn">← Voltar às aulas</a>
+    <a href="atividade.html?tema=evolucao" class="btn">Fazer atividades desta aula →</a>
+  </p>
+  <article class="card artigo-corpo">
+    <h2>Aula 4 — Evolução</h2>
+    <p>Conteúdo da aula de Evolução.</p>
+  </article>
+  <section class="card" style="text-align:center;">
+    <h2>📝 Praticar</h2>
+    <p><a href="atividade.html?tema=evolucao" class="btn">Atividades de Evolução →</a></p>
+  </section>
 </main>
-<footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma gratuita de Biologia</p></footer>
+<footer class="rodape">
+    <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
+</footer>
 </div>
 <script>
 async function verificarAcesso() {
 try {
-    const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
-    if (!resposta.ok) { window.location.replace('/login.html'); return; }
-    const dados = await resposta.json();
-    if (!dados.logado) { window.location.replace('/login.html'); return; }
-    const el = document.getElementById('mensagemAluno');
-    if (el && dados.aluno && dados.aluno.nome) el.textContent = `Olá, ${dados.aluno.nome}!`;
-    document.getElementById('verificandoLogin').style.display = 'none';
-    document.getElementById('conteudoProtegido').style.display = 'block';
-    document.body.classList.add('autorizado');
+  const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
+  if (!resposta.ok) { window.location.replace('/login.html'); return; }
+  const dados = await resposta.json();
+  if (!dados.logado) { window.location.replace('/login.html'); return; }
+  const el = document.getElementById('mensagemAluno');
+  if (el && dados.aluno && dados.aluno.nome) el.textContent = 'Olá, ' + dados.aluno.nome + '!';
+  document.getElementById('verificandoLogin').style.display = 'none';
+  document.getElementById('conteudoProtegido').style.display = 'block';
+  document.body.classList.add('autorizado');
 } catch (e) { console.error(e); window.location.replace('/login.html'); }
 }
 document.addEventListener('DOMContentLoaded', verificarAcesso);
