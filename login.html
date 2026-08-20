@@ -7,108 +7,72 @@
     <title>BioMentoria - Entrar</title>
     <style>
         .login-wrap {
-            max-width: 440px;
-            margin: 0 auto 32px;
+            max-width: 400px;
+            margin: 8px auto 48px;
+            padding: 0 8px;
         }
-        .login-card {
-            background: #ffffff;
-            border-radius: 22px;
-            padding: 40px 36px 36px;
-            box-shadow: 0 10px 36px rgba(4, 53, 40, 0.1);
-            border: 1px solid rgba(6, 64, 47, 0.06);
-        }
-        .login-icon {
-            width: 68px;
-            height: 68px;
-            margin: 0 auto 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.85rem;
-            background: linear-gradient(145deg, #e8f5ee, #d4efe0);
-        }
-        .login-card h2 {
+        .login-wrap h2 {
             text-align: center;
             color: #06402f;
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
-        .login-card > p.login-sub {
+        .login-sub {
             text-align: center;
             color: #5a6b62;
             font-size: 0.98rem;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
-        .login-card label {
+        .login-wrap label {
             display: block;
             font-weight: 600;
             color: #06402f;
             font-size: 0.92rem;
             margin-bottom: 6px;
         }
-        .login-card input[type="email"],
-        .login-card input[type="password"] {
+        .login-wrap input[type="email"],
+        .login-wrap input[type="password"] {
             width: 100%;
-            padding: 12px 14px;
-            border: 1.5px solid #d4e5db;
+            padding: 13px 16px;
+            border: 1.5px solid #c5d9ce;
             border-radius: 12px;
             font-size: 1rem;
             font-family: inherit;
             color: #2d3a34;
-            background: #f8fcfa;
+            background: #ffffff;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             outline: none;
         }
-        .login-card input:focus {
+        .login-wrap input:focus {
             border-color: #0a6b48;
-            box-shadow: 0 0 0 3px rgba(10, 107, 72, 0.15);
-            background: #fff;
+            box-shadow: 0 0 0 3px rgba(10, 107, 72, 0.12);
         }
-        .login-card .btn-entrar {
+        .login-wrap .btn-entrar {
             width: 100%;
-            margin-top: 6px;
-            padding: 13px 20px;
+            margin-top: 4px;
+            padding: 14px 20px;
             font-size: 1.05rem;
             font-weight: 700;
             border: none;
             cursor: pointer;
+            border-radius: 12px;
         }
-        .login-divider {
+        .login-footer-links {
             text-align: center;
-            margin: 28px 0 18px;
-            color: #8a9b92;
-            font-size: 0.9rem;
-            position: relative;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid #d4e5db;
         }
-        .login-divider::before,
-        .login-divider::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 38%;
-            height: 1px;
-            background: #d4e5db;
-        }
-        .login-divider::before { left: 0; }
-        .login-divider::after { right: 0; }
-        .login-criar {
-            text-align: center;
-            padding: 22px 20px;
-            background: #f4faf7;
-            border-radius: 16px;
-            border: 1px solid rgba(6, 64, 47, 0.06);
-        }
-        .login-criar p {
+        .login-footer-links p {
             color: #5a6b62;
             font-size: 0.95rem;
             margin-bottom: 14px;
         }
-        .login-criar .btn {
+        .login-footer-links .btn {
             display: inline-block;
-            min-width: 160px;
+            min-width: 150px;
         }
     </style>
 </head>
@@ -131,27 +95,22 @@
 
 <main class="container">
     <div class="login-wrap">
-        <div class="login-card">
-            <div class="login-icon">🔐</div>
-            <h2>Acesse sua conta</h2>
-            <p class="login-sub">Use o e-mail e a senha cadastrados na BioMentoria.</p>
+        <h2>Acesse sua conta</h2>
+        <p class="login-sub">Use o e-mail e a senha cadastrados na BioMentoria.</p>
 
-            <form action="/login" method="POST">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required placeholder="seu@email.com" autocomplete="email">
+        <form action="/login" method="POST">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="seu@email.com" autocomplete="email">
 
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required placeholder="Sua senha" autocomplete="current-password">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required placeholder="Sua senha" autocomplete="current-password">
 
-                <button type="submit" class="btn btn-entrar">Entrar</button>
-            </form>
+            <button type="submit" class="btn btn-entrar">Entrar</button>
+        </form>
 
-            <div class="login-divider">ou</div>
-
-            <div class="login-criar">
-                <p>Ainda não tem uma conta? Cadastre-se gratuitamente.</p>
-                <a href="clientes.html" class="btn">Criar conta</a>
-            </div>
+        <div class="login-footer-links">
+            <p>Ainda não tem uma conta?</p>
+            <a href="clientes.html" class="btn">Criar conta gratuita</a>
         </div>
     </div>
 </main>
