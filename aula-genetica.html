@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="estilo.css">
+<title>BioMentoria - Genética</title>
+<style>
+body { visibility: hidden; }
+body.autorizado { visibility: visible; }
+#verificandoLogin {
+  min-height: 100vh; display: flex; justify-content: center; align-items: center;
+  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
+}
+#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
+.artigo-corpo { max-width: 820px; margin: 0 auto 28px; }
+.artigo-corpo p, .artigo-corpo li { line-height: 1.7; margin-bottom: 12px; color: #2d3a34; }
+.artigo-corpo h2 { color: #06402f; margin-bottom: 16px; }
+.artigo-corpo h3 { margin-top: 26px; margin-bottom: 10px; color: #0a6b48; font-size: 1.15rem; }
+.artigo-corpo .destaque {
+  background: linear-gradient(165deg, #f4faf7, #eaf6ef);
+  border-left: 4px solid #0a6b48;
+  padding: 14px 18px;
+  border-radius: 0 12px 12px 0;
+  margin: 18px 0;
+}
+</style>
+</head>
+<body>
+<div id="verificandoLogin"><div class="card">
+  <h2>🔐 Verificando acesso...</h2>
+  <p>Aguarde enquanto verificamos sua conta.</p>
+</div></div>
+<div id="conteudoProtegido" style="display:none;">
+<nav>
+  <a href="index.html">Início</a>
+  <a href="clientes.html">Criar conta</a>
+  <a href="login.html">Entrar</a>
+  <a href="agendamentos.html">Fazer aulas</a>
+  <a href="atividades.html">Atividades</a>
+  <a href="aulas-particulares.html">Aulas particulares</a>
+  <a href="consulta_agendamentos.html">Contato</a>
+  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+</nav>
+<section class="banner">
+  <span class="gratuito">🔓 Conteúdo gratuito</span>
+  <h1>🧬 Genética</h1>
+  <p id="mensagemAluno">Aula 2</p>
+</section>
+<main class="container">
+  <p style="margin-bottom:20px;">
+    <a href="agendamentos.html" class="btn">← Voltar às aulas</a>
+    <a href="atividade.html?tema=genetica" class="btn">Fazer atividades desta aula →</a>
+  </p>
+  <article class="card artigo-corpo">
+    <h2>Aula 2 — Genética</h2>
+    <p>A <strong>genética</strong> estuda a hereditariedade: como as características são transmitidas de geração em geração. O material genético dos seres vivos é o <strong>DNA</strong> (ácido desoxirribonucleico), organizado em genes que codificam informações para a síntese de proteínas.</p>
+    <p>Os <strong>cromossomos</strong> são estruturas formadas por DNA e proteínas; nos seres humanos diploides, há 46 cromossomos (23 pares). Genes localizados no mesmo cromossomo tendem a ser herdados juntos, a menos que ocorra recombinação.</p>
+    <p>Gregor Mendel, com experimentos em ervilhas, estabeleceu as bases da genética clássica. A <strong>1ª lei de Mendel</strong> (segregação) afirma que os alelos de um gene se separam na formação dos gametas. A <strong>2ª lei</strong> (independência) trata da segregação independente de genes em cromossomos diferentes.</p>
+    <h3>Conceitos importantes</h3>
+    <p><strong>Genótipo</strong> é a constituição genética de um indivíduo; <strong>fenótipo</strong> é a expressão observável, resultante da interação entre genótipo e ambiente. Alelos podem ser dominantes ou recessivos: o dominante se manifesta mesmo em heterozigose.</p>
+    <p>Cruzamentos monohíbridos e dihíbridos, quadros de Punnett e cálculo de proporções genotípicas e fenotípicas são ferramentas centrais para resolver problemas de genética mendeliana.</p>
+    <p>Além da genética clássica, a biologia molecular explica a replicação do DNA, a transcrição (DNA → RNA) e a tradução (RNA → proteína). Mutações podem alterar genes e, em alguns casos, causar doenças ou variação evolutiva.</p>
+    <div class="destaque">
+      <p><strong>Resumo:</strong> gene, alelo, dominante/recessivo, genótipo e fenótipo formam a base. Pratique cruzamentos e proporções — é o que mais cai em provas e nas atividades desta aula.</p>
+    </div>
+    <p>Herança ligada ao sexo, codominância e alelos múltiplos (como no sistema ABO) ampliam o modelo mendeliano simples e aparecem com frequência em questões.</p>
+    <p>Estude com exemplos concretos (cor de flor, tipo sanguíneo, doenças recessivas) para fixar a lógica dos cruzamentos e interpretar pedigrees.</p>
+    <p>Resolva vários exercícios de cruzamento passo a passo: identificar os alelos, montar o quadro de Punnett e interpretar as proporções é o caminho mais seguro para acertar nas provas.</p>
+  </article>
+  <section class="card" style="text-align:center; max-width:820px; margin:0 auto 28px;">
+    <h2>📝 Praticar</h2>
+    <p>Teste o que aprendeu com o quiz e os exercícios desta aula.</p>
+    <p><a href="atividade.html?tema=genetica" class="btn">Atividades de Genética →</a></p>
+  </section>
+</main>
+<footer class="rodape">
+  <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
+</footer>
+</div>
+<script>
+async function verificarAcesso() {
+try {
+  const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
+  if (!resposta.ok) { window.location.replace('/login.html'); return; }
+  const dados = await resposta.json();
+  if (!dados.logado) { window.location.replace('/login.html'); return; }
+  const el = document.getElementById('mensagemAluno');
+  if (el && dados.aluno && dados.aluno.nome) el.textContent = 'Olá, ' + dados.aluno.nome + '!';
+  document.getElementById('verificandoLogin').style.display = 'none';
+  document.getElementById('conteudoProtegido').style.display = 'block';
+  document.body.classList.add('autorizado');
+} catch (e) { console.error(e); window.location.replace('/login.html'); }
+}
+document.addEventListener('DOMContentLoaded', verificarAcesso);
+</script>
+</body></html>
