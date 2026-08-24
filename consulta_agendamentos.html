@@ -1,190 +1,255 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioMentoria | Contato</title>
-    <link rel="stylesheet" href="estilo.css">
-    <style>
-        body.pagina-contato {
-            background: linear-gradient(165deg, #e8f5ee 0%, #f0f7f3 40%, #eef6f1 100%);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioMentoria | Contato</title>
+<link rel="stylesheet" href="estilo.css">
+<style>
+.pagina-contato .container {
+  max-width: none;
+  width: 92%;
+  margin: 0 auto 40px;
+}
 
-        body.pagina-contato .container {
-            max-width: none;
-            width: 94%;
-            margin-left: auto;
-            margin-right: auto;
-        }
+.bloco-intro {
+  max-width: 680px;
+  margin: 0 auto 48px;
+  text-align: center;
+  padding: 0 12px;
+}
+.bloco-intro h2 {
+  color: #06402f;
+  font-size: 1.55rem;
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+.bloco-intro p {
+  color: #3d4f46;
+  line-height: 1.8;
+  font-size: 1.08rem;
+  margin: 0;
+}
 
-        .contato-intro {
-            text-align: center;
-            max-width: 580px;
-            margin: 4px auto 36px;
-            padding: 0 8px;
-        }
-        .contato-intro h2 {
-            color: #06402f;
-            font-size: 1.45rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-        .contato-intro p {
-            color: #5a6b62;
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin: 0;
-        }
+.canais-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 920px;
+  margin: 0 auto 48px;
+  padding: 0 4px;
+}
+.canal-card {
+  background: linear-gradient(165deg, #f4faf7, #eaf6ef);
+  border: 1px solid #d4e8dc;
+  border-radius: 22px;
+  padding: 40px 32px;
+  text-align: center;
+  transition: transform .2s, box-shadow .2s;
+}
+.canal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(4,53,40,.12);
+}
+.canal-icon {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: linear-gradient(145deg, #0a6b48, #0d8a5a);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(10,107,72,.3);
+}
+.canal-card h3 {
+  color: #06402f;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.canal-card p {
+  color: #5a6b62;
+  font-size: .98rem;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.canal-valor {
+  display: block;
+  margin: 16px 0 22px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #043528;
+  word-break: break-word;
+}
+.canal-card .btn {
+  display: inline-block;
+  min-width: 170px;
+  font-weight: 700;
+}
 
-        .contato-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 8px;
-        }
+.assuntos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin: 0 0 48px;
+  padding: 0 4px;
+}
+.assunto-card {
+  background: linear-gradient(165deg, #f7fbf8, #eef7f2);
+  border: 1px solid #d4e8dc;
+  border-radius: 18px;
+  padding: 28px 22px;
+  text-align: center;
+}
+.assunto-card .icone {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+.assunto-card h3 {
+  color: #06402f;
+  font-size: 1.08rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.assunto-card p {
+  color: #5a6b62;
+  font-size: .95rem;
+  line-height: 1.6;
+  margin: 0;
+}
 
-        .contato-canal {
-            text-align: center;
-            padding: 36px 28px;
-            border-radius: 20px;
-            background: linear-gradient(160deg, rgba(255,255,255,0.55), rgba(232,245,238,0.7));
-            border: 1.5px solid rgba(10, 107, 72, 0.15);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-        .contato-canal:hover {
-            transform: translateY(-3px);
-            border-color: rgba(10, 107, 72, 0.3);
-            box-shadow: 0 12px 32px rgba(4, 53, 40, 0.1);
-        }
+.cta-final {
+  display: grid;
+  grid-template-columns: 1.4fr auto;
+  gap: 32px;
+  align-items: center;
+  margin: 0 0 40px;
+  padding: 36px 40px;
+  background: linear-gradient(135deg, #e8f5ee, #f2faf6);
+  border-radius: 24px;
+  border: 1px solid #d0e5d8;
+}
+.cta-final h2 {
+  color: #06402f;
+  font-size: 1.35rem;
+  margin-bottom: 8px;
+  text-align: left;
+  font-weight: 800;
+}
+.cta-final p {
+  color: #5a6b62;
+  margin: 0;
+  text-align: left;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+.cta-final .btns-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
 
-        .contato-icon {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.9rem;
-            background: linear-gradient(145deg, #0a6b48, #0d8a5a);
-            color: #fff;
-            box-shadow: 0 6px 18px rgba(10, 107, 72, 0.3);
-        }
+.msg-final {
+  text-align: center;
+  color: #5a6b62;
+  font-size: .95rem;
+  margin: 0 0 24px;
+  padding: 0 12px;
+}
 
-        .contato-canal h2 {
-            font-size: 1.3rem;
-            color: #06402f;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .contato-canal p {
-            color: #5a6b62;
-            font-size: 0.98rem;
-            margin-bottom: 6px;
-        }
-        .contato-valor {
-            display: block;
-            margin: 16px 0 22px;
-            font-size: 1.12rem;
-            font-weight: 700;
-            color: #043528;
-            letter-spacing: 0.01em;
-            word-break: break-word;
-        }
-        .contato-canal .btn {
-            display: inline-block;
-            min-width: 170px;
-            background: linear-gradient(135deg, #06402f, #0a6b48);
-            color: #fff;
-            border: none;
-            font-weight: 700;
-            box-shadow: 0 4px 14px rgba(10, 107, 72, 0.28);
-        }
-        .contato-canal .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(10, 107, 72, 0.35);
-        }
-
-        .contato-rodape-msg {
-            text-align: center;
-            margin: 40px auto 24px;
-            padding: 0 12px;
-            color: #5a6b62;
-            font-size: 0.95rem;
-            max-width: 480px;
-        }
-
-        @media (max-width: 700px) {
-            .contato-grid {
-                grid-template-columns: 1fr;
-                max-width: 420px;
-            }
-            body.pagina-contato .container {
-                width: 92%;
-            }
-        }
-    </style>
+@media (max-width: 900px) {
+  .canais-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .assuntos-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .cta-final { grid-template-columns: 1fr; text-align: center; padding: 28px 24px; }
+  .cta-final h2, .cta-final p { text-align: center; }
+  .cta-final .btns-linha { justify-content: center; }
+}
+@media (max-width: 560px) {
+  .pagina-contato .container { width: 92%; }
+  .canal-card { padding: 32px 22px; }
+}
+</style>
 </head>
 <body class="pagina-contato">
 
 <nav>
-    <a href="index.html">Início</a>
-    <a href="clientes.html">Criar conta</a>
-    <a href="login.html">Entrar</a>
-    <a href="agendamentos.html">Fazer aulas</a>
-    <a href="aulas-particulares.html">Aulas particulares</a>
-    <a href="consulta_agendamentos.html">Contato</a>
-    <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+<a href="index.html">Início</a>
+<a href="clientes.html">Criar conta</a>
+<a href="login.html">Entrar</a>
+<a href="agendamentos.html">Fazer aulas</a>
+<a href="aulas-particulares.html">Aulas particulares</a>
+<a href="consulta_agendamentos.html">Contato</a>
+<a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
 
 <section class="banner">
-    <h1>Contato</h1>
-    <p>Estamos à disposição para atender você</p>
+<h1>Contato</h1>
+<p>Estamos à disposição para atender você</p>
 </section>
 
 <main class="container">
 
-    <div class="contato-intro">
-        <h2>Fale conosco</h2>
-        <p>
-            Dúvidas sobre cadastro, conteúdo da plataforma ou outras informações?
-            Escolha o canal de sua preferência. Responderemos o mais breve possível.
-        </p>
-    </div>
+<div class="bloco-intro">
+<h2>Fale conosco</h2>
+<p>Dúvidas sobre cadastro, conteúdo da plataforma, aulas particulares via Meet ou outras informações? Escolha o canal de sua preferência. Responderemos o mais breve possível.</p>
+</div>
 
-    <div class="contato-grid">
-        <div class="contato-canal">
-            <div class="contato-icon">📱</div>
-            <h2>WhatsApp</h2>
-            <p>Atendimento rápido e direto</p>
-            <span class="contato-valor">(46) 99971-3928</span>
-            <a href="https://wa.me/5546999713928" target="_blank" rel="noopener" class="btn">
-                Abrir WhatsApp
-            </a>
-        </div>
+<div class="canais-grid">
+<div class="canal-card">
+<div class="canal-icon">📱</div>
+<h3>WhatsApp</h3>
+<p>Atendimento rápido e direto</p>
+<span class="canal-valor">(46) 99971-3928</span>
+<a href="https://wa.me/5546999713928" target="_blank" rel="noopener" class="btn">Abrir WhatsApp</a>
+</div>
+<div class="canal-card">
+<div class="canal-icon">📧</div>
+<h3>E-mail</h3>
+<p>Envie sua mensagem quando preferir</p>
+<span class="canal-valor">schuantesluana25@gmail.com</span>
+<a href="mailto:schuantesluana25@gmail.com" class="btn">Enviar e-mail</a>
+</div>
+</div>
 
-        <div class="contato-canal">
-            <div class="contato-icon">📧</div>
-            <h2>E-mail</h2>
-            <p>Envie sua mensagem quando preferir</p>
-            <span class="contato-valor">schuantesluana25@gmail.com</span>
-            <a href="mailto:schuantesluana25@gmail.com" class="btn">
-                Enviar e-mail
-            </a>
-        </div>
-    </div>
+<div class="assuntos-grid">
+<div class="assunto-card">
+<div class="icone">📝</div>
+<h3>Cadastro e acesso</h3>
+<p>Dúvidas para criar conta, fazer login ou acessar o conteúdo gratuito do site.</p>
+</div>
+<div class="assunto-card">
+<div class="icone">💻</div>
+<h3>Aulas particulares</h3>
+<p>Informações sobre aulas via Meet, horários, valores e inscrição.</p>
+</div>
+<div class="assunto-card">
+<div class="icone">📚</div>
+<h3>Conteúdo e estudos</h3>
+<p>Perguntas sobre aulas, quizzes, exercícios e temas de Biologia.</p>
+</div>
+</div>
 
-    <p class="contato-rodape-msg">
-        BioMentoria — educação em Biologia com simplicidade e qualidade.
-    </p>
+<div class="cta-final">
+<div>
+<h2>Quer saber mais sobre as aulas particulares?</h2>
+<p>Confira detalhes de horário, valor e como funcionam as aulas via Google Meet.</p>
+</div>
+<div class="btns-linha">
+<a href="aulas-particulares.html" class="btn">Ver aulas particulares</a>
+<a href="clientes.html" class="btn">Criar conta grátis</a>
+</div>
+</div>
+
+<p class="msg-final">BioMentoria — educação em Biologia com simplicidade e qualidade.</p>
 
 </main>
 
 <footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
+<p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
 </footer>
-
 </body>
 </html>
