@@ -6,33 +6,220 @@
 <title>BioMentoria - Biologia para Todos</title>
 <link rel="stylesheet" href="estilo.css">
 <style>
-.pagina-inicial .hero{width:100%;max-width:none;margin:0 0 36px;min-height:52vh;padding:80px 48px 72px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;border-radius:0;position:relative;overflow:hidden;background:linear-gradient(125deg,rgba(2,36,28,.82),rgba(4,53,40,.75) 40%,rgba(6,80,55,.7)),url("./fundo.jpg");background-size:cover;background-position:center;box-shadow:0 12px 40px rgba(4,53,40,.2)}
-.pagina-inicial .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(125,255,200,.08),transparent 55%);pointer-events:none}
-.pagina-inicial .hero>*{position:relative;z-index:1}
-.pagina-inicial .hero .gratuito{background:rgba(255,255,255,.95);color:#0a6b48;padding:9px 20px;font-size:12px;letter-spacing:.08em;margin-bottom:22px}
-.pagina-inicial .hero h1{margin:0 0 18px;font-size:clamp(42px,7vw,72px);font-weight:800;text-shadow:0 4px 28px rgba(0,0,0,.4)}
-.pagina-inicial .hero p{max-width:560px;margin:0 auto 32px;font-size:clamp(16px,2vw,19px);line-height:1.7;color:rgba(255,255,255,.94)}
-.pagina-inicial .btn-primary{background:#fff;color:#06402f;padding:15px 30px;font-weight:700}
-.pagina-inicial .btn-secondary{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.65);padding:15px 28px}
-.pagina-inicial .container{max-width:1180px;width:94%;margin:0 auto}
-.intro-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:48px 56px;margin:8px 0 48px;padding:0 8px}
-.intro-grid h2{color:#06402f;font-size:1.45rem;margin-bottom:14px}
-.intro-grid p{color:#3d4f46;line-height:1.8;margin-bottom:14px;font-size:1.05rem}
-.intro-grid .btns-linha,.cta-final .btns-linha{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.intro-lateral{display:grid;gap:22px}
-.intro-lateral .destaque-item strong{display:block;color:#06402f;font-size:1.05rem;margin-bottom:6px}
-.intro-lateral .destaque-item span{color:#5a6b62;font-size:.97rem;line-height:1.6}
-.secao-card{margin:8px 0 44px;width:100%;padding:40px 36px}
-.secao-card h2{margin-bottom:26px;color:#06402f;text-align:center;font-size:1.4rem}
-.pagina-inicial .steps,.pagina-inicial .features{grid-template-columns:repeat(4,1fr);gap:18px}
-.cta-final{display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:center;margin:36px 0 40px;padding:8px}
-.cta-final h2{color:#06402f;font-size:1.4rem;margin-bottom:10px;text-align:left}
-.cta-final p{color:#5a6b62;margin-bottom:8px;text-align:left;font-size:1.02rem;line-height:1.7}
-@media(max-width:1000px){.intro-grid,.cta-final{grid-template-columns:1fr}.pagina-inicial .steps,.pagina-inicial .features{grid-template-columns:repeat(2,1fr)}.cta-final h2,.cta-final p{text-align:center}.cta-final .btns-linha{justify-content:center}.pagina-inicial .hero{min-height:42vh;padding:56px 28px}}
-@media(max-width:560px){.pagina-inicial .steps,.pagina-inicial .features{grid-template-columns:1fr}.pagina-inicial .container{width:92%}.pagina-inicial .hero{min-height:38vh;padding:48px 22px}}
+.pagina-inicial .hero {
+  width: 100%;
+  max-width: none;
+  margin: 0 0 48px;
+  min-height: 52vh;
+  padding: 88px 48px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(125deg, rgba(2,36,28,.82), rgba(4,53,40,.75) 40%, rgba(6,80,55,.7)),
+    url("./fundo.jpg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 12px 40px rgba(4,53,40,.2);
+}
+.pagina-inicial .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 20%, rgba(125,255,200,.08), transparent 55%);
+  pointer-events: none;
+}
+.pagina-inicial .hero > * { position: relative; z-index: 1; }
+.pagina-inicial .hero .gratuito {
+  background: rgba(255,255,255,.95);
+  color: #0a6b48;
+  padding: 9px 22px;
+  font-size: 12px;
+  letter-spacing: .08em;
+  margin-bottom: 24px;
+}
+.pagina-inicial .hero h1 {
+  margin: 0 0 18px;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 800;
+  text-shadow: 0 4px 28px rgba(0,0,0,.4);
+}
+.pagina-inicial .hero p {
+  max-width: 580px;
+  margin: 0 auto 36px;
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.7;
+  color: rgba(255,255,255,.94);
+}
+.pagina-inicial .hero-buttons { gap: 14px; }
+.pagina-inicial .btn-primary {
+  background: #fff;
+  color: #06402f;
+  padding: 15px 32px;
+  font-weight: 700;
+}
+.pagina-inicial .btn-secondary {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.65);
+  padding: 15px 28px;
+}
+
+.pagina-inicial .container {
+  max-width: none;
+  width: 92%;
+  margin: 0 auto 40px;
+}
+
+.bloco-como {
+  max-width: 720px;
+  margin: 0 auto 56px;
+  text-align: center;
+  padding: 0 12px;
+}
+.bloco-como h2 {
+  color: #06402f;
+  font-size: 1.55rem;
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+.bloco-como p {
+  color: #3d4f46;
+  line-height: 1.8;
+  font-size: 1.08rem;
+  margin-bottom: 14px;
+}
+.bloco-como .btns-linha {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.destaques-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin: 0 0 56px;
+  padding: 0 4px;
+}
+.destaque-card {
+  background: linear-gradient(165deg, #f4faf7, #eaf6ef);
+  border: 1px solid #d4e8dc;
+  border-radius: 20px;
+  padding: 32px 26px;
+  text-align: center;
+  transition: transform .2s, box-shadow .2s;
+}
+.destaque-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(4,53,40,.1);
+}
+.destaque-card .icone {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+.destaque-card h3 {
+  color: #06402f;
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.destaque-card p {
+  color: #5a6b62;
+  font-size: .98rem;
+  line-height: 1.65;
+  margin: 0 0 18px;
+}
+.destaque-card .btn {
+  display: inline-block;
+  font-size: .92rem;
+  padding: 10px 20px;
+}
+
+.secao-card {
+  margin: 0 0 48px;
+  width: 100%;
+  padding: 44px 40px;
+}
+.secao-card h2 {
+  margin-bottom: 28px;
+  color: #06402f;
+  text-align: center;
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+.pagina-inicial .steps,
+.pagina-inicial .features {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.pagina-inicial .step,
+.pagina-inicial .feature {
+  min-height: 165px;
+  padding: 28px 22px;
+}
+
+.cta-final {
+  display: grid;
+  grid-template-columns: 1.4fr auto;
+  gap: 40px;
+  align-items: center;
+  margin: 20px 0 48px;
+  padding: 36px 40px;
+  background: linear-gradient(135deg, #e8f5ee, #f2faf6);
+  border-radius: 24px;
+  border: 1px solid #d0e5d8;
+}
+.cta-final h2 {
+  color: #06402f;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.cta-final p {
+  color: #5a6b62;
+  margin-bottom: 8px;
+  text-align: left;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  max-width: none;
+}
+.cta-final .btns-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1000px) {
+  .destaques-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .pagina-inicial .steps,
+  .pagina-inicial .features { grid-template-columns: repeat(2, 1fr); }
+  .cta-final { grid-template-columns: 1fr; text-align: center; padding: 28px 24px; }
+  .cta-final h2, .cta-final p { text-align: center; }
+  .cta-final .btns-linha { justify-content: center; }
+  .pagina-inicial .hero { min-height: 42vh; padding: 56px 28px; }
+}
+@media (max-width: 560px) {
+  .pagina-inicial .steps,
+  .pagina-inicial .features { grid-template-columns: 1fr; }
+  .pagina-inicial .container { width: 92%; }
+  .pagina-inicial .hero { min-height: 38vh; padding: 48px 22px; }
+  .secao-card { padding: 28px 18px; }
+}
 </style>
 </head>
 <body class="pagina-inicial">
+
 <nav>
 <a href="index.html">Início</a>
 <a href="clientes.html">Criar conta</a>
@@ -42,6 +229,7 @@
 <a href="consulta_agendamentos.html">Contato</a>
 <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
+
 <section class="hero">
 <span class="gratuito">🎓 100% GRATUITO ONLINE</span>
 <h1>BioMentoria</h1>
@@ -51,37 +239,42 @@
 <a href="login.html" class="btn btn-secondary">Já tenho um cadastro</a>
 </div>
 </section>
+
 <main class="container">
-<div class="intro-grid">
-<div>
+
+<div class="bloco-como">
 <h2>📖 Como funciona a BioMentoria?</h2>
 <p>A BioMentoria é uma plataforma de ensino de Biologia com <strong>conteúdo online 100% gratuito</strong>. Aqui você encontra aulas de Biologia, quizzes e listas de exercícios para estudar e praticar no seu ritmo.</p>
-<p><strong>Para acessar:</strong> crie uma conta gratuita ou faça login. Não há mensalidade nem planos pagos para usar as aulas, quizzes e exercícios.</p>
+<p><strong>Para acessar:</strong> crie uma conta gratuita ou faça login. Não há mensalidade nem planos pagos para usar as aulas, quizzes e exercícios do site.</p>
 <div class="btns-linha">
 <a href="clientes.html" class="btn">Criar cadastro gratuito</a>
 <a href="login.html" class="btn">Já tenho cadastro</a>
 </div>
 </div>
-<div class="intro-lateral">
-<div class="destaque-item">
-<strong>💻 Aulas particulares via Meet</strong>
-<span>Aulas particulares ao vivo pelo Google Meet, 3x por semana, das 19h às 21h — R$ 120/mês. Detalhes na página de aulas particulares.</span>
+
+<div class="destaques-grid">
+<div class="destaque-card">
+<div class="icone">💻</div>
+<h3>Aulas particulares via Meet</h3>
+<p>Aulas particulares ao vivo pelo Google Meet, 3x por semana, das 19h às 21h — R$ 120/mês.</p>
+<a href="aulas-particulares.html" class="btn">Saiba mais</a>
 </div>
-<div class="destaque-item">
-<strong>💚 100% gratuito online</strong>
-<span>Textos, quizzes e exercícios sem cobrança de mensalidade.</span>
+<div class="destaque-card">
+<div class="icone">💚</div>
+<h3>100% gratuito no site</h3>
+<p>Textos, quizzes e exercícios de Biologia sem cobrança de mensalidade.</p>
+<a href="agendamentos.html" class="btn">Ver conteúdo</a>
 </div>
-<div class="destaque-item">
-<strong>🎯 No seu ritmo</strong>
-<span>Estude quando quiser, no horário que preferir.</span>
-</div>
-<div class="btns-linha">
-<a href="aulas-particulares.html" class="btn">Ver aulas particulares</a>
-</div>
+<div class="destaque-card">
+<div class="icone">🎯</div>
+<h3>No seu ritmo</h3>
+<p>Estude quando quiser, no horário que preferir, com acesso imediato após o cadastro.</p>
+<a href="clientes.html" class="btn">Começar agora</a>
 </div>
 </div>
+
 <section class="card secao-card">
-<h2>🚀 Passo a passo para estudar online</h2>
+<h2>🚀 Passo a passo para estudar</h2>
 <div class="steps">
 <div class="step"><span class="step-number">1</span><h3>Crie sua conta</h3><p>Cadastre-se gratuitamente com nome, e-mail e senha.</p></div>
 <div class="step"><span class="step-number">2</span><h3>Faça login</h3><p>Entre com seus dados para liberar o acesso.</p></div>
@@ -89,6 +282,7 @@
 <div class="step"><span class="step-number">4</span><h3>Pratique</h3><p>Faça o quiz e os exercícios.</p></div>
 </div>
 </section>
+
 <section class="card secao-card">
 <h2>📚 O que você encontra no site</h2>
 <div class="features">
@@ -98,6 +292,7 @@
 <div class="feature"><div class="feature-icon">🎯</div><h3>Estude no seu ritmo</h3><p>Sem mensalidade e sem pressão de horário.</p></div>
 </div>
 </section>
+
 <div class="cta-final">
 <div>
 <h2>🎓 Pronto para começar?</h2>
@@ -109,7 +304,9 @@
 <a href="login.html" class="btn">Já tenho um cadastro</a>
 </div>
 </div>
+
 </main>
+
 <footer class="rodape">
 <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
 </footer>
