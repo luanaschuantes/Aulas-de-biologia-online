@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="estilo.css">
+<title>BioMentoria - Citologia</title>
+<style>
+body { visibility: hidden; }
+body.autorizado { visibility: visible; }
+#verificandoLogin {
+  min-height: 100vh; display: flex; justify-content: center; align-items: center;
+  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
+}
+#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
+.artigo-corpo { max-width: 820px; margin: 0 auto 28px; }
+.artigo-corpo p, .artigo-corpo li { line-height: 1.7; margin-bottom: 12px; color: #2d3a34; }
+.artigo-corpo h2 { color: #06402f; margin-bottom: 16px; }
+.artigo-corpo h3 { margin-top: 26px; margin-bottom: 10px; color: #0a6b48; font-size: 1.15rem; }
+.artigo-corpo ul { margin: 8px 0 14px 22px; }
+.artigo-corpo .destaque {
+  background: linear-gradient(165deg, #f4faf7, #eaf6ef);
+  border-left: 4px solid #0a6b48;
+  padding: 14px 18px;
+  border-radius: 0 12px 12px 0;
+  margin: 18px 0;
+}
+</style>
+</head>
+<body>
+<div id="verificandoLogin"><div class="card">
+  <h2>🔐 Verificando acesso...</h2>
+  <p>Aguarde enquanto verificamos sua conta.</p>
+</div></div>
+<div id="conteudoProtegido" style="display:none;">
+<nav>
+  <a href="index.html">Início</a>
+  <a href="clientes.html">Criar conta</a>
+  <a href="login.html">Entrar</a>
+  <a href="agendamentos.html">Fazer aulas</a>
+  <a href="atividades.html">Atividades</a>
+  <a href="aulas-particulares.html">Aulas particulares</a>
+  <a href="consulta_agendamentos.html">Contato</a>
+  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+</nav>
+<section class="banner">
+  <span class="gratuito">🔓 Conteúdo gratuito</span>
+  <h1>🔬 Citologia</h1>
+  <p id="mensagemAluno">Aula 1</p>
+</section>
+<main class="container">
+  <p style="margin-bottom:20px;">
+    <a href="agendamentos.html" class="btn">← Voltar às aulas</a>
+    <a href="atividade.html?tema=citologia" class="btn">Fazer atividades desta aula →</a>
+  </p>
+  <article class="card artigo-corpo">
+    <h2>Aula 1 — Citologia</h2>
+    <p>A <strong>citologia</strong> é o ramo da Biologia que estuda a célula: sua estrutura, funções e importância para a vida. A célula é considerada a <strong>unidade básica estrutural e funcional</strong> dos seres vivos, pois todos os organismos são formados por uma ou mais células.</p>
+    <p>Existem dois grandes grupos celulares. As células <strong>procariontes</strong> não possuem núcleo delimitado por membrana; o material genético fica disperso no citoplasma, em uma região chamada nucleoide. Bactérias e arqueas são exemplos de procariontes.</p>
+    <p>As células <strong>eucariontes</strong> possuem núcleo verdadeiro, envolvido por membrana nuclear. O DNA fica organizado em cromossomos dentro do núcleo. Animais, plantas, fungos e protistas são formados por células eucariontes.</p>
+    <h3>Principais organelas</h3>
+    <p>Nas células eucariontes, várias organelas realizam funções específicas. A <strong>mitocôndria</strong> é a principal responsável pela produção de ATP na respiração celular, fornecendo energia para as atividades da célula.</p>
+    <p>Os <strong>ribossomos</strong> sintetizam proteínas a partir da informação do RNA mensageiro. O <strong>retículo endoplasmático</strong> participa do transporte e da síntese de moléculas; o aparelho de Golgi modifica e empacota substâncias para secreção ou uso interno.</p>
+    <p>Os <strong>lisossomos</strong> contêm enzimas digestivas que degradam partículas e organelas velhas. Nas células vegetais, os <strong>cloroplastos</strong> realizam a fotossíntese, convertendo energia luminosa em energia química.</p>
+    <div class="destaque">
+      <p><strong>Resumo:</strong> a célula é a base da vida. Saber distinguir procariontes e eucariontes e reconhecer o papel das organelas (núcleo, mitocôndria, ribossomo, cloroplasto) é essencial para entender a Biologia celular e as questões de vestibular e ENEM.</p>
+    </div>
+    <p>A membrana plasmática controla a entrada e a saída de substâncias, mantendo o equilíbrio interno (homeostase). O citoplasma é o meio onde ocorrem muitas reações químicas e onde as organelas estão imersas.</p>
+    <p>Ao estudar citologia, relacione sempre estrutura e função: cada parte da célula existe para cumprir um papel. Isso facilita memorizar e aplicar o conteúdo nas atividades desta aula.</p>
+    <p>Observe imagens de células e esquemas de organelas sempre que estudar: a visualização reforça a memória e prepara você para questões com figuras no ENEM e vestibulares.</p>
+  </article>
+  <section class="card" style="text-align:center; max-width:820px; margin:0 auto 28px;">
+    <h2>📝 Praticar</h2>
+    <p>Teste o que aprendeu com o quiz e os exercícios desta aula.</p>
+    <p><a href="atividade.html?tema=citologia" class="btn">Atividades de Citologia →</a></p>
+  </section>
+</main>
+<footer class="rodape">
+  <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
+</footer>
+</div>
+<script>
+async function verificarAcesso() {
+try {
+  const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
+  if (!resposta.ok) { window.location.replace('/login.html'); return; }
+  const dados = await resposta.json();
+  if (!dados.logado) { window.location.replace('/login.html'); return; }
+  const el = document.getElementById('mensagemAluno');
+  if (el && dados.aluno && dados.aluno.nome) el.textContent = 'Olá, ' + dados.aluno.nome + '!';
+  document.getElementById('verificandoLogin').style.display = 'none';
+  document.getElementById('conteudoProtegido').style.display = 'block';
+  document.body.classList.add('autorizado');
+} catch (e) { console.error(e); window.location.replace('/login.html'); }
+}
+document.addEventListener('DOMContentLoaded', verificarAcesso);
+</script>
+</body></html>
