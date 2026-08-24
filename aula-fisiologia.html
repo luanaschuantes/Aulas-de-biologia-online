@@ -4,72 +4,77 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="estilo.css">
-<title>BioMentoria - Fisiologia</title>
+<title>BioMentoria - Fisiologia Humana</title>
 <style>
-body { visibility: hidden; }
-body.autorizado { visibility: visible; }
-#verificandoLogin {
-  min-height: 100vh; display: flex; justify-content: center; align-items: center;
-  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
-}
-#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
-.artigo-corpo p, .artigo-corpo li { line-height: 1.65; margin-bottom: 10px; }
-.artigo-corpo h3 { margin-top: 22px; color: #1b6b3a; }
-.artigo-corpo ul { margin: 8px 0 12px 20px; }
+body{visibility:hidden}body.autorizado{visibility:visible}
+#verificandoLogin{min-height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;background:linear-gradient(180deg,#f7faf9,#eef6f1)}
+#verificandoLogin .card{width:90%;max-width:500px;margin:0}
+.artigo-corpo{max-width:820px;margin:0 auto 28px}
+.artigo-corpo p,.artigo-corpo li{line-height:1.7;margin-bottom:12px;color:#2d3a34}
+.artigo-corpo h2{color:#06402f;margin-bottom:16px}
+.artigo-corpo h3{margin-top:26px;margin-bottom:10px;color:#0a6b48;font-size:1.15rem}
+.artigo-corpo .destaque{background:linear-gradient(165deg,#f4faf7,#eaf6ef);border-left:4px solid #0a6b48;padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0}
 </style>
 </head>
 <body>
-<div id="verificandoLogin"><div class="card">
-  <h2>🔐 Verificando acesso...</h2>
-  <p>Aguarde enquanto verificamos sua conta.</p>
-</div></div>
+<div id="verificandoLogin"><div class="card"><h2>🔐 Verificando acesso...</h2><p>Aguarde enquanto verificamos sua conta.</p></div></div>
 <div id="conteudoProtegido" style="display:none;">
 <nav>
-  <a href="index.html">Início</a>
-  <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
-  <a href="login.html">Entrar</a>
-  <a href="agendamentos.html">Fazer aulas</a>
-  <a href="atividades.html">Atividades</a>
-  <a href="consulta_agendamentos.html">Contato</a>
-  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+<a href="index.html">Início</a>
+<a href="clientes.html">Criar conta</a>
+<a href="login.html">Entrar</a>
+<a href="agendamentos.html">Fazer aulas</a>
+<a href="atividades.html">Atividades</a>
+<a href="aulas-particulares.html">Aulas particulares</a>
+<a href="consulta_agendamentos.html">Contato</a>
+<a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
 <section class="banner">
-  <span class="gratuito">🔓 Conteúdo gratuito</span>
-  <h1>🫀 Fisiologia Humana</h1>
-  <p id="mensagemAluno">Aula 5</p>
+<span class="gratuito">🔓 Conteúdo gratuito</span>
+<h1>🫀 Fisiologia Humana</h1>
+<p id="mensagemAluno">Aula 5</p>
 </section>
 <main class="container">
-  <p>
-    <a href="agendamentos.html" class="btn">← Voltar às aulas</a>
-    <a href="atividade.html?tema=fisiologia" class="btn">Fazer atividades desta aula →</a>
-  </p>
-  <article class="card artigo-corpo">
-    <h2>Aula 5 — Fisiologia Humana</h2>
-    <p>Conteúdo da aula de Fisiologia Humana.</p>
-  </article>
-  <section class="card" style="text-align:center;">
-    <h2>📝 Praticar</h2>
-    <p><a href="atividade.html?tema=fisiologia" class="btn">Atividades de Fisiologia →</a></p>
-  </section>
+<p style="margin-bottom:20px;">
+<a href="agendamentos.html" class="btn">← Voltar às aulas</a>
+<a href="atividade.html?tema=fisiologia" class="btn">Fazer atividades desta aula →</a>
+</p>
+<article class="card artigo-corpo">
+<h2>Aula 5 — Fisiologia Humana</h2>
+<p>A <strong>fisiologia humana</strong> estuda o funcionamento dos órgãos e sistemas do corpo. O objetivo central é manter a <strong>homeostase</strong>: o equilíbrio interno apesar das mudanças do ambiente externo.</p>
+<p>O <strong>sistema digestório</strong> quebra os alimentos em nutrientes absorvíveis. Boca, estômago e intestinos atuam em sequência; enzimas e sucos digestivos aceleram as reações químicas da digestão.</p>
+<p>O <strong>sistema respiratório</strong> realiza as trocas gasosas: o oxigênio entra no sangue nos alvéolos pulmonares e o gás carbônico é eliminado. A respiração celular, nas mitocôndrias, usa O₂ para produzir ATP.</p>
+<h3>Circulação, excreção e coordenação</h3>
+<p>O <strong>sistema cardiovascular</strong> transporta nutrientes, gases e hormônios. O coração bombeia o sangue; artérias, veias e capilares formam a rede de distribuição. Circulação humana é dupla e completa.</p>
+<p>Os <strong>rins</strong> filtram o sangue e regulam água e sais, formando a urina. O sistema nervoso e o endócrino coordenam as respostas do organismo: o nervoso age de forma rápida (impulsos); o endócrino, por hormônios, de forma mais duradoura.</p>
+<p>O sistema imunológico defende o corpo contra patógenos. A imunidade pode ser inata ou adquirida; vacinas estimulam a memória imunológica sem causar a doença.</p>
+<div class="destaque"><p><strong>Resumo:</strong> associe cada sistema à sua função principal (digestão, troca de gases, transporte, excreção, coordenação, defesa). Isso organiza o estudo e facilita as atividades.</p></div>
+<p>Homeostase envolve feedbacks negativos (ex.: controle da temperatura e da glicemia). Entender esses mecanismos ajuda a interpretar situações clínicas simples em questões.</p>
+<p>Pratique relacionar órgãos e funções e reconhecer o caminho de substâncias (alimento, O₂, CO₂, urina) pelo corpo — tema recorrente em provas e no quiz desta aula.</p>
+<p>Faça esquemas simples do caminho do ar, do alimento e do sangue no corpo; desenhar o percurso ajuda a fixar a sequência de órgãos e a lógica de cada sistema.</p>
+</article>
+<section class="card" style="text-align:center;max-width:820px;margin:0 auto 28px;">
+<h2>📝 Praticar</h2>
+<p>Teste o que aprendeu com o quiz e os exercícios desta aula.</p>
+<p><a href="atividade.html?tema=fisiologia" class="btn">Atividades de Fisiologia Humana →</a></p>
+</section>
 </main>
-<footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
-</footer>
+<footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma de Biologia</p></footer>
 </div>
 <script>
-async function verificarAcesso() {
-try {
-  const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
-  if (!resposta.ok) { window.location.replace('/login.html'); return; }
-  const dados = await resposta.json();
-  if (!dados.logado) { window.location.replace('/login.html'); return; }
-  const el = document.getElementById('mensagemAluno');
-  if (el && dados.aluno && dados.aluno.nome) el.textContent = 'Olá, ' + dados.aluno.nome + '!';
-  document.getElementById('verificandoLogin').style.display = 'none';
-  document.getElementById('conteudoProtegido').style.display = 'block';
-  document.body.classList.add('autorizado');
-} catch (e) { console.error(e); window.location.replace('/login.html'); }
+async function verificarAcesso(){
+try{
+const resposta=await fetch('/verificar-login',{method:'GET',credentials:'same-origin',cache:'no-store'});
+if(!resposta.ok){window.location.replace('/login.html');return;}
+const dados=await resposta.json();
+if(!dados.logado){window.location.replace('/login.html');return;}
+const el=document.getElementById('mensagemAluno');
+if(el&&dados.aluno&&dados.aluno.nome)el.textContent='Olá, '+dados.aluno.nome+'!';
+document.getElementById('verificandoLogin').style.display='none';
+document.getElementById('conteudoProtegido').style.display='block';
+document.body.classList.add('autorizado');
+}catch(e){console.error(e);window.location.replace('/login.html');}
 }
-document.addEventListener('DOMContentLoaded', verificarAcesso);
+document.addEventListener('DOMContentLoaded',verificarAcesso);
 </script>
 </body></html>

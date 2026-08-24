@@ -6,70 +6,75 @@
 <link rel="stylesheet" href="estilo.css">
 <title>BioMentoria - Botânica</title>
 <style>
-body { visibility: hidden; }
-body.autorizado { visibility: visible; }
-#verificandoLogin {
-  min-height: 100vh; display: flex; justify-content: center; align-items: center;
-  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
-}
-#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
-.artigo-corpo p, .artigo-corpo li { line-height: 1.65; margin-bottom: 10px; }
-.artigo-corpo h3 { margin-top: 22px; color: #1b6b3a; }
-.artigo-corpo ul { margin: 8px 0 12px 20px; }
+body{visibility:hidden}body.autorizado{visibility:visible}
+#verificandoLogin{min-height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;background:linear-gradient(180deg,#f7faf9,#eef6f1)}
+#verificandoLogin .card{width:90%;max-width:500px;margin:0}
+.artigo-corpo{max-width:820px;margin:0 auto 28px}
+.artigo-corpo p,.artigo-corpo li{line-height:1.7;margin-bottom:12px;color:#2d3a34}
+.artigo-corpo h2{color:#06402f;margin-bottom:16px}
+.artigo-corpo h3{margin-top:26px;margin-bottom:10px;color:#0a6b48;font-size:1.15rem}
+.artigo-corpo .destaque{background:linear-gradient(165deg,#f4faf7,#eaf6ef);border-left:4px solid #0a6b48;padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0}
 </style>
 </head>
 <body>
-<div id="verificandoLogin"><div class="card">
-  <h2>🔐 Verificando acesso...</h2>
-  <p>Aguarde enquanto verificamos sua conta.</p>
-</div></div>
+<div id="verificandoLogin"><div class="card"><h2>🔐 Verificando acesso...</h2><p>Aguarde enquanto verificamos sua conta.</p></div></div>
 <div id="conteudoProtegido" style="display:none;">
 <nav>
-  <a href="index.html">Início</a>
-  <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
-  <a href="login.html">Entrar</a>
-  <a href="agendamentos.html">Fazer aulas</a>
-  <a href="atividades.html">Atividades</a>
-  <a href="consulta_agendamentos.html">Contato</a>
-  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+<a href="index.html">Início</a>
+<a href="clientes.html">Criar conta</a>
+<a href="login.html">Entrar</a>
+<a href="agendamentos.html">Fazer aulas</a>
+<a href="atividades.html">Atividades</a>
+<a href="aulas-particulares.html">Aulas particulares</a>
+<a href="consulta_agendamentos.html">Contato</a>
+<a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
 <section class="banner">
-  <span class="gratuito">🔓 Conteúdo gratuito</span>
-  <h1>🌿 Botânica</h1>
-  <p id="mensagemAluno">Aula 6</p>
+<span class="gratuito">🔓 Conteúdo gratuito</span>
+<h1>🌿 Botânica</h1>
+<p id="mensagemAluno">Aula 6</p>
 </section>
 <main class="container">
-  <p>
-    <a href="agendamentos.html" class="btn">← Voltar às aulas</a>
-    <a href="atividade.html?tema=botanica" class="btn">Fazer atividades desta aula →</a>
-  </p>
-  <article class="card artigo-corpo">
-    <h2>Aula 6 — Botânica</h2>
-    <p>Conteúdo da aula de Botânica.</p>
-  </article>
-  <section class="card" style="text-align:center;">
-    <h2>📝 Praticar</h2>
-    <p><a href="atividade.html?tema=botanica" class="btn">Atividades de Botânica →</a></p>
-  </section>
+<p style="margin-bottom:20px;">
+<a href="agendamentos.html" class="btn">← Voltar às aulas</a>
+<a href="atividade.html?tema=botanica" class="btn">Fazer atividades desta aula →</a>
+</p>
+<article class="card artigo-corpo">
+<h2>Aula 6 — Botânica</h2>
+<p>A <strong>botânica</strong> estuda as plantas: estrutura, classificação, fisiologia e importância ecológica e econômica. As plantas são, em geral, organismos autótrofos fotossintetizantes e formam a base de muitas cadeias alimentares terrestres.</p>
+<p>As plantas vasculares possuem <strong>xilema</strong> (transporte de água e sais) e <strong>floema</strong> (transporte de compostos orgânicos). Raiz, caule e folhas são órgãos vegetativos com funções especializadas de absorção, sustentação e fotossíntese.</p>
+<p>A <strong>fotossíntese</strong> ocorre principalmente nas folhas, nos cloroplastos: a luz é captada, água e CO₂ são utilizados, e glicose e oxigênio são produzidos. Esse processo sustenta a maior parte da vida na Terra.</p>
+<h3>Reprodução e grupos de plantas</h3>
+<p>Briófitas (ex.: musgos) são avasculares e dependem de ambientes úmidos. Pteridófitas (ex.: samambaias) já possuem vasos, mas ainda se reproduzem por esporos. Gimnospermas e angiospermas produzem sementes; as angiospermas também formam frutos.</p>
+<p>A flor é a estrutura reprodutiva típica das angiospermas. Polinização e fertilização levam à formação da semente e do fruto, que protege e auxilia na dispersão.</p>
+<p>Hormônios vegetais (auxinas, giberelinas, etileno, entre outros) regulam crescimento, dormência e amadurecimento de frutos. Tropismos, como o fototropismo, orientam o crescimento em resposta a estímulos.</p>
+<div class="destaque"><p><strong>Resumo:</strong> diferencie grupos de plantas, órgãos e tecidos de condução, e o papel da fotossíntese. Fruto e semente são marcas das angiospermas — tema muito cobrado.</p></div>
+<p>Na ecologia, as plantas atuam como produtores e influenciam clima, solo e biodiversidade. O desmatamento e a perda de habitats afetam todo o ecossistema.</p>
+<p>Nas atividades desta aula, você revisará classificação básica, funções de raiz, caule e folha, fotossíntese e reprodução das plantas com flores.</p>
+<p>Compare sempre briófitas, pteridófitas, gimnospermas e angiospermas em uma tabela (vasos, sementes, frutos, dependência de água na reprodução) — é uma das formas mais eficientes de revisar para a prova.</p>
+</article>
+<section class="card" style="text-align:center;max-width:820px;margin:0 auto 28px;">
+<h2>📝 Praticar</h2>
+<p>Teste o que aprendeu com o quiz e os exercícios desta aula.</p>
+<p><a href="atividade.html?tema=botanica" class="btn">Atividades de Botânica →</a></p>
+</section>
 </main>
-<footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
-</footer>
+<footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma de Biologia</p></footer>
 </div>
 <script>
-async function verificarAcesso() {
-try {
-  const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
-  if (!resposta.ok) { window.location.replace('/login.html'); return; }
-  const dados = await resposta.json();
-  if (!dados.logado) { window.location.replace('/login.html'); return; }
-  const el = document.getElementById('mensagemAluno');
-  if (el && dados.aluno && dados.aluno.nome) el.textContent = 'Olá, ' + dados.aluno.nome + '!';
-  document.getElementById('verificandoLogin').style.display = 'none';
-  document.getElementById('conteudoProtegido').style.display = 'block';
-  document.body.classList.add('autorizado');
-} catch (e) { console.error(e); window.location.replace('/login.html'); }
+async function verificarAcesso(){
+try{
+const resposta=await fetch('/verificar-login',{method:'GET',credentials:'same-origin',cache:'no-store'});
+if(!resposta.ok){window.location.replace('/login.html');return;}
+const dados=await resposta.json();
+if(!dados.logado){window.location.replace('/login.html');return;}
+const el=document.getElementById('mensagemAluno');
+if(el&&dados.aluno&&dados.aluno.nome)el.textContent='Olá, '+dados.aluno.nome+'!';
+document.getElementById('verificandoLogin').style.display='none';
+document.getElementById('conteudoProtegido').style.display='block';
+document.body.classList.add('autorizado');
+}catch(e){console.error(e);window.location.replace('/login.html');}
 }
-document.addEventListener('DOMContentLoaded', verificarAcesso);
+document.addEventListener('DOMContentLoaded',verificarAcesso);
 </script>
 </body></html>

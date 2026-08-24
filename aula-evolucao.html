@@ -6,70 +6,75 @@
 <link rel="stylesheet" href="estilo.css">
 <title>BioMentoria - Evolução</title>
 <style>
-body { visibility: hidden; }
-body.autorizado { visibility: visible; }
-#verificandoLogin {
-  min-height: 100vh; display: flex; justify-content: center; align-items: center;
-  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
-}
-#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
-.artigo-corpo p, .artigo-corpo li { line-height: 1.65; margin-bottom: 10px; }
-.artigo-corpo h3 { margin-top: 22px; color: #1b6b3a; }
-.artigo-corpo ul { margin: 8px 0 12px 20px; }
+body{visibility:hidden}body.autorizado{visibility:visible}
+#verificandoLogin{min-height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;background:linear-gradient(180deg,#f7faf9,#eef6f1)}
+#verificandoLogin .card{width:90%;max-width:500px;margin:0}
+.artigo-corpo{max-width:820px;margin:0 auto 28px}
+.artigo-corpo p,.artigo-corpo li{line-height:1.7;margin-bottom:12px;color:#2d3a34}
+.artigo-corpo h2{color:#06402f;margin-bottom:16px}
+.artigo-corpo h3{margin-top:26px;margin-bottom:10px;color:#0a6b48;font-size:1.15rem}
+.artigo-corpo .destaque{background:linear-gradient(165deg,#f4faf7,#eaf6ef);border-left:4px solid #0a6b48;padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0}
 </style>
 </head>
 <body>
-<div id="verificandoLogin"><div class="card">
-  <h2>🔐 Verificando acesso...</h2>
-  <p>Aguarde enquanto verificamos sua conta.</p>
-</div></div>
+<div id="verificandoLogin"><div class="card"><h2>🔐 Verificando acesso...</h2><p>Aguarde enquanto verificamos sua conta.</p></div></div>
 <div id="conteudoProtegido" style="display:none;">
 <nav>
-  <a href="index.html">Início</a>
-  <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
-  <a href="login.html">Entrar</a>
-  <a href="agendamentos.html">Fazer aulas</a>
-  <a href="atividades.html">Atividades</a>
-  <a href="consulta_agendamentos.html">Contato</a>
-  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+<a href="index.html">Início</a>
+<a href="clientes.html">Criar conta</a>
+<a href="login.html">Entrar</a>
+<a href="agendamentos.html">Fazer aulas</a>
+<a href="atividades.html">Atividades</a>
+<a href="aulas-particulares.html">Aulas particulares</a>
+<a href="consulta_agendamentos.html">Contato</a>
+<a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
 <section class="banner">
-  <span class="gratuito">🔓 Conteúdo gratuito</span>
-  <h1>🦎 Evolução</h1>
-  <p id="mensagemAluno">Aula 4</p>
+<span class="gratuito">🔓 Conteúdo gratuito</span>
+<h1>🦴 Evolução</h1>
+<p id="mensagemAluno">Aula 4</p>
 </section>
 <main class="container">
-  <p>
-    <a href="agendamentos.html" class="btn">← Voltar às aulas</a>
-    <a href="atividade.html?tema=evolucao" class="btn">Fazer atividades desta aula →</a>
-  </p>
-  <article class="card artigo-corpo">
-    <h2>Aula 4 — Evolução</h2>
-    <p>Conteúdo da aula de Evolução.</p>
-  </article>
-  <section class="card" style="text-align:center;">
-    <h2>📝 Praticar</h2>
-    <p><a href="atividade.html?tema=evolucao" class="btn">Atividades de Evolução →</a></p>
-  </section>
+<p style="margin-bottom:20px;">
+<a href="agendamentos.html" class="btn">← Voltar às aulas</a>
+<a href="atividade.html?tema=evolucao" class="btn">Fazer atividades desta aula →</a>
+</p>
+<article class="card artigo-corpo">
+<h2>Aula 4 — Evolução</h2>
+<p>A <strong>evolução biológica</strong> explica a diversidade da vida ao longo do tempo. A teoria moderna integra a seleção natural de Darwin e Wallace com a genética de populações e as mutações como fonte de variação.</p>
+<p>A <strong>seleção natural</strong> favorece indivíduos com características que aumentam o sucesso reprodutivo em determinado ambiente. Com o tempo, essas características tendem a se tornar mais comuns na população.</p>
+<p>Outros mecanismos evolutivos incluem mutação, deriva genética, fluxo gênico e seleção sexual. Isolamento reprodutivo entre populações pode levar à especiação — surgimento de novas espécies.</p>
+<h3>Evidências da evolução</h3>
+<p>Fósseis, homologia de órgãos, embriologia comparada e dados moleculares (DNA e proteínas) apoiam a ideia de ancestralidade comum. Órgãos análogos, por outro lado, resultam de evolução convergente, não de ancestralidade recente compartilhada.</p>
+<p>Lamarck propôs o uso e desuso e a herança de caracteres adquiridos; essas ideias foram superadas, mas ajudam a contrastar com o darwinismo. Em provas, é comum pedir a diferença entre Lamarck e Darwin.</p>
+<p>Adaptação não é “vontade” do organismo: é resultado de variação pré-existente e seleção ao longo de gerações. Populações evoluem; indivíduos não “evoluem” no sentido biológico do termo.</p>
+<div class="destaque"><p><strong>Resumo:</strong> variação + seleção + tempo = mudança evolutiva. Saiba distinguir evidências, mecanismos e conceitos como adaptação, fitness e especiação.</p></div>
+<p>Exemplos clássicos — resistência de bactérias a antibióticos, melanismo industrial da mariposa — ilustram seleção natural em ação e costumam aparecer em questões.</p>
+<p>Nas atividades, pratique interpretar gráficos de frequência de alelos, árvores filogenéticas simples e cenários de seleção em diferentes ambientes.</p>
+<p>Lembre-se: evolução é mudança nas populações ao longo do tempo, sustentada por evidências científicas múltiplas, e não uma “escada” em que uma espécie atual se transforma em outra da mesma época.</p>
+</article>
+<section class="card" style="text-align:center;max-width:820px;margin:0 auto 28px;">
+<h2>📝 Praticar</h2>
+<p>Teste o que aprendeu com o quiz e os exercícios desta aula.</p>
+<p><a href="atividade.html?tema=evolucao" class="btn">Atividades de Evolução →</a></p>
+</section>
 </main>
-<footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
-</footer>
+<footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma de Biologia</p></footer>
 </div>
 <script>
-async function verificarAcesso() {
-try {
-  const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
-  if (!resposta.ok) { window.location.replace('/login.html'); return; }
-  const dados = await resposta.json();
-  if (!dados.logado) { window.location.replace('/login.html'); return; }
-  const el = document.getElementById('mensagemAluno');
-  if (el && dados.aluno && dados.aluno.nome) el.textContent = 'Olá, ' + dados.aluno.nome + '!';
-  document.getElementById('verificandoLogin').style.display = 'none';
-  document.getElementById('conteudoProtegido').style.display = 'block';
-  document.body.classList.add('autorizado');
-} catch (e) { console.error(e); window.location.replace('/login.html'); }
+async function verificarAcesso(){
+try{
+const resposta=await fetch('/verificar-login',{method:'GET',credentials:'same-origin',cache:'no-store'});
+if(!resposta.ok){window.location.replace('/login.html');return;}
+const dados=await resposta.json();
+if(!dados.logado){window.location.replace('/login.html');return;}
+const el=document.getElementById('mensagemAluno');
+if(el&&dados.aluno&&dados.aluno.nome)el.textContent='Olá, '+dados.aluno.nome+'!';
+document.getElementById('verificandoLogin').style.display='none';
+document.getElementById('conteudoProtegido').style.display='block';
+document.body.classList.add('autorizado');
+}catch(e){console.error(e);window.location.replace('/login.html');}
 }
-document.addEventListener('DOMContentLoaded', verificarAcesso);
+document.addEventListener('DOMContentLoaded',verificarAcesso);
 </script>
 </body></html>

@@ -6,70 +6,75 @@
 <link rel="stylesheet" href="estilo.css">
 <title>BioMentoria - Ecologia</title>
 <style>
-body { visibility: hidden; }
-body.autorizado { visibility: visible; }
-#verificandoLogin {
-  min-height: 100vh; display: flex; justify-content: center; align-items: center;
-  text-align: center; padding: 20px; background: linear-gradient(180deg, #f7faf9, #eef6f1);
-}
-#verificandoLogin .card { width: 90%; max-width: 500px; margin: 0; }
-.artigo-corpo p, .artigo-corpo li { line-height: 1.65; margin-bottom: 10px; }
-.artigo-corpo h3 { margin-top: 22px; color: #1b6b3a; }
-.artigo-corpo ul { margin: 8px 0 12px 20px; }
+body{visibility:hidden}body.autorizado{visibility:visible}
+#verificandoLogin{min-height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px;background:linear-gradient(180deg,#f7faf9,#eef6f1)}
+#verificandoLogin .card{width:90%;max-width:500px;margin:0}
+.artigo-corpo{max-width:820px;margin:0 auto 28px}
+.artigo-corpo p,.artigo-corpo li{line-height:1.7;margin-bottom:12px;color:#2d3a34}
+.artigo-corpo h2{color:#06402f;margin-bottom:16px}
+.artigo-corpo h3{margin-top:26px;margin-bottom:10px;color:#0a6b48;font-size:1.15rem}
+.artigo-corpo .destaque{background:linear-gradient(165deg,#f4faf7,#eaf6ef);border-left:4px solid #0a6b48;padding:14px 18px;border-radius:0 12px 12px 0;margin:18px 0}
 </style>
 </head>
 <body>
-<div id="verificandoLogin"><div class="card">
-  <h2>🔐 Verificando acesso...</h2>
-  <p>Aguarde enquanto verificamos sua conta.</p>
-</div></div>
+<div id="verificandoLogin"><div class="card"><h2>🔐 Verificando acesso...</h2><p>Aguarde enquanto verificamos sua conta.</p></div></div>
 <div id="conteudoProtegido" style="display:none;">
 <nav>
-  <a href="index.html">Início</a>
-  <a href="clientes.html">Se cadastrar ou já tenho uma conta</a>
-  <a href="login.html">Entrar</a>
-  <a href="agendamentos.html">Fazer aulas</a>
-  <a href="atividades.html">Atividades</a>
-  <a href="consulta_agendamentos.html">Contato</a>
-  <a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
+<a href="index.html">Início</a>
+<a href="clientes.html">Criar conta</a>
+<a href="login.html">Entrar</a>
+<a href="agendamentos.html">Fazer aulas</a>
+<a href="atividades.html">Atividades</a>
+<a href="aulas-particulares.html">Aulas particulares</a>
+<a href="consulta_agendamentos.html">Contato</a>
+<a href="/logout" onclick="return confirm('Tem certeza que deseja fechar a sessão?')">Fechar sessão</a>
 </nav>
 <section class="banner">
-  <span class="gratuito">🔓 Conteúdo gratuito</span>
-  <h1>🌱 Ecologia</h1>
-  <p id="mensagemAluno">Aula 3</p>
+<span class="gratuito">🔓 Conteúdo gratuito</span>
+<h1>🌍 Ecologia</h1>
+<p id="mensagemAluno">Aula 3</p>
 </section>
 <main class="container">
-  <p>
-    <a href="agendamentos.html" class="btn">← Voltar às aulas</a>
-    <a href="atividade.html?tema=ecologia" class="btn">Fazer atividades desta aula →</a>
-  </p>
-  <article class="card artigo-corpo">
-    <h2>Aula 3 — Ecologia</h2>
-    <p>Conteúdo da aula de Ecologia.</p>
-  </article>
-  <section class="card" style="text-align:center;">
-    <h2>📝 Praticar</h2>
-    <p><a href="atividade.html?tema=ecologia" class="btn">Atividades de Ecologia →</a></p>
-  </section>
+<p style="margin-bottom:20px;">
+<a href="agendamentos.html" class="btn">← Voltar às aulas</a>
+<a href="atividade.html?tema=ecologia" class="btn">Fazer atividades desta aula →</a>
+</p>
+<article class="card artigo-corpo">
+<h2>Aula 3 — Ecologia</h2>
+<p>A <strong>ecologia</strong> estuda as relações entre os seres vivos e o ambiente. Os níveis de organização ecológicos incluem indivíduo, população, comunidade, ecossistema e biosfera.</p>
+<p>Uma <strong>população</strong> é o conjunto de indivíduos da mesma espécie em uma área; a <strong>comunidade</strong> reúne populações de espécies diferentes que interagem. O <strong>ecossistema</strong> une comunidade e fatores abióticos (luz, água, solo, temperatura).</p>
+<p>Nas cadeias e teias alimentares, a energia flui dos <strong>produtores</strong> (autótrofos, em geral plantas e algas) para os consumidores e decompositores. A cada nível trófico, grande parte da energia se perde na forma de calor.</p>
+<h3>Relações ecológicas</h3>
+<p>As interações podem ser harmônicas ou desarmônicas. Exemplos: mutualismo (ambos se beneficiam), comensalismo, predação, parasitismo e competição. Entender quem ganha ou perde em cada relação ajuda a interpretar questões.</p>
+<p>Ciclos biogeoquímicos (água, carbono, nitrogênio) descrevem como elementos químicos circulam entre seres vivos e ambiente. A ação humana pode alterar esses ciclos, causando desequilíbrios como o aumento do CO₂ e o aquecimento global.</p>
+<p>Sucessão ecológica é a sequência de mudanças na comunidade ao longo do tempo, desde estágios pioneiros até uma comunidade mais estável (clímax), em condições naturais.</p>
+<div class="destaque"><p><strong>Resumo:</strong> memorize níveis ecológicos, fluxo de energia, relações entre espécies e impactos humanos. Relacione sempre causa e consequência no ambiente.</p></div>
+<p>Biodiversidade, habitats e nichos ecológicos são conceitos-chave: habitat é o “endereço”; nicho é o “modo de vida” da espécie no ecossistema.</p>
+<p>Nas atividades desta aula, você praticará identificação de níveis tróficos, tipos de relações e interpretação de situações ambientais reais ou esquemáticas.</p>
+<p>Ao analisar uma teia alimentar, identifique produtores, consumidores e decompositores e acompanhe o sentido das setas (fluxo de energia e matéria) — isso evita confusões comuns em questões.</p>
+</article>
+<section class="card" style="text-align:center;max-width:820px;margin:0 auto 28px;">
+<h2>📝 Praticar</h2>
+<p>Teste o que aprendeu com o quiz e os exercícios desta aula.</p>
+<p><a href="atividade.html?tema=ecologia" class="btn">Atividades de Ecologia →</a></p>
+</section>
 </main>
-<footer class="rodape">
-    <p>&copy; 2026 BioMentoria - Plataforma de Biologia</p>
-</footer>
+<footer class="rodape"><p>&copy; 2026 BioMentoria - Plataforma de Biologia</p></footer>
 </div>
 <script>
-async function verificarAcesso() {
-try {
-  const resposta = await fetch('/verificar-login', { method: 'GET', credentials: 'same-origin', cache: 'no-store' });
-  if (!resposta.ok) { window.location.replace('/login.html'); return; }
-  const dados = await resposta.json();
-  if (!dados.logado) { window.location.replace('/login.html'); return; }
-  const el = document.getElementById('mensagemAluno');
-  if (el && dados.aluno && dados.aluno.nome) el.textContent = 'Olá, ' + dados.aluno.nome + '!';
-  document.getElementById('verificandoLogin').style.display = 'none';
-  document.getElementById('conteudoProtegido').style.display = 'block';
-  document.body.classList.add('autorizado');
-} catch (e) { console.error(e); window.location.replace('/login.html'); }
+async function verificarAcesso(){
+try{
+const resposta=await fetch('/verificar-login',{method:'GET',credentials:'same-origin',cache:'no-store'});
+if(!resposta.ok){window.location.replace('/login.html');return;}
+const dados=await resposta.json();
+if(!dados.logado){window.location.replace('/login.html');return;}
+const el=document.getElementById('mensagemAluno');
+if(el&&dados.aluno&&dados.aluno.nome)el.textContent='Olá, '+dados.aluno.nome+'!';
+document.getElementById('verificandoLogin').style.display='none';
+document.getElementById('conteudoProtegido').style.display='block';
+document.body.classList.add('autorizado');
+}catch(e){console.error(e);window.location.replace('/login.html');}
 }
-document.addEventListener('DOMContentLoaded', verificarAcesso);
+document.addEventListener('DOMContentLoaded',verificarAcesso);
 </script>
 </body></html>
